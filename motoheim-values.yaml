@@ -1,0 +1,6 @@
+---
+serverPort: 30005
+timezone: "America/Chicago"
+serverName: "MotoHeim"
+worldName: "Asgard"
+public: true
