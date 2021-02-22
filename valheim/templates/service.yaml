@@ -18,11 +18,11 @@ spec:
       protocol: UDP
       port: 2457
       {{- if .Values.serverPort }}
-      nodePort: {{ .Values.serverPort + 1 }}
+      nodePort: {{ add .Values.serverPort 1 }}
       {{- end }}
     - name: valheim-3
       protocol: UDP
       port: 2458
       {{- if .Values.serverPort }}
-      nodePort: {{ .Values.serverPort + 2 }}
+      nodePort: {{ add .Values.serverPort 2 }}
       {{- end }}
