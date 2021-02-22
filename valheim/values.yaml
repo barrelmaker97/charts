@@ -1,0 +1,5 @@
+---
+image:
+  repo: "docker.io"
+  name: "mbround18/valheim"
+  tag: "latest"

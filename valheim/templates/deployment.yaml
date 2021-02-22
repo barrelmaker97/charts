@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Release.Name }}
+          image: "{{ .Values.image.repo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          ports:
+            - name: valheim-1
+              containerPort: 2456
+            - name: valheim-2
+              containerPort: 2457
+            - name: valheim-3
+              containerPort: 2458
+          volumeMounts:
+            - name: "{{ .Release.Name }}-data"
+              mountPath: /home/steam/.config/unity3d/IronGate/Valheim
+              subPath: saves
+            - name: "{{ .Release.Name }}-data"
+              mountPath: /home/steam/valheim
+              subPath: server
+      volumes:
+        - name: "{{ .Release.Name }}-data"
+          hostPath:
+            path: "/home/barrelmaker/gamedata/valheim/{{ .Release.Name }}-data"
+            type: Directory
