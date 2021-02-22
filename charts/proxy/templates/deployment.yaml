@@ -21,7 +21,7 @@ spec:
           - 192.168.20.1
       containers:
         - name: {{ .Release.Name }}
-          image: nginx:alpine
+          image: "{{ .Values.image.repo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
           ports:
             - name: nginx-port
               containerPort: 80
