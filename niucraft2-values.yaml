@@ -1,0 +1,22 @@
+---
+image:
+  repo: "docker.io"
+  name: "itzg/minecraft-server"
+  tag: "latest"
+# Must be in the range 30000-32767
+serverPort: "30004"
+dynmap: true
+metrics: true
+properties:
+  eula: "TRUE"
+  difficulty: "normal"
+  ops: "Barrelmaker97"
+  memory: "2G"
+  serverName: "NIUCraft2"
+  motd: "NIUCraft Server 2"
+  spawnProtection: "0"
+  forceGamemode: "true"
+  viewDistance: "32"
+  seed: "WLLBYUG"
+  type: "BUKKIT"
+  timezone: "America/Chicago"

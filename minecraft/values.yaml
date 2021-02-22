@@ -1,0 +1,7 @@
+---
+image:
+  repo: "docker.io"
+  name: "itzg/minecraft-server"
+  tag: "latest"
+properties:
+  eula: "TRUE"

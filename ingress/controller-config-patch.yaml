@@ -1,0 +1,8 @@
+data:
+  enable-ocsp: "true"
+  hsts-max-age: "63072000"
+  hsts-preload: "true"
+  server-tokens: "false"
+  ssl-session-tickets: "false"
+  http-snippet: |
+    sendfile on;

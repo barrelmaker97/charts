@@ -1,0 +1,56 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicas | default 1 }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Release.Name }}
+          image: "{{ .Values.image.repo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          ports:
+            - name: jellyfin
+              containerPort: 8096
+          volumeMounts:
+            - name: {{ .Release.Name }}-data
+              mountPath: /media
+            - name: {{ .Release.Name }}-cache
+              mountPath: /cache
+            - name: {{ .Release.Name }}-config
+              mountPath: /config
+          livenessProbe:
+            httpGet:
+              path: /
+              port: jellyfin
+              scheme: HTTP
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: jellyfin
+              scheme: HTTP
+            initialDelaySeconds: 3
+            periodSeconds: 10
+      volumes:
+        - name: {{ .Release.Name }}-data
+          nfs:
+            server: soteria.lan
+            path: /volume1/local_only/content/media
+        - name: {{ .Release.Name }}-cache
+          emptyDir:
+            medium: "Memory"
+        - name: {{ .Release.Name }}-config
+          hostPath:
+            path: /home/barrelmaker/{{ .Release.Name }}-config
+            type: DirectoryOrCreate

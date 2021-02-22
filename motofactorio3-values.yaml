@@ -1,0 +1,7 @@
+---
+image:
+  repo: "docker.io"
+  name: "factoriotools/factorio"
+  tag: "latest"
+# Must be in the range 30000-32767
+serverPort: "30002"

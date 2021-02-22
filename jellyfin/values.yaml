@@ -1,0 +1,6 @@
+---
+replicas: 1
+image:
+  repo: "docker.io"
+  name: "jellyfin/jellyfin"
+  tag: "latest"

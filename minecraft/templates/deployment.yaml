@@ -1,0 +1,90 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicas | default 1 }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Release.Name }}
+          image: "{{ .Values.image.repo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          env:
+            {{- if .Values.properties.eula }}
+            - name: EULA
+              value: {{ .Values.properties.eula | quote }}
+            {{- end }}
+            {{- if .Values.properties.difficulty }}
+            - name: DIFFICULTY
+              value: {{ .Values.properties.difficulty | quote }}
+            {{- end }}
+            {{- if .Values.properties.ops }}
+            - name: OPS
+              value: {{ .Values.properties.ops | quote }}
+            {{- end }}
+            {{- if .Values.properties.memory }}
+            - name: MEMORY
+              value: {{ .Values.properties.memory | quote }}
+            {{- end }}
+            {{- if .Values.properties.serverName }}
+            - name: SERVER_NAME
+              value: {{ .Values.properties.serverName | quote }}
+            {{- else }}
+            - name: SERVER_NAME
+              value: {{ .Release.Name | quote }}
+            {{- end }}
+            {{- if .Values.properties.motd }}
+            - name: MOTD
+              value: {{ .Values.properties.motd | quote }}
+            {{- else }}
+            - name: MOTD
+              value: {{ .Release.Name | quote }}
+            {{- end }}
+            {{- if .Values.properties.spawnProtection }}
+            - name: SPAWN_PROTECTION
+              value: {{ .Values.properties.spawnProtection | quote }}
+            {{- end }}
+            {{- if .Values.properties.forceGamemode }}
+            - name: FORCE_GAMEMODE
+              value: {{ .Values.properties.forceGamemode | quote }}
+            {{- end }}
+            {{- if .Values.properties.viewDistance }}
+            - name: VIEW_DISTANCE
+              value: {{ .Values.properties.viewDistance | quote }}
+            {{- end }}
+            {{- if .Values.properties.seed }}
+            - name: SEED
+              value: {{ .Values.properties.seed | quote }}
+            {{- end }}
+            {{- if .Values.properties.type }}
+            - name: TYPE
+              value: {{ .Values.properties.type | quote }}
+            {{- end }}
+            {{- if .Values.properties.timezone }}
+            - name: TZ
+              value: {{ .Values.properties.timezone | quote }}
+            {{- end }}
+          ports:
+            - name: minecraft
+              containerPort: 25565
+            - name: dynmap
+              containerPort: 8123
+            - name: metrics
+              containerPort: 9225
+          volumeMounts:
+            - name: {{ .Release.Name }}-data
+              mountPath: /data
+      volumes:
+        - name: {{ .Release.Name }}-data
+          hostPath:
+            path: "/home/barrelmaker/gamedata/minecraft/{{ .Release.Name }}-data"
+            type: DirectoryOrCreate
