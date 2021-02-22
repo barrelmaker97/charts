@@ -28,4 +28,4 @@ spec:
         - name: "{{ .Release.Name }}-data"
           hostPath:
             path: "/home/barrelmaker/gamedata/factorio/{{ .Release.Name }}-data"
-            type: Directory
+            type: DirectoryOrCreate

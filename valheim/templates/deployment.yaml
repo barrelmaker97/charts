@@ -63,4 +63,4 @@ spec:
         - name: "{{ .Release.Name }}-data"
           hostPath:
             path: "/home/barrelmaker/gamedata/valheim/{{ .Release.Name }}-data"
-            type: Directory
+            type: DirectoryOrCreate
