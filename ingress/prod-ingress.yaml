@@ -31,7 +31,7 @@ spec:
           path: "/"
           backend:
             service:
-              name: nginx
+              name: proxy
               port:
                 number: 80
     - host: dotfiles.barrelmaker.dev
@@ -41,7 +41,7 @@ spec:
           path: "/"
           backend:
             service:
-              name: nginx
+              name: proxy
               port:
                 number: 80
     # Needs work, doesn't have CSP
@@ -162,6 +162,6 @@ spec:
           path: "/"
           backend:
             service:
-              name: nginx
+              name: proxy
               port:
                 number: 80
