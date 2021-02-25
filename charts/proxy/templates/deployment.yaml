@@ -15,10 +15,6 @@ spec:
       labels:
         app: {{ .Release.Name }}
     spec:
-      dnsPolicy: None
-      dnsConfig:
-        nameservers:
-          - 192.168.20.1
       containers:
         - name: {{ .Release.Name }}
           image: "{{ .Values.image.repo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
