@@ -4,22 +4,22 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}
   labels:
-    app: friendbot
+    app: {{ .Release.Name }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      app: friendbot
+      app: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: friendbot
+        app: {{ .Release.Name }}
     spec:
       containers:
         - name: friendbot
           image: "{{ .Values.image.repo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
           ports:
-            - name: friendbot-port
+            - name: friendbot
               containerPort: 6000
           env:
             - name: FRIENDBOT_REDIS_HOST
@@ -30,23 +30,27 @@ spec:
               value: "{{ .Values.logLevel }}"
             - name: FRIENDBOT_EXPORT_ZIP
               value: /friendbot/export.zip
+            {{ if .Values.signature }}
             - name: FRIENDBOT_SECRET_FILE
               value: /friendbot-secret/signature
+            {{- end }}
           volumeMounts:
             - name: {{ .Release.Name }}-export
               mountPath: /friendbot/export.zip
+            {{ if .Values.signature }}
             - name: {{ .Release.Name }}-signature
               mountPath: /friendbot-secret
+            {{- end }}
           livenessProbe:
             httpGet:
               path: /health
-              port: friendbot-port
+              port: friendbot
             initialDelaySeconds: 3
             periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /health
-              port: friendbot-port
+              port: friendbot
             initialDelaySeconds: 3
             periodSeconds: 10
       volumes:
@@ -54,6 +58,8 @@ spec:
           hostPath:
             path: {{ .Values.exportLocation }}
             type: File
+        {{ if .Values.signature }}
         - name: {{ .Release.Name }}-signature
           secret:
             secretName: {{ .Release.Name }}-signature
+        {{- end }}
