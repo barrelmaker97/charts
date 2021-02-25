@@ -5,7 +5,7 @@ metadata:
   name: {{ .Release.Name }}
 spec:
   selector:
-    app: friendbot
+    app: {{ .Release.Name }}
   ports:
     - protocol: TCP
       port: 6000
