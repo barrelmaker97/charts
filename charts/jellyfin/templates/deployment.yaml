@@ -44,9 +44,15 @@ spec:
             periodSeconds: 10
       volumes:
         - name: {{ .Release.Name }}-data
+          {{- if .Values.remoteLibrary }}
           nfs:
             server: soteria.lan
             path: /volume1/local_only/content/media
+          {{- else }}
+          hostPath:
+            path: /home/barrelmaker/{{ .Release.Name }}-data
+            type: DirectoryOrCreate
+          {{- end }}
         - name: {{ .Release.Name }}-cache
           emptyDir:
             medium: "Memory"
