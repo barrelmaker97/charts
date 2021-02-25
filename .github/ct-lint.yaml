@@ -1,2 +1,4 @@
 ---
 target-branch: main
+check-version-increment: false
+since: HEAD~1
