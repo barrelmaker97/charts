@@ -1,4 +1,5 @@
 ---
 target-branch: main
 check-version-increment: false
-since: HEAD~1
+#since: HEAD~1
+all: true
