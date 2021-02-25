@@ -27,15 +27,11 @@ spec:
               containerPort: 80
               protocol: TCP
           volumeMounts:
-            - mountPath: /etc/nginx/nginx.conf
-              name: {{ .Release.Name }}-data-volume
-              subPath: nginx/nginx.conf
-            - mountPath: /etc/nginx/conf.d
-              name: {{ .Release.Name }}-data-volume
-              subPath: nginx/servers
-            - mountPath: /var/www/website
-              name: {{ .Release.Name }}-data-volume
-              subPath: website
+            - name: {{ .Release.Name }}-config-volume
+              subPath: nginx.conf
+              mountPath: /etc/nginx/nginx.conf
+            - name: {{ .Release.Name }}-website-volume
+              mountPath: /var/www/website
           livenessProbe:
             failureThreshold: 3
             httpGet:
@@ -57,7 +53,11 @@ spec:
             successThreshold: 1
             timeoutSeconds: 1
       volumes:
-        - name: {{ .Release.Name }}-data-volume
+        - name: {{ .Release.Name }}-config-volume
+          configMap:
+            name: {{ .Release.Name }}-config
+            defaultMode: 0644
+        - name: {{ .Release.Name }}-website-volume
           hostPath:
-            path: /home/barrelmaker/git/nginx-certbot/data
-            type: Directory
+            path: /home/barrelmaker/git/nginx-certbot/data/website
+            type: DirectoryOrCreate
