@@ -58,13 +58,13 @@ spec:
             httpGet:
               path: /health
               port: friendbot
-            initialDelaySeconds: 3
+            initialDelaySeconds: 20
             periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /health
               port: friendbot
-            initialDelaySeconds: 3
+            initialDelaySeconds: 20
             periodSeconds: 10
       volumes:
         {{ if .Values.exportLocation }}
