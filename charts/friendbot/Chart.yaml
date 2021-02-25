@@ -1,0 +1,9 @@
+---
+apiversion: v1
+description: A Helm Chart for Friendbot
+name: friendbot
+version: 0.1.0
+maintainers:
+  - name: barrelmaker97
+    email: nolancooper97@gmail.com
+    url: barrelmaker.dev
