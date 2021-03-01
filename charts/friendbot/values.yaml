@@ -4,4 +4,3 @@ image:
   name: "barrelmaker97/friendbot"
   tag: "latest"
 redis: {}
-logLevel: debug
