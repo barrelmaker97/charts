@@ -47,7 +47,7 @@ spec:
             service:
               name: friendbot
               port:
-                number: 6000
+                number: 8000
     - host: grafana.barrelmaker.dev
       http:
         paths:

@@ -20,7 +20,7 @@ spec:
           image: "{{ .Values.image.repo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
           ports:
             - name: friendbot
-              containerPort: 6000
+              containerPort: 8000
           env:
             {{ if .Values.redis.host }}
             - name: FRIENDBOT_REDIS_HOST
