@@ -55,5 +55,5 @@ spec:
             defaultMode: 0644
         - name: {{ .Release.Name }}-website-volume
           hostPath:
-            path: /home/barrelmaker/git/nginx-certbot/data/website
+            path: {{ .Values.websiteLocation }}
             type: DirectoryOrCreate

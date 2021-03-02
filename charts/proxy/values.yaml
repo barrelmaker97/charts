@@ -3,3 +3,4 @@ image:
   repo: "docker.io"
   name: "nginx"
   tag: "alpine"
+websiteLocation: "/var/www"
