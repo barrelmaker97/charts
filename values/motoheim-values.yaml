@@ -4,3 +4,4 @@ timezone: "America/Chicago"
 serverName: "MotoHeim"
 worldName: "Asgard"
 public: true
+saveLocation: /home/barrelmaker/gamedata/valheim

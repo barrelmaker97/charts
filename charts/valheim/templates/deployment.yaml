@@ -52,6 +52,7 @@ spec:
               containerPort: 2457
             - name: valheim-3
               containerPort: 2458
+      {{- if .Values.saveLocation }}
           volumeMounts:
             - name: "{{ .Release.Name }}-data"
               mountPath: /home/steam/.config/unity3d/IronGate/Valheim
@@ -62,5 +63,6 @@ spec:
       volumes:
         - name: "{{ .Release.Name }}-data"
           hostPath:
-            path: "/home/barrelmaker/gamedata/valheim/{{ .Release.Name }}-data"
+            path: "{{ .Values.saveLocation }}/{{ .Release.Name }}-data"
             type: DirectoryOrCreate
+      {{- end }}
