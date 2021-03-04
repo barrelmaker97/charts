@@ -80,11 +80,13 @@ spec:
               containerPort: 8123
             - name: metrics
               containerPort: 9225
+      {{- if .Values.saveLocation }}
           volumeMounts:
             - name: {{ .Release.Name }}-data
               mountPath: /data
       volumes:
         - name: {{ .Release.Name }}-data
           hostPath:
-            path: "/home/barrelmaker/gamedata/minecraft/{{ .Release.Name }}-data"
+            path: "{{ .Values.saveLocation }}/{{ .Release.Name }}-data"
             type: DirectoryOrCreate
+      {{- end }}

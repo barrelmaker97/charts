@@ -3,6 +3,7 @@
 serverPort: "30003"
 dynmap: true
 metrics: false
+saveLocation: /home/barrelmaker/gamedata/minecraft
 properties:
   difficulty: "normal"
   ops: "Barrelmaker97"
