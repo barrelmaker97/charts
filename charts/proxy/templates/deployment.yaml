@@ -26,8 +26,10 @@ spec:
             - name: {{ .Release.Name }}-config-volume
               subPath: nginx.conf
               mountPath: /etc/nginx/nginx.conf
+            {{- if .Values.websiteLocation }}
             - name: {{ .Release.Name }}-website-volume
-              mountPath: /var/www/website
+              mountPath: /usr/share/nginx/html
+            {{- end }}
           livenessProbe:
             failureThreshold: 3
             httpGet:
@@ -53,7 +55,9 @@ spec:
           configMap:
             name: {{ .Release.Name }}-config
             defaultMode: 0644
+        {{- if .Values.websiteLocation }}
         - name: {{ .Release.Name }}-website-volume
           hostPath:
             path: {{ .Values.websiteLocation }}
             type: DirectoryOrCreate
+        {{- end }}
