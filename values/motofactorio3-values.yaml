@@ -1,3 +1,4 @@
 ---
 # Must be in the range 30000-32767
 serverPort: "30002"
+saveLocation: /home/barrelmaker/gamedata/factorio

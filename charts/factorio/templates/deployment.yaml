@@ -21,11 +21,13 @@ spec:
           ports:
             - name: factorio
               containerPort: 34197
+      {{- if .Values.saveLocation }}
           volumeMounts:
             - name: "{{ .Release.Name }}-data"
               mountPath: /factorio
       volumes:
         - name: "{{ .Release.Name }}-data"
           hostPath:
-            path: "/home/barrelmaker/gamedata/factorio/{{ .Release.Name }}-data"
+            path: "{{ .Values.saveLocation }}/{{ .Release.Name }}-data"
             type: DirectoryOrCreate
+      {{- end }}
