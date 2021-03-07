@@ -2,13 +2,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fah-cpu
+  name: {{ .Release.Name }}
   labels:
-    app: fah-cpu
+    app: {{ .Release.Name }}
 spec:
   selector:
     matchLabels:
-      app: fah-cpu
+      app: {{ .Release.Name }}
   replicas: {{ .Values.replicas }}
   strategy:
     type: RollingUpdate
@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       labels:
-        app: fah-cpu
+        app: {{ .Release.Name }}
     spec:
       containers:
         - name: fah-cpu
