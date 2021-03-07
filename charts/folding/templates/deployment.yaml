@@ -1,0 +1,72 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fah-cpu
+  labels:
+    app: fah-cpu
+spec:
+  selector:
+    matchLabels:
+      app: fah-cpu
+  replicas: {{ .Values.replicas }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 100%
+      maxSurge: 100%
+  template:
+    metadata:
+      labels:
+        app: fah-cpu
+    spec:
+      containers:
+        - name: fah-cpu
+          image: "richstokes20/fah-covid:latest"
+          # --run-as UID should match runAsUser value in containers securityContext
+          command:
+            - "/usr/bin/FAHClient"
+            - "--config"
+            - "/var/lib/fahclient/config.xml"
+            - "--config-rotate=false"
+            - "--run-as"
+            - "1234"
+            - "--pid-file=/var/lib/fahclient/fahclient.pid"
+            - "--gpu=false"
+          resources:
+            limits:
+              cpu: {{ .Values.cpu }}
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 512Mi
+          # Make the container harder to break out of or exploit
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1234
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+          volumeMounts:
+            - mountPath: /var/lib/fahclient
+              name: fahclient
+      # We make an emptyDir to mount on the work directory /var/lib/fahclient
+      # so we can make the rest of the container's root filesystem read-only
+      volumes:
+        - name: fahclient
+          emptyDir: {}
+      initContainers:
+        - name: copy-config
+          imagePullPolicy: Always
+          image: "richstokes20/fah-covid:latest"
+          command:
+            - "sh"
+            - "-c"
+            - "cp /etc/fahclient/config.xml /var/lib/fahclient/config.xml"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1234
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+          volumeMounts:
+            - mountPath: /var/lib/fahclient
+              name: fahclient

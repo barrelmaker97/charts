@@ -1,0 +1,2 @@
+cpu: "1000m"
+replicas: 1
