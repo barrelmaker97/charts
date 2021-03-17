@@ -16,12 +16,27 @@ spec:
         app: {{ .Release.Name }}
     spec:
       containers:
-        - name: {{ .Release.Name }}
+        {{- if .Values.webClient }}
+        - name: webclient
+          image: "{{ .Values.node.repo }}/{{ .Values.node.name }}:{{ .Values.node.tag }}"
+          command:
+            - "bash"
+            - "-c"
+            - "git clone https://github.com/michaljaz/web-minecraft && cd web-minecraft && npm i && npm run dev"
+          ports:
+            - name: webclient
+              containerPort: 8080
+        {{- end }}
+        - name: minecraft
           image: "{{ .Values.image.repo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
           env:
             {{- if .Values.properties.eula }}
             - name: EULA
               value: {{ .Values.properties.eula | quote }}
+            {{- end }}
+            {{- if .Values.properties.gamemode }}
+            - name: MODE
+              value: {{ .Values.properties.gamemode | quote }}
             {{- end }}
             {{- if .Values.properties.difficulty }}
             - name: DIFFICULTY
@@ -72,6 +87,10 @@ spec:
             {{- if .Values.properties.timezone }}
             - name: TZ
               value: {{ .Values.properties.timezone | quote }}
+            {{- end }}
+            {{- if not .Values.properties.online }}
+            - name: ONLINE_MODE
+              value: {{ .Values.properties.online | quote }}
             {{- end }}
           ports:
             - name: minecraft

@@ -3,5 +3,9 @@ image:
   repo: "docker.io"
   name: "itzg/minecraft-server"
   tag: "latest"
+node:
+  repo: "docker.io"
+  name: "node"
+  tag: "latest"
 properties:
   eula: "TRUE"
