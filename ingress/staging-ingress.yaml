@@ -10,12 +10,6 @@ spec:
   tls:
     - hosts:
         - barrelmaker.dev
-        - dotfiles.barrelmaker.dev
-        - friendbot.barrelmaker.dev
-        - grafana.barrelmaker.dev
-        - jellyfin.barrelmaker.dev
-        - motocraft.barrelmaker.dev
-        - niucraft2.barrelmaker.dev
       secretName: staging-ingress-tls
   rules:
     - host: barrelmaker.dev
@@ -28,63 +22,3 @@ spec:
               name: nginx
               port:
                 number: 80
-    - host: dotfiles.barrelmaker.dev
-      http:
-        paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: nginx
-              port:
-                number: 80
-    - host: friendbot.barrelmaker.dev
-      http:
-        paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: friendbot
-              port:
-                number: 8000
-    - host: grafana.barrelmaker.dev
-      http:
-        paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: nginx
-              port:
-                number: 80
-    - host: jellyfin.barrelmaker.dev
-      http:
-        paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: jellyfin
-              port:
-                number: 8096
-    - host: motocraft.barrelmaker.dev
-      http:
-        paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: motocraft-extras
-              port:
-                number: 8123
-    - host: niucraft2.barrelmaker.dev
-      http:
-        paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: niucraft2-extras
-              port:
-                number: 8123
