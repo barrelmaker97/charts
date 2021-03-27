@@ -2,7 +2,7 @@
 # Must be in the range 30000-32767
 serverPort: "30003"
 dynmap: true
-metrics: false
+metrics: true
 saveLocation: /home/barrelmaker/gamedata/minecraft
 properties:
   difficulty: "normal"
