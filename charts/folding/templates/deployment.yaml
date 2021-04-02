@@ -38,7 +38,7 @@ spec:
               cpu: {{ .Values.cpu }}
               memory: 512Mi
             requests:
-              cpu: 100m
+              cpu: {{ .Values.cpu }}
               memory: 512Mi
           # Make the container harder to break out of or exploit
           securityContext:
