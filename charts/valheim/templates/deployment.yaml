@@ -52,6 +52,13 @@ spec:
               containerPort: 2457
             - name: valheim-3
               containerPort: 2458
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 7Gi
+            requests:
+              cpu: 700m
+              memory: 5Gi
       {{- if .Values.saveLocation }}
           volumeMounts:
             - name: "{{ .Release.Name }}-data"
