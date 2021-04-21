@@ -18,17 +18,20 @@ spec:
       containers:
         - name: starbound
           image: "{{ .Values.image.repo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          #command: ['sh', '-c', 'yes']
           env:
-            - name: STEAM_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: "{{ .Release.Name}}-steam-password"
-                  key: password
-            - name: STEAM_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: "{{ .Release.Name}}-steam-username"
-                  key: username
+            - name: SKIP_STEAMCMD
+              value: "True"
+          # - name: STEAM_PASSWORD
+          #   valueFrom:
+          #     secretKeyRef:
+          #       name: "{{ .Release.Name}}-steam-password"
+          #       key: password
+          # - name: STEAM_USERNAME
+          #   valueFrom:
+          #     secretKeyRef:
+          #       name: "{{ .Release.Name}}-steam-username"
+          #       key: username
           ports:
             - name: starbound-port
               containerPort: 21025
