@@ -35,7 +35,7 @@ spec:
       {{- if .Values.saveLocation }}
           volumeMounts:
             - name: "{{ .Release.Name }}-data"
-              mountPath: /home/steam/.config/unity3d/IronGate/Valheim
+              mountPath: /steamcmd/starbound
       volumes:
         - name: "{{ .Release.Name }}-data"
           hostPath:
