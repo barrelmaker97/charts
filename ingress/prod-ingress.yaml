@@ -22,7 +22,6 @@ spec:
         - jellyfin.barrelmaker.dev
         - motocraft.barrelmaker.dev
         - niucraft2.barrelmaker.dev
-        - webcraft.barrelmaker.dev
       secretName: main-ingress-tls
   rules:
     - host: barrelmaker.dev
