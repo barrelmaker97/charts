@@ -4,3 +4,4 @@ check-version-increment: false
 #since: HEAD~1
 all: true
 debug: true
+exclude-charts: starbound
