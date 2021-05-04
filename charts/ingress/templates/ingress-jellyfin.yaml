@@ -1,0 +1,32 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jellyfin-ingress
+  annotations:
+#   cert-manager.io/cluster-issuer: "letsencrypt-prod"
+#   acme.cert-manager.io/http01-edit-in-place: "true"
+    nginx.ingress.kubernetes.io/server-snippet: |
+      add_header X-Frame-Options SAMEORIGIN;
+      add_header Referrer-Policy same-origin;
+      add_header X-XSS-Protection "1; mode=block";
+      add_header X-Content-Type-Options nosniff;
+      add_header Content-Security-Policy "default-src 'none'; manifest-src 'self'; media-src 'self'; font-src 'self' data:; img-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://www.youtube.com/iframe_api https://s.ytimg.com; worker-src 'self' blob:; connect-src 'self'; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self';" always;
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_hide_header Access-Control-Allow-Origin;
+spec:
+  tls:
+    - hosts:
+        - jellyfin.barrelmaker.dev
+      secretName: main-ingress-tls
+  rules:
+    - host: jellyfin.barrelmaker.dev
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: jellyfin
+                port:
+                  number: 8096
