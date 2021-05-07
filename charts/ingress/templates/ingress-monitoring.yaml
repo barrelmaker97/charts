@@ -17,31 +17,31 @@ spec:
     - host: grafana.ares.lan
       http:
         paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: grafana
-              port:
-                number: 3000
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: grafana
+                port:
+                  number: 3000
     - host: prometheus.ares.lan
       http:
         paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: prometheus-k8s
-              port:
-                number: 9090
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: prometheus-k8s
+                port:
+                  number: 9090
     - host: alertmanager.ares.lan
       http:
         paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: alertmanager-main
-              port:
-                number: 9093
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: alertmanager-main
+                port:
+                  number: 9093
 {{- end }}

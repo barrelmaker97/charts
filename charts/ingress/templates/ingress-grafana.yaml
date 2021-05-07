@@ -21,10 +21,10 @@ spec:
     - host: grafana.barrelmaker.dev
       http:
         paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: proxy
-              port:
-                number: 80
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: proxy
+                port:
+                  number: 80
