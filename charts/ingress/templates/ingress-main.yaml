@@ -27,30 +27,30 @@ spec:
     - host: barrelmaker.dev
       http:
         paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: proxy
-              port:
-                number: 80
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: proxy
+                port:
+                  number: 80
     - host: dotfiles.barrelmaker.dev
       http:
         paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: proxy
-              port:
-                number: 80
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: proxy
+                port:
+                  number: 80
     - host: friendbot.barrelmaker.dev
       http:
         paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: friendbot
-              port:
-                number: 8000
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: friendbot
+                port:
+                  number: 8000
