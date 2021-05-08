@@ -1,5 +1,44 @@
 apiVersion: v1
 entries:
+  factorio:
+  - apiVersion: v1
+    created: "2021-05-08T05:00:56.187753925Z"
+    description: A Helm Chart for Factorio
+    digest: c68d3de7c6cb4ae996f99827b3eff0d3626c14b642e737c798a0c39b6f911381
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: factorio
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/factorio-0.1.1/factorio-0.1.1.tgz
+    version: 0.1.1
+  folding:
+  - apiVersion: v1
+    created: "2021-05-08T05:00:56.274982169Z"
+    description: A Helm Chart for Folding at Home
+    digest: 68f205950ff61fae8c87f02e29b9700607ff506be52a0f9018c2c3fed11da73a
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: folding
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/folding-0.1.1/folding-0.1.1.tgz
+    version: 0.1.1
+  friendbot:
+  - apiVersion: v1
+    created: "2021-05-08T05:00:56.372838874Z"
+    description: A Helm Chart for Friendbot
+    digest: f1fecfbd05e778071c4f70027187eb6be8cabbcf0ce30da544de6b4aaf029895
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: friendbot
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/friendbot-0.1.1/friendbot-0.1.1.tgz
+    version: 0.1.1
   ingress:
   - apiVersion: v1
     created: "2021-05-07T20:54:38.157261749Z"
@@ -13,4 +52,69 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/ingress-0.1.1/ingress-0.1.1.tgz
     version: 0.1.1
-generated: "2021-05-07T20:54:38.157376649Z"
+  jellyfin:
+  - apiVersion: v1
+    created: "2021-05-08T05:00:56.467966284Z"
+    description: A Helm Chart for Jellyfin
+    digest: 0c3c23c8b6aa42dc3f276a91251db1bb4b1bb20fa55d6b21100b4a82083d5605
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: jellyfin
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/jellyfin-0.1.1/jellyfin-0.1.1.tgz
+    version: 0.1.1
+  minecraft:
+  - apiVersion: v1
+    created: "2021-05-08T05:00:56.562519553Z"
+    description: A Helm Chart for Minecraft
+    digest: cea234a413ed9383072a22b79dc95403e30ce166855d271865a1b6fb05fe5aa3
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: minecraft
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/minecraft-0.1.1/minecraft-0.1.1.tgz
+    version: 0.1.1
+  proxy:
+  - apiVersion: v1
+    created: "2021-05-08T05:00:56.657424746Z"
+    description: A Helm Chart for a reverse proxy
+    digest: 98f038c3c417b06fbbd4e30096e39192eaf7336fe14d7fab88179620a51d59e9
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: proxy
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/proxy-0.1.1/proxy-0.1.1.tgz
+    version: 0.1.1
+  starbound:
+  - apiVersion: v1
+    created: "2021-05-08T05:00:56.755141941Z"
+    description: A Helm Chart for Starbound
+    digest: cc75fe8479ef2ef581e54bb2f080b546d758de8137843fb0838355c70c3d42a6
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: starbound
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/starbound-0.1.1/starbound-0.1.1.tgz
+    version: 0.1.1
+  valheim:
+  - apiVersion: v1
+    created: "2021-05-08T05:00:56.839072149Z"
+    description: A Helm Chart for Valheim
+    digest: 5549ffc58c56cd5500e7c63db9db44fb6fba617dce4d68a89f2b06ed556b8423
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: valheim
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/valheim-0.1.1/valheim-0.1.1.tgz
+    version: 0.1.1
+generated: "2021-05-08T05:00:56.83908535Z"
