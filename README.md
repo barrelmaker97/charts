@@ -5,8 +5,8 @@ Applications I use, ready to launch on Kubernetes using [Kubernetes Helm](https:
 ## TL;DR
 
 ```bash
-git clone git@github.com:barrelmaker97/charts.git
-cd charts
+helm repo add barrelmaker https://charts.barrelmaker.dev
+helm search repo barrelmaker
 helm install my-release ./charts/<chart>
 ```
 
@@ -26,12 +26,12 @@ Helm is a tool for managing Kubernetes charts. Charts are packages of pre-config
 
 To install Helm, refer to the [Helm install guide](https://github.com/helm/helm#install) and ensure that the `helm` binary is in the `PATH` of your shell.
 
-### Clone Repo
+### Add Repo
 
 The following command allows you to download and install all the charts from this repository:
 
 ```bash
-git clone git@github.com:barrelmaker97/charts.git
+helm repo add barrelmaker https://charts.barrelmaker.dev
 ```
 
 ### Using Helm
