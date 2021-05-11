@@ -42,7 +42,7 @@ Please refer to the [Quick Start guide](https://helm.sh/docs/intro/quickstart/) 
 
 Useful Helm Client Commands:
 * View available charts: `helm search repo`
-* Install a chart: `helm install my-release ./charts/<package-name>`
+* Install a chart: `helm install my-release barrelmaker/<package-name>`
 * Upgrade your application: `helm upgrade`
 
 # License
