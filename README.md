@@ -10,6 +10,8 @@ helm search repo barrelmaker
 helm install my-release barrelmaker/<chart>
 ```
 
+![Installing a chart](demo.gif)
+
 ## Before you begin
 
 ### Prerequisites
