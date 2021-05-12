@@ -7,7 +7,7 @@ Applications I use, ready to launch on Kubernetes using [Kubernetes Helm](https:
 ```bash
 helm repo add barrelmaker https://charts.barrelmaker.dev
 helm search repo barrelmaker
-helm install my-release ./charts/<chart>
+helm install my-release barrelmaker/<chart>
 ```
 
 ## Before you begin
