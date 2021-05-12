@@ -7,8 +7,10 @@ Applications I use, ready to launch on Kubernetes using [Kubernetes Helm](https:
 ```bash
 helm repo add barrelmaker https://charts.barrelmaker.dev
 helm search repo barrelmaker
-helm install my-release ./charts/<chart>
+helm install my-release barrelmaker/<chart>
 ```
+
+![Installing a chart](demo.gif)
 
 ## Before you begin
 
@@ -42,7 +44,7 @@ Please refer to the [Quick Start guide](https://helm.sh/docs/intro/quickstart/) 
 
 Useful Helm Client Commands:
 * View available charts: `helm search repo`
-* Install a chart: `helm install my-release ./charts/<package-name>`
+* Install a chart: `helm install my-release barrelmaker/<package-name>`
 * Upgrade your application: `helm upgrade`
 
 # License
