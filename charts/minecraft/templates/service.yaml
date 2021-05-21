@@ -3,12 +3,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}-extras
+  name: {{ include "minecraft.fullname" . }}-extras
   labels:
-    app: {{ .Release.Name }}
+    {{- include "minecraft.labels" . | nindent 4 }}
 spec:
   selector:
-    app: {{ .Release.Name }}
+    {{- include "minecraft.selectorLabels" . | nindent 4 }}
   ports:
 {{- if .Values.dynmap }}
     - name: dynmap
