@@ -2,10 +2,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ include "friendbot.fullname" . }}
+  labels:
+    {{- include "friendbot.labels" . | nindent 4 }}
 spec:
   selector:
-    app: {{ .Release.Name }}
+    {{- include "friendbot.selectorLabels" . | nindent 4 }}
   ports:
     - protocol: TCP
       port: 8000
