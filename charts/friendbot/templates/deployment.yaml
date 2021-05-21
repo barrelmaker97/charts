@@ -94,6 +94,6 @@ spec:
         {{- if .Values.signature }}
         - name: {{ .Release.Name }}-signature
           secret:
-            secretName: {{ .Release.Name }}-signature
+            secretName: {{ include "friendbot.fullname" . }}-signature
         {{- end }}
       {{- end }}
