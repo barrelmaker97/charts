@@ -1,4 +1,4 @@
-{{- if or .Values.dynmap .Values.metrics .Values.webClient }}
+{{- if or .Values.dynmap .Values.metrics }}
 ---
 apiVersion: v1
 kind: Service
@@ -21,11 +21,5 @@ spec:
       protocol: TCP
       port: 9225
       targetPort: 9225
-{{- end }}
-{{- if .Values.webClient }}
-    - name: webclient
-      protocol: TCP
-      port: 8080
-      targetPort: 8080
 {{- end }}
 {{- end }}

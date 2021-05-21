@@ -26,14 +26,14 @@ spec:
             path: "/"
             backend:
               service:
-                name: niucraft2-extras
+                name: niucraft2-minecraft-extras
                 port:
                   number: 8123
           - pathType: Prefix
             path: "/metrics"
             backend:
               service:
-                name: niucraft2-extras
+                name: niucraft2-minecraft-extras
                 port:
                   number: 9225
     - host: motocraft.barrelmaker.dev
@@ -43,13 +43,13 @@ spec:
             path: "/"
             backend:
               service:
-                name: motocraft-extras
+                name: motocraft-minecraft-extras
                 port:
                   number: 8123
           - pathType: Prefix
             path: "/metrics"
             backend:
               service:
-                name: motocraft-extras
+                name: motocraft-minecraft-extras
                 port:
                   number: 9225

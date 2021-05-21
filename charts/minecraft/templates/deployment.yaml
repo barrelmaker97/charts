@@ -16,17 +16,6 @@ spec:
         {{- include "minecraft.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-        {{- if .Values.webClient }}
-        - name: webclient
-          image: "{{ .Values.node.repo }}/{{ .Values.node.name }}:{{ .Values.node.tag }}"
-          command:
-            - "bash"
-            - "-c"
-            - "git clone https://github.com/michaljaz/web-minecraft && cd web-minecraft && npm i && npm run dev"
-          ports:
-            - name: webclient
-              containerPort: 8080
-        {{- end }}
         - name: minecraft
           image: "{{ .Values.image.repo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
           env:
