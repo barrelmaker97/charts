@@ -2,18 +2,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ include "starbound.fullname" . }}
   labels:
-    app: {{ .Release.Name }}
+    {{- include "starbound.labels" . | nindent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Release.Name }}
+      {{- include "starbound.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}
+        {{- include "starbound.selectorLabels" . | nindent 8 }}
     spec:
       containers:
         - name: starbound
@@ -25,12 +25,12 @@ spec:
           # - name: STEAM_PASSWORD
           #   valueFrom:
           #     secretKeyRef:
-          #       name: "{{ .Release.Name}}-steam-password"
+          #       name: {{ include "starbound.fullname" . }}-steam-password
           #       key: password
           # - name: STEAM_USERNAME
           #   valueFrom:
           #     secretKeyRef:
-          #       name: "{{ .Release.Name}}-steam-username"
+          #       name: {{ include "starbound.fullname" . }}-steam-username
           #       key: username
           ports:
             - name: starbound-port

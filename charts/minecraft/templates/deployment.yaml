@@ -2,18 +2,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ include "minecraft.fullname" . }}
   labels:
-    app: {{ .Release.Name }}
+    {{- include "minecraft.labels" . | nindent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Release.Name }}
+      {{- include "minecraft.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}
+        {{- include "minecraft.selectorLabels" . | nindent 8 }}
     spec:
       containers:
         {{- if .Values.webClient }}

@@ -2,13 +2,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ include "folding.fullname" . }}
   labels:
-    app: {{ .Release.Name }}
+    {{- include "folding.labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
-      app: {{ .Release.Name }}
+      {{- include "folding.selectorLabels" . | nindent 6 }}
   replicas: {{ .Values.replicas }}
   strategy:
     type: RollingUpdate
@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}
+        {{- include "folding.selectorLabels" . | nindent 8 }}
     spec:
       containers:
         - name: fah-cpu
