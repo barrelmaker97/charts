@@ -2,18 +2,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ include "proxy.fullname" . }}
   labels:
-    app: {{ .Release.Name }}
+    {{- include "proxy.labels" . | nindent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Release.Name }}
+      {{- include "proxy.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}
+        {{- include "proxy.selectorLabels" . | nindent 8 }}
     spec:
       containers:
         - name: proxy
@@ -53,7 +53,7 @@ spec:
       volumes:
         - name: {{ .Release.Name }}-config-volume
           configMap:
-            name: {{ .Release.Name }}-config
+            name: {{ include "proxy.fullname" . }}-config
             defaultMode: 0644
         {{- if .Values.websiteLocation }}
         - name: {{ .Release.Name }}-website-volume
