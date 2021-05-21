@@ -77,6 +77,18 @@ entries:
     version: 0.1.1
   ingress:
   - apiVersion: v2
+    created: "2021-05-21T05:07:26.057926714Z"
+    description: A Helm Chart for Ingresses
+    digest: 34526f98abb5ca94beb46fb460c55e8cf43d894ecce7f7aa9b34716d69674362
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: ingress
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/ingress-0.1.3/ingress-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
     created: "2021-05-21T04:38:30.730258228Z"
     description: A Helm Chart for Ingresses
     digest: 401a9ffba4be49d90209815c7d74099597e7630c1cfbc0113a7e11549661a301
@@ -126,6 +138,18 @@ entries:
     - https://github.com/barrelmaker97/charts/releases/download/jellyfin-0.1.1/jellyfin-0.1.1.tgz
     version: 0.1.1
   minecraft:
+  - apiVersion: v2
+    created: "2021-05-21T05:07:26.17721015Z"
+    description: A Helm Chart for Minecraft
+    digest: a88acd1478dbfc3a4f79511da4cad7b3507e4aea7be1736282df0f11c92ba1b4
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: minecraft
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/minecraft-0.1.3/minecraft-0.1.3.tgz
+    version: 0.1.3
   - apiVersion: v2
     created: "2021-05-21T04:38:30.941065605Z"
     description: A Helm Chart for Minecraft
@@ -225,4 +249,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/valheim-0.1.1/valheim-0.1.1.tgz
     version: 0.1.1
-generated: "2021-05-21T04:38:31.25012303Z"
+generated: "2021-05-21T05:07:26.177445253Z"
