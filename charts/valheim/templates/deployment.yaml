@@ -2,18 +2,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ include "valheim.fullname" . }}
   labels:
-    app: {{ .Release.Name }}
+    {{- include "valheim.labels" . | nindent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Release.Name }}
+      {{- include "valheim.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}
+        {{- include "valheim.selectorLabels" . | nindent 8 }}
     spec:
       containers:
         - name: valheim
@@ -42,7 +42,7 @@ spec:
             - name: PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: "{{ .Release.Name}}-password"
+                  name: {{ include "valheim.fullname" . }}-password
                   key: password
             {{- end }}
           ports:
