@@ -1,6 +1,18 @@
 apiVersion: v1
 entries:
   factorio:
+  - apiVersion: v2
+    created: "2021-05-21T04:38:30.442813277Z"
+    description: A Helm Chart for Factorio
+    digest: 01832951e586135fb30569f72e7c93a8daa47a538d14fad228a0de60fe8dcff0
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: factorio
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/factorio-0.1.2/factorio-0.1.2.tgz
+    version: 0.1.2
   - apiVersion: v1
     created: "2021-05-08T05:00:56.187753925Z"
     description: A Helm Chart for Factorio
@@ -14,6 +26,18 @@ entries:
     - https://github.com/barrelmaker97/charts/releases/download/factorio-0.1.1/factorio-0.1.1.tgz
     version: 0.1.1
   folding:
+  - apiVersion: v2
+    created: "2021-05-21T04:38:30.542762147Z"
+    description: A Helm Chart for Folding at Home
+    digest: 7e29bd4fb27dc3cd8e960647afd84e1bb2945469c19d211149195312d249b614
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: folding
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/folding-0.1.2/folding-0.1.2.tgz
+    version: 0.1.2
   - apiVersion: v1
     created: "2021-05-08T05:00:56.274982169Z"
     description: A Helm Chart for Folding at Home
@@ -27,6 +51,18 @@ entries:
     - https://github.com/barrelmaker97/charts/releases/download/folding-0.1.1/folding-0.1.1.tgz
     version: 0.1.1
   friendbot:
+  - apiVersion: v2
+    created: "2021-05-21T04:38:30.638640464Z"
+    description: A Helm Chart for Friendbot
+    digest: 836d01a34a6557a322237905e26f2f8ea3344a9c7f792b561615afb7b65c2b29
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: friendbot
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/friendbot-0.1.2/friendbot-0.1.2.tgz
+    version: 0.1.2
   - apiVersion: v1
     created: "2021-05-08T05:00:56.372838874Z"
     description: A Helm Chart for Friendbot
@@ -40,6 +76,18 @@ entries:
     - https://github.com/barrelmaker97/charts/releases/download/friendbot-0.1.1/friendbot-0.1.1.tgz
     version: 0.1.1
   ingress:
+  - apiVersion: v2
+    created: "2021-05-21T04:38:30.730258228Z"
+    description: A Helm Chart for Ingresses
+    digest: 401a9ffba4be49d90209815c7d74099597e7630c1cfbc0113a7e11549661a301
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: ingress
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/ingress-0.1.2/ingress-0.1.2.tgz
+    version: 0.1.2
   - apiVersion: v1
     created: "2021-05-07T20:54:38.157261749Z"
     description: A Helm Chart for Ingresses
@@ -53,6 +101,18 @@ entries:
     - https://github.com/barrelmaker97/charts/releases/download/ingress-0.1.1/ingress-0.1.1.tgz
     version: 0.1.1
   jellyfin:
+  - apiVersion: v2
+    created: "2021-05-21T04:38:30.827790367Z"
+    description: A Helm Chart for Jellyfin
+    digest: 44fb38e73fcf52f001ae5358415aeaeeb230c843a0e9938d8cb5d2c4c9bc54b5
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: jellyfin
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/jellyfin-0.1.2/jellyfin-0.1.2.tgz
+    version: 0.1.2
   - apiVersion: v1
     created: "2021-05-08T05:00:56.467966284Z"
     description: A Helm Chart for Jellyfin
@@ -66,6 +126,18 @@ entries:
     - https://github.com/barrelmaker97/charts/releases/download/jellyfin-0.1.1/jellyfin-0.1.1.tgz
     version: 0.1.1
   minecraft:
+  - apiVersion: v2
+    created: "2021-05-21T04:38:30.941065605Z"
+    description: A Helm Chart for Minecraft
+    digest: 55849044437842f6ec26085f84ada2980f1f0f5928336c095d9421d940b4f841
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: minecraft
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/minecraft-0.1.2/minecraft-0.1.2.tgz
+    version: 0.1.2
   - apiVersion: v1
     created: "2021-05-08T05:00:56.562519553Z"
     description: A Helm Chart for Minecraft
@@ -79,6 +151,18 @@ entries:
     - https://github.com/barrelmaker97/charts/releases/download/minecraft-0.1.1/minecraft-0.1.1.tgz
     version: 0.1.1
   proxy:
+  - apiVersion: v2
+    created: "2021-05-21T04:38:31.041794085Z"
+    description: A Helm Chart for a reverse proxy
+    digest: 8493c2bcd839006790900b62cbae566a02ba11d748fb3bf2ac417df64ab71bd8
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: proxy
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/proxy-0.1.2/proxy-0.1.2.tgz
+    version: 0.1.2
   - apiVersion: v1
     created: "2021-05-08T05:00:56.657424746Z"
     description: A Helm Chart for a reverse proxy
@@ -92,6 +176,18 @@ entries:
     - https://github.com/barrelmaker97/charts/releases/download/proxy-0.1.1/proxy-0.1.1.tgz
     version: 0.1.1
   starbound:
+  - apiVersion: v2
+    created: "2021-05-21T04:38:31.146650416Z"
+    description: A Helm Chart for Starbound
+    digest: 3fbb2f1907919aea0dfe5ed09b0bbbf7d3ac6adf6abc0fea442fb01f161979af
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: starbound
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/starbound-0.1.2/starbound-0.1.2.tgz
+    version: 0.1.2
   - apiVersion: v1
     created: "2021-05-08T05:00:56.755141941Z"
     description: A Helm Chart for Starbound
@@ -105,6 +201,18 @@ entries:
     - https://github.com/barrelmaker97/charts/releases/download/starbound-0.1.1/starbound-0.1.1.tgz
     version: 0.1.1
   valheim:
+  - apiVersion: v2
+    created: "2021-05-21T04:38:31.25009413Z"
+    description: A Helm Chart for Valheim
+    digest: e5b16de17c3cc309f5622dfb2d43f1321e492ea1ec9ecf81063f9e0e4f2171e9
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: valheim
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/valheim-0.1.2/valheim-0.1.2.tgz
+    version: 0.1.2
   - apiVersion: v1
     created: "2021-05-08T05:00:56.839072149Z"
     description: A Helm Chart for Valheim
@@ -117,4 +225,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/valheim-0.1.1/valheim-0.1.1.tgz
     version: 0.1.1
-generated: "2021-05-08T05:00:56.83908535Z"
+generated: "2021-05-21T04:38:31.25012303Z"
