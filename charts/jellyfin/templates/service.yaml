@@ -2,12 +2,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ include "jellyfin.fullname" . }}
   labels:
-    app: {{ .Release.Name }}
+    {{- include "jellyfin.labels" . | nindent 4 }}
 spec:
   selector:
-    app: {{ .Release.Name }}
+    {{- include "jellyfin.selectorLabels" . | nindent 4 }}
   ports:
     - name: jellyfin
       protocol: TCP

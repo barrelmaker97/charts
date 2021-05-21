@@ -2,20 +2,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ include "jellyfin.fullname" . }}
   labels:
-    app: {{ .Release.Name }}
+    {{- include "jellyfin.labels" . | nindent 4 }}
 spec:
   replicas: 1
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: {{ .Release.Name }}
+      {{- include "jellyfin.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}
+        {{- include "jellyfin.selectorLabels" . | nindent 8 }}
     spec:
       containers:
         - name: jellyfin
