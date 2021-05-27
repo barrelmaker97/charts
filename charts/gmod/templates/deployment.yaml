@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "gmod.fullname" . }}
+  labels:
+    {{- include "gmod.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "gmod.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "gmod.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: gmod
+          image: "{{ .Values.image.repo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          ports:
+            - name: gmod
+              containerPort: 27015
+            - name: client
+              containerPort: 27005
+      {{- if .Values.saveLocation }}
+          volumeMounts:
+            - name: "save-data"
+              mountPath: /gmod
+      {{- end }}
+      {{- if .Values.saveLocation }}
+      volumes:
+        - name: "save-data"
+          hostPath:
+            path: {{ .Values.saveLocation }}/{{ include "gmod.fullname" . }}-data
+            type: DirectoryOrCreate
+      {{- end }}
