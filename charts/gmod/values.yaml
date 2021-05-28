@@ -3,3 +3,8 @@ image:
   repo: "docker.io"
   name: "ceifa/gmod-server"
   tag: "latest"
+
+production: 1
+maxPlayers: 16
+gamemode: sandbox
+map: gm_construct

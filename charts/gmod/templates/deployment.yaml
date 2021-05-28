@@ -21,17 +21,24 @@ spec:
           ports:
             - name: gmod
               containerPort: 27015
-            - name: client
-              containerPort: 27005
-      {{- if .Values.saveLocation }}
+          env:
+            - name: PRODUCTION
+              value: {{ .Values.production | quote }}
+            - name: MAXPLAYERS
+              value: {{ .Values.maxPlayers | quote }}
+            - name: GAMEMODE
+              value: {{ .Values.gamemode | quote }}
+            - name: MAP
+              value: {{ .Values.map | quote }}
+      {{- if .Values.mapsDir }}
           volumeMounts:
-            - name: "save-data"
-              mountPath: /gmod
+            - name: maps-dir
+              mountPath: /home/gmod/server/garrysmod/maps
       {{- end }}
-      {{- if .Values.saveLocation }}
+      {{- if .Values.mapsDir }}
       volumes:
-        - name: "save-data"
+        - name: maps-dir
           hostPath:
-            path: {{ .Values.saveLocation }}/{{ include "gmod.fullname" . }}-data
-            type: DirectoryOrCreate
+            path: {{ .Values.mapsDir }}
+            type: Directory
       {{- end }}
