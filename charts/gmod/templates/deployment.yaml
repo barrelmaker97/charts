@@ -30,15 +30,25 @@ spec:
               value: {{ .Values.gamemode | quote }}
             - name: MAP
               value: {{ .Values.map | quote }}
-      {{- if .Values.mapsDir }}
           volumeMounts:
+      {{- if .Values.mapsDir }}
             - name: maps-dir
               mountPath: /home/gmod/server/garrysmod/maps
       {{- end }}
-      {{- if .Values.mapsDir }}
+      {{- if .Values.addonsDir }}
+            - name: addons-dir
+              mountPath: /home/gmod/server/garrysmod/addons
+      {{- end }}
       volumes:
+      {{- if .Values.mapsDir }}
         - name: maps-dir
           hostPath:
             path: {{ .Values.mapsDir }}
+            type: Directory
+      {{- end }}
+      {{- if .Values.addonsDir }}
+        - name: addons-dir
+          hostPath:
+            path: {{ .Values.addonsDir }}
             type: Directory
       {{- end }}
