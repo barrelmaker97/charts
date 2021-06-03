@@ -21,6 +21,20 @@ spec:
           ports:
             - name: gmod
               containerPort: 27015
+          livenessProbe:
+            exec:
+              command:
+                - bash
+                - /home/gmod/health.sh
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            exec:
+              command:
+                - bash
+                - /home/gmod/health.sh
+            initialDelaySeconds: 0
+            periodSeconds: 10
           env:
             - name: PRODUCTION
               value: {{ .Values.production | quote }}
