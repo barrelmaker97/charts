@@ -45,6 +45,9 @@ spec:
             - name: MAP
               value: {{ .Values.map | quote }}
           volumeMounts:
+            - name: update-script
+              subPath: update.txt
+              mountPath: /home/gmod/update.txt
       {{- if .Values.mapsDir }}
             - name: maps-dir
               mountPath: /home/gmod/server/garrysmod/maps
@@ -54,6 +57,10 @@ spec:
               mountPath: /home/gmod/server/garrysmod/addons
       {{- end }}
       volumes:
+        - name: update-script
+          configMap:
+            name: {{ include "gmod.fullname" . }}-update
+            defaultMode: 0644
       {{- if .Values.mapsDir }}
         - name: maps-dir
           hostPath:
