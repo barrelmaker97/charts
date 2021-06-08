@@ -18,9 +18,12 @@ spec:
       containers:
         - name: gmod
           image: "{{ .Values.image.repo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          command: ["/home/gmod/start.sh"]
           ports:
-            - name: gmod
+            - name: gmod-server
               containerPort: 27015
+            - name: gmod-client
+              containerPort: 27005
           livenessProbe:
             exec:
               command:
