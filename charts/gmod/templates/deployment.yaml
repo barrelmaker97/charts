@@ -44,10 +44,15 @@ spec:
               value: {{ .Values.gamemode | quote }}
             - name: MAP
               value: {{ .Values.map | quote }}
+            - name: ARGS
+              value: {{ .Values.args | quote }}
           volumeMounts:
             - name: update-script
               subPath: update.txt
               mountPath: /home/gmod/update.txt
+            - name: users-list
+              subPath: users.txt
+              mountPath: /home/gmod/server/garrysmod/settings/users.txt
       {{- if .Values.mapsDir }}
             - name: maps-dir
               mountPath: /home/gmod/server/garrysmod/maps
@@ -57,6 +62,10 @@ spec:
               mountPath: /home/gmod/server/garrysmod/addons
       {{- end }}
       volumes:
+        - name: users-list
+          configMap:
+            name: {{ include "gmod.fullname" . }}-users
+            defaultMode: 0644
         - name: update-script
           configMap:
             name: {{ include "gmod.fullname" . }}-update
