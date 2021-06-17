@@ -77,6 +77,18 @@ entries:
     version: 0.1.1
   ingress:
   - apiVersion: v2
+    created: "2021-06-17T22:36:15.746983879Z"
+    description: A Helm Chart for Ingresses
+    digest: dbf3a78d29678e47e2a5bcd7b83c8047d016fafa9ce5076911552e22c6eacd36
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: ingress
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/ingress-0.1.4/ingress-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
     created: "2021-05-21T05:07:26.057926714Z"
     description: A Helm Chart for Ingresses
     digest: 34526f98abb5ca94beb46fb460c55e8cf43d894ecce7f7aa9b34716d69674362
@@ -249,4 +261,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/valheim-0.1.1/valheim-0.1.1.tgz
     version: 0.1.1
-generated: "2021-05-21T05:07:26.177445253Z"
+generated: "2021-06-17T22:36:15.747041382Z"
