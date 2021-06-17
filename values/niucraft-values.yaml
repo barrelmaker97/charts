@@ -1,0 +1,17 @@
+---
+# Must be in the range 30000-32767
+serverPort: "30013"
+dynmap: true
+metrics: true
+saveLocation: /home/barrelmaker/gamedata/minecraft
+properties:
+  difficulty: "normal"
+  ops: "Barrelmaker97"
+  memory: "2G"
+  serverName: "NIUCraft"
+  motd: "NIUCraft Server"
+  spawnProtection: "0"
+  forceGamemode: "true"
+  viewDistance: "32"
+  type: "BUKKIT"
+  timezone: "America/Chicago"
