@@ -35,6 +35,8 @@ spec:
               value: {{ .Values.properties.forceGamemode | quote }}
             - name: TZ
               value: {{ .Values.properties.timezone | quote }}
+            - name: VERSION
+              value: {{ .Values.properties.version | quote }}
             {{- if .Values.properties.viewDistance }}
             - name: VIEW_DISTANCE
               value: {{ .Values.properties.viewDistance | quote }}
