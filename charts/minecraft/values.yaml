@@ -5,3 +5,10 @@ image:
   tag: "latest"
 properties:
   eula: "TRUE"
+  difficulty: "normal"
+  serverName: "Minecraft Server"
+  timezone: "America/Chicago"
+  motd: "Minecraft Server"
+  gamemode: "suvival"
+  spawnProtection: "0"
+  forceGamemode: "true"
