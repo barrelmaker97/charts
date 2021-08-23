@@ -188,6 +188,18 @@ entries:
     version: 0.1.1
   proxy:
   - apiVersion: v2
+    created: "2021-08-23T02:25:08.318804059Z"
+    description: A Helm Chart for a reverse proxy
+    digest: 6b7a0fd91b4c249612e57f7870179c69b37c9af7f38463e04d23e42a23038fb2
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: proxy
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/proxy-0.1.3/proxy-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
     created: "2021-05-21T04:38:31.041794085Z"
     description: A Helm Chart for a reverse proxy
     digest: 8493c2bcd839006790900b62cbae566a02ba11d748fb3bf2ac417df64ab71bd8
@@ -261,4 +273,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/valheim-0.1.1/valheim-0.1.1.tgz
     version: 0.1.1
-generated: "2021-06-17T22:36:15.747041382Z"
+generated: "2021-08-23T02:25:08.32284286Z"
