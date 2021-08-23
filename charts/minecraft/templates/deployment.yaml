@@ -64,10 +64,14 @@ spec:
           ports:
             - name: minecraft
               containerPort: 25565
+          {{- if .Values.dynmap }}
             - name: dynmap
               containerPort: 8123
+          {{- end }}
+          {{- if .Values.metrics }}
             - name: metrics
               containerPort: 9225
+          {{- end }}
           {{- if .Values.properties.memory }}
           resources:
             requests:
