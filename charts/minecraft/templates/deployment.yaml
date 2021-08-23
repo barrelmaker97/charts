@@ -72,11 +72,6 @@ spec:
             - name: metrics
               containerPort: 9225
           {{- end }}
-          {{- if .Values.properties.memory }}
-          resources:
-            requests:
-              memory: {{ .Values.properties.memory }}
-          {{- end }}
       {{- if .Values.saveLocation }}
           volumeMounts:
             - name: {{ .Release.Name }}-data
