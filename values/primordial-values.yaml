@@ -5,13 +5,9 @@ dynmap: false
 metrics: true
 saveLocation: /home/barrelmaker/gamedata/minecraft
 properties:
-  difficulty: "normal"
-  ops: "Barrelmaker97"
   memory: "2G"
-  serverName: "Primordial"
   motd: "Primordial Server"
-  spawnProtection: "0"
-  forceGamemode: "true"
-  viewDistance: "32"
+  ops: "Barrelmaker97"
+  serverName: "Primordial"
   type: "BUKKIT"
-  timezone: "America/Chicago"
+  viewDistance: "32"

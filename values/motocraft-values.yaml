@@ -5,13 +5,9 @@ dynmap: true
 metrics: true
 saveLocation: /home/barrelmaker/gamedata/minecraft
 properties:
-  difficulty: "normal"
-  ops: "Barrelmaker97"
   memory: "2G"
-  serverName: "MotoCraft"
   motd: "MotoCraft Server"
-  spawnProtection: "0"
-  forceGamemode: "true"
-  viewDistance: "32"
+  ops: "Barrelmaker97"
+  serverName: "MotoCraft"
   type: "BUKKIT"
-  timezone: "America/Chicago"
+  viewDistance: "32"
