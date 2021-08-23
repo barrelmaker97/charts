@@ -1,7 +1,0 @@
----
-serverPort: 30008
-timezone: "America/Chicago"
-serverName: "BeerDens"
-worldName: "MyNewPerma"
-public: true
-saveLocation: /home/barrelmaker/gamedata/valheim
