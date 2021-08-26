@@ -26,11 +26,9 @@ spec:
             - name: factorio
               containerPort: 34197
           volumeMounts:
-      {{- if .Values.saveLocation }}
             - name: savedata
               mountPath: /factorio
-      {{- end }}
-      {{- if .Values.metrics }}
+        {{- if .Values.metrics }}
         - name: metrics
           image: "{{ .Values.metricsImage.repo }}/{{ .Values.metricsImage.name }}:{{ .Values.metricsImage.tag }}"
           args:
@@ -43,11 +41,13 @@ spec:
           volumeMounts:
             - name: savedata
               mountPath: /factorio
-      {{- end }}
+        {{- end }}
       volumes:
-      {{- if .Values.saveLocation }}
         - name: savedata
+        {{- if .Values.saveLocation }}
           hostPath:
             path: "{{ .Values.saveLocation }}/{{ .Release.Name }}-data"
             type: DirectoryOrCreate
-      {{- end }}
+        {{- else }}
+          emptyDir: {}
+        {{- end }}
