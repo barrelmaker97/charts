@@ -1,7 +1,7 @@
 ---
 # Must be in the range 30000-32767
 serverPort: "30004"
-saveLocation: /home/barrelmaker/gamedata/minecraft
+saveLocation: /home/barrelmaker
 properties:
   memory: "2G"
   motd: "Primordial Beta Server"
