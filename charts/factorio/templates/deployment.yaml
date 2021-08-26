@@ -7,6 +7,8 @@ metadata:
     {{- include "factorio.labels" . | nindent 4 }}
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       {{- include "factorio.selectorLabels" . | nindent 6 }}
@@ -15,21 +17,43 @@ spec:
       labels:
         {{- include "factorio.selectorLabels" . | nindent 8 }}
     spec:
+      securityContext:
+        runAsUser: 845
       containers:
         - name: factorio
           image: "{{ .Values.image.repo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
           ports:
             - name: factorio
               containerPort: 34197
-      {{- if .Values.saveLocation }}
           volumeMounts:
-            - name: "{{ .Release.Name }}-data"
+      {{- if .Values.saveLocation }}
+            - name: savedata
               mountPath: /factorio
       {{- end }}
-      {{- if .Values.saveLocation }}
+      {{- if .Values.metrics }}
+            - name: metrics-volume
+              mountPath: /factorio/script-output/graftorio2
+      {{- end }}
+      {{- if .Values.metrics }}
+        - name: metrics
+          image: "{{ .Values.metricsImage.repo }}/{{ .Values.metricsImage.name }}:{{ .Values.metricsImage.tag }}"
+          args:
+            - "--collector.textfile.directory=/textfiles"
+          ports:
+            - name: metrics
+              containerPort: 9100
+          volumeMounts:
+            - name: metrics-volume
+              mountPath: /textfiles
+      {{- end }}
       volumes:
-        - name: "{{ .Release.Name }}-data"
+      {{- if .Values.saveLocation }}
+        - name: savedata
           hostPath:
             path: "{{ .Values.saveLocation }}/{{ .Release.Name }}-data"
             type: DirectoryOrCreate
+      {{- end }}
+      {{- if .Values.metrics }}
+        - name: metrics-volume
+          emptyDir: {}
       {{- end }}

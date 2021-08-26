@@ -3,3 +3,7 @@ image:
   repo: "docker.io"
   name: "factoriotools/factorio"
   tag: "latest"
+metricsImage:
+  repo: "docker.io"
+  name: "prom/node-exporter"
+  tag: "latest"
