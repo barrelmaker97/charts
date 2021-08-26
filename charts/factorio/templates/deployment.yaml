@@ -31,22 +31,18 @@ spec:
               mountPath: /factorio
       {{- end }}
       {{- if .Values.metrics }}
-            - name: metrics-volume
-              mountPath: /factorio/script-output/graftorio2
-      {{- end }}
-      {{- if .Values.metrics }}
         - name: metrics
           image: "{{ .Values.metricsImage.repo }}/{{ .Values.metricsImage.name }}:{{ .Values.metricsImage.tag }}"
           args:
             - "--collector.disable-defaults"
             - "--collector.textfile"
-            - "--collector.textfile.directory=/textfiles"
+            - "--collector.textfile.directory=/factorio/script-output/graftorio2"
           ports:
             - name: metrics
               containerPort: 9100
           volumeMounts:
-            - name: metrics-volume
-              mountPath: /textfiles
+            - name: savedata
+              mountPath: /factorio
       {{- end }}
       volumes:
       {{- if .Values.saveLocation }}
@@ -54,8 +50,4 @@ spec:
           hostPath:
             path: "{{ .Values.saveLocation }}/{{ .Release.Name }}-data"
             type: DirectoryOrCreate
-      {{- end }}
-      {{- if .Values.metrics }}
-        - name: metrics-volume
-          emptyDir: {}
       {{- end }}
