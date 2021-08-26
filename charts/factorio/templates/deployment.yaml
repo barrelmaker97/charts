@@ -38,6 +38,8 @@ spec:
         - name: metrics
           image: "{{ .Values.metricsImage.repo }}/{{ .Values.metricsImage.name }}:{{ .Values.metricsImage.tag }}"
           args:
+            - "--collector.disable-defaults"
+            - "--collector.textfile"
             - "--collector.textfile.directory=/textfiles"
           ports:
             - name: metrics
