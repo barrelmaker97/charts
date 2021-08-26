@@ -163,6 +163,18 @@ entries:
     version: 0.1.1
   minecraft:
   - apiVersion: v2
+    created: "2021-08-26T04:27:42.59027576Z"
+    description: A Helm Chart for Minecraft
+    digest: d1a47c13577db9c31343d1d21265a57339b63eb6029b0067195ee08f34f69a6b
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: minecraft
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/minecraft-0.1.6/minecraft-0.1.6.tgz
+    version: 0.1.6
+  - apiVersion: v2
     created: "2021-08-23T22:47:26.753608661Z"
     description: A Helm Chart for Minecraft
     digest: 5da008815a695470a22b970ddfb03eedd755a61194c0d37a21831f563e7d4992
@@ -309,4 +321,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/valheim-0.1.1/valheim-0.1.1.tgz
     version: 0.1.1
-generated: "2021-08-26T04:07:13.879403602Z"
+generated: "2021-08-26T04:27:42.590736163Z"
