@@ -4,4 +4,12 @@ image:
   name: "itzg/minecraft-server"
   tag: "latest"
 properties:
+  difficulty: "normal"
   eula: "TRUE"
+  forceGamemode: "true"
+  gamemode: "suvival"
+  motd: "Minecraft Server"
+  serverName: "Minecraft Server"
+  spawnProtection: "0"
+  timezone: "America/Chicago"
+  version: "LATEST"

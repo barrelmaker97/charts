@@ -1,13 +1,13 @@
 ---
 # Must be in the range 30000-32767
-serverPort: "30003"
+serverPort: "30013"
 dynmap: true
 metrics: true
 saveLocation: /home/barrelmaker/gamedata/minecraft
 properties:
   memory: "2G"
-  motd: "MotoCraft Server"
+  motd: "NIUCraft Server"
   ops: "Barrelmaker97"
-  serverName: "MotoCraft"
+  serverName: "NIUCraft"
   type: "BUKKIT"
   viewDistance: "32"

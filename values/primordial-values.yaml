@@ -1,13 +1,11 @@
 ---
 # Must be in the range 30000-32767
-serverPort: "30003"
-dynmap: true
-metrics: true
+serverPort: "30001"
 saveLocation: /home/barrelmaker/gamedata/minecraft
 properties:
   memory: "2G"
-  motd: "MotoCraft Server"
+  motd: "Primordial Server"
   ops: "Barrelmaker97"
-  serverName: "MotoCraft"
-  type: "BUKKIT"
+  serverName: "Primordial"
+  version: "1.16.5"
   viewDistance: "32"
