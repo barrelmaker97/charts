@@ -18,11 +18,6 @@ spec:
         - barrelmaker.dev
         - dotfiles.barrelmaker.dev
         - friendbot.barrelmaker.dev
-        - grafana.barrelmaker.dev
-        - jellyfin.barrelmaker.dev
-        - motocraft.barrelmaker.dev
-        - motofactorio4.barrelmaker.dev
-        - niucraft.barrelmaker.dev
       secretName: main-ingress-tls
   rules:
     - host: barrelmaker.dev
