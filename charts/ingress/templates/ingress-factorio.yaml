@@ -4,6 +4,8 @@ kind: Ingress
 metadata:
   name: factorio-ingress
   annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    acme.cert-manager.io/http01-edit-in-place: "true"
     nginx.ingress.kubernetes.io/server-snippet: |
       add_header X-Frame-Options SAMEORIGIN;
       add_header Referrer-Policy same-origin;
@@ -14,7 +16,7 @@ spec:
   tls:
     - hosts:
         - motofactorio4.barrelmaker.dev
-      secretName: main-ingress-tls
+      secretName: factorio-ingress-tls
   rules:
     - host: motofactorio4.barrelmaker.dev
       http:

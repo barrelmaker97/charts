@@ -4,8 +4,8 @@ kind: Ingress
 metadata:
   name: grafana-ingress
   annotations:
-#   cert-manager.io/cluster-issuer: "letsencrypt-prod"
-#   acme.cert-manager.io/http01-edit-in-place: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    acme.cert-manager.io/http01-edit-in-place: "true"
     nginx.ingress.kubernetes.io/server-snippet: |
       add_header X-Frame-Options SAMEORIGIN;
       add_header Referrer-Policy same-origin;
@@ -16,7 +16,7 @@ spec:
   tls:
     - hosts:
         - grafana.barrelmaker.dev
-      secretName: main-ingress-tls
+      secretName: grafana-ingress-tls
   rules:
     - host: grafana.barrelmaker.dev
       http:
