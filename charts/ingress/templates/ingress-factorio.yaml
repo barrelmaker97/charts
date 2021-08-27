@@ -1,0 +1,28 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: factorio-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/server-snippet: |
+      add_header X-Frame-Options SAMEORIGIN;
+      add_header Referrer-Policy same-origin;
+      add_header X-XSS-Protection "1; mode=block";
+      add_header X-Content-Type-Options nosniff;
+      add_header Content-Security-Policy "frame-ancestors 'self'; default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self'; base-uri 'self'; form-action 'self';" always;
+spec:
+  tls:
+    - hosts:
+        - motofactorio4.barrelmaker.dev
+      secretName: main-ingress-tls
+  rules:
+    - host: motofactorio4.barrelmaker.dev
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: motofactorio4-metrics
+                port:
+                  number: 9100

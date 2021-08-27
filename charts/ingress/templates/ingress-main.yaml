@@ -21,6 +21,7 @@ spec:
         - grafana.barrelmaker.dev
         - jellyfin.barrelmaker.dev
         - motocraft.barrelmaker.dev
+        - motofactorio4.barrelmaker.dev
         - niucraft.barrelmaker.dev
       secretName: main-ingress-tls
   rules:
