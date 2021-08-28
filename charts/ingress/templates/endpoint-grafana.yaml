@@ -5,8 +5,8 @@ metadata:
   name: grafana-external
 subsets:
   - addresses:
-      - ip: 192.168.15.20
+      - ip: {{ $.Values.grafana.ip }}
     ports:
       - name: http
-        port: 3000
+        port: {{ $.Values.grafana.port }}
         protocol: TCP
