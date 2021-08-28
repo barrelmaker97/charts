@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: main-ingress
+  name: kuma-ingress
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     acme.cert-manager.io/http01-edit-in-place: "true"
@@ -15,38 +15,16 @@ metadata:
 spec:
   tls:
     - hosts:
-        - barrelmaker.dev
-        - dotfiles.barrelmaker.dev
-        - friendbot.barrelmaker.dev
-      secretName: main-ingress-tls
+        - kuma.barrelmaker.dev
+      secretName: kuma-ingress-tls
   rules:
-    - host: barrelmaker.dev
+    - host: kuma.barrelmaker.dev
       http:
         paths:
           - pathType: Prefix
             path: "/"
             backend:
               service:
-                name: proxy
+                name: kuma-external
                 port:
                   number: 80
-    - host: dotfiles.barrelmaker.dev
-      http:
-        paths:
-          - pathType: Prefix
-            path: "/"
-            backend:
-              service:
-                name: proxy
-                port:
-                  number: 80
-    - host: friendbot.barrelmaker.dev
-      http:
-        paths:
-          - pathType: Prefix
-            path: "/"
-            backend:
-              service:
-                name: friendbot
-                port:
-                  number: 8000
