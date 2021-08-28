@@ -25,6 +25,6 @@ spec:
             path: "/"
             backend:
               service:
-                name: proxy
+                name: grafana-external
                 port:
                   number: 80
