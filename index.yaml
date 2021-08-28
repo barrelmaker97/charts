@@ -89,6 +89,18 @@ entries:
     version: 0.1.1
   ingress:
   - apiVersion: v2
+    created: "2021-08-28T04:16:05.54322283Z"
+    description: A Helm Chart for Ingresses
+    digest: 8b3269aab981453978e81455d2b82058557f62b8148247400d9e66088f089246
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: ingress
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/ingress-0.1.7/ingress-0.1.7.tgz
+    version: 0.1.7
+  - apiVersion: v2
     created: "2021-08-27T04:04:35.59149669Z"
     description: A Helm Chart for Ingresses
     digest: 8efa51e40f725eb59d0e1226f4ad2b59317d5f2c17fafc96959921c96070ca45
@@ -260,6 +272,18 @@ entries:
     version: 0.1.1
   proxy:
   - apiVersion: v2
+    created: "2021-08-28T04:16:05.708368869Z"
+    description: A Helm Chart for a reverse proxy
+    digest: ad46ae4c3ab199edfe9151dc34579173fe85408cf64a7926a71be2b3273450c2
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: proxy
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/proxy-0.1.4/proxy-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
     created: "2021-08-23T02:25:08.318804059Z"
     description: A Helm Chart for a reverse proxy
     digest: 6b7a0fd91b4c249612e57f7870179c69b37c9af7f38463e04d23e42a23038fb2
@@ -345,4 +369,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/valheim-0.1.1/valheim-0.1.1.tgz
     version: 0.1.1
-generated: "2021-08-27T04:04:35.591568993Z"
+generated: "2021-08-28T04:16:05.708425868Z"
