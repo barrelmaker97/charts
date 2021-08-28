@@ -18,6 +18,7 @@ spec:
         - barrelmaker.dev
         - dotfiles.barrelmaker.dev
         - friendbot.barrelmaker.dev
+        - kuma.barrelmaker.dev
       secretName: main-ingress-tls
   rules:
     - host: barrelmaker.dev
@@ -50,3 +51,13 @@ spec:
                 name: friendbot
                 port:
                   number: 8000
+    - host: kuma.barrelmaker.dev
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: kuma-external
+                port:
+                  number: 80
