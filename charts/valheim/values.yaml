@@ -3,3 +3,7 @@ image:
   repo: "docker.io"
   name: "mbround18/valheim"
   tag: "latest"
+timezone: "America/Chicago"
+serverName: "Valheim"
+worldName: "world"
+public: true

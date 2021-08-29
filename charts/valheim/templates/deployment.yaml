@@ -19,18 +19,12 @@ spec:
         - name: valheim
           image: "{{ .Values.image.repo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
           env:
-            {{- if .Values.timezone }}
             - name: TZ
               value: {{ .Values.timezone | quote }}
-            {{- end }}
-            {{- if .Values.serverName }}
             - name: NAME
               value: {{ .Values.serverName | quote }}
-            {{- end }}
-            {{- if .Values.worldName }}
             - name: WORLD
               value: {{ .Values.worldName | quote }}
-            {{- end }}
             {{- if .Values.public }}
             - name: PUBLIC
               value: "1"
