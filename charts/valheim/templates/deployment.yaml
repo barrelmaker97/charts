@@ -39,6 +39,8 @@ spec:
                   name: {{ include "valheim.fullname" . }}-password
                   key: password
             {{- end }}
+            - name: ADDRESS
+              value: 127.0.0.1
           ports:
             - name: valheim-1
               containerPort: 2456
