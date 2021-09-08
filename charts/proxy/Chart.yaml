@@ -2,7 +2,7 @@
 apiVersion: v2
 description: A Helm Chart for a reverse proxy
 name: proxy
-version: 0.1.4
+version: 0.1.5
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com

@@ -25,11 +25,11 @@ spec:
               containerPort: 80
               protocol: TCP
           volumeMounts:
-            - name: {{ .Release.Name }}-config-volume
+            - name: config-volume
               subPath: nginx.conf
               mountPath: /etc/nginx/nginx.conf
             {{- if .Values.websiteLocation }}
-            - name: {{ .Release.Name }}-website-volume
+            - name: website-volume
               mountPath: /usr/share/nginx/html
             {{- end }}
           livenessProbe:
@@ -53,12 +53,12 @@ spec:
             successThreshold: 1
             timeoutSeconds: 1
       volumes:
-        - name: {{ .Release.Name }}-config-volume
+        - name: config-volume
           configMap:
             name: {{ include "proxy.fullname" . }}-config
             defaultMode: 0644
         {{- if .Values.websiteLocation }}
-        - name: {{ .Release.Name }}-website-volume
+        - name: website-volume
           hostPath:
             path: {{ .Values.websiteLocation }}
             type: DirectoryOrCreate
