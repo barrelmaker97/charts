@@ -1,0 +1,25 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dotfiles-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    acme.cert-manager.io/http01-edit-in-place: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: https://raw.githubusercontent.com/barrelmaker97/dotfiles/master/bin/updot
+spec:
+  tls:
+    - hosts:
+        - dotfiles.barrelmaker.dev
+      secretName: dotfiles-ingress-tls
+  rules:
+    - host: dotfiles.barrelmaker.dev
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: proxy
+                port:
+                  number: 80

@@ -16,21 +16,10 @@ spec:
   tls:
     - hosts:
         - barrelmaker.dev
-        - dotfiles.barrelmaker.dev
         - friendbot.barrelmaker.dev
       secretName: main-ingress-tls
   rules:
     - host: barrelmaker.dev
-      http:
-        paths:
-          - pathType: Prefix
-            path: "/"
-            backend:
-              service:
-                name: proxy
-                port:
-                  number: 80
-    - host: dotfiles.barrelmaker.dev
       http:
         paths:
           - pathType: Prefix
