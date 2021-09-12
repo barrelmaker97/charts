@@ -6,7 +6,9 @@ metadata:
   labels:
     {{- include "proxy.labels" . | nindent 4 }}
 spec:
-  replicas: 1
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "proxy.selectorLabels" . | nindent 6 }}
@@ -16,27 +18,42 @@ spec:
         {{- include "proxy.selectorLabels" . | nindent 8 }}
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+      {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "proxy.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: proxy
+        - name: nginx
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: nginx-port
+            - name: http
               containerPort: 80
               protocol: TCP
           volumeMounts:
-            - name: config-volume
+            - name: config
               subPath: nginx.conf
               mountPath: /etc/nginx/nginx.conf
+              readOnly: true
             {{- if .Values.websiteLocation }}
-            - name: website-volume
+            - name: website
               mountPath: /usr/share/nginx/html
+              readOnly: true
             {{- end }}
           livenessProbe:
             failureThreshold: 3
             httpGet:
               path: /
-              port: nginx-port
+              port: http
               scheme: HTTP
             initialDelaySeconds: 3
             periodSeconds: 10
@@ -46,20 +63,34 @@ spec:
             failureThreshold: 3
             httpGet:
               path: /
-              port: nginx-port
+              port: http
               scheme: HTTP
             initialDelaySeconds: 3
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
       volumes:
-        - name: config-volume
+        - name: config
           configMap:
             name: {{ include "proxy.fullname" . }}-config
             defaultMode: 0644
         {{- if .Values.websiteLocation }}
-        - name: website-volume
+        - name: website
           hostPath:
             path: {{ .Values.websiteLocation }}
             type: DirectoryOrCreate
         {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
