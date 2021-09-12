@@ -40,12 +40,14 @@ spec:
               containerPort: 80
               protocol: TCP
           volumeMounts:
-            - name: config-volume
+            - name: config
               subPath: nginx.conf
               mountPath: /etc/nginx/nginx.conf
+              readOnly: true
             {{- if .Values.websiteLocation }}
-            - name: website-volume
+            - name: website
               mountPath: /usr/share/nginx/html
+              readOnly: true
             {{- end }}
           livenessProbe:
             failureThreshold: 3
@@ -70,12 +72,12 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
-        - name: config-volume
+        - name: config
           configMap:
             name: {{ include "proxy.fullname" . }}-config
             defaultMode: 0644
         {{- if .Values.websiteLocation }}
-        - name: website-volume
+        - name: website
           hostPath:
             path: {{ .Values.websiteLocation }}
             type: DirectoryOrCreate
