@@ -6,7 +6,9 @@ metadata:
   labels:
     {{- include "proxy.labels" . | nindent 4 }}
 spec:
-  replicas: 1
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "proxy.selectorLabels" . | nindent 6 }}
@@ -16,12 +18,25 @@ spec:
         {{- include "proxy.selectorLabels" . | nindent 8 }}
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+      {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "proxy.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: proxy
+        - name: nginx
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: nginx-port
+            - name: http
               containerPort: 80
               protocol: TCP
           volumeMounts:
@@ -36,7 +51,7 @@ spec:
             failureThreshold: 3
             httpGet:
               path: /
-              port: nginx-port
+              port: http
               scheme: HTTP
             initialDelaySeconds: 3
             periodSeconds: 10
@@ -46,12 +61,14 @@ spec:
             failureThreshold: 3
             httpGet:
               path: /
-              port: nginx-port
+              port: http
               scheme: HTTP
             initialDelaySeconds: 3
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
       volumes:
         - name: config-volume
           configMap:
@@ -63,3 +80,15 @@ spec:
             path: {{ .Values.websiteLocation }}
             type: DirectoryOrCreate
         {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
