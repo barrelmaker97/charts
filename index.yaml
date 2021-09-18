@@ -211,6 +211,19 @@ entries:
     version: 0.1.1
   jellyfin:
   - apiVersion: v2
+    created: "2021-09-18T19:39:56.6369851Z"
+    description: A Helm Chart for Jellyfin
+    digest: ee991ba9760578a8f3397e05e4882cf4a45a0df0e89e85f86070f6d0c8887ac6
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: jellyfin
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/jellyfin-0.1.3/jellyfin-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
     created: "2021-05-21T04:38:30.827790367Z"
     description: A Helm Chart for Jellyfin
     digest: 44fb38e73fcf52f001ae5358415aeaeeb230c843a0e9938d8cb5d2c4c9bc54b5
@@ -442,4 +455,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/valheim-0.1.1/valheim-0.1.1.tgz
     version: 0.1.1
-generated: "2021-09-18T16:56:28.92290023Z"
+generated: "2021-09-18T19:39:56.637111401Z"
