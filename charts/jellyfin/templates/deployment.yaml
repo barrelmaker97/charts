@@ -39,11 +39,11 @@ spec:
               containerPort: 8096
               protocol: TCP
           volumeMounts:
-            - name: {{ .Release.Name }}-data
+            - name: data
               mountPath: /media
-            - name: {{ .Release.Name }}-cache
+            - name: cache
               mountPath: /cache
-            - name: {{ .Release.Name }}-config
+            - name: config
               mountPath: /config
           livenessProbe:
             httpGet:
@@ -62,7 +62,7 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
-        - name: {{ .Release.Name }}-data
+        - name: data
           {{- if .Values.remoteLibrary }}
           nfs:
             server: soteria.lan
@@ -72,10 +72,10 @@ spec:
             path: /home/barrelmaker/{{ .Release.Name }}-data
             type: DirectoryOrCreate
           {{- end }}
-        - name: {{ .Release.Name }}-cache
+        - name: cache
           emptyDir:
             medium: "Memory"
-        - name: {{ .Release.Name }}-config
+        - name: config
           hostPath:
             path: /home/barrelmaker/{{ .Release.Name }}-config
             type: DirectoryOrCreate
