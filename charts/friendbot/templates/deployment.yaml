@@ -85,22 +85,22 @@ spec:
       {{- if or .Values.exportLocation .Values.signature }}
           volumeMounts:
             {{- if .Values.exportLocation }}
-            - name: {{ .Release.Name }}-export
+            - name: export
               mountPath: /friendbot/export.zip
             {{- end }}
             {{- if .Values.signature }}
-            - name: {{ .Release.Name }}-signature
+            - name: signature
               mountPath: /friendbot-secret
             {{- end }}
       volumes:
         {{- if .Values.exportLocation }}
-        - name: {{ .Release.Name }}-export
+        - name: export
           hostPath:
             path: {{ .Values.exportLocation }}
             type: File
         {{- end }}
         {{- if .Values.signature }}
-        - name: {{ .Release.Name }}-signature
+        - name: signature
           secret:
             secretName: {{ include "friendbot.fullname" . }}-signature
         {{- end }}
