@@ -6,21 +6,38 @@ metadata:
   labels:
     {{- include "friendbot.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicas | default 1 }}
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "friendbot.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       labels:
         {{- include "friendbot.selectorLabels" . | nindent 8 }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "friendbot.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: friendbot
-          image: "{{ .Values.image.repo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: friendbot
               containerPort: 8000
+              protocol: TCP
           env:
             {{- if .Values.redis.host }}
             - name: FRIENDBOT_REDIS_HOST
@@ -63,17 +80,8 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
-          securityContext:
-            runAsNonRoot: true
-            readOnlyRootFilesystem: true
-            allowPrivilegeEscalation: false
           resources:
-            limits:
-              cpu: 500m
-              memory: 300Mi
-            requests:
-              cpu: 150m
-              memory: 150Mi
+            {{- toYaml .Values.resources | nindent 12 }}
       {{- if or .Values.exportLocation .Values.signature }}
           volumeMounts:
             {{- if .Values.exportLocation }}
@@ -96,4 +104,16 @@ spec:
           secret:
             secretName: {{ include "friendbot.fullname" . }}-signature
         {{- end }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
       {{- end }}
