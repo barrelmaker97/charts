@@ -39,7 +39,7 @@ spec:
               containerPort: 8096
               protocol: TCP
           volumeMounts:
-            - name: data
+            - name: media
               mountPath: /media
             - name: cache
               mountPath: /cache
@@ -62,14 +62,14 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
-        - name: data
+        - name: media
           {{- if .Values.remoteLibrary }}
           nfs:
             server: soteria.lan
             path: /volume1/local_only/content/media
           {{- else }}
           hostPath:
-            path: /home/barrelmaker/{{ .Release.Name }}-data
+            path: /home/barrelmaker/{{ .Release.Name }}-media
             type: DirectoryOrCreate
           {{- end }}
         - name: cache
