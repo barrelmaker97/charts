@@ -82,7 +82,6 @@ spec:
             timeoutSeconds: 1
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-      {{- if or .Values.exportLocation .Values.signature }}
           volumeMounts:
             {{- if .Values.exportLocation }}
             - name: export
@@ -104,7 +103,6 @@ spec:
           secret:
             secretName: {{ include "friendbot.fullname" . }}-signature
         {{- end }}
-      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
