@@ -64,6 +64,19 @@ entries:
     version: 0.1.1
   friendbot:
   - apiVersion: v2
+    created: "2021-09-18T16:56:28.922832728Z"
+    description: A Helm Chart for Friendbot
+    digest: 6167336641d29ef986c885fbc10596c8f6830dbedeb8a28372886e9fdcbeeeb8
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: friendbot
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/friendbot-0.1.3/friendbot-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
     created: "2021-05-21T04:38:30.638640464Z"
     description: A Helm Chart for Friendbot
     digest: 836d01a34a6557a322237905e26f2f8ea3344a9c7f792b561615afb7b65c2b29
@@ -429,4 +442,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/valheim-0.1.1/valheim-0.1.1.tgz
     version: 0.1.1
-generated: "2021-09-12T22:50:51.087077109Z"
+generated: "2021-09-18T16:56:28.92290023Z"
