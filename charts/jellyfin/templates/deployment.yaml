@@ -14,15 +14,30 @@ spec:
       {{- include "jellyfin.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       labels:
         {{- include "jellyfin.selectorLabels" . | nindent 8 }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "jellyfin.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: jellyfin
-          image: "{{ .Values.image.repo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: jellyfin
               containerPort: 8096
+              protocol: TCP
           volumeMounts:
             - name: {{ .Release.Name }}-data
               mountPath: /media
@@ -44,6 +59,8 @@ spec:
               scheme: HTTP
             initialDelaySeconds: 3
             periodSeconds: 10
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
       volumes:
         - name: {{ .Release.Name }}-data
           {{- if .Values.remoteLibrary }}
@@ -62,3 +79,15 @@ spec:
           hostPath:
             path: /home/barrelmaker/{{ .Release.Name }}-config
             type: DirectoryOrCreate
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
