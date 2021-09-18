@@ -47,10 +47,8 @@ spec:
             - name: FRIENDBOT_REDIS_PORT
               value: "{{ .Values.redis.port }}"
             {{- end }}
-            {{- if .Values.logLevel }}
             - name: FRIENDBOT_LOG_LEVEL
-              value: "{{ .Values.logLevel }}"
-            {{- end }}
+              value: {{ .Values.logLevel | quote }}
             {{- if .Values.exportLocation }}
             - name: FRIENDBOT_EXPORT_ZIP
               value: /friendbot/export.zip
