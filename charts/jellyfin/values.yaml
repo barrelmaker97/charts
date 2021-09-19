@@ -4,6 +4,10 @@ image:
   pullPolicy: IfNotPresent
   tag: "latest"
 
+storageClassName:
+  config: ""
+  media: ""
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
