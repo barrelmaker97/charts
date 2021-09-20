@@ -8,7 +8,7 @@ metadata:
 spec:
   storageClassName: {{ .Values.storageClassName.media }}
   accessModes:
-    - ReadWriteOnce
+    - ReadOnlyMany
   resources:
     requests:
       storage: 1Gi
