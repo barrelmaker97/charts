@@ -1,4 +1,5 @@
 ---
 # Must be in the range 30000-32767
-serverPort: "30002"
+metrics: true
 saveLocation: /home/barrelmaker/gamedata/factorio
+serverPort: "30002"
