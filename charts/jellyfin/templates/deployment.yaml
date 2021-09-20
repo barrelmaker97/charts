@@ -41,6 +41,7 @@ spec:
           volumeMounts:
             - name: media
               mountPath: /media
+              readOnly: true
             - name: cache
               mountPath: /cache
             - name: config
@@ -63,22 +64,14 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
         - name: media
-          {{- if .Values.remoteLibrary }}
-          nfs:
-            server: soteria.lan
-            path: /volume1/local_only/content/media
-          {{- else }}
-          hostPath:
-            path: /home/barrelmaker/{{ .Release.Name }}-media
-            type: DirectoryOrCreate
-          {{- end }}
+          persistentVolumeClaim:
+            claimName: {{ include "jellyfin.fullname" . }}-media
+        - name: config
+          persistentVolumeClaim:
+            claimName: {{ include "jellyfin.fullname" . }}-config
         - name: cache
           emptyDir:
             medium: "Memory"
-        - name: config
-          hostPath:
-            path: /home/barrelmaker/{{ .Release.Name }}-config
-            type: DirectoryOrCreate
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
