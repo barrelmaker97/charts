@@ -1,5 +1,4 @@
 ---
-# Must be in the range 30000-32767
 metrics: true
-saveLocation: /home/barrelmaker/gamedata/factorio
-serverPort: "30002"
+serverPort: "30002"  # Must be in the range 30000-32767
+storageClassName: motofactorio4

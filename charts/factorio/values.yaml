@@ -7,3 +7,5 @@ metricsImage:
   repo: "docker.io"
   name: "prom/node-exporter"
   tag: "latest"
+
+storageClassName: ""

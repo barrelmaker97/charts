@@ -44,10 +44,5 @@ spec:
         {{- end }}
       volumes:
         - name: savedata
-        {{- if .Values.saveLocation }}
-          hostPath:
-            path: "{{ .Values.saveLocation }}/{{ .Release.Name }}-data"
-            type: DirectoryOrCreate
-        {{- else }}
-          emptyDir: {}
-        {{- end }}
+          persistentVolumeClaim:
+            claimName: {{ include "factorio.fullname" . }}
