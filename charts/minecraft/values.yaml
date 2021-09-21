@@ -3,6 +3,9 @@ image:
   repo: "docker.io"
   name: "itzg/minecraft-server"
   tag: "latest"
+
+storageClassName: ""
+
 properties:
   difficulty: "normal"
   eula: "TRUE"
