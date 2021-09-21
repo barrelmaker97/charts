@@ -1,6 +1,6 @@
 ---
-serverPort: "30001"  # Must be in the range 30000-32767
-saveLocation: /home/barrelmaker/gamedata/minecraft
+storageClassName: primordial
+serverPort: 30001  # Must be in the range 30000-32767
 properties:
   memory: "2G"
   motd: "Primordial Server"

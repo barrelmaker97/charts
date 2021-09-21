@@ -1,8 +1,8 @@
 ---
-serverPort: "30003"  # Must be in the range 30000-32767
+storageClassName: motocraft
+serverPort: 30003  # Must be in the range 30000-32767
 dynmap: true
 metrics: true
-saveLocation: /home/barrelmaker/gamedata/minecraft
 properties:
   memory: "2G"
   motd: "MotoCraft Server"
