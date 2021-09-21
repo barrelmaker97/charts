@@ -2,7 +2,7 @@
 image:
   repo: "docker.io"
   name: "factoriotools/factorio"
-  tag: "1.1.38"
+  tag: "1.1.39"
 metricsImage:
   repo: "docker.io"
   name: "prom/node-exporter"
