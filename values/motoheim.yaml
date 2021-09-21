@@ -1,5 +1,5 @@
 ---
-serverPort: 30005
-serverName: "MotoHeim"
-worldName: "Asgard"
-saveLocation: /home/barrelmaker/gamedata/valheim
+serverName: MotoHeim
+serverPort: 30005  # Must be in the range 30000-32767
+storageClassName: motoheim
+worldName: Asgard

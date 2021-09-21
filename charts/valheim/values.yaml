@@ -7,3 +7,4 @@ timezone: "America/Chicago"
 serverName: "Valheim"
 worldName: "world"
 public: true
+storageClassName: ""
