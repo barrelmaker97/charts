@@ -1,6 +1,5 @@
 ---
-# Must be in the range 30000-32767
-serverPort: "30001"
+serverPort: "30001"  # Must be in the range 30000-32767
 saveLocation: /home/barrelmaker/gamedata/minecraft
 properties:
   memory: "2G"
