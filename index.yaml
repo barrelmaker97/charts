@@ -520,4 +520,17 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/valheim-0.1.1/valheim-0.1.1.tgz
     version: 0.1.1
-generated: "2021-09-22T03:12:22.513266212Z"
+  website:
+  - apiVersion: v2
+    created: "2021-09-22T04:12:04.975981617Z"
+    description: A Helm Chart for a website
+    digest: 8eba020d57003f0f058b8108a688d9f8c35b4d80a7903cf9c564ff00f0fd850e
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: website
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
+    version: 0.1.0
+generated: "2021-09-22T04:12:04.976065421Z"
