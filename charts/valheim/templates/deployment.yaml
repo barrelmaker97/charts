@@ -12,12 +12,26 @@ spec:
       {{- include "valheim.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       labels:
         {{- include "valheim.selectorLabels" . | nindent 8 }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "valheim.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: valheim
-          image: "{{ .Values.image.repo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: TZ
               value: {{ .Values.timezone | quote }}
@@ -49,12 +63,7 @@ spec:
             - name: valheim-3
               containerPort: 2458
           resources:
-            limits:
-              cpu: 1000m
-              memory: 7Gi
-            requests:
-              cpu: 700m
-              memory: 5Gi
+            {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - name: savedata
               mountPath: /home/steam/.config/unity3d/IronGate/Valheim
@@ -64,10 +73,17 @@ spec:
               subPath: server
       volumes:
         - name: savedata
-        {{- if .Values.saveLocation }}
-          hostPath:
-            path: "{{ .Values.saveLocation }}/{{ .Release.Name }}-data"
-            type: DirectoryOrCreate
-        {{- else }}
-          emptyDir: {}
-        {{- end }}
+          persistentVolumeClaim:
+            claimName: {{ include "valheim.fullname" . }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
