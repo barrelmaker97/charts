@@ -2,20 +2,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "proxy.fullname" . }}
+  name: {{ include "website.fullname" . }}
   labels:
-    {{- include "proxy.labels" . | nindent 4 }}
+    {{- include "website.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "proxy.selectorLabels" . | nindent 6 }}
+      {{- include "website.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "proxy.selectorLabels" . | nindent 8 }}
+        {{- include "website.selectorLabels" . | nindent 8 }}
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
       {{- with .Values.podAnnotations }}
@@ -26,7 +26,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "proxy.serviceAccountName" . }}
+      serviceAccountName: {{ include "website.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -74,7 +74,7 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: {{ include "proxy.fullname" . }}-config
+            name: {{ include "website.fullname" . }}-config
             defaultMode: 0644
         {{- if .Values.websiteLocation }}
         - name: website
