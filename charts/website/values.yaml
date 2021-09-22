@@ -1,9 +1,11 @@
 ---
+replicaCount: 1
+
 image:
-  repo: "docker.io"
-  name: "nginx"
-  tag: "alpine"
+  repository: docker.io/nginx
   pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: alpine
 
 imagePullSecrets: []
 nameOverride: ""
