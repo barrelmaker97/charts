@@ -12,7 +12,7 @@ fullnameOverride: ""
 timezone: "America/Chicago"
 serverName: "Valheim"
 worldName: "world"
-public: true
+public: false
 
 storageClassName: ""
 
