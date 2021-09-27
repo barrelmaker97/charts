@@ -32,7 +32,7 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          # TODO: Figure out how to hand 2FA for steam accounts
+          # TODO: Figure out how to handle 2FA for steam accounts
           # Currently requires exec'ing into container to login
           # command: ['sh', '-c', 'yes']
           env:
