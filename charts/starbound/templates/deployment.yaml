@@ -39,12 +39,12 @@ spec:
           # - name: STEAM_PASSWORD
           #   valueFrom:
           #     secretKeyRef:
-          #       name: {{ include "starbound.fullname" . }}-steam-password
+          #       name: {{ include "starbound.fullname" . }}-steam-creds
           #       key: password
           # - name: STEAM_USERNAME
           #   valueFrom:
           #     secretKeyRef:
-          #       name: {{ include "starbound.fullname" . }}-steam-username
+          #       name: {{ include "starbound.fullname" . }}-steam-creds
           #       key: username
           ports:
             - name: starbound-port
