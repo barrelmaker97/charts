@@ -26,7 +26,7 @@ spec:
             path: "/"
             backend:
               service:
-                name: proxy
+                name: website
                 port:
                   number: 80
     - host: friendbot.barrelmaker.dev
