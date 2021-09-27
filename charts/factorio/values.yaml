@@ -1,9 +1,51 @@
 ---
 image:
-  repo: "docker.io"
-  name: "factoriotools/factorio"
-  tag: "1.1.38"
+  repository: docker.io/factoriotools/factorio
+  pullPolicy: IfNotPresent
+  tag: "1.1.39"
+
 metricsImage:
-  repo: "docker.io"
-  name: "prom/node-exporter"
-  tag: "latest"
+  repository: docker.io/prom/node-exporter
+  pullPolicy: IfNotPresent
+  tag: latest
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+storageClassName: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext:
+  runAsUser: 845
+  # fsGroup: 2000
+
+securityContext:
+  runAsNonRoot: true
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+
+resources: {}
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

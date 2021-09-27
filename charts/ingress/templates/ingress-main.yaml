@@ -16,12 +16,7 @@ spec:
   tls:
     - hosts:
         - barrelmaker.dev
-        - dotfiles.barrelmaker.dev
         - friendbot.barrelmaker.dev
-        - grafana.barrelmaker.dev
-        - jellyfin.barrelmaker.dev
-        - motocraft.barrelmaker.dev
-        - niucraft.barrelmaker.dev
       secretName: main-ingress-tls
   rules:
     - host: barrelmaker.dev
@@ -31,17 +26,7 @@ spec:
             path: "/"
             backend:
               service:
-                name: proxy
-                port:
-                  number: 80
-    - host: dotfiles.barrelmaker.dev
-      http:
-        paths:
-          - pathType: Prefix
-            path: "/"
-            backend:
-              service:
-                name: proxy
+                name: website
                 port:
                   number: 80
     - host: friendbot.barrelmaker.dev

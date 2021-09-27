@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: grafana-ingress
+  name: kuma-ingress
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     acme.cert-manager.io/http01-edit-in-place: "true"
@@ -11,20 +11,20 @@ metadata:
       add_header Referrer-Policy same-origin;
       add_header X-XSS-Protection "1; mode=block";
       add_header X-Content-Type-Options nosniff;
-      add_header Content-Security-Policy "frame-ancestors 'self'; default-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; font-src 'self'; connect-src 'self' https://grafana.com; img-src 'self' data:; style-src 'self' 'unsafe-inline'; base-uri 'self'; form-action 'self';" always;
+      add_header Content-Security-Policy "frame-ancestors 'self'; default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' data:; connect-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; base-uri 'self'; form-action 'self';" always;
 spec:
   tls:
     - hosts:
-        - grafana.barrelmaker.dev
-      secretName: grafana-ingress-tls
+        - kuma.barrelmaker.dev
+      secretName: kuma-ingress-tls
   rules:
-    - host: grafana.barrelmaker.dev
+    - host: kuma.barrelmaker.dev
       http:
         paths:
           - pathType: Prefix
             path: "/"
             backend:
               service:
-                name: grafana-external
+                name: kuma-external
                 port:
                   number: 80

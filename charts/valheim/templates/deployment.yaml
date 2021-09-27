@@ -12,25 +12,33 @@ spec:
       {{- include "valheim.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       labels:
         {{- include "valheim.selectorLabels" . | nindent 8 }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "valheim.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: valheim
-          image: "{{ .Values.image.repo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            {{- if .Values.timezone }}
             - name: TZ
               value: {{ .Values.timezone | quote }}
-            {{- end }}
-            {{- if .Values.serverName }}
             - name: NAME
               value: {{ .Values.serverName | quote }}
-            {{- end }}
-            {{- if .Values.worldName }}
             - name: WORLD
               value: {{ .Values.worldName | quote }}
-            {{- end }}
             {{- if .Values.public }}
             - name: PUBLIC
               value: "1"
@@ -45,6 +53,8 @@ spec:
                   name: {{ include "valheim.fullname" . }}-password
                   key: password
             {{- end }}
+            - name: ADDRESS
+              value: 127.0.0.1
           ports:
             - name: valheim-1
               containerPort: 2456
@@ -53,23 +63,27 @@ spec:
             - name: valheim-3
               containerPort: 2458
           resources:
-            limits:
-              cpu: 1000m
-              memory: 7Gi
-            requests:
-              cpu: 700m
-              memory: 5Gi
-      {{- if .Values.saveLocation }}
+            {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-            - name: "{{ .Release.Name }}-data"
+            - name: savedata
               mountPath: /home/steam/.config/unity3d/IronGate/Valheim
               subPath: saves
-            - name: "{{ .Release.Name }}-data"
+            - name: savedata
               mountPath: /home/steam/valheim
               subPath: server
       volumes:
-        - name: "{{ .Release.Name }}-data"
-          hostPath:
-            path: "{{ .Values.saveLocation }}/{{ .Release.Name }}-data"
-            type: DirectoryOrCreate
+        - name: savedata
+          persistentVolumeClaim:
+            claimName: {{ include "valheim.fullname" . }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
       {{- end }}

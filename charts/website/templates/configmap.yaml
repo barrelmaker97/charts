@@ -2,8 +2,8 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: {{ include "proxy.fullname" . }}-config
+  name: {{ include "website.fullname" . }}-config
   labels:
-    {{- include "proxy.labels" . | nindent 4 }}
+    {{- include "website.labels" . | nindent 4 }}
 data:
 {{ (.Files.Glob "nginx.conf").AsConfig | indent 2 }}
