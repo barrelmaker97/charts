@@ -6,18 +6,32 @@ metadata:
   labels:
     {{- include "starbound.labels" . | nindent 4 }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       {{- include "starbound.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       labels:
         {{- include "starbound.selectorLabels" . | nindent 8 }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "starbound.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: starbound
-          image: "{{ .Values.image.repo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           #command: ['sh', '-c', 'yes']
           env:
             - name: SKIP_STEAMCMD
@@ -35,6 +49,8 @@ spec:
           ports:
             - name: starbound-port
               containerPort: 21025
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
       {{- if .Values.saveLocation }}
           volumeMounts:
             - name: "{{ .Release.Name }}-data"
@@ -44,4 +60,16 @@ spec:
           hostPath:
             path: "{{ .Values.saveLocation }}/{{ .Release.Name }}-data"
             type: DirectoryOrCreate
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
       {{- end }}
