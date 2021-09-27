@@ -36,16 +36,16 @@ spec:
           env:
             - name: SKIP_STEAMCMD
               value: "True"
-          # - name: STEAM_PASSWORD
-          #   valueFrom:
-          #     secretKeyRef:
-          #       name: {{ include "starbound.fullname" . }}-steam-creds
-          #       key: password
-          # - name: STEAM_USERNAME
-          #   valueFrom:
-          #     secretKeyRef:
-          #       name: {{ include "starbound.fullname" . }}-steam-creds
-          #       key: username
+            - name: STEAM_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "starbound.fullname" . }}-steam-creds
+                  key: password
+            - name: STEAM_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "starbound.fullname" . }}-steam-creds
+                  key: username
           ports:
             - name: starbound-port
               containerPort: 21025
