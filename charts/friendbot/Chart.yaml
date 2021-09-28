@@ -1,7 +1,7 @@
 ---
 apiVersion: v2
-description: A Helm Chart for Friendbot
 name: friendbot
+description: A Helm Chart for Friendbot
 type: application
 version: 0.1.4
 appVersion: 0.1.0
