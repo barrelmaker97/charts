@@ -9,6 +9,6 @@ spec:
   selector:
     {{- include "friendbot.selectorLabels" . | nindent 4 }}
   ports:
-    - protocol: TCP
-      port: 8000
-      targetPort: 8000
+    - port: 8000
+      targetPort: friendbot
+      protocol: TCP
