@@ -3,8 +3,8 @@ apiVersion: v2
 name: friendbot
 description: A Helm Chart for Friendbot
 type: application
-version: 0.1.4
-appVersion: 0.1.0
+version: 0.1.5
+appVersion: 0.1.2
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com
