@@ -77,6 +77,20 @@ entries:
     version: 0.1.1
   friendbot:
   - apiVersion: v2
+    appVersion: 0.1.2
+    created: "2021-09-29T05:37:37.564326806Z"
+    description: A Helm Chart for Friendbot
+    digest: 374dfaa69c5a2bfa7d4f0a01dbc573d8a278bfb3adcc1a7c7139f8355e9752f2
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: friendbot
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/friendbot-0.1.5/friendbot-0.1.5.tgz
+    version: 0.1.5
+  - apiVersion: v2
     appVersion: 0.1.0
     created: "2021-09-29T00:08:36.693507683Z"
     description: A Helm Chart for Friendbot
@@ -584,4 +598,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2021-09-29T00:08:36.693601684Z"
+generated: "2021-09-29T05:37:37.564425716Z"
