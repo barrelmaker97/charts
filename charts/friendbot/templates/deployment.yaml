@@ -54,7 +54,7 @@ spec:
               value: /friendbot/export.zip
             {{- else }}
             - name: FRIENDBOT_EXPORT_ZIP
-              value: /test-export.zip
+              value: /home/friendbot/test-export.zip
             {{- end }}
             {{- if .Values.signature }}
             - name: FRIENDBOT_SECRET_FILE

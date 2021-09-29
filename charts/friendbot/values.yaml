@@ -32,7 +32,7 @@ securityContext:
       - ALL
   readOnlyRootFilesystem: true
   runAsNonRoot: true
-
+  runAsUser: 1234
 
 resources: {}
   # limits:
