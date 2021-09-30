@@ -2,7 +2,8 @@
 image:
   repository: docker.io/factoriotools/factorio
   pullPolicy: IfNotPresent
-  tag: "1.1.39"
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
 
 metricsImage:
   repository: docker.io/prom/node-exporter
