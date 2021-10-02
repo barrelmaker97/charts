@@ -544,6 +544,20 @@ entries:
   starbound:
   - apiVersion: v2
     appVersion: latest
+    created: "2021-10-02T03:06:12.456531724Z"
+    description: A Helm Chart for Starbound
+    digest: c4610e2c6978d477a63763f84aec99e86703c7d5b7eabf5d851d49c999d9de46
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: starbound
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/starbound-0.1.5/starbound-0.1.5.tgz
+    version: 0.1.5
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-09-30T03:45:54.66793794Z"
     description: A Helm Chart for Starbound
     digest: d0c097f110331da30d7c85a4ea3221447bac75326e691c27c5c1139f0c0f64ae
@@ -710,4 +724,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2021-09-30T04:05:18.283825084Z"
+generated: "2021-10-02T03:06:12.456658127Z"
