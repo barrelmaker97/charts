@@ -3,7 +3,7 @@ apiVersion: v2
 name: starbound
 description: A Helm Chart for Starbound
 type: application
-version: 0.1.4
+version: 0.1.5
 appVersion: latest
 maintainers:
   - name: barrelmaker97
