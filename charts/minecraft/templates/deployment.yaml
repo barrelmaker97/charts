@@ -7,6 +7,8 @@ metadata:
     {{- include "minecraft.labels" . | nindent 4 }}
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       {{- include "minecraft.selectorLabels" . | nindent 6 }}
@@ -75,6 +77,15 @@ spec:
             - name: MEMORY
               value: {{ .Values.properties.memory | quote }}
             {{- end }}
+          livenessProbe:
+            exec:
+              command:
+                - /health.sh
+            initialDelaySeconds: 40
+          readinessProbe:
+            exec:
+              command:
+                - /health.sh
           ports:
             - name: minecraft
               containerPort: 25565
