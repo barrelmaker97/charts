@@ -55,5 +55,22 @@ tolerations: []
 
 affinity: {}
 
-redis: {}
 logLevel: info
+redisHost: redis-master
+redisPort: 6379
+
+# Friendbot needs Redis in order to run.
+# By default, this chart installs Friendbot without Redis.
+
+# In order to run Friendbot, there are two options:
+# - (recommended) Deploy and maintain a Redis instance and pass the connection
+#   details to Friendbot via the `redisHost` and `redisPort` values above.
+# - You can use the below `redis` sub-chart to deploy Redis
+#   along-with Friendbot as part of a single Helm release.
+
+# Redis chart documentation:
+# https://github.com/bitnami/charts/blob/master/bitnami/redis/README.md
+redis:
+  enabled: false
+# auth:
+#   enabled: false

@@ -47,14 +47,10 @@ spec:
             - name: FRIENDBOT_SECRET_FILE
               value: /friendbot-secret/signature
             {{- end }}
-            {{- if .Values.redis.host }}
             - name: FRIENDBOT_REDIS_HOST
-              value: {{ .Values.redis.host | quote }}
-            {{- end }}
-            {{- if .Values.redis.port }}
+              value: {{ .Values.redisHost | quote }}
             - name: FRIENDBOT_REDIS_PORT
-              value: {{ .Values.redis.port | quote }}
-            {{- end }}
+              value: {{ .Values.redisPort | quote }}
           livenessProbe:
             httpGet:
               path: /metrics
