@@ -1,6 +1,5 @@
 ---
 check-version-increment: true
-debug: true
 excluded-charts: starbound
 remote: origin
 target-branch: main
