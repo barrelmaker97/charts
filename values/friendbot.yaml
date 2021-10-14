@@ -1,4 +1,2 @@
 ---
 exportLocation: "/home/barrelmaker/export.zip"
-redis:
-  host: redis-master
