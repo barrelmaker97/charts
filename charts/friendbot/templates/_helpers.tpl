@@ -71,3 +71,14 @@ Create Redis hostname when using Redis subchart
 {{- .Values.redisHost }}
 {{- end }}
 {{- end }}
+
+{{/*
+Create Redis port when using Redis subchart
+*/}}
+{{- define "friendbot.redisHost" -}}
+{{- if .Values.redis.enabled }}
+6379
+{{- else }}
+{{- .Values.redisPort }}
+{{- end }}
+{{- end }}

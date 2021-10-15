@@ -50,7 +50,7 @@ spec:
             - name: FRIENDBOT_REDIS_HOST
               value: {{ include "friendbot.redisHost" . | quote }}
             - name: FRIENDBOT_REDIS_PORT
-              value: {{ .Values.redisPort | quote }}
+              value: {{ include "friendbot.redisPort" . | quote }}
           livenessProbe:
             httpGet:
               path: /metrics
