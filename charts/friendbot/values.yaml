@@ -70,5 +70,9 @@ logLevel: info
 #redisPort: 6379
 redis:
   enabled: true
+  architecture: standalone
+  master:
+    persistence:
+      enabled: false
   auth:
     enabled: false
