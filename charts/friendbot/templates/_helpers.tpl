@@ -60,3 +60,14 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Create Redis hostname when using Redis subchart
+*/}}
+{{- define "friendbot.redisHost" -}}
+{{- if .Values.redis.enabled }}
+{{- printf "%s-redis-master" .Release.Name }}
+{{- else }}
+{{- .Values.redisHost }}
+{{- end }}
+{{- end }}

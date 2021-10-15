@@ -48,7 +48,7 @@ spec:
               value: /friendbot-secret/signature
             {{- end }}
             - name: FRIENDBOT_REDIS_HOST
-              value: {{ .Values.redisHost | quote }}
+              value: {{ include "friendbot.redisHost" . | quote }}
             - name: FRIENDBOT_REDIS_PORT
               value: {{ .Values.redisPort | quote }}
           livenessProbe:
