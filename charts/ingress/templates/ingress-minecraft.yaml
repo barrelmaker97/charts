@@ -4,7 +4,7 @@ kind: Ingress
 metadata:
   name: minecraft-ingress
   annotations:
-    cert-manager.io/issuer: "letsencrypt-prod"
+    cert-manager.io/issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/server-snippet: |
       add_header X-Frame-Options SAMEORIGIN;
       add_header Referrer-Policy same-origin;
