@@ -4,8 +4,7 @@ kind: Ingress
 metadata:
   name: dotfiles-ingress
   annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    acme.cert-manager.io/http01-edit-in-place: "true"
+    cert-manager.io/issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/rewrite-target: https://raw.githubusercontent.com/barrelmaker97/dotfiles/master/bin/updot
 spec:
   tls:
