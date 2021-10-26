@@ -7,13 +7,16 @@ metadata:
     {{- include "valheim.labels" . | nindent 4 }}
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       {{- include "valheim.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
       annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+      {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
@@ -46,15 +49,26 @@ spec:
             - name: PUBLIC
               value: "0"
             {{- end }}
-            {{- if .Values.password }}
             - name: PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ include "valheim.fullname" . }}-password
                   key: password
-            {{- end }}
             - name: ADDRESS
               value: 127.0.0.1
+          livenessProbe:
+            exec:
+              command:
+                - bash
+                - -c
+                - "pidof valheim_server.x86_64 || exit 1"
+            initialDelaySeconds: 60
+          readinessProbe:
+            exec:
+              command:
+                - bash
+                - -c
+                - "pidof valheim_server.x86_64 || exit 1"
           ports:
             - name: valheim-1
               containerPort: 2456
