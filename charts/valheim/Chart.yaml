@@ -3,7 +3,7 @@ apiVersion: v2
 name: valheim
 description: A Helm Chart for Valheim
 type: application
-version: 0.1.7
+version: 0.2.0
 appVersion: 1.4.12
 maintainers:
   - name: barrelmaker97
