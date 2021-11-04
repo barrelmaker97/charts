@@ -38,7 +38,14 @@ securityContext:
   #   - ALL
   # readOnlyRootFilesystem: true
 
-resources: {}
+resources:
+  factorio: {}
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+  metrics: {}
   #   cpu: 100m
   #   memory: 128Mi
   # requests:
