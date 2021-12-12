@@ -53,6 +53,8 @@ spec:
               value: {{ .Values.properties.timezone | quote }}
             - name: VERSION
               value: {{ .Values.properties.version | quote }}
+            - name: ONLINE_MODE
+              value: {{ .Values.properties.online | quote }}
             {{- if .Values.properties.viewDistance }}
             - name: VIEW_DISTANCE
               value: {{ .Values.properties.viewDistance | quote }}
@@ -64,10 +66,6 @@ spec:
             {{- if .Values.properties.type }}
             - name: TYPE
               value: {{ .Values.properties.type | quote }}
-            {{- end }}
-            {{- if not .Values.properties.online }}
-            - name: ONLINE_MODE
-              value: {{ .Values.properties.online | quote }}
             {{- end }}
             {{- if .Values.properties.ops }}
             - name: OPS
