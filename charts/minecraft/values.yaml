@@ -13,6 +13,7 @@ properties:
   forceGamemode: "true"
   gamemode: "suvival"
   motd: "Minecraft Server"
+  online: "TRUE"
   serverName: "Minecraft Server"
   spawnProtection: "0"
   timezone: "America/Chicago"
