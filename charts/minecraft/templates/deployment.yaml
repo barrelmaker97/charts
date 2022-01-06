@@ -81,7 +81,7 @@ spec:
             exec:
               command:
                 - /health.sh
-            initialDelaySeconds: 60
+            initialDelaySeconds: 90
           readinessProbe:
             exec:
               command:
