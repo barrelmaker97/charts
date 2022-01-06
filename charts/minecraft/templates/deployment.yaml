@@ -55,6 +55,8 @@ spec:
               value: {{ .Values.properties.version | quote }}
             - name: ONLINE_MODE
               value: {{ .Values.properties.online | quote }}
+            - name: USE_AIKAR_FLAGS
+              value: {{ .Values.properties.aikarFlags | quote }}
             {{- if .Values.properties.viewDistance }}
             - name: VIEW_DISTANCE
               value: {{ .Values.properties.viewDistance | quote }}
@@ -79,7 +81,7 @@ spec:
             exec:
               command:
                 - /health.sh
-            initialDelaySeconds: 60
+            initialDelaySeconds: 90
           readinessProbe:
             exec:
               command:
