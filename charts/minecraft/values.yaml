@@ -18,6 +18,7 @@ properties:
   spawnProtection: "0"
   timezone: "America/Chicago"
   version: "LATEST"
+  aikarFlags: false
 
 imagePullSecrets: []
 nameOverride: ""
