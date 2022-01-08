@@ -63,6 +63,8 @@ spec:
               value: {{ .Values.properties.viewDistance | quote }}
             - name: MEMORY
               value: {{ .Values.properties.memory | quote }}
+            - name: SPIGET_RESOURCES
+              value: {{ .Values.properties.spigetResources | quote }}
             {{- if .Values.properties.seed }}
             - name: SEED
               value: {{ .Values.properties.seed | quote }}

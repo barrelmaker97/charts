@@ -18,6 +18,7 @@ properties:
   online: "TRUE"
   serverName: "Minecraft Server"
   spawnProtection: 0
+  spigetResources: ""
   timezone: "America/Chicago"
   type: VANILLA
   version: LATEST
