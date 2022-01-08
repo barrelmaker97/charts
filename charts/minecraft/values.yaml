@@ -8,17 +8,20 @@ image:
 storageClassName: ""
 
 properties:
+  aikarFlags: false
   difficulty: "normal"
   eula: "TRUE"
   forceGamemode: "true"
   gamemode: "suvival"
+  memory: "1G"
   motd: "Minecraft Server"
   online: "TRUE"
   serverName: "Minecraft Server"
   spawnProtection: "0"
   timezone: "America/Chicago"
+  type: "VANILLA"
   version: "LATEST"
-  aikarFlags: false
+  viewDistance: "10"
 
 imagePullSecrets: []
 nameOverride: ""

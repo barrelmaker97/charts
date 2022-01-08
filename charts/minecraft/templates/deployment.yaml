@@ -57,25 +57,19 @@ spec:
               value: {{ .Values.properties.online | quote }}
             - name: USE_AIKAR_FLAGS
               value: {{ .Values.properties.aikarFlags | quote }}
-            {{- if .Values.properties.viewDistance }}
+            - name: TYPE
+              value: {{ .Values.properties.type | quote }}
             - name: VIEW_DISTANCE
               value: {{ .Values.properties.viewDistance | quote }}
-            {{- end }}
+            - name: MEMORY
+              value: {{ .Values.properties.memory | quote }}
             {{- if .Values.properties.seed }}
             - name: SEED
               value: {{ .Values.properties.seed | quote }}
             {{- end }}
-            {{- if .Values.properties.type }}
-            - name: TYPE
-              value: {{ .Values.properties.type | quote }}
-            {{- end }}
             {{- if .Values.properties.ops }}
             - name: OPS
               value: {{ .Values.properties.ops | quote }}
-            {{- end }}
-            {{- if .Values.properties.memory }}
-            - name: MEMORY
-              value: {{ .Values.properties.memory | quote }}
             {{- end }}
           livenessProbe:
             exec:
