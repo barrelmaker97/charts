@@ -9,19 +9,19 @@ storageClassName: ""
 
 properties:
   aikarFlags: false
-  difficulty: "normal"
+  difficulty: normal
   eula: "TRUE"
-  forceGamemode: "true"
-  gamemode: "suvival"
-  memory: "1G"
+  forceGamemode: true
+  gamemode: survival
+  memory: 1G
   motd: "Minecraft Server"
   online: "TRUE"
   serverName: "Minecraft Server"
-  spawnProtection: "0"
+  spawnProtection: 0
   timezone: "America/Chicago"
-  type: "VANILLA"
-  version: "LATEST"
-  viewDistance: "10"
+  type: VANILLA
+  version: LATEST
+  viewDistance: 10
 
 imagePullSecrets: []
 nameOverride: ""
