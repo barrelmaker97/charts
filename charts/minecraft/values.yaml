@@ -8,17 +8,21 @@ image:
 storageClassName: ""
 
 properties:
-  difficulty: "normal"
+  aikarFlags: false
+  difficulty: normal
   eula: "TRUE"
-  forceGamemode: "true"
-  gamemode: "suvival"
+  forceGamemode: true
+  gamemode: survival
+  memory: 1G
   motd: "Minecraft Server"
   online: "TRUE"
   serverName: "Minecraft Server"
-  spawnProtection: "0"
+  spawnProtection: 0
+  spigetResources: ""
   timezone: "America/Chicago"
-  version: "LATEST"
-  aikarFlags: false
+  type: VANILLA
+  version: LATEST
+  viewDistance: 10
 
 imagePullSecrets: []
 nameOverride: ""
