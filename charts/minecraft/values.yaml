@@ -16,6 +16,8 @@ properties:
   memory: 1G
   motd: "Minecraft Server"
   online: "TRUE"
+  ops: ""
+  seed: ""
   serverName: "Minecraft Server"
   spawnProtection: 0
   spigetResources: ""
@@ -23,6 +25,7 @@ properties:
   type: VANILLA
   version: LATEST
   viewDistance: 10
+  whitelist: ""
 
 imagePullSecrets: []
 nameOverride: ""
