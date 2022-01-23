@@ -3,8 +3,8 @@ apiVersion: v2
 name: friendbot
 description: A Helm Chart for Friendbot
 type: application
-version: 0.1.6
-appVersion: 0.1.4
+version: 0.1.7
+appVersion: 0.1.5
 dependencies:
   - name: redis
     version: ~15.4.1
