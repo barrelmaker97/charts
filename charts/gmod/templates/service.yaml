@@ -6,9 +6,7 @@ metadata:
   labels:
     {{- include "gmod.labels" . | nindent 4 }}
 spec:
-  type: NodePort
-  selector:
-    {{- include "gmod.selectorLabels" . | nindent 4 }}
+  type: {{ .Values.service.type }}
   ports:
     - name: gmod-server
       protocol: UDP
@@ -22,3 +20,5 @@ spec:
       {{- if .Values.serverPort }}
       nodePort: {{ add .Values.serverPort 1 }}
       {{- end }}
+  selector:
+    {{- include "gmod.selectorLabels" . | nindent 4 }}

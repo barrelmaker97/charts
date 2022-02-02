@@ -12,12 +12,26 @@ spec:
       {{- include "gmod.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       labels:
         {{- include "gmod.selectorLabels" . | nindent 8 }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "gmod.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: gmod
-          image: "{{ .Values.image.repo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/home/gmod/start.sh"]
           ports:
             - name: gmod-server
@@ -40,15 +54,15 @@ spec:
             periodSeconds: 10
           env:
             - name: PRODUCTION
-              value: {{ .Values.production | quote }}
+              value: {{ .Values.properties.production | quote }}
             - name: MAXPLAYERS
-              value: {{ .Values.maxPlayers | quote }}
+              value: {{ .Values.properties.maxPlayers | quote }}
             - name: GAMEMODE
-              value: {{ .Values.gamemode | quote }}
+              value: {{ .Values.properties.gamemode | quote }}
             - name: MAP
-              value: {{ .Values.map | quote }}
+              value: {{ .Values.properties.map | quote }}
             - name: ARGS
-              value: {{ .Values.args | quote }}
+              value: {{ .Values.properties.args | quote }}
           volumeMounts:
             - name: update-script
               subPath: update.txt
@@ -63,6 +77,20 @@ spec:
       {{- if .Values.addonsDir }}
             - name: addons-dir
               mountPath: /home/gmod/server/garrysmod/addons
+      {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
         - name: users-list
