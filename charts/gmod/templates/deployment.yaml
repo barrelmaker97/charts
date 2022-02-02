@@ -70,14 +70,14 @@ spec:
             - name: users-list
               subPath: users.txt
               mountPath: /home/gmod/server/garrysmod/settings/users.txt
-      {{- if .Values.mapsDir }}
+            {{- if .Values.mapsDir }}
             - name: maps-dir
               mountPath: /home/gmod/server/garrysmod/maps
-      {{- end }}
-      {{- if .Values.addonsDir }}
+            {{- end }}
+            {{- if .Values.addonsDir }}
             - name: addons-dir
               mountPath: /home/gmod/server/garrysmod/addons
-      {{- end }}
+            {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
