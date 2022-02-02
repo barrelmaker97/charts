@@ -7,6 +7,8 @@ metadata:
     {{- include "minecraft.labels" . | nindent 4 }}
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       {{- include "minecraft.selectorLabels" . | nindent 6 }}
@@ -33,48 +35,57 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            - name: EULA
-              value: {{ .Values.properties.eula | quote }}
-            - name: MODE
-              value: {{ .Values.properties.gamemode | quote }}
             - name: DIFFICULTY
               value: {{ .Values.properties.difficulty | quote }}
-            - name: SERVER_NAME
-              value: {{ .Values.properties.serverName | quote }}
-            - name: MOTD
-              value: {{ .Values.properties.motd | quote }}
-            - name: SPAWN_PROTECTION
-              value: {{ .Values.properties.spawnProtection | quote }}
+            - name: ENFORCE_WHITELIST
+              value: {{ .Values.properties.enforceWhitelist | quote }}
+            - name: EULA
+              value: {{ .Values.properties.eula | quote }}
             - name: FORCE_GAMEMODE
               value: {{ .Values.properties.forceGamemode | quote }}
-            - name: TZ
-              value: {{ .Values.properties.timezone | quote }}
-            - name: VERSION
-              value: {{ .Values.properties.version | quote }}
-            {{- if .Values.properties.viewDistance }}
-            - name: VIEW_DISTANCE
-              value: {{ .Values.properties.viewDistance | quote }}
-            {{- end }}
-            {{- if .Values.properties.seed }}
-            - name: SEED
-              value: {{ .Values.properties.seed | quote }}
-            {{- end }}
-            {{- if .Values.properties.type }}
-            - name: TYPE
-              value: {{ .Values.properties.type | quote }}
-            {{- end }}
-            {{- if not .Values.properties.online }}
-            - name: ONLINE_MODE
-              value: {{ .Values.properties.online | quote }}
-            {{- end }}
-            {{- if .Values.properties.ops }}
-            - name: OPS
-              value: {{ .Values.properties.ops | quote }}
-            {{- end }}
-            {{- if .Values.properties.memory }}
             - name: MEMORY
               value: {{ .Values.properties.memory | quote }}
-            {{- end }}
+            - name: MODE
+              value: {{ .Values.properties.gamemode | quote }}
+            - name: MOTD
+              value: {{ .Values.properties.motd | quote }}
+            - name: ONLINE_MODE
+              value: {{ .Values.properties.online | quote }}
+            - name: OPS
+              value: {{ .Values.properties.ops | quote }}
+            - name: OVERRIDE_OPS
+              value: {{ .Values.properties.overrideOps | quote }}
+            - name: OVERRIDE_WHITELIST
+              value: {{ .Values.properties.overrideWhitelist | quote }}
+            - name: SEED
+              value: {{ .Values.properties.seed | quote }}
+            - name: SERVER_NAME
+              value: {{ .Values.properties.serverName | quote }}
+            - name: SPAWN_PROTECTION
+              value: {{ .Values.properties.spawnProtection | quote }}
+            - name: SPIGET_RESOURCES
+              value: {{ .Values.properties.spigetResources | quote }}
+            - name: TYPE
+              value: {{ .Values.properties.type | quote }}
+            - name: TZ
+              value: {{ .Values.properties.timezone | quote }}
+            - name: USE_AIKAR_FLAGS
+              value: {{ .Values.properties.aikarFlags | quote }}
+            - name: VERSION
+              value: {{ .Values.properties.version | quote }}
+            - name: VIEW_DISTANCE
+              value: {{ .Values.properties.viewDistance | quote }}
+            - name: WHITELIST
+              value: {{ .Values.properties.whitelist | quote }}
+          livenessProbe:
+            exec:
+              command:
+                - /health.sh
+            initialDelaySeconds: 90
+          readinessProbe:
+            exec:
+              command:
+                - /health.sh
           ports:
             - name: minecraft
               containerPort: 25565

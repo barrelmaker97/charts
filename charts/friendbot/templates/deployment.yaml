@@ -32,58 +32,40 @@ spec:
         - name: friendbot
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: friendbot
               containerPort: 8000
               protocol: TCP
           env:
-            {{- if .Values.redis.host }}
-            - name: FRIENDBOT_REDIS_HOST
-              value: "{{ .Values.redis.host }}"
-            {{- end }}
-            {{- if .Values.redis.port }}
-            - name: FRIENDBOT_REDIS_PORT
-              value: "{{ .Values.redis.port }}"
-            {{- end }}
             - name: FRIENDBOT_LOG_LEVEL
               value: {{ .Values.logLevel | quote }}
-            {{- if .Values.exportLocation }}
             - name: FRIENDBOT_EXPORT_ZIP
-              value: /friendbot/export.zip
-            {{- else }}
-            - name: FRIENDBOT_EXPORT_ZIP
-              value: /test-export.zip
-            {{- end }}
+              value: /home/friendbot/export.zip
             {{- if .Values.signature }}
             - name: FRIENDBOT_SECRET_FILE
               value: /friendbot-secret/signature
             {{- end }}
+            - name: FRIENDBOT_REDIS_HOST
+              value: {{ include "friendbot.redisHost" . | quote }}
+            - name: FRIENDBOT_REDIS_PORT
+              value: {{ include "friendbot.redisPort" . | quote }}
           livenessProbe:
             httpGet:
               path: /metrics
               port: friendbot
-              scheme: HTTP
             initialDelaySeconds: 20
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 1
           readinessProbe:
             httpGet:
               path: /metrics
               port: friendbot
-              scheme: HTTP
-            initialDelaySeconds: 20
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 1
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             {{- if .Values.exportLocation }}
             - name: export
-              mountPath: /friendbot/export.zip
+              mountPath: /home/friendbot/export.zip
             {{- end }}
             {{- if .Values.signature }}
             - name: signature

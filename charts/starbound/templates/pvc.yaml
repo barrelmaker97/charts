@@ -2,15 +2,13 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "valheim.fullname" . }}
+  name: {{ include "starbound.fullname" . }}
   labels:
-    {{- include "valheim.labels" . | nindent 4 }}
+    {{- include "starbound.labels" . | nindent 4 }}
 spec:
-  {{- if .Values.storageClassName }}
   storageClassName: {{ .Values.storageClassName }}
-  {{- end }}
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 3Gi
+      storage: 1Gi

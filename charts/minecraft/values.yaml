@@ -3,20 +3,32 @@ image:
   repository: docker.io/itzg/minecraft-server
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: latest
+  tag: ""
 
 storageClassName: ""
 
 properties:
-  difficulty: "normal"
+  aikarFlags: false
+  difficulty: normal
+  enforceWhitelist: false
   eula: "TRUE"
-  forceGamemode: "true"
-  gamemode: "suvival"
+  forceGamemode: true
+  gamemode: survival
+  memory: 1G
   motd: "Minecraft Server"
+  online: "TRUE"
+  ops: ""
+  overrideWhitelist: false
+  overrideOps: false
+  seed: ""
   serverName: "Minecraft Server"
-  spawnProtection: "0"
+  spawnProtection: 0
+  spigetResources: ""
   timezone: "America/Chicago"
-  version: "LATEST"
+  type: VANILLA
+  version: LATEST
+  viewDistance: 10
+  whitelist: ""
 
 imagePullSecrets: []
 nameOverride: ""

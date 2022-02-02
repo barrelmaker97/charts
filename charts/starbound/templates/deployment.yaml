@@ -12,36 +12,63 @@ spec:
       {{- include "starbound.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       labels:
         {{- include "starbound.selectorLabels" . | nindent 8 }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "starbound.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: starbound
-          image: "{{ .Values.image.repo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
-          #command: ['sh', '-c', 'yes']
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          # TODO: Figure out how to handle 2FA for steam accounts
+          # Currently requires exec'ing into container to login
+          # command: ['sh', '-c', 'yes']
           env:
             - name: SKIP_STEAMCMD
               value: "True"
-          # - name: STEAM_PASSWORD
-          #   valueFrom:
-          #     secretKeyRef:
-          #       name: {{ include "starbound.fullname" . }}-steam-password
-          #       key: password
-          # - name: STEAM_USERNAME
-          #   valueFrom:
-          #     secretKeyRef:
-          #       name: {{ include "starbound.fullname" . }}-steam-username
-          #       key: username
+            - name: STEAM_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "starbound.fullname" . }}-steam-creds
+                  key: password
+            - name: STEAM_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "starbound.fullname" . }}-steam-creds
+                  key: username
           ports:
             - name: starbound-port
               containerPort: 21025
-      {{- if .Values.saveLocation }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-            - name: "{{ .Release.Name }}-data"
+            - name: savedata
               mountPath: /steamcmd/starbound
       volumes:
-        - name: "{{ .Release.Name }}-data"
-          hostPath:
-            path: "{{ .Values.saveLocation }}/{{ .Release.Name }}-data"
-            type: DirectoryOrCreate
+        - name: savedata
+          persistentVolumeClaim:
+            claimName: {{ include "starbound.fullname" . }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
       {{- end }}

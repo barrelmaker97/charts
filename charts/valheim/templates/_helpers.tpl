@@ -60,3 +60,14 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Return Valheim password
+*/}}
+{{- define "valheim.password" -}}
+{{- if not (empty .Values.password) -}}
+    {{- .Values.password -}}
+{{- else -}}
+    {{- randAlphaNum 10 -}}
+{{- end -}}
+{{- end -}}

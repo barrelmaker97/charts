@@ -5,11 +5,15 @@ image:
   repository: docker.io/nginx
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: alpine
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
+
+storage:
+  enabled: false  # Specifies whether persistent storage will be used
+  class: ""  # StorageClassName used if persistent storage is enabled
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -38,10 +42,6 @@ service:
   port: 80
 
 resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   # limits:
   #   cpu: 100m
   #   memory: 128Mi

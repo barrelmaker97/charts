@@ -6,7 +6,9 @@ metadata:
   labels:
     {{- include "minecraft.labels" . | nindent 4 }}
 spec:
+  {{- if .Values.storageClassName }}
   storageClassName: {{ .Values.storageClassName }}
+  {{- end }}
   accessModes:
     - ReadWriteOnce
   resources:

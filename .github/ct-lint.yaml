@@ -1,9 +1,10 @@
 ---
 check-version-increment: true
-debug: true
+chart-repos: bitnami=https://charts.bitnami.com/bitnami
 excluded-charts: starbound
 remote: origin
 target-branch: main
+upgrade: true
 validate-chart-schema: true
 validate-maintainers: true
 validate-yaml: true

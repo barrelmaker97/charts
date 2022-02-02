@@ -44,7 +44,7 @@ spec:
               subPath: nginx.conf
               mountPath: /etc/nginx/nginx.conf
               readOnly: true
-            {{- if .Values.websiteLocation }}
+            {{- if .Values.storage.enabled }}
             - name: website
               mountPath: /usr/share/nginx/html
               readOnly: true
@@ -54,21 +54,13 @@ spec:
             httpGet:
               path: /
               port: http
-              scheme: HTTP
             initialDelaySeconds: 3
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 1
           readinessProbe:
             failureThreshold: 3
             httpGet:
               path: /
               port: http
-              scheme: HTTP
             initialDelaySeconds: 3
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 1
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
@@ -76,11 +68,10 @@ spec:
           configMap:
             name: {{ include "website.fullname" . }}-config
             defaultMode: 0644
-        {{- if .Values.websiteLocation }}
+        {{- if .Values.storage.enabled }}
         - name: website
-          hostPath:
-            path: {{ .Values.websiteLocation }}
-            type: DirectoryOrCreate
+          persistentVolumeClaim:
+            claimName: {{ include "website.fullname" . }}
         {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
