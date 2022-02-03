@@ -67,13 +67,6 @@ spec:
               value: {{ .Values.properties.map | quote }}
             - name: ARGS
               value: {{ .Values.properties.args | quote }}
-          volumeMounts:
-            - name: update-script
-              subPath: update.txt
-              mountPath: /home/gmod/update.txt
-            - name: users-list
-              subPath: users.txt
-              mountPath: /home/gmod/server/garrysmod/settings/users.txt
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
@@ -88,12 +81,3 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      volumes:
-        - name: users-list
-          configMap:
-            name: {{ include "gmod.fullname" . }}-users
-            defaultMode: 0644
-        - name: update-script
-          configMap:
-            name: {{ include "gmod.fullname" . }}-update
-            defaultMode: 0644

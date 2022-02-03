@@ -1,9 +1,0 @@
----
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: {{ include "gmod.fullname" . }}-users
-  labels:
-    {{- include "gmod.labels" . | nindent 4 }}
-data:
-{{ (.Files.Glob "users.txt").AsConfig | indent 2 }}
