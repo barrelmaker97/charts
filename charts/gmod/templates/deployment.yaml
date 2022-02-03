@@ -74,6 +74,9 @@ spec:
             - name: users-list
               subPath: users.txt
               mountPath: /home/gmod/server/garrysmod/settings/users.txt
+            - name: server-config
+              subPath: server.cfg
+              mountPath: /home/gmod/server/garrysmod/cfg/server.cfg
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
@@ -96,4 +99,8 @@ spec:
         - name: update-script
           configMap:
             name: {{ include "gmod.fullname" . }}-update
+            defaultMode: 0644
+        - name: server-config
+          configMap:
+            name: {{ include "gmod.fullname" . }}-cfg
             defaultMode: 0644
