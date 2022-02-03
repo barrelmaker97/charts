@@ -34,8 +34,12 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/home/gmod/start.sh"]
           ports:
-            - name: gmod-server
+            - name: gmod-server-tcp
               containerPort: 27015
+              protocol: TCP
+            - name: gmod-server-udp
+              containerPort: 27015
+              protocol: UDP
             - name: gmod-client
               containerPort: 27005
           livenessProbe:
