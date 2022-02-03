@@ -1,0 +1,30 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "gmod.fullname" . }}
+  labels:
+    {{- include "gmod.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - name: gmod-server-tcp
+      protocol: TCP
+      port: 27015
+      {{- if .Values.serverPort }}
+      nodePort: {{ .Values.serverPort }}
+      {{- end }}
+    - name: gmod-server-udp
+      protocol: UDP
+      port: 27015
+      {{- if .Values.serverPort }}
+      nodePort: {{ .Values.serverPort }}
+      {{- end }}
+    - name: gmod-client
+      protocol: UDP
+      port: 27005
+      {{- if .Values.serverPort }}
+      nodePort: {{ add .Values.serverPort 1 }}
+      {{- end }}
+  selector:
+    {{- include "gmod.selectorLabels" . | nindent 4 }}
