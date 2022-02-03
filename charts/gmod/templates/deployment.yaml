@@ -70,14 +70,6 @@ spec:
             - name: users-list
               subPath: users.txt
               mountPath: /home/gmod/server/garrysmod/settings/users.txt
-            {{- if .Values.mapsDir }}
-            - name: maps-dir
-              mountPath: /home/gmod/server/garrysmod/maps
-            {{- end }}
-            {{- if .Values.addonsDir }}
-            - name: addons-dir
-              mountPath: /home/gmod/server/garrysmod/addons
-            {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
@@ -101,15 +93,3 @@ spec:
           configMap:
             name: {{ include "gmod.fullname" . }}-update
             defaultMode: 0644
-      {{- if .Values.mapsDir }}
-        - name: maps-dir
-          hostPath:
-            path: {{ .Values.mapsDir }}
-            type: Directory
-      {{- end }}
-      {{- if .Values.addonsDir }}
-        - name: addons-dir
-          hostPath:
-            path: {{ .Values.addonsDir }}
-            type: Directory
-      {{- end }}
