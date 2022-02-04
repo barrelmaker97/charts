@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "gmod.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.service.type }}
+  type: NodePort
   ports:
     - name: gmod-server-tcp
       protocol: TCP

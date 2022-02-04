@@ -47,9 +47,6 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-service:
-  type: NodePort
-
 resources: {}
   # limits:
   #   cpu: 100m
