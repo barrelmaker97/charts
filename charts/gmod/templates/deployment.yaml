@@ -66,6 +66,13 @@ spec:
               value: {{ .Values.properties.gamemode | quote }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: savedata
+              mountPath: /home/steam/serverfiles
+      volumes:
+        - name: savedata
+          persistentVolumeClaim:
+            claimName: {{ include "gmod.fullname" . }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
