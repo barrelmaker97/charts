@@ -1,9 +1,9 @@
 ---
 image:
-  repository: docker.io/ceifa/gmod-server
+  repository: docker.io/jusito/docker-ttt
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: latest
+  tag: gmod_ttt_debian
 
 imagePullSecrets: []
 nameOverride: ""
