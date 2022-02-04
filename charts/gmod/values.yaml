@@ -14,7 +14,7 @@ properties:
   installHLDM: false
   installTF2: false
   workshopCollectionID: ""
-  serverName: "GmodServer"
+  serverName: GmodServer
   serverPassword: ""
   rconPassword: ""
   defaultMap: gm_construct
