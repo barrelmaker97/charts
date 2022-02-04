@@ -40,16 +40,30 @@ spec:
               containerPort: 27015
               protocol: UDP
           env:
-            - name: PRODUCTION
-              value: {{ .Values.properties.production | quote }}
-            - name: MAXPLAYERS
+            - name: TZ
+              value: {{ .Values.properties.timezone | quote }}
+            - name: INSTALL_CSS
+              value: {{ .Values.properties.installCSS | quote }}
+            - name: INSTALL_HL2
+              value: {{ .Values.properties.installHL2 | quote }}
+            - name: INSTALL_HLDM
+              value: {{ .Values.properties.installHLDM | quote }}
+            - name: INSTALL_TF2
+              value: {{ .Values.properties.installTF2 | quote }}
+            - name: WORKSHOP_COLLECTION_ID
+              value: {{ .Values.properties.workshopCollectionID | quote }}
+            - name: SERVER_NAME
+              value: {{ .Values.properties.serverName | quote }}
+            - name: SERVER_PASSWORD
+              value: {{ .Values.properties.serverPassword | quote }}
+            - name: SERVER_RCON_PASSWORD
+              value: {{ .Values.properties.rconPassword | quote }}
+            - name: SERVER_DEFAULT_MAP
+              value: {{ .Values.properties.defaultMap | quote }}
+            - name: SERVER_MAX_PLAYERS
               value: {{ .Values.properties.maxPlayers | quote }}
-            - name: GAMEMODE
+            - name: SERVER_GAMEMODE
               value: {{ .Values.properties.gamemode | quote }}
-            - name: MAP
-              value: {{ .Values.properties.map | quote }}
-            - name: ARGS
-              value: {{ .Values.properties.args | quote }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

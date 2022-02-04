@@ -53,8 +53,15 @@ tolerations: []
 affinity: {}
 
 properties:
-  production: 1
+  timezone: America/Chicago
+  installCSS: false
+  installHL2: false
+  installHLDM: false
+  installTF2: false
+  workshopCollectionID: ""
+  serverName: "GmodServer"
+  serverPassword: ""
+  rconPassword: ""
+  defaultMap: gm_construct
   maxPlayers: 16
   gamemode: sandbox
-  map: gm_construct
-  args: ""
