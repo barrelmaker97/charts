@@ -20,11 +20,5 @@ spec:
       {{- if .Values.serverPort }}
       nodePort: {{ .Values.serverPort }}
       {{- end }}
-    - name: gmod-client
-      protocol: UDP
-      port: 27005
-      {{- if .Values.serverPort }}
-      nodePort: {{ add .Values.serverPort 1 }}
-      {{- end }}
   selector:
     {{- include "gmod.selectorLabels" . | nindent 4 }}

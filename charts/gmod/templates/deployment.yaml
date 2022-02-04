@@ -32,7 +32,6 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["/home/gmod/start.sh"]
           ports:
             - name: gmod-server-tcp
               containerPort: 27015
@@ -40,22 +39,6 @@ spec:
             - name: gmod-server-udp
               containerPort: 27015
               protocol: UDP
-            - name: gmod-client
-              containerPort: 27005
-          livenessProbe:
-            exec:
-              command:
-                - bash
-                - /home/gmod/health.sh
-            initialDelaySeconds: 300
-            periodSeconds: 10
-          readinessProbe:
-            exec:
-              command:
-                - bash
-                - /home/gmod/health.sh
-            initialDelaySeconds: 0
-            periodSeconds: 10
           env:
             - name: PRODUCTION
               value: {{ .Values.properties.production | quote }}
