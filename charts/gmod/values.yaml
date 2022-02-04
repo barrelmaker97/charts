@@ -8,18 +8,18 @@ image:
 storageClassName: ""
 
 properties:
-  timezone: America/Chicago
+  defaultMap: gm_construct
+  gamemode: sandbox
   installCSS: false
   installHL2: false
   installHLDM: false
   installTF2: false
-  workshopCollectionID: ""
+  maxPlayers: 16
+  rconPassword: ""
   serverName: GmodServer
   serverPassword: ""
-  rconPassword: ""
-  defaultMap: gm_construct
-  maxPlayers: 16
-  gamemode: sandbox
+  timezone: America/Chicago
+  workshopCollectionID: ""
 
 imagePullSecrets: []
 nameOverride: ""
