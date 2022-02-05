@@ -19,7 +19,7 @@ properties:
   serverName: GmodServer
   serverPassword: ""
   timezone: America/Chicago
-  workshopCollectionID: ""
+  workshopCollectionID: "" # Has to be in quotes, not an int
 
 imagePullSecrets: []
 nameOverride: ""
