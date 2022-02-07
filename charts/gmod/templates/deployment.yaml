@@ -7,6 +7,8 @@ metadata:
     {{- include "gmod.labels" . | nindent 4 }}
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       {{- include "gmod.selectorLabels" . | nindent 6 }}
@@ -32,7 +34,6 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["/home/gmod/start.sh"]
           ports:
             - name: gmod-server-tcp
               containerPort: 27015
@@ -40,45 +41,40 @@ spec:
             - name: gmod-server-udp
               containerPort: 27015
               protocol: UDP
-            - name: gmod-client
-              containerPort: 27005
-          livenessProbe:
-            exec:
-              command:
-                - bash
-                - /home/gmod/health.sh
-            initialDelaySeconds: 300
-            periodSeconds: 10
-          readinessProbe:
-            exec:
-              command:
-                - bash
-                - /home/gmod/health.sh
-            initialDelaySeconds: 0
-            periodSeconds: 10
           env:
-            - name: PRODUCTION
-              value: {{ .Values.properties.production | quote }}
-            - name: MAXPLAYERS
+            - name: TZ
+              value: {{ .Values.properties.timezone | quote }}
+            - name: INSTALL_CSS
+              value: {{ .Values.properties.installCSS | quote }}
+            - name: INSTALL_HL2
+              value: {{ .Values.properties.installHL2 | quote }}
+            - name: INSTALL_HLDM
+              value: {{ .Values.properties.installHLDM | quote }}
+            - name: INSTALL_TF2
+              value: {{ .Values.properties.installTF2 | quote }}
+            - name: WORKSHOP_COLLECTION_ID
+              value: {{ .Values.properties.workshopCollectionID | quote }}
+            - name: SERVER_NAME
+              value: {{ .Values.properties.serverName | quote }}
+            - name: SERVER_PASSWORD
+              value: {{ .Values.properties.serverPassword | quote }}
+            - name: SERVER_RCON_PASSWORD
+              value: {{ .Values.properties.rconPassword | quote }}
+            - name: SERVER_DEFAULT_MAP
+              value: {{ .Values.properties.defaultMap | quote }}
+            - name: SERVER_MAX_PLAYERS
               value: {{ .Values.properties.maxPlayers | quote }}
-            - name: GAMEMODE
+            - name: SERVER_GAMEMODE
               value: {{ .Values.properties.gamemode | quote }}
-            - name: MAP
-              value: {{ .Values.properties.map | quote }}
-            - name: ARGS
-              value: {{ .Values.properties.args | quote }}
-          volumeMounts:
-            - name: update-script
-              subPath: update.txt
-              mountPath: /home/gmod/update.txt
-            - name: users-list
-              subPath: users.txt
-              mountPath: /home/gmod/server/garrysmod/settings/users.txt
-            - name: server-config
-              subPath: server.cfg
-              mountPath: /home/gmod/server/garrysmod/cfg/server.cfg
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: savedata
+              mountPath: /home/steam/serverfiles
+      volumes:
+        - name: savedata
+          persistentVolumeClaim:
+            claimName: {{ include "gmod.fullname" . }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -91,16 +87,3 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      volumes:
-        - name: users-list
-          configMap:
-            name: {{ include "gmod.fullname" . }}-users
-            defaultMode: 0644
-        - name: update-script
-          configMap:
-            name: {{ include "gmod.fullname" . }}-update
-            defaultMode: 0644
-        - name: server-config
-          configMap:
-            name: {{ include "gmod.fullname" . }}-cfg
-            defaultMode: 0644

@@ -1,9 +1,0 @@
----
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: {{ include "gmod.fullname" . }}-cfg
-  labels:
-    {{- include "gmod.labels" . | nindent 4 }}
-data:
-{{ (.Files.Glob "server.cfg").AsConfig | indent 2 }}
