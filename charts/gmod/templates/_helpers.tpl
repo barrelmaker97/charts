@@ -60,3 +60,25 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Return server password
+*/}}
+{{- define "gmod.serverPassword" -}}
+{{- if not (empty .Values.properties.serverPassword) -}}
+    {{- .Values.properties.serverPassword -}}
+{{- else -}}
+    {{- randAlphaNum 10 -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Return rcon password
+*/}}
+{{- define "gmod.rconPassword" -}}
+{{- if not (empty .Values.properties.rconPassword) -}}
+    {{- .Values.properties.rconPassword -}}
+{{- else -}}
+    {{- randAlphaNum 10 -}}
+{{- end -}}
+{{- end -}}
