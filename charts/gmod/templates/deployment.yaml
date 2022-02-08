@@ -57,9 +57,15 @@ spec:
             - name: SERVER_NAME
               value: {{ .Values.properties.serverName | quote }}
             - name: SERVER_PASSWORD
-              value: {{ .Values.properties.serverPassword | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "gmod.fullname" . }}-server-password
+                  key: password
             - name: SERVER_RCON_PASSWORD
-              value: {{ .Values.properties.rconPassword | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "gmod.fullname" . }}-rcon-password
+                  key: password
             - name: SERVER_DEFAULT_MAP
               value: {{ .Values.properties.defaultMap | quote }}
             - name: SERVER_MAX_PLAYERS
