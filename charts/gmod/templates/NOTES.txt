@@ -1,1 +1,13 @@
 Garry's Mod has been installed!
+
+To get the password for the server, run:
+
+    kubectl get secret --namespace {{ .Release.Namespace }} {{ include "gmod.fullname" . }}-server-password -o jsonpath="{.data.password}" | base64 --decode
+
+To get the password for the rcon, run:
+
+    kubectl get secret --namespace {{ .Release.Namespace }} {{ include "gmod.fullname" . }}-rcon-password -o jsonpath="{.data.password}" | base64 --decode
+
+If you did not set a password manually, then one was generated for you.
+The auto-generated password will be rotated when this helm chart is upgraded.
+Please set a password if you would like to avoid password rotation on upgrade.
