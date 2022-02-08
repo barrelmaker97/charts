@@ -252,6 +252,20 @@ entries:
   gmod:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2022-02-08T02:47:38.952283149Z"
+    description: A Helm Chart for Garry's Mod
+    digest: 16be9f9a04d09b051308be6f29f59ca03fbbe3ea9a1fbbc59266f61df7040ca6
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: gmod
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/gmod-0.1.2/gmod-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2022-02-07T23:58:44.348336987Z"
     description: A Helm Chart for Garry's Mod
     digest: ce2d58eed2ceeaf1bbc5e87f59f9e99c993f1173568fb161da7de585ea750256
@@ -1036,4 +1050,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2022-02-07T23:58:44.348628604Z"
+generated: "2022-02-08T02:47:38.952627152Z"
