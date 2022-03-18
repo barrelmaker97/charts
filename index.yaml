@@ -921,6 +921,20 @@ entries:
     version: 0.1.1
   valheim:
   - apiVersion: v2
+    appVersion: 1.5.3
+    created: "2022-03-18T05:23:15.738302612Z"
+    description: A Helm Chart for Valheim
+    digest: 47c5639650c428327b5d979942c583719b700cee99a8dae219593aa8352da06f
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: valheim
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/valheim-0.2.3/valheim-0.2.3.tgz
+    version: 0.2.3
+  - apiVersion: v2
     appVersion: 1.5.0
     created: "2022-01-23T17:04:47.677527819Z"
     description: A Helm Chart for Valheim
@@ -1092,4 +1106,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2022-02-20T17:53:57.731986368Z"
+generated: "2022-03-18T05:23:15.738848733Z"
