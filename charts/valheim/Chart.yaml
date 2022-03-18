@@ -4,7 +4,7 @@ name: valheim
 description: A Helm Chart for Valheim
 type: application
 version: 0.2.3
-appVersion: 1.5.1
+appVersion: 1.5.3
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com
