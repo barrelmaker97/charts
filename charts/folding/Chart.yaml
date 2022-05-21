@@ -2,8 +2,5 @@
 apiVersion: v2
 description: A Helm Chart for Folding at Home
 name: folding
-version: 0.1.2
-maintainers:
-  - name: barrelmaker97
-    email: nolancooper97@gmail.com
-    url: barrelmaker.dev
+version: 0.1.3
+deprecated: true
