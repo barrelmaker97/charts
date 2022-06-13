@@ -6,7 +6,9 @@ metadata:
   labels:
     {{- include "jellyfin.labels" . | nindent 4 }}
 spec:
-  storageClassName: {{ .Values.storageClassName.config }}
+  {{- if .Values.storageClassName }}
+  storageClassName: {{ .Values.storageClassName }}
+  {{- end }}
   accessModes:
     - ReadWriteOnce
   resources:
