@@ -5,5 +5,5 @@ grafana:
 kuma:
   ip: 192.168.15.20
   port: 3001
-monitoring: false
+observability: false
 issuerName: letsencrypt-prod
