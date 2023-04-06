@@ -5,7 +5,6 @@ metadata:
   labels:
     app: serge
   name: serge
-  namespace: serge-ai
 spec:
   replicas: 1
   selector:

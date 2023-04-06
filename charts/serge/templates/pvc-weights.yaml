@@ -5,7 +5,6 @@ metadata:
   labels:
     app: serge
   name: weights
-  namespace: serge-ai
 spec:
   accessModes:
     - ReadWriteMany
