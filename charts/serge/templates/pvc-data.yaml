@@ -7,7 +7,7 @@ metadata:
   name: datadb
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 16Gi
