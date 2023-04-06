@@ -21,13 +21,13 @@ spec:
           ports:
             - containerPort: 8008
             - containerPort: 9124
-          resources:
-            requests:
-              cpu: 5000m
-              memory: 5120Mi
-            limits:
-              cpu: 8000m
-              memory: 8192Mi
+#         resources:
+#           requests:
+#             cpu: 5000m
+#             memory: 5120Mi
+#           limits:
+#             cpu: 8000m
+#             memory: 8192Mi
           volumeMounts:
             - mountPath: /data/db
               name: datadb
