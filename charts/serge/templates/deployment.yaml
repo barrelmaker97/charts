@@ -5,9 +5,7 @@ metadata:
   labels:
     {{- include "serge.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
-  {{- end }}
+  replicas: 1
   selector:
     matchLabels:
       {{- include "serge.selectorLabels" . | nindent 6 }}
@@ -28,25 +26,39 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
+        - name: serge
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8008
               protocol: TCP
+          volumeMounts:
+            - name: datadb
+              mountPath: /data/db
+            - name: weights
+              mountPath: /usr/src/app/weights
           livenessProbe:
             httpGet:
               path: /
               port: http
+            initialDelaySeconds: 3
           readinessProbe:
             httpGet:
               path: /
               port: http
+            initialDelaySeconds: 3
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        - name: datadb
+          persistentVolumeClaim:
+            claimName: {{ include "serge.fullname" . }}-datadb
+        - name: weights
+          persistentVolumeClaim:
+            claimName: {{ include "serge.fullname" . }}-weights
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
