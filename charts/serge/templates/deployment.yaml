@@ -1,43 +1,61 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: {{ include "serge.fullname" . }}
   labels:
-    app: serge
-  name: serge
+    {{- include "serge.labels" . | nindent 4 }}
 spec:
-  replicas: 1
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
   selector:
     matchLabels:
-      app: serge
+      {{- include "serge.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       labels:
-        app: serge
+        {{- include "serge.selectorLabels" . | nindent 8 }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "serge.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - image: ghcr.io/nsarrazin/serge:main
-          name: serge
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - containerPort: 8008
-            - containerPort: 9124
-#         resources:
-#           requests:
-#             cpu: 5000m
-#             memory: 5120Mi
-#           limits:
-#             cpu: 8000m
-#             memory: 8192Mi
-          volumeMounts:
-            - mountPath: /data/db
-              name: datadb
-            - mountPath: /usr/src/app/weights
-              name: weights
-      restartPolicy: Always
-      volumes:
-        - name: datadb
-          persistentVolumeClaim:
-            claimName: datadb
-        - name: weights
-          persistentVolumeClaim:
-            claimName: weights
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
