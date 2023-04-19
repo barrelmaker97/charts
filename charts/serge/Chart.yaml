@@ -3,7 +3,7 @@ name: serge
 description: A Helm chart for Serge
 type: application
 version: 0.1.0
-appVersion: 0.0.4
+appVersion: 0.0.5
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com
