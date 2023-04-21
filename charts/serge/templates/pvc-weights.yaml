@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "serge.fullname" . }}-weights
+  labels:
+    {{- include "serge.labels" . | nindent 4 }}
+spec:
+  {{- if .Values.storageClassName.weights }}
+  storageClassName: {{ .Values.storageClassName.weights }}
+  {{- end }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 64Gi

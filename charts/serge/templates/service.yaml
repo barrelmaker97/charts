@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "serge.fullname" . }}
+  labels:
+    {{- include "serge.labels" . | nindent 4 }}
+spec:
+  selector:
+    {{- include "serge.selectorLabels" . | nindent 4 }}
+  ports:
+    - name: serge
+      protocol: TCP
+      port: 8008
+      targetPort: 8008
