@@ -36,7 +36,7 @@ spec:
               containerPort: 8008
               protocol: TCP
           volumeMounts:
-            - name: datadb
+            - name: data
               mountPath: /data/db
             - name: weights
               mountPath: /usr/src/app/weights
@@ -53,9 +53,9 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
-        - name: datadb
+        - name: data
           persistentVolumeClaim:
-            claimName: {{ include "serge.fullname" . }}-datadb
+            claimName: {{ include "serge.fullname" . }}-data
         - name: weights
           persistentVolumeClaim:
             claimName: {{ include "serge.fullname" . }}-weights
