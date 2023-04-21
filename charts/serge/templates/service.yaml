@@ -5,11 +5,10 @@ metadata:
   labels:
     {{- include "serge.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.service.type }}
-  ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
   selector:
     {{- include "serge.selectorLabels" . | nindent 4 }}
+  ports:
+    - name: serge
+      protocol: TCP
+      port: 8008
+      targetPort: 8008
