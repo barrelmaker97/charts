@@ -1234,6 +1234,21 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/minecraft-0.1.1/minecraft-0.1.1.tgz
     version: 0.1.1
+  serge:
+  - apiVersion: v2
+    appVersion: 0.0.5
+    created: "2023-04-21T05:07:12.748120804Z"
+    description: A Helm chart for Serge
+    digest: 0c6717221bd9998fdee9b880fe23a624a30aad941a116d08e8ececcdb72a4383
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: serge
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/serge-0.1.0/serge-0.1.0.tgz
+    version: 0.1.0
   starbound:
   - apiVersion: v2
     appVersion: latest
@@ -1585,4 +1600,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2023-04-07T21:08:54.259649685Z"
+generated: "2023-04-21T05:07:12.748537704Z"
