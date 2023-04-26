@@ -3,8 +3,8 @@ apiVersion: v2
 name: serge
 description: A Helm chart for Serge
 type: application
-version: 0.1.2
-appVersion: 0.0.5
+version: 0.1.3
+appVersion: 0.1.1
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com
