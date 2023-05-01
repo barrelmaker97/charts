@@ -3,11 +3,11 @@ apiVersion: v2
 name: friendbot
 description: A Helm Chart for Friendbot
 type: application
-version: 0.1.9
-appVersion: 0.1.7
+version: 0.1.10
+appVersion: 0.1.9
 dependencies:
   - name: redis
-    version: ~16.8.2
+    version: ~17.10.1
     repository: https://charts.bitnami.com/bitnami
     condition: redis.enabled
 maintainers:
