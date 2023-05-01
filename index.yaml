@@ -1250,6 +1250,20 @@ entries:
     version: 0.1.1
   serge:
   - apiVersion: v2
+    appVersion: 0.1.2
+    created: "2023-05-01T20:02:14.42800374Z"
+    description: A Helm chart for Serge
+    digest: 65fb28bf4dc7797e7ee2085f867f3012b9ab85f3aeaa5d6ffbaa5cf720d835f7
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: serge
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/serge-0.1.4/serge-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
     appVersion: 0.1.1
     created: "2023-04-26T13:00:20.232156666Z"
     description: A Helm chart for Serge
@@ -1656,4 +1670,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2023-04-26T13:00:20.232364071Z"
+generated: "2023-05-01T20:02:14.428276555Z"
