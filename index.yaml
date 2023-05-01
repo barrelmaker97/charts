@@ -198,6 +198,25 @@ entries:
     version: 0.1.1
   friendbot:
   - apiVersion: v2
+    appVersion: 0.1.9
+    created: "2023-05-01T22:37:35.339977859Z"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: ~17.10.1
+    description: A Helm Chart for Friendbot
+    digest: b8d5eb2ecdb43fec8263842ac94bb937d2ed6009175937ab2d2f917c1df5449b
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: friendbot
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/friendbot-0.1.10/friendbot-0.1.10.tgz
+    version: 0.1.10
+  - apiVersion: v2
     appVersion: 0.1.7
     created: "2022-11-01T04:25:49.269609076Z"
     dependencies:
@@ -1670,4 +1689,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2023-05-01T20:02:14.428276555Z"
+generated: "2023-05-01T22:37:35.340389852Z"
