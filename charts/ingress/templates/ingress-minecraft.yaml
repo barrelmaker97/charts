@@ -15,7 +15,6 @@ spec:
   tls:
     - hosts:
         - niucraft.barrelmaker.dev
-        - motocraft.barrelmaker.dev
       secretName: minecraft-ingress-tls
   rules:
     - host: niucraft.barrelmaker.dev
@@ -33,22 +32,5 @@ spec:
             backend:
               service:
                 name: niucraft-minecraft-extras
-                port:
-                  number: 9225
-    - host: motocraft.barrelmaker.dev
-      http:
-        paths:
-          - pathType: Prefix
-            path: "/"
-            backend:
-              service:
-                name: motocraft-minecraft-extras
-                port:
-                  number: 8123
-          - pathType: Prefix
-            path: "/metrics"
-            backend:
-              service:
-                name: motocraft-minecraft-extras
                 port:
                   number: 9225
