@@ -1,6 +1,6 @@
 ---
 image:
-  repository: ghcr.io/nsarrazin/serge
+  repository: ghcr.io/serge-chat/serge
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
