@@ -14,16 +14,16 @@ metadata:
 spec:
   tls:
     - hosts:
-        - motofactorio4.barrelmaker.dev
+        - factorio.barrelmaker.dev
       secretName: factorio-ingress-tls
   rules:
-    - host: motofactorio4.barrelmaker.dev
+    - host: factorio.barrelmaker.dev
       http:
         paths:
           - pathType: Prefix
             path: "/"
             backend:
               service:
-                name: motofactorio4-metrics
+                name: factorio-metrics
                 port:
                   number: 9100
