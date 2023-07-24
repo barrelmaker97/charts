@@ -14,7 +14,7 @@ metadata:
       add_header Content-Security-Policy "frame-ancestors 'self'; default-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; font-src 'self'; connect-src 'self' https://grafana.com; img-src 'self' data:; style-src 'self' 'unsafe-inline'; base-uri 'self'; form-action 'self';" always;
 spec:
   rules:
-    - host: grafana.ares.lan
+    - host: grafana.hermes.lan
       http:
         paths:
           - pathType: Prefix
@@ -24,7 +24,7 @@ spec:
                 name: kube-prom-stack-grafana
                 port:
                   number: 80
-    - host: prometheus.ares.lan
+    - host: prometheus.hermes.lan
       http:
         paths:
           - pathType: Prefix
@@ -34,7 +34,7 @@ spec:
                 name: kube-prom-stack-kube-prome-prometheus
                 port:
                   number: 9090
-    - host: alertmanager.ares.lan
+    - host: alertmanager.hermes.lan
       http:
         paths:
           - pathType: Prefix
