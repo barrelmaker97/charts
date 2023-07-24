@@ -15,7 +15,6 @@ spec:
   tls:
     - hosts:
         - barrelmaker.dev
-        - friendbot.barrelmaker.dev
       secretName: main-ingress-tls
   rules:
     - host: barrelmaker.dev
@@ -28,13 +27,3 @@ spec:
                 name: website
                 port:
                   number: 80
-    - host: friendbot.barrelmaker.dev
-      http:
-        paths:
-          - pathType: Prefix
-            path: "/"
-            backend:
-              service:
-                name: friendbot
-                port:
-                  number: 8000
