@@ -18,8 +18,8 @@ properties:
   motd: "Minecraft Server"
   online: "TRUE"
   ops: ""
-  overrideWhitelist: false
-  overrideOps: false
+  existingWhitelist: "SKIP"
+  existingOps: "SKIP"
   seed: ""
   serverName: "Minecraft Server"
   spawnProtection: 0
