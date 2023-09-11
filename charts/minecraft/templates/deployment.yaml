@@ -53,8 +53,8 @@ spec:
               value: {{ .Values.properties.online | quote }}
             - name: OPS
               value: {{ .Values.properties.ops | quote }}
-            - name: OVERRIDE_OPS
-              value: {{ .Values.properties.overrideOps | quote }}
+            - name: EXISTING_OPS_FILE
+              value: {{ .Values.properties.existingOps | quote }}
             - name: EXISTING_WHITELIST_FILE
               value: {{ .Values.properties.existingWhitelist | quote }}
             - name: SEED

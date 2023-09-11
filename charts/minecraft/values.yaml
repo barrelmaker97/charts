@@ -19,7 +19,7 @@ properties:
   online: "TRUE"
   ops: ""
   existingWhitelist: "SKIP"
-  overrideOps: false
+  existingOps: "SKIP"
   seed: ""
   serverName: "Minecraft Server"
   spawnProtection: 0
