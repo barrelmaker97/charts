@@ -68,6 +68,6 @@ Return Valheim password
 {{- if not (empty .Values.password) -}}
     {{- .Values.password -}}
 {{- else -}}
-    {{- randAlphaNum 10 -}}
+    {{- randAlphaNum 16 -}}
 {{- end -}}
 {{- end -}}
