@@ -3,8 +3,8 @@ apiVersion: v2
 name: jellyfin
 description: A Helm Chart for Jellyfin
 type: application
-version: 0.2.9
-appVersion: 10.8.12
+version: 0.2.10
+appVersion: 10.8.13
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com
