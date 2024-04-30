@@ -3,8 +3,8 @@ apiVersion: v2
 name: valheim
 description: A Helm Chart for Valheim
 type: application
-version: 0.2.20
-appVersion: 2.4.2
+version: 0.2.21
+appVersion: 2.5.0
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com
