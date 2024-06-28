@@ -57,6 +57,8 @@ spec:
               value: {{ .Values.properties.existingOps | quote }}
             - name: EXISTING_WHITELIST_FILE
               value: {{ .Values.properties.existingWhitelist | quote }}
+            - name: PAPER_CHANNEL
+              value: {{ .Values.properties.paperChannel | quote }}
             - name: SEED
               value: {{ .Values.properties.seed | quote }}
             - name: SERVER_NAME
