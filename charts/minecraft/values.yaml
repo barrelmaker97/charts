@@ -20,6 +20,7 @@ properties:
   ops: ""
   existingWhitelist: "SKIP"
   existingOps: "SKIP"
+  paperChannel: "default"
   seed: ""
   serverName: "Minecraft Server"
   spawnProtection: 0
