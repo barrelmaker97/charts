@@ -25,6 +25,7 @@ properties:
   serverName: "Minecraft Server"
   spawnProtection: 0
   spigetResources: ""
+  modrinthProjects: ""
   timezone: "America/Chicago"
   type: VANILLA
   version: LATEST
