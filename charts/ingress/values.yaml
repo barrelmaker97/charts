@@ -5,7 +5,6 @@ grafana:
 kuma:
   ip: 192.168.15.20
   port: 3001
-observability: false
 issuerName: letsencrypt-prod
 baseDomain: barrelmaker.dev
 securityHeaders: |-
