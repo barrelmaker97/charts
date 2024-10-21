@@ -1,4 +1,7 @@
 ---
+# The repo must contain a directory named "website" containing the site content.
+gitRepo: https://github.com/barrelmaker97/website.git
+
 replicaCount: 1
 
 image:
@@ -7,13 +10,14 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
+gitImage:
+  repository: docker.io/alpine/git
+  pullPolicy: IfNotPresent
+  tag: latest
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
-
-storage:
-  enabled: false  # Specifies whether persistent storage will be used
-  class: ""  # StorageClassName used if persistent storage is enabled
 
 serviceAccount:
   # Specifies whether a service account should be created
