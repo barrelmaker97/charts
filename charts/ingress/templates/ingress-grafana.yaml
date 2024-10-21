@@ -14,10 +14,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - grafana.barrelmaker.dev
+        - grafana.{{ .Values.baseDomain }}
       secretName: grafana-ingress-tls
   rules:
-    - host: grafana.barrelmaker.dev
+    - host: grafana.{{ .Values.baseDomain }}
       http:
         paths:
           - pathType: Prefix

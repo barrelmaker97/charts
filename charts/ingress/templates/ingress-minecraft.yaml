@@ -14,10 +14,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - niucraft.barrelmaker.dev
+        - niucraft.{{ .Values.baseDomain }}
       secretName: minecraft-ingress-tls
   rules:
-    - host: niucraft.barrelmaker.dev
+    - host: niucraft.{{ .Values.baseDomain }}
       http:
         paths:
           - pathType: Prefix

@@ -14,10 +14,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - factorio.barrelmaker.dev
+        - factorio.{{ .Values.baseDomain }}
       secretName: factorio-ingress-tls
   rules:
-    - host: factorio.barrelmaker.dev
+    - host: factorio.{{ .Values.baseDomain }}
       http:
         paths:
           - pathType: Prefix

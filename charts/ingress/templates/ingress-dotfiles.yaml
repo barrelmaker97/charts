@@ -9,10 +9,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - dotfiles.barrelmaker.dev
+        - dotfiles.{{ .Values.baseDomain }}
       secretName: dotfiles-ingress-tls
   rules:
-    - host: dotfiles.barrelmaker.dev
+    - host: dotfiles.{{ .Values.baseDomain }}
       http:
         paths:
           - pathType: Prefix

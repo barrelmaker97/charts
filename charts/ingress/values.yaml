@@ -7,3 +7,4 @@ kuma:
   port: 3001
 observability: false
 issuerName: letsencrypt-prod
+baseDomain: barrelmaker.dev

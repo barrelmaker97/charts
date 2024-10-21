@@ -14,10 +14,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - kuma.barrelmaker.dev
+        - kuma.{{ .Values.baseDomain }}
       secretName: kuma-ingress-tls
   rules:
-    - host: kuma.barrelmaker.dev
+    - host: kuma.{{ .Values.baseDomain }}
       http:
         paths:
           - pathType: Prefix

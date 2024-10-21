@@ -14,10 +14,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - barrelmaker.dev
+        - {{ .Values.baseDomain }}
       secretName: main-ingress-tls
   rules:
-    - host: barrelmaker.dev
+    - host: {{ .Values.baseDomain }}
       http:
         paths:
           - pathType: Prefix

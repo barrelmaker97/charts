@@ -16,10 +16,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - jellyfin.barrelmaker.dev
+        - jellyfin.{{ .Values.baseDomain }}
       secretName: jellyfin-ingress-tls
   rules:
-    - host: jellyfin.barrelmaker.dev
+    - host: jellyfin.{{ .Values.baseDomain }}
       http:
         paths:
           - pathType: Prefix
