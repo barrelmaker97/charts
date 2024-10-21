@@ -29,6 +29,21 @@ spec:
       serviceAccountName: {{ include "website.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: git-cloner
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.gitImage.repository }}:{{ .Values.gitImage.tag }}"
+          imagePullPolicy: {{ .Values.gitImage.pullPolicy }}
+          args:
+            - clone
+            - --verbose
+            - --depth=1
+            - {{ .Values.gitRepo }}
+            - /data
+          volumeMounts:
+            - name: website
+              mountPath: /data
       containers:
         - name: nginx
           securityContext:
@@ -44,11 +59,10 @@ spec:
               subPath: nginx.conf
               mountPath: /etc/nginx/nginx.conf
               readOnly: true
-            {{- if .Values.storage.enabled }}
             - name: website
               mountPath: /usr/share/nginx/html
               readOnly: true
-            {{- end }}
+              subPath: website
           livenessProbe:
             failureThreshold: 3
             httpGet:
@@ -68,11 +82,8 @@ spec:
           configMap:
             name: {{ include "website.fullname" . }}-config
             defaultMode: 0644
-        {{- if .Values.storage.enabled }}
         - name: website
-          persistentVolumeClaim:
-            claimName: {{ include "website.fullname" . }}
-        {{- end }}
+          emptyDir: {}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
