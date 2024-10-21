@@ -1,4 +1,5 @@
 ---
+# The repo must contain a directory named "website" containing the site content.
 gitRepo: https://github.com/barrelmaker97/website.git
 
 replicaCount: 1
