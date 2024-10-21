@@ -9,10 +9,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - dotfiles.{{ .Values.baseDomain }}
+        - dotfiles.{{ $.Values.baseDomain }}
       secretName: dotfiles-ingress-tls
   rules:
-    - host: dotfiles.{{ .Values.baseDomain }}
+    - host: dotfiles.{{ $.Values.baseDomain }}
       http:
         paths:
           - pathType: Prefix

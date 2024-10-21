@@ -11,10 +11,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - grafana.{{ .Values.baseDomain }}
+        - grafana.{{ $.Values.baseDomain }}
       secretName: grafana-ingress-tls
   rules:
-    - host: grafana.{{ .Values.baseDomain }}
+    - host: grafana.{{ $.Values.baseDomain }}
       http:
         paths:
           - pathType: Prefix

@@ -11,10 +11,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - factorio.{{ .Values.baseDomain }}
+        - factorio.{{ $.Values.baseDomain }}
       secretName: factorio-ingress-tls
   rules:
-    - host: factorio.{{ .Values.baseDomain }}
+    - host: factorio.{{ $.Values.baseDomain }}
       http:
         paths:
           - pathType: Prefix

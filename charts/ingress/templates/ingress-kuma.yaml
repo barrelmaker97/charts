@@ -11,10 +11,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - kuma.{{ .Values.baseDomain }}
+        - kuma.{{ $.Values.baseDomain }}
       secretName: kuma-ingress-tls
   rules:
-    - host: kuma.{{ .Values.baseDomain }}
+    - host: kuma.{{ $.Values.baseDomain }}
       http:
         paths:
           - pathType: Prefix

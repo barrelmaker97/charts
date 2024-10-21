@@ -11,10 +11,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - niucraft.{{ .Values.baseDomain }}
+        - niucraft.{{ $.Values.baseDomain }}
       secretName: minecraft-ingress-tls
   rules:
-    - host: niucraft.{{ .Values.baseDomain }}
+    - host: niucraft.{{ $.Values.baseDomain }}
       http:
         paths:
           - pathType: Prefix

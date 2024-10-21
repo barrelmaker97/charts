@@ -13,10 +13,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - jellyfin.{{ .Values.baseDomain }}
+        - jellyfin.{{ $.Values.baseDomain }}
       secretName: jellyfin-ingress-tls
   rules:
-    - host: jellyfin.{{ .Values.baseDomain }}
+    - host: jellyfin.{{ $.Values.baseDomain }}
       http:
         paths:
           - pathType: Prefix
