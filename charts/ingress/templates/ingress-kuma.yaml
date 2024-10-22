@@ -4,7 +4,7 @@ kind: Ingress
 metadata:
   name: kuma-ingress
   annotations:
-    cert-manager.io/issuer: {{ $.Values.issuerName }}
+    cert-manager.io/cluster-issuer: {{ $.Values.issuerName }}
     nginx.ingress.kubernetes.io/server-snippet: |
       {{- $.Values.securityHeaders | nindent 6 }}
       add_header Content-Security-Policy "frame-ancestors 'self'; default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' data:; connect-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; base-uri 'self'; form-action 'self';" always;
