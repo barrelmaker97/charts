@@ -5,8 +5,7 @@ metadata:
   name: minecraft-ingress
   annotations:
     cert-manager.io/cluster-issuer: {{ $.Values.issuerName }}
-    nginx.ingress.kubernetes.io/server-snippet: |
-      add_header Content-Security-Policy "frame-ancestors 'self'; default-src 'none'; script-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; style-src 'self'; base-uri 'self'; form-action 'self';" always;
+    nginx.ingress.kubernetes.io/custom-headers: {{ $.Release.Namespace }}/minecraft-custom-headers
 spec:
   ingressClassName: {{ $.Values.ingressClass }}
   tls:

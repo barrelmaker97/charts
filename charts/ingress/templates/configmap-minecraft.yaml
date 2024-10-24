@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: minecraft-custom-headers
+data:
+  Content-Security-Policy: "frame-ancestors 'self'; default-src 'none'; script-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; style-src 'self'; base-uri 'self'; form-action 'self';"
