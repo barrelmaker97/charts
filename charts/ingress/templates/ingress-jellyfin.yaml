@@ -6,8 +6,6 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: {{ $.Values.issuerName }}
     nginx.ingress.kubernetes.io/custom-headers: {{ $.Release.Namespace }}/jellyfin-custom-headers
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      proxy_hide_header Access-Control-Allow-Origin;
 spec:
   ingressClassName: {{ $.Values.ingressClass }}
   tls:
