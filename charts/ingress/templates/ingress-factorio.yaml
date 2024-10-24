@@ -5,8 +5,7 @@ metadata:
   name: factorio-ingress
   annotations:
     cert-manager.io/cluster-issuer: {{ $.Values.issuerName }}
-    nginx.ingress.kubernetes.io/server-snippet: |
-      add_header Content-Security-Policy "frame-ancestors 'self'; default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self'; base-uri 'self'; form-action 'self';" always;
+    nginx.ingress.kubernetes.io/custom-headers: {{ $.Release.Namespace }}/factorio-custom-headers
 spec:
   ingressClassName: {{ $.Values.ingressClass }}
   tls:

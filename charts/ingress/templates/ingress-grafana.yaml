@@ -5,8 +5,7 @@ metadata:
   name: grafana-ingress
   annotations:
     cert-manager.io/cluster-issuer: {{ $.Values.issuerName }}
-    nginx.ingress.kubernetes.io/server-snippet: |
-      add_header Content-Security-Policy "frame-ancestors 'self'; default-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; font-src 'self'; connect-src 'self' https://grafana.com; img-src 'self' data:; style-src 'self' 'unsafe-inline'; base-uri 'self'; form-action 'self';" always;
+    nginx.ingress.kubernetes.io/custom-headers: {{ $.Release.Namespace }}/grafana-custom-headers
 spec:
   ingressClassName: {{ $.Values.ingressClass }}
   tls:
