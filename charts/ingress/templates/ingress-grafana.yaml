@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: grafana-ingress
+  name: grafana
   annotations:
     cert-manager.io/cluster-issuer: {{ $.Values.issuerName }}
     nginx.ingress.kubernetes.io/custom-headers: {{ $.Release.Namespace }}/grafana-custom-headers
