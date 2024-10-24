@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: factorio-ingress
+  name: factorio
   annotations:
     cert-manager.io/cluster-issuer: {{ $.Values.issuerName }}
     nginx.ingress.kubernetes.io/custom-headers: {{ $.Release.Namespace }}/factorio-custom-headers

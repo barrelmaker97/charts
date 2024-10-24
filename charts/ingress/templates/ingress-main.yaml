@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: main-ingress
+  name: main
   annotations:
     cert-manager.io/cluster-issuer: {{ $.Values.issuerName }}
     nginx.ingress.kubernetes.io/custom-headers: {{ $.Release.Namespace }}/main-custom-headers

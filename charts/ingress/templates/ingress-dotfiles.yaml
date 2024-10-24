@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: dotfiles-ingress
+  name: dotfiles
   annotations:
     cert-manager.io/cluster-issuer: {{ $.Values.issuerName }}
     nginx.ingress.kubernetes.io/rewrite-target: https://raw.githubusercontent.com/barrelmaker97/dotfiles/master/bin/updot
