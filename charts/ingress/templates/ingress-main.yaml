@@ -9,6 +9,7 @@ metadata:
       {{- $.Values.securityHeaders | nindent 6 }}
       add_header Content-Security-Policy "frame-ancestors 'self'; default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self'; base-uri 'self'; form-action 'self';" always;
 spec:
+  ingressClassName: {{ $.Values.ingressClass }}
   tls:
     - hosts:
         - {{ $.Values.baseDomain }}
