@@ -120,8 +120,6 @@ spec:
   volumeClaimTemplates:
     - metadata:
         name: savedata
-        labels:
-          {{- include "minecraft.labels" . | nindent 10 }}
       spec:
         {{- if .Values.persistence.storageClassName }}
         storageClassName: {{ .Values.persistence.storageClassName }}
