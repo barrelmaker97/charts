@@ -5,7 +5,9 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
-storageClassName: ""
+persistence:
+  storageClassName: ""
+  size: 1Gi
 
 properties:
   aikarFlags: false
