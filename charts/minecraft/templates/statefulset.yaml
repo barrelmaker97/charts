@@ -83,12 +83,12 @@ spec:
           livenessProbe:
             exec:
               command:
-                - /health.sh
+                - mc-health
             initialDelaySeconds: 120
           readinessProbe:
             exec:
               command:
-                - /health.sh
+                - mc-health
           ports:
             - name: minecraft
               containerPort: 25565
