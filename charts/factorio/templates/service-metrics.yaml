@@ -7,6 +7,7 @@ metadata:
   labels:
     {{- include "factorio.labels" . | nindent 4 }}
 spec:
+  clusterIP: None
   selector:
     {{- include "factorio.selectorLabels" . | nindent 4 }}
   ports:

@@ -14,7 +14,9 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-storageClassName: ""
+persistence:
+  storageClassName: ""
+  size: 1Gi
 
 serviceAccount:
   # Specifies whether a service account should be created

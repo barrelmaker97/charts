@@ -1,14 +1,13 @@
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ include "factorio.fullname" . }}
   labels:
     {{- include "factorio.labels" . | nindent 4 }}
 spec:
   replicas: 1
-  strategy:
-    type: Recreate
+  serviceName: {{ include "factorio.fullname" . }}-metrics
   selector:
     matchLabels:
       {{- include "factorio.selectorLabels" . | nindent 6 }}
@@ -61,10 +60,6 @@ spec:
             - name: savedata
               mountPath: /factorio
         {{- end }}
-      volumes:
-        - name: savedata
-          persistentVolumeClaim:
-            claimName: {{ include "factorio.fullname" . }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -77,3 +72,15 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+  volumeClaimTemplates:
+    - metadata:
+        name: savedata
+      spec:
+        {{- if .Values.persistence.storageClassName }}
+        storageClassName: {{ .Values.persistence.storageClassName }}
+        {{- end }}
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: {{ .Values.persistence.size }}
