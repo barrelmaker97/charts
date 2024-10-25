@@ -1,14 +1,13 @@
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ include "minecraft.fullname" . }}
   labels:
     {{- include "minecraft.labels" . | nindent 4 }}
 spec:
   replicas: 1
-  strategy:
-    type: Recreate
+  serviceName: {{ include "minecraft.fullname" . }}
   selector:
     matchLabels:
       {{- include "minecraft.selectorLabels" . | nindent 6 }}
@@ -106,10 +105,6 @@ spec:
           volumeMounts:
             - name: savedata
               mountPath: /data
-      volumes:
-        - name: savedata
-          persistentVolumeClaim:
-            claimName: {{ include "minecraft.fullname" . }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -122,3 +117,17 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+  volumeClaimTemplates:
+    - metadata:
+        name: savedata
+        labels:
+          {{- include "minecraft.labels" . | nindent 10 }}
+      spec:
+        {{- if .Values.storageClassName }}
+        storageClassName: {{ .Values.storageClassName }}
+        {{- end }}
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: {{ .Values.persistence.size }}
