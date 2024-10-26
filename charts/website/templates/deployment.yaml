@@ -29,6 +29,22 @@ spec:
       serviceAccountName: {{ include "website.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: git-sync-init
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.gitSyncImage.repository }}:{{ .Values.gitSyncImage.tag }}"
+          imagePullPolicy: {{ .Values.gitSyncImage.pullPolicy }}
+          args:
+            - --repo={{ $.Values.gitRepo }}
+            - --root=/git
+            - --link=head
+            - --one-time
+            - --git-gc=off
+            - --verbose=2
+          volumeMounts:
+            - name: content
+              mountPath: /git
       containers:
         - name: nginx
           securityContext:
