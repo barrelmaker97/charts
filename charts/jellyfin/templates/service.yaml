@@ -6,6 +6,7 @@ metadata:
   labels:
     {{- include "jellyfin.labels" . | nindent 4 }}
 spec:
+  clusterIP: None
   selector:
     {{- include "jellyfin.selectorLabels" . | nindent 4 }}
   ports:

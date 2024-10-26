@@ -5,9 +5,13 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
-storageClassName:
-  config: ""
-  media: ""
+persistence:
+  config:
+    storageClassName: ""
+    size: 1Gi
+  media:
+    storageClassName: ""
+    size: 50Gi
 
 imagePullSecrets: []
 nameOverride: ""
