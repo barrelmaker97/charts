@@ -30,20 +30,22 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
-        - name: git-cloner
+        - name: git-sync-init
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.gitImage.repository }}:{{ .Values.gitImage.tag }}"
-          imagePullPolicy: {{ .Values.gitImage.pullPolicy }}
+          image: "{{ .Values.gitSyncImage.repository }}:{{ .Values.gitSyncImage.tag }}"
+          imagePullPolicy: {{ .Values.gitSyncImage.pullPolicy }}
           args:
-            - clone
-            - --verbose
-            - --depth=1
-            - {{ .Values.gitRepo }}
-            - /data
+            - --repo={{ $.Values.gitSyncRepo }}
+            - --ref={{ $.Values.gitSyncRef }}
+            - --root=/git
+            - --link=head
+            - --one-time
+            - --git-gc=off
+            - --verbose=2
           volumeMounts:
-            - name: website
-              mountPath: /data
+            - name: content
+              mountPath: /git
       containers:
         - name: nginx
           securityContext:
@@ -59,30 +61,55 @@ spec:
               subPath: nginx.conf
               mountPath: /etc/nginx/nginx.conf
               readOnly: true
-            - name: website
+            - name: content
               mountPath: /usr/share/nginx/html
               readOnly: true
-              subPath: website
+              subPath: head/{{ $.Values.contentDirectory }}
           livenessProbe:
-            failureThreshold: 3
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 3
           readinessProbe:
-            failureThreshold: 3
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 3
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+        - name: git-sync
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.gitSyncImage.repository }}:{{ .Values.gitSyncImage.tag }}"
+          imagePullPolicy: {{ .Values.gitSyncImage.pullPolicy }}
+          args:
+            - --repo={{ $.Values.gitSyncRepo }}
+            - --ref={{ $.Values.gitSyncRef }}
+            - --root=/git
+            - --link=head
+            - --period={{ $.Values.gitSyncPeriodSeconds }}s
+            - --max-failures=30
+            - --http-bind=:9100
+            - --verbose=2
+          ports:
+            - name: health
+              containerPort: 9100
+              protocol: TCP
+          volumeMounts:
+            - name: content
+              mountPath: /git
+          livenessProbe:
+            httpGet:
+              path: /
+              port: health
+          readinessProbe:
+            httpGet:
+              path: /
+              port: health
       volumes:
         - name: config
           configMap:
             name: {{ include "website.fullname" . }}-config
             defaultMode: 0644
-        - name: website
+        - name: content
           emptyDir: {}
       {{- with .Values.nodeSelector }}
       nodeSelector:
