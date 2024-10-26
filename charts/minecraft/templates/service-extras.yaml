@@ -1,0 +1,26 @@
+{{- if or .Values.dynmap .Values.metrics }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "minecraft.fullname" . }}-extras
+  labels:
+    {{- include "minecraft.labels" . | nindent 4 }}
+spec:
+  clusterIP: None
+  selector:
+    {{- include "minecraft.selectorLabels" . | nindent 4 }}
+  ports:
+{{- if .Values.dynmap }}
+    - name: dynmap
+      protocol: TCP
+      port: 8123
+      targetPort: 8123
+{{- end }}
+{{- if .Values.metrics }}
+    - name: metrics
+      protocol: TCP
+      port: 9225
+      targetPort: 9225
+{{- end }}
+{{- end }}
