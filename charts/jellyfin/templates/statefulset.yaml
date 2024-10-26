@@ -1,14 +1,13 @@
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ include "jellyfin.fullname" . }}
   labels:
     {{- include "jellyfin.labels" . | nindent 4 }}
 spec:
   replicas: 1
-  strategy:
-    type: Recreate
+  serviceName: {{ include "jellyfin.fullname" . }}
   selector:
     matchLabels:
       {{- include "jellyfin.selectorLabels" . | nindent 6 }}
@@ -59,12 +58,6 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
-        - name: media
-          persistentVolumeClaim:
-            claimName: {{ include "jellyfin.fullname" . }}-media
-        - name: config
-          persistentVolumeClaim:
-            claimName: {{ include "jellyfin.fullname" . }}-config
         - name: cache
           emptyDir:
             medium: "Memory"
@@ -80,3 +73,26 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+  volumeClaimTemplates:
+    - metadata:
+        name: media
+      spec:
+        {{- if .Values.persistence.media.storageClassName }}
+        storageClassName: {{ .Values.persistence.media.storageClassName }}
+        {{- end }}
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: {{ .Values.persistence.media.size }}
+    - metadata:
+        name: config
+      spec:
+        {{- if .Values.persistence.config.storageClassName }}
+        storageClassName: {{ .Values.persistence.config.storageClassName }}
+        {{- end }}
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: {{ .Values.persistence.config.size }}
