@@ -55,6 +55,8 @@ spec:
                   key: password
             - name: ADDRESS
               value: 127.0.0.1
+            - name: HTTP_PORT
+              value: 9100
           livenessProbe:
             exec:
               command:
