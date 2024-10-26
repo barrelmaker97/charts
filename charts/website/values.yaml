@@ -1,6 +1,7 @@
 ---
 # The repo must contain a directory named "website" containing the site content.
-gitRepo: https://github.com/barrelmaker97/website.git
+gitSyncRepo: https://github.com/barrelmaker97/website.git
+gitSyncRef: main
 gitSyncPeriodSeconds: 60
 
 replicaCount: 1

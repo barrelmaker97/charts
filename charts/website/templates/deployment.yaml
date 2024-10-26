@@ -36,7 +36,8 @@ spec:
           image: "{{ .Values.gitSyncImage.repository }}:{{ .Values.gitSyncImage.tag }}"
           imagePullPolicy: {{ .Values.gitSyncImage.pullPolicy }}
           args:
-            - --repo={{ $.Values.gitRepo }}
+            - --repo={{ $.Values.gitSyncRepo }}
+            - --ref={{ $.Values.gitSyncRef }}
             - --root=/git
             - --link=head
             - --one-time
@@ -80,7 +81,8 @@ spec:
           image: "{{ .Values.gitSyncImage.repository }}:{{ .Values.gitSyncImage.tag }}"
           imagePullPolicy: {{ .Values.gitSyncImage.pullPolicy }}
           args:
-            - --repo={{ $.Values.gitRepo }}
+            - --repo={{ $.Values.gitSyncRepo }}
+            - --ref={{ $.Values.gitSyncRef }}
             - --root=/git
             - --link=head
             - --period={{ $.Values.gitSyncPeriodSeconds }}s
