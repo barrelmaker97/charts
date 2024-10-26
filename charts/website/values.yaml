@@ -10,10 +10,10 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
-gitImage:
-  repository: docker.io/alpine/git
+gitSyncImage:
+  repository: registry.k8s.io/git-sync/git-sync
   pullPolicy: IfNotPresent
-  tag: latest
+  tag: v4.3.0
 
 imagePullSecrets: []
 nameOverride: ""
