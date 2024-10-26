@@ -83,7 +83,7 @@ spec:
             - --repo={{ $.Values.gitRepo }}
             - --root=/git
             - --link=head
-            - --period=60s
+            - --period={{ $.Values.gitSyncPeriodSeconds }}s
             - --max-failures=30
             - --http-bind=:9100
             - --verbose=2
