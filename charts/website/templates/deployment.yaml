@@ -30,6 +30,35 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
+        - name: nginx
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - name: config
+              subPath: nginx.conf
+              mountPath: /etc/nginx/nginx.conf
+              readOnly: true
+            - name: content
+              mountPath: /usr/share/nginx/html
+              readOnly: true
+              subPath: head/website
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 150
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
         - name: git-sync
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
@@ -51,49 +80,13 @@ spec:
             - name: content
               mountPath: /git
           livenessProbe:
-            failureThreshold: 3
             httpGet:
               path: /
               port: health
-            initialDelaySeconds: 3
           readinessProbe:
-            failureThreshold: 3
             httpGet:
               path: /
               port: health
-            initialDelaySeconds: 3
-        - name: nginx
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
-          volumeMounts:
-            - name: config
-              subPath: nginx.conf
-              mountPath: /etc/nginx/nginx.conf
-              readOnly: true
-            - name: content
-              mountPath: /usr/share/nginx/html
-              readOnly: true
-              subPath: head/website
-          livenessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /
-              port: http
-            initialDelaySeconds: 3
-          readinessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /
-              port: http
-            initialDelaySeconds: 3
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
       volumes:
         - name: config
           configMap:
