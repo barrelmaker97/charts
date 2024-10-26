@@ -13,8 +13,11 @@ timezone: "America/Chicago"
 serverName: "Valheim"
 worldName: "world"
 public: false
+metrics: false
 
-storageClassName: ""
+persistence:
+  storageClassName: ""
+  size: 10Gi
 
 serviceAccount:
   # Specifies whether a service account should be created

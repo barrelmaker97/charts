@@ -1,0 +1,18 @@
+{{- if .Values.metrics }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "valheim.fullname" . }}-metrics
+  labels:
+    {{- include "valheim.labels" . | nindent 4 }}
+spec:
+  clusterIP: None
+  selector:
+    {{- include "valheim.selectorLabels" . | nindent 4 }}
+  ports:
+    - name: metrics
+      protocol: TCP
+      port: 9100
+      targetPort: 9100
+{{- end }}
