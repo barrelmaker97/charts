@@ -13,7 +13,7 @@ data:
       "tags": [ "game", "tags" ],
       "max_players": {{ $.Values.factorio.maxPlayers }},
       "visibility": {
-        "public": true,
+        "public": {{ $.Values.factorio.public }},
         "lan": true
       },
       "username": "",
