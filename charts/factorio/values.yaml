@@ -42,6 +42,12 @@ podSecurityContext:
   fsGroup: 845
 
 securityContext:
+  factorio: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  metrics: {}
   # capabilities:
   #   drop:
   #   - ALL
