@@ -18,6 +18,11 @@ persistence:
   storageClassName: ""
   size: 1Gi
 
+factorio:
+  serverName: "Factorio Server"
+  serverDescription: "Server Description"
+  maxPlayers: 0
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: true

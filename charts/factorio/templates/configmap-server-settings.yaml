@@ -8,10 +8,10 @@ metadata:
 data:
   server-settings.json: >
     {
-      "name": "Name of the game as it will appear in the game listing",
-      "description": "Description of the game that will appear in the listing",
+      "name": "{{ $.Values.factorio.serverName }}",
+      "description": "{{ $.Values.factorio.serverDescription }}",
       "tags": [ "game", "tags" ],
-      "max_players": 0,
+      "max_players": {{ $.Values.factorio.maxPlayers }},
       "visibility": {
         "public": true,
         "lan": true
