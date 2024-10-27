@@ -1,4 +1,10 @@
 ---
+factorio:
+  serverName: "Factorio Server"
+  serverDescription: "Server Description"
+  maxPlayers: 0
+  public: false
+
 image:
   repository: docker.io/factoriotools/factorio
   pullPolicy: IfNotPresent
@@ -17,12 +23,6 @@ fullnameOverride: ""
 persistence:
   storageClassName: ""
   size: 1Gi
-
-factorio:
-  serverName: "Factorio Server"
-  serverDescription: "Server Description"
-  maxPlayers: 0
-  public: false
 
 serviceAccount:
   # Specifies whether a service account should be created
