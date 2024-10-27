@@ -45,7 +45,6 @@ spec:
             - name: config
               mountPath: /factorio/config/server-settings.json
               subPath: server-settings.json
-              readOnly: true
         {{- if .Values.metrics }}
         - name: metrics
           securityContext:
