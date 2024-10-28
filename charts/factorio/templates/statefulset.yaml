@@ -37,7 +37,7 @@ spec:
             - name: factorio
               containerPort: 34197
           resources:
-            {{- toYaml .Values.resources.factorio | nindent 12 }}
+            {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - name: savedata
               mountPath: /factorio
@@ -55,7 +55,7 @@ spec:
             - name: metrics
               containerPort: 9100
           resources:
-            {{- toYaml .Values.resources.metrics | nindent 12 }}
+            {{- toYaml .Values.metrics.resources | nindent 12 }}
           volumeMounts:
             - name: savedata
               mountPath: /factorio

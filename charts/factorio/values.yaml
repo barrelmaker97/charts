@@ -11,6 +11,12 @@ metrics:
     repository: docker.io/prom/node-exporter
     pullPolicy: IfNotPresent
     tag: latest
+  resources: {}
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
 
 imagePullSecrets: []
 nameOverride: ""
@@ -42,14 +48,7 @@ securityContext: {}
   #   drop:
   #     - ALL
 
-resources:
-  factorio: {}
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
-  metrics: {}
+resources: {}
   #   cpu: 100m
   #   memory: 128Mi
   # requests:
