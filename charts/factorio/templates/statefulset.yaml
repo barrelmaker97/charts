@@ -45,7 +45,7 @@ spec:
         - name: metrics
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.metricsImage.repository }}:{{ .Values.metricsImage.tag }}"
+          image: "{{ .Values.metrics.image.repository }}:{{ .Values.metrics.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
             - "--collector.disable-defaults"

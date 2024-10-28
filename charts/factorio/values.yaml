@@ -7,10 +7,10 @@ image:
 
 metrics:
   enabled: false
-metricsImage:
-  repository: docker.io/prom/node-exporter
-  pullPolicy: IfNotPresent
-  tag: latest
+  image:
+    repository: docker.io/prom/node-exporter
+    pullPolicy: IfNotPresent
+    tag: latest
 
 imagePullSecrets: []
 nameOverride: ""
