@@ -5,23 +5,6 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
-metrics:
-  enabled: false
-  image:
-    repository: docker.io/prom/node-exporter
-    pullPolicy: IfNotPresent
-    tag: latest
-  resources: {}
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
-  securityContext: {}
-  #   capabilities:
-  #     drop:
-  #       - ALL
-
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -64,3 +47,23 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+metrics:
+  enabled: false
+
+  image:
+    repository: docker.io/prom/node-exporter
+    pullPolicy: IfNotPresent
+    tag: latest
+
+  resources: {}
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+  #
+  securityContext: {}
+  #   capabilities:
+  #     drop:
+  #       - ALL
