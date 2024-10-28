@@ -9,6 +9,9 @@ persistence:
   storageClassName: ""
   size: 1Gi
 
+dynmap: false
+metrics: false
+
 properties:
   aikarFlags: false
   difficulty: normal
