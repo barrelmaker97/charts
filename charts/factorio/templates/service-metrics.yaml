@@ -1,4 +1,5 @@
 {{- if .Values.metrics }}
+{{- if .Values.metrics.enabled }}
 ---
 apiVersion: v1
 kind: Service
@@ -15,4 +16,5 @@ spec:
       protocol: TCP
       port: 9100
       targetPort: 9100
+{{- end }}
 {{- end }}

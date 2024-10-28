@@ -5,11 +5,6 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
-metricsImage:
-  repository: docker.io/prom/node-exporter
-  pullPolicy: IfNotPresent
-  tag: latest
-
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -29,33 +24,48 @@ serviceAccount:
 
 podAnnotations: {}
 
-podSecurityContext:
-  runAsUser: 845
-  # fsGroup: 2000
+podSecurityContext: {}
+  # runAsNonRoot: true
+  # runAsUser: 845
+  # runAsGroup: 845
+  # fsGroup: 845
 
-securityContext:
-  runAsNonRoot: true
+securityContext: {}
   # capabilities:
   #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
+  #     - ALL
 
-resources:
-  factorio: {}
-  #   cpu: 100m
-  #   memory: 128Mi
+resources: {}
   # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
-  metrics: {}
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+  #   cpu: 800m
+  #   memory: 1000Mi
+  # limits:
+  #   cpu: 1600m
+  #   memory: 2000Mi
 
 nodeSelector: {}
 
 tolerations: []
 
 affinity: {}
+
+metrics:
+  enabled: false
+
+  image:
+    repository: docker.io/prom/node-exporter
+    pullPolicy: IfNotPresent
+    tag: latest
+
+  resources: {}
+  # requests:
+  #   cpu: 10m
+  #   memory: 40Mi
+  # limits:
+  #   cpu: 100m
+  #   memory: 120Mi
+
+  securityContext: {}
+  #   capabilities:
+  #     drop:
+  #       - ALL

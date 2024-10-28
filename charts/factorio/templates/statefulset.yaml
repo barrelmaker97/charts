@@ -37,16 +37,17 @@ spec:
             - name: factorio
               containerPort: 34197
           resources:
-            {{- toYaml .Values.resources.factorio | nindent 12 }}
+            {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - name: savedata
               mountPath: /factorio
         {{- if .Values.metrics }}
+        {{- if .Values.metrics.enabled }}
         - name: metrics
           securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.metricsImage.repository }}:{{ .Values.metricsImage.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+            {{- toYaml .Values.metrics.securityContext | nindent 12 }}
+          image: "{{ .Values.metrics.image.repository }}:{{ .Values.metrics.image.tag }}"
+          imagePullPolicy: {{ .Values.metrics.image.pullPolicy }}
           args:
             - "--collector.disable-defaults"
             - "--collector.textfile"
@@ -55,10 +56,11 @@ spec:
             - name: metrics
               containerPort: 9100
           resources:
-            {{- toYaml .Values.resources.metrics | nindent 12 }}
+            {{- toYaml .Values.metrics.resources | nindent 12 }}
           volumeMounts:
             - name: savedata
               mountPath: /factorio
+        {{- end }}
         {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
