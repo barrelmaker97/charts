@@ -9,6 +9,14 @@ persistence:
   storageClassName: ""
   size: 1Gi
 
+# Requires installation of the mod dynmap to work properly
+# https://modrinth.com/plugin/dynmap
+dynmap: false
+
+# Requires installation of the mod Prometheus Exporter to work properly
+# https://github.com/sladkoff/minecraft-prometheus-exporter
+metrics: false
+
 properties:
   aikarFlags: false
   difficulty: normal
@@ -50,23 +58,24 @@ serviceAccount:
 podAnnotations: {}
 
 podSecurityContext: {}
-  # fsGroup: 2000
-
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
+  # runAsGroup: 1000
+  # fsGroup: 1000
+
+securityContext: {}
+  # allowPrivilegeEscalation: false
+  # capabilities:
+  #   drop:
+  #     - ALL
 
 resources: {}
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
   # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+  #   cpu: 1000m
+  #   memory: 1000Mi
+  # limits:
+  #   cpu: 1500m
+  #   memory: 2000Mi
 
 nodeSelector: {}
 
