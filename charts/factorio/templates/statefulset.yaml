@@ -41,7 +41,7 @@ spec:
           volumeMounts:
             - name: savedata
               mountPath: /factorio
-        {{- if .Values.metrics }}
+        {{- if .Values.metrics.enabled }}
         - name: metrics
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
