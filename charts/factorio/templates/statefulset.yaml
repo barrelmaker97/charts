@@ -41,6 +41,7 @@ spec:
           volumeMounts:
             - name: savedata
               mountPath: /factorio
+        {{- if .Values.metrics }}
         {{- if .Values.metrics.enabled }}
         - name: metrics
           securityContext:
@@ -59,6 +60,7 @@ spec:
           volumeMounts:
             - name: savedata
               mountPath: /factorio
+        {{- end }}
         {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
