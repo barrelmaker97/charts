@@ -9,7 +9,12 @@ persistence:
   storageClassName: ""
   size: 1Gi
 
+# Requires installation of the mod dynmap to work properly
+# https://modrinth.com/plugin/dynmap
 dynmap: false
+
+# Requires installation of the mod Prometheus Exporter to work properly
+# https://github.com/sladkoff/minecraft-prometheus-exporter
 metrics: false
 
 properties:
