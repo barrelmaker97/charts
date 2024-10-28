@@ -36,11 +36,12 @@ securityContext: {}
   #     - ALL
 
 resources: {}
-  #   cpu: 100m
-  #   memory: 128Mi
   # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+  #   cpu: 800m
+  #   memory: 1000Mi
+  # limits:
+  #   cpu: 1600m
+  #   memory: 2000Mi
 
 nodeSelector: {}
 
@@ -57,12 +58,13 @@ metrics:
     tag: latest
 
   resources: {}
-  #   cpu: 100m
-  #   memory: 128Mi
   # requests:
+  #   cpu: 10m
+  #   memory: 40Mi
+  # limits:
   #   cpu: 100m
-  #   memory: 128Mi
-  #
+  #   memory: 120Mi
+
   securityContext: {}
   #   capabilities:
   #     drop:
