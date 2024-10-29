@@ -1,8 +1,25 @@
 ---
-contentDirectory: website  # Directory in the repo containing the site content.
-gitSyncRepo: https://github.com/barrelmaker97/website.git
-gitSyncRef: main
-gitSyncPeriodSeconds: 60
+gitSync:
+  repo: https://github.com/barrelmaker97/website.git
+  ref: main
+  contentDirectory: website  # Directory in the repo containing the site content.
+  periodSeconds: 60
+  image:
+    repository: registry.k8s.io/git-sync/git-sync
+    pullPolicy: IfNotPresent
+    tag: v4.3.0
+  securityContext: {}
+    # allowPrivilegeEscalation: false
+    # capabilities:
+    #   drop:
+    #     - ALL
+  resources: {}
+    # requests:
+    #   cpu: 20m
+    #   memory: 500Mi
+    # limits:
+    #   cpu: 100m
+    #   memory: 1Gi
 
 replicaCount: 1
 
@@ -11,11 +28,6 @@ image:
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
-
-gitSyncImage:
-  repository: registry.k8s.io/git-sync/git-sync
-  pullPolicy: IfNotPresent
-  tag: v4.3.0
 
 imagePullSecrets: []
 nameOverride: ""
@@ -33,27 +45,28 @@ serviceAccount:
 podAnnotations: {}
 
 podSecurityContext: {}
-  # fsGroup: 2000
-
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
+  # runAsGroup: 1000
+  # fsGroup: 1000
+
+securityContext: {}
+  # allowPrivilegeEscalation: false
+  # capabilities:
+  #   drop:
+  #     - ALL
 
 service:
   type: ClusterIP
-  port: 80
+  port: 8080
 
 resources: {}
+  # requests:
+  #   cpu: 20m
+  #   memory: 500Mi
   # limits:
   #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+  #   memory: 1Gi
 
 autoscaling:
   enabled: false
