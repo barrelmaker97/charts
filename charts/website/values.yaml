@@ -48,12 +48,12 @@ service:
   port: 8080
 
 resources: {}
+  # requests:
+  #   cpu: 20m
+  #   memory: 500Mi
   # limits:
   #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+  #   memory: 1Gi
 
 autoscaling:
   enabled: false
