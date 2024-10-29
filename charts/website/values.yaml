@@ -9,12 +9,10 @@ gitSync:
     pullPolicy: IfNotPresent
     tag: v4.3.0
   securityContext: {}
+    # allowPrivilegeEscalation: false
     # capabilities:
     #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+    #     - ALL
   resources: {}
     # requests:
     #   cpu: 20m
@@ -47,15 +45,16 @@ serviceAccount:
 podAnnotations: {}
 
 podSecurityContext: {}
-  # fsGroup: 2000
-
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
+  # runAsGroup: 1000
+  # fsGroup: 1000
+
+securityContext: {}
+  # allowPrivilegeEscalation: false
+  # capabilities:
+  #   drop:
+  #     - ALL
 
 service:
   type: ClusterIP
