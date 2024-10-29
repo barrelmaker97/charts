@@ -1,8 +1,13 @@
 ---
-contentDirectory: website  # Directory in the repo containing the site content.
-gitSyncRepo: https://github.com/barrelmaker97/website.git
-gitSyncRef: main
-gitSyncPeriodSeconds: 60
+gitSync:
+  repo: https://github.com/barrelmaker97/website.git
+  ref: main
+  contentDirectory: website  # Directory in the repo containing the site content.
+  periodSeconds: 60
+  image:
+    repository: registry.k8s.io/git-sync/git-sync
+    pullPolicy: IfNotPresent
+    tag: v4.3.0
 
 replicaCount: 1
 
@@ -11,11 +16,6 @@ image:
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
-
-gitSyncImage:
-  repository: registry.k8s.io/git-sync/git-sync
-  pullPolicy: IfNotPresent
-  tag: v4.3.0
 
 imagePullSecrets: []
 nameOverride: ""

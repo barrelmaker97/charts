@@ -33,11 +33,11 @@ spec:
         - name: git-sync-init
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.gitSyncImage.repository }}:{{ .Values.gitSyncImage.tag }}"
-          imagePullPolicy: {{ .Values.gitSyncImage.pullPolicy }}
+          image: "{{ .Values.gitSync.image.repository }}:{{ .Values.gitSync.image.tag }}"
+          imagePullPolicy: {{ .Values.gitSync.image.pullPolicy }}
           args:
-            - --repo={{ $.Values.gitSyncRepo }}
-            - --ref={{ $.Values.gitSyncRef }}
+            - --repo={{ $.Values.gitSync.repo }}
+            - --ref={{ $.Values.gitSync.ref }}
             - --root=/git
             - --link=head
             - --one-time
@@ -64,7 +64,7 @@ spec:
             - name: content
               mountPath: /usr/share/nginx/html
               readOnly: true
-              subPath: head/{{ $.Values.contentDirectory }}
+              subPath: head/{{ $.Values.gitSync.contentDirectory }}
           livenessProbe:
             httpGet:
               path: /
@@ -78,14 +78,14 @@ spec:
         - name: git-sync
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.gitSyncImage.repository }}:{{ .Values.gitSyncImage.tag }}"
-          imagePullPolicy: {{ .Values.gitSyncImage.pullPolicy }}
+          image: "{{ .Values.gitSync.image.repository }}:{{ .Values.gitSync.image.tag }}"
+          imagePullPolicy: {{ .Values.gitSync.image.pullPolicy }}
           args:
-            - --repo={{ $.Values.gitSyncRepo }}
-            - --ref={{ $.Values.gitSyncRef }}
+            - --repo={{ $.Values.gitSync.repo }}
+            - --ref={{ $.Values.gitSync.ref }}
             - --root=/git
             - --link=head
-            - --period={{ $.Values.gitSyncPeriodSeconds }}s
+            - --period={{ $.Values.gitSync.periodSeconds }}s
             - --max-failures=30
             - --http-bind=:9100
             - --verbose=2
