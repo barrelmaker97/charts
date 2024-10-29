@@ -32,7 +32,7 @@ spec:
       initContainers:
         - name: git-sync-init
           securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
+            {{- toYaml .Values.gitSync.securityContext | nindent 12 }}
           image: "{{ .Values.gitSync.image.repository }}:{{ .Values.gitSync.image.tag }}"
           imagePullPolicy: {{ .Values.gitSync.image.pullPolicy }}
           args:
@@ -46,6 +46,8 @@ spec:
           volumeMounts:
             - name: content
               mountPath: /git
+          resources:
+            {{- toYaml .Values.gitSync.resources | nindent 12 }}
       containers:
         - name: nginx
           securityContext:
@@ -77,7 +79,7 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
         - name: git-sync
           securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
+            {{- toYaml .Values.gitSync.securityContext | nindent 12 }}
           image: "{{ .Values.gitSync.image.repository }}:{{ .Values.gitSync.image.tag }}"
           imagePullPolicy: {{ .Values.gitSync.image.pullPolicy }}
           args:
@@ -104,6 +106,8 @@ spec:
             httpGet:
               path: /
               port: health
+          resources:
+            {{- toYaml .Values.gitSync.resources | nindent 12 }}
       volumes:
         - name: config
           configMap:

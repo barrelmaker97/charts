@@ -8,6 +8,20 @@ gitSync:
     repository: registry.k8s.io/git-sync/git-sync
     pullPolicy: IfNotPresent
     tag: v4.3.0
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+  resources: {}
+    # requests:
+    #   cpu: 20m
+    #   memory: 500Mi
+    # limits:
+    #   cpu: 100m
+    #   memory: 1Gi
 
 replicaCount: 1
 
