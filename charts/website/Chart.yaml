@@ -4,7 +4,7 @@ name: website
 description: A Helm Chart for a website
 type: application
 version: 0.3.0
-appVersion: 1.27.2
+appVersion: 1.27.2-alpine
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com
