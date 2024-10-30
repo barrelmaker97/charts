@@ -542,6 +542,18 @@ entries:
     version: 0.1.0
   ingress:
   - apiVersion: v2
+    created: "2024-10-30T03:34:46.522518737Z"
+    description: A Helm Chart for Ingresses
+    digest: 9a1d32cb3d2875f506b38d3817fc35d4d79df0cc5b7056a4be1bbde2c1dcbaa9
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: ingress
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/ingress-0.3.0/ingress-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
     created: "2024-10-29T05:07:51.285974133Z"
     description: A Helm Chart for Ingresses
     digest: 623dcff6ad34a42da16690cbd3b4a0dea57112ab20eefbfb2d9e85f0a521e6f9
@@ -3065,4 +3077,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2024-10-29T05:07:51.370872558Z"
+generated: "2024-10-30T03:34:46.523333463Z"
