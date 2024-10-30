@@ -20,6 +20,6 @@ spec:
             path: "/"
             backend:
               service:
-                name: grafana-external
+                name: {{ $.Values.externalName }}
                 port:
-                  number: 80
+                  number: 3000
