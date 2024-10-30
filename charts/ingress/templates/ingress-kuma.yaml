@@ -20,6 +20,6 @@ spec:
             path: "/"
             backend:
               service:
-                name: kuma-external
+                name: soteria
                 port:
-                  number: 80
+                  number: 3001
