@@ -2,7 +2,7 @@
 apiVersion: v2
 description: A Helm Chart for Ingresses
 name: ingress
-version: 0.2.7
+version: 0.2.8
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com
