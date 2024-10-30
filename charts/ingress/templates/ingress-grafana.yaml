@@ -20,6 +20,6 @@ spec:
             path: "/"
             backend:
               service:
-                name: soteria
+                name: {{ $.Values.externalName }}
                 port:
                   number: 3000
