@@ -69,6 +69,10 @@ securityContext: {}
   #   drop:
   #     - ALL
 
+service:
+  type: ClusterIP
+  port: 25565
+
 resources: {}
   # requests:
   #   cpu: 1000m
