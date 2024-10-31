@@ -35,6 +35,10 @@ securityContext: {}
   #   drop:
   #     - ALL
 
+service:
+  type: ClusterIP
+  port: 34197
+
 resources: {}
   # requests:
   #   cpu: 800m

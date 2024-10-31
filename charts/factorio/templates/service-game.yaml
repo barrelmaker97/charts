@@ -6,13 +6,11 @@ metadata:
   labels:
     {{- include "factorio.labels" . | nindent 4 }}
 spec:
-  type: NodePort
+  type: {{ .Values.service.type }}
   selector:
     {{- include "factorio.selectorLabels" . | nindent 4 }}
   ports:
     - name: factorio
       protocol: UDP
-      port: 34197
-      {{- if .Values.serverPort }}
-      nodePort: {{ .Values.serverPort }}
-      {{- end }}
+      port: {{ .Values.service.port }}
+      targetPort: factorio

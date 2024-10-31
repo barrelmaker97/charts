@@ -6,25 +6,19 @@ metadata:
   labels:
     {{- include "valheim.labels" . | nindent 4 }}
 spec:
-  type: NodePort
+  type: {{ .Values.service.type }}
   selector:
     {{- include "valheim.selectorLabels" . | nindent 4 }}
   ports:
     - name: valheim-1
       protocol: UDP
-      port: 2456
-      {{- if .Values.serverPort }}
-      nodePort: {{ .Values.serverPort }}
-      {{- end }}
+      port: {{ .Values.service.port }}
+      targetPort: valheim-1
     - name: valheim-2
       protocol: UDP
-      port: 2457
-      {{- if .Values.serverPort }}
-      nodePort: {{ add .Values.serverPort 1 }}
-      {{- end }}
+      port: {{ add .Values.service.port 1 }}
+      targetPort: valheim-2
     - name: valheim-3
       protocol: UDP
-      port: 2458
-      {{- if .Values.serverPort }}
-      nodePort: {{ add .Values.serverPort 2 }}
-      {{- end }}
+      port: {{ add .Values.service.port 2 }}
+      targetPort: valheim-3

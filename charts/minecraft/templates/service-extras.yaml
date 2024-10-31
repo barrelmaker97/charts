@@ -15,12 +15,12 @@ spec:
     - name: dynmap
       protocol: TCP
       port: 8123
-      targetPort: 8123
+      targetPort: dynmap
 {{- end }}
 {{- if .Values.metrics }}
     - name: metrics
       protocol: TCP
       port: 9225
-      targetPort: 9225
+      targetPort: metrics
 {{- end }}
 {{- end }}
