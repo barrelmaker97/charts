@@ -5,7 +5,9 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: gmod_ttt_debian
 
-storageClassName: ""
+persistence:
+  storageClassName: ""
+  size: 10Gi
 
 properties:
   defaultMap: gm_construct
@@ -37,15 +39,20 @@ serviceAccount:
 podAnnotations: {}
 
 podSecurityContext:
+  # runAsNonRoot: true
+  # runAsUser: 10000
+  # runAsGroup: 10000
   fsGroup: 10000
 
 securityContext: {}
+  # allowPrivilegeEscalation: false
   # capabilities:
   #   drop:
   #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 27015
 
 resources: {}
   # limits:

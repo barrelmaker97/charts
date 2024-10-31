@@ -3,8 +3,7 @@ apiVersion: v2
 name: gmod
 description: A Helm Chart for Garry's Mod
 type: application
-version: 0.1.2
-appVersion: 0.0.0
+version: 0.2.0
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com

@@ -6,19 +6,15 @@ metadata:
   labels:
     {{- include "gmod.labels" . | nindent 4 }}
 spec:
-  type: NodePort
+  type: {{ .Values.service.type }}
+  selector:
+    {{- include "gmod.selectorLabels" . | nindent 4 }}
   ports:
     - name: gmod-server-tcp
       protocol: TCP
-      port: 27015
-      {{- if .Values.serverPort }}
-      nodePort: {{ .Values.serverPort }}
-      {{- end }}
+      port: {{ .Values.service.port }}
+      targetPort: gmod-server-tcp
     - name: gmod-server-udp
       protocol: UDP
-      port: 27015
-      {{- if .Values.serverPort }}
-      nodePort: {{ .Values.serverPort }}
-      {{- end }}
-  selector:
-    {{- include "gmod.selectorLabels" . | nindent 4 }}
+      port: {{ .Values.service.port }}
+      targetPort: gmod-server-udp
