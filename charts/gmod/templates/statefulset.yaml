@@ -1,14 +1,13 @@
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ include "gmod.fullname" . }}
   labels:
     {{- include "gmod.labels" . | nindent 4 }}
 spec:
   replicas: 1
-  strategy:
-    type: Recreate
+  serviceName: {{ include "gmod.fullname" . }}-headless
   selector:
     matchLabels:
       {{- include "gmod.selectorLabels" . | nindent 6 }}
@@ -77,10 +76,6 @@ spec:
           volumeMounts:
             - name: savedata
               mountPath: /home/steam/serverfiles
-      volumes:
-        - name: savedata
-          persistentVolumeClaim:
-            claimName: {{ include "gmod.fullname" . }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -93,3 +88,15 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+  volumeClaimTemplates:
+    - metadata:
+        name: savedata
+      spec:
+        {{- if .Values.persistence.storageClassName }}
+        storageClassName: {{ .Values.persistence.storageClassName }}
+        {{- end }}
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: {{ .Values.persistence.size }}
