@@ -330,40 +330,6 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/factorio-0.1.1/factorio-0.1.1.tgz
     version: 0.1.1
-  folding:
-  - apiVersion: v2
-    created: "2022-05-21T16:19:45.509583309Z"
-    deprecated: true
-    description: A Helm Chart for Folding at Home
-    digest: 0fdf9951811ff9d9a5f3da828bc99b845847355166c1fa207e8cf9b5284e58cc
-    name: folding
-    urls:
-    - https://github.com/barrelmaker97/charts/releases/download/folding-0.1.3/folding-0.1.3.tgz
-    version: 0.1.3
-  - apiVersion: v2
-    created: "2021-05-21T04:38:30.542762147Z"
-    description: A Helm Chart for Folding at Home
-    digest: 7e29bd4fb27dc3cd8e960647afd84e1bb2945469c19d211149195312d249b614
-    maintainers:
-    - email: nolancooper97@gmail.com
-      name: barrelmaker97
-      url: barrelmaker.dev
-    name: folding
-    urls:
-    - https://github.com/barrelmaker97/charts/releases/download/folding-0.1.2/folding-0.1.2.tgz
-    version: 0.1.2
-  - apiVersion: v1
-    created: "2021-05-08T05:00:56.274982169Z"
-    description: A Helm Chart for Folding at Home
-    digest: 68f205950ff61fae8c87f02e29b9700607ff506be52a0f9018c2c3fed11da73a
-    maintainers:
-    - email: nolancooper97@gmail.com
-      name: barrelmaker97
-      url: barrelmaker.dev
-    name: folding
-    urls:
-    - https://github.com/barrelmaker97/charts/releases/download/folding-0.1.1/folding-0.1.1.tgz
-    version: 0.1.1
   friendbot:
   - apiVersion: v2
     appVersion: 0.1.9
