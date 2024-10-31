@@ -77,6 +77,10 @@ spec:
               containerPort: 2457
             - name: valheim-3
               containerPort: 2458
+            {{- if .Values.metrics }}
+            - name: metrics
+              containerPort: 9100
+            {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
