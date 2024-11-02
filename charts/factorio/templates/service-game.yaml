@@ -13,4 +13,4 @@ spec:
     - name: factorio
       protocol: UDP
       port: {{ .Values.service.port }}
-      targetPort: factorio
+      targetPort: 34197
