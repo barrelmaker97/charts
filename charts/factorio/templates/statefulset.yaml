@@ -36,6 +36,7 @@ spec:
           ports:
             - name: factorio
               containerPort: 34197
+              protocol: UDP
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
