@@ -3,6 +3,20 @@ entries:
   factorio:
   - apiVersion: v2
     appVersion: 2.0.15
+    created: "2024-11-12T04:38:34.637564445Z"
+    description: A Helm Chart for Factorio
+    digest: a648d34200526ed7b6d2d80cccc623404764b248fcadaf4544f0eddc54cf525d
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: factorio
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/factorio-0.5.0/factorio-0.5.0.tgz
+    version: 0.5.0
+  - apiVersion: v2
+    appVersion: 2.0.15
     created: "2024-11-11T02:04:43.722503127Z"
     description: A Helm Chart for Factorio
     digest: e8d7acdc4490d102970c50db23cd816a59d93c35aa7fd6fdb7cff92162861c80
@@ -604,6 +618,18 @@ entries:
     - https://github.com/barrelmaker97/charts/releases/download/gmod-0.1.0/gmod-0.1.0.tgz
     version: 0.1.0
   ingress:
+  - apiVersion: v2
+    created: "2024-11-12T04:38:34.724880092Z"
+    description: A Helm Chart for Ingresses
+    digest: 88ae350bf0d69f017dd848ce1240b731f2ca8e48520d75f7bddd82c40d4e8604
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: ingress
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/ingress-0.3.2/ingress-0.3.2.tgz
+    version: 0.3.2
   - apiVersion: v2
     created: "2024-11-12T01:14:52.045301319Z"
     description: A Helm Chart for Ingresses
@@ -3250,4 +3276,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2024-11-12T01:14:52.241061392Z"
+generated: "2024-11-12T04:38:34.725531331Z"
