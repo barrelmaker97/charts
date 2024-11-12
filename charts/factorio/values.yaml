@@ -52,24 +52,3 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-metrics:
-  enabled: false
-
-  image:
-    repository: docker.io/prom/node-exporter
-    pullPolicy: IfNotPresent
-    tag: latest
-
-  resources: {}
-  # requests:
-  #   cpu: 10m
-  #   memory: 40Mi
-  # limits:
-  #   cpu: 100m
-  #   memory: 120Mi
-
-  securityContext: {}
-  #   capabilities:
-  #     drop:
-  #       - ALL

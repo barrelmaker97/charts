@@ -7,7 +7,7 @@ metadata:
     {{- include "factorio.labels" . | nindent 4 }}
 spec:
   replicas: 1
-  serviceName: {{ include "factorio.fullname" . }}-metrics
+  serviceName: {{ include "factorio.fullname" . }}
   selector:
     matchLabels:
       {{- include "factorio.selectorLabels" . | nindent 6 }}
@@ -42,27 +42,6 @@ spec:
           volumeMounts:
             - name: savedata
               mountPath: /factorio
-        {{- if .Values.metrics }}
-        {{- if .Values.metrics.enabled }}
-        - name: metrics
-          securityContext:
-            {{- toYaml .Values.metrics.securityContext | nindent 12 }}
-          image: "{{ .Values.metrics.image.repository }}:{{ .Values.metrics.image.tag }}"
-          imagePullPolicy: {{ .Values.metrics.image.pullPolicy }}
-          args:
-            - "--collector.disable-defaults"
-            - "--collector.textfile"
-            - "--collector.textfile.directory=/factorio/script-output/graftorio2"
-          ports:
-            - name: metrics
-              containerPort: 9100
-          resources:
-            {{- toYaml .Values.metrics.resources | nindent 12 }}
-          volumeMounts:
-            - name: savedata
-              mountPath: /factorio
-        {{- end }}
-        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
