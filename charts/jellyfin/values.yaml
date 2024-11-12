@@ -40,6 +40,10 @@ securityContext: {}
   #   drop:
   #     - ALL
 
+service:
+  type: ClusterIP
+  port: 8096
+
 resources: {}
   # limits:
   #   cpu: 100m
