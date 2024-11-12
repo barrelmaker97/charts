@@ -605,6 +605,18 @@ entries:
     version: 0.1.0
   ingress:
   - apiVersion: v2
+    created: "2024-11-12T01:14:52.045301319Z"
+    description: A Helm Chart for Ingresses
+    digest: d8e797b5b9b8c3b112a5d78e151c6369c6ab0751d4261c9618564f2a9d9d02a8
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: ingress
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/ingress-0.3.1/ingress-0.3.1.tgz
+    version: 0.3.1
+  - apiVersion: v2
     created: "2024-10-30T03:34:46.522518737Z"
     description: A Helm Chart for Ingresses
     digest: 9a1d32cb3d2875f506b38d3817fc35d4d79df0cc5b7056a4be1bbde2c1dcbaa9
@@ -917,6 +929,20 @@ entries:
     - https://github.com/barrelmaker97/charts/releases/download/ingress-0.1.1/ingress-0.1.1.tgz
     version: 0.1.1
   jellyfin:
+  - apiVersion: v2
+    appVersion: 10.10.1
+    created: "2024-11-12T01:14:52.14711466Z"
+    description: A Helm Chart for Jellyfin
+    digest: 20ac05fd08dcc4ed0ca988530f6816460915948e967bc8bf94b9285c1d782223
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: jellyfin
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/jellyfin-0.4.0/jellyfin-0.4.0.tgz
+    version: 0.4.0
   - apiVersion: v2
     appVersion: 10.10.1
     created: "2024-11-05T15:35:40.63629087Z"
@@ -3062,6 +3088,20 @@ entries:
   website:
   - apiVersion: v2
     appVersion: 1.27.2-alpine
+    created: "2024-11-12T01:14:52.240001365Z"
+    description: A Helm Chart for a website
+    digest: c8fc309406bc91e9720f04265052f3ebdb6738651bcf4f6ef9b5bf62a8ebc287
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: website
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/website-0.5.0/website-0.5.0.tgz
+    version: 0.5.0
+  - apiVersion: v2
+    appVersion: 1.27.2-alpine
     created: "2024-10-30T15:01:56.830828237Z"
     description: A Helm Chart for a website
     digest: edebfa7486b5bdcfd9efc160006c0efb83ba531643c1c6568ecb99c4eefecd95
@@ -3210,4 +3250,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2024-11-11T02:04:43.722968396Z"
+generated: "2024-11-12T01:14:52.241061392Z"
