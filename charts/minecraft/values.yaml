@@ -11,11 +11,43 @@ persistence:
 
 # Requires installation of the mod dynmap to work properly
 # https://modrinth.com/plugin/dynmap
-dynmap: false
+dynmap:
+  enabled: false
+  ingress:
+    enabled: false
+    className: ""
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: minecraft.local
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls: []
+    #  - secretName: minecraft-tls
+    #    hosts:
+    #      - minecraft.local
 
 # Requires installation of the mod Prometheus Exporter to work properly
 # https://github.com/sladkoff/minecraft-prometheus-exporter
-metrics: false
+metrics:
+  enabled: false
+  ingress:
+    enabled: false
+    className: ""
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: minecraft.local
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls: []
+    #  - secretName: minecraft-tls
+    #    hosts:
+    #      - minecraft.local
 
 properties:
   aikarFlags: false
@@ -72,22 +104,6 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 25565
-
-ingress:
-  enabled: false
-  className: ""
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: minecraft.local
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: minecraft-tls
-  #    hosts:
-  #      - minecraft.local
 
 resources: {}
   # requests:
