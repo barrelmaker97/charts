@@ -619,6 +619,18 @@ entries:
     version: 0.1.0
   ingress:
   - apiVersion: v2
+    created: "2024-11-14T03:53:50.264220912Z"
+    description: A Helm Chart for Ingresses
+    digest: 65326e61aa2f80046c5a46ed0455e1f5502cb2a79dc52e185cafb8a8b27c2033
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: ingress
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/ingress-0.3.3/ingress-0.3.3.tgz
+    version: 0.3.3
+  - apiVersion: v2
     created: "2024-11-12T04:38:34.724880092Z"
     description: A Helm Chart for Ingresses
     digest: 88ae350bf0d69f017dd848ce1240b731f2ca8e48520d75f7bddd82c40d4e8604
@@ -1397,6 +1409,20 @@ entries:
     - https://github.com/barrelmaker97/charts/releases/download/jellyfin-0.1.1/jellyfin-0.1.1.tgz
     version: 0.1.1
   minecraft:
+  - apiVersion: v2
+    appVersion: 2024.10.2
+    created: "2024-11-14T03:53:50.374837064Z"
+    description: A Helm Chart for Minecraft
+    digest: 22e1ef3c1fa7b7f5fc10e111e988230b612a7a0ea0a627438d5ba9fb4d6df6d9
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: minecraft
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/minecraft-0.6.0/minecraft-0.6.0.tgz
+    version: 0.6.0
   - apiVersion: v2
     appVersion: 2024.10.2
     created: "2024-10-31T04:15:32.479344623Z"
@@ -3276,4 +3302,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2024-11-12T04:38:34.725531331Z"
+generated: "2024-11-14T03:53:50.375430154Z"
