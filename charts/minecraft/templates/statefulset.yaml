@@ -92,11 +92,11 @@ spec:
           ports:
             - name: minecraft
               containerPort: 25565
-          {{- if .Values.dynmap }}
+          {{- if .Values.dynmap.enabled }}
             - name: dynmap
               containerPort: 8123
           {{- end }}
-          {{- if .Values.metrics }}
+          {{- if .Values.metrics.enabled }}
             - name: metrics
               containerPort: 9225
           {{- end }}
