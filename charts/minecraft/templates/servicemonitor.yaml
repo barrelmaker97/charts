@@ -1,0 +1,51 @@
+{{- if and .Values.metrics.enabled .Values.metrics.serviceMonitor.enabled -}}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "minecraft.fullname" . }}
+  labels:
+    {{- include "minecraft.labels" . | nindent 4 }}
+    {{- if .Values.metrics.serviceMonitor.additionalLabels }}
+    {{- toYaml .Values.metrics.serviceMonitor.additionalLabels | nindent 4 }}
+    {{- end }}
+  {{- if .Values.metrics.serviceMonitor.annotations }}
+  annotations: {{ toYaml .Values.metrics.serviceMonitor.annotations | nindent 4 }}
+  {{- end }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "minecraft.selectorLabels" . | nindent 6 }}
+  endpoints:
+  - port: metrics
+    interval: {{ .Values.metrics.serviceMonitor.scrapeInterval }}
+    {{- if .Values.metrics.serviceMonitor.honorLabels }}
+    honorLabels: true
+    {{- end }}
+    {{- if .Values.metrics.serviceMonitor.relabelings }}
+    relabelings: {{ toYaml .Values.metrics.serviceMonitor.relabelings | nindent 4 }}
+    {{- end }}
+    {{- if .Values.metrics.serviceMonitor.metricRelabelings }}
+    metricRelabelings: {{ toYaml .Values.metrics.serviceMonitor.metricRelabelings | nindent 4 }}
+    {{- end }}
+  {{- if .Values.metrics.serviceMonitor.jobLabel }}
+  jobLabel: {{ .Values.metrics.serviceMonitor.jobLabel | quote }}
+  {{- end }}
+  {{- if .Values.metrics.serviceMonitor.targetLabels }}
+  targetLabels: {{ toYaml .Values.metrics.serviceMonitor.targetLabels | nindent 2 }}
+  {{- end }}
+  {{- if .Values.metrics.serviceMonitor.labelLimit }}
+  labelLimit: {{ .Values.metrics.serviceMonitor.labelLimit }}
+  {{- end }}
+  {{- if .Values.metrics.serviceMonitor.labelNameLengthLimit }}
+  labelNameLengthLimit: {{ .Values.metrics.serviceMonitor.labelNameLengthLimit }}
+  {{- end }}
+  {{- if .Values.metrics.serviceMonitor.labelValueLengthLimit }}
+  labelValueLengthLimit: {{ .Values.metrics.serviceMonitor.labelValueLengthLimit }}
+  {{- end }}
+  {{- if .Values.metrics.serviceMonitor.sampleLimit }}
+  sampleLimit: {{ .Values.metrics.serviceMonitor.sampleLimit }}
+  {{- end }}
+  {{- if .Values.metrics.serviceMonitor.targetLimit }}
+  targetLimit: {{ .Values.metrics.serviceMonitor.targetLimit }}
+  {{- end }}
+{{- end }}
