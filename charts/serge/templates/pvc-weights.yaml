@@ -6,11 +6,11 @@ metadata:
   labels:
     {{- include "serge.labels" . | nindent 4 }}
 spec:
-  {{- if .Values.storageClassName.weights }}
-  storageClassName: {{ .Values.storageClassName.weights }}
+  {{- if .Values.persistence.weights.storageClassName }}
+  storageClassName: {{ .Values.persistence.weights.storageClassName }}
   {{- end }}
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 64Gi
+      storage: {{ $.Values.persistence.weights.size }}
