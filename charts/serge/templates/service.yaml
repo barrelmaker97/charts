@@ -8,8 +8,9 @@ metadata:
 spec:
   selector:
     {{- include "serge.selectorLabels" . | nindent 4 }}
+  type: {{ .Values.service.type }}
   ports:
     - name: serge
       protocol: TCP
-      port: 8008
+      port: {{ .Values.service.port }}
       targetPort: 8008
