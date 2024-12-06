@@ -13,4 +13,4 @@ spec:
     - name: serge
       protocol: TCP
       port: {{ .Values.service.port }}
-      targetPort: serge
+      targetPort: 8008
