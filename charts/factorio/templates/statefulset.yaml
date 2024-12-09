@@ -13,8 +13,9 @@ spec:
       {{- include "factorio.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
       annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+      {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
@@ -33,11 +34,18 @@ spec:
             {{- toYaml .Values.config.securityContext | nindent 12 }}
           image: "{{ .Values.config.image.repository }}:{{ .Values.config.image.tag }}"
           imagePullPolicy: {{ .Values.config.image.pullPolicy }}
+          command:
+            - cat
+          args:
+            - /config/server-settings.json
           resources:
             {{- toYaml .Values.config.resources | nindent 12 }}
           volumeMounts:
             - name: savedata
               mountPath: /factorio
+            - name: config
+              mountPath: /config
+              readOnly: true
       containers:
         - name: factorio
           securityContext:
@@ -65,6 +73,11 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      volumes:
+        - name: config
+          configMap:
+            name: {{ include "factorio.fullname" . }}-config
+            defaultMode: 0644
   volumeClaimTemplates:
     - metadata:
         name: savedata

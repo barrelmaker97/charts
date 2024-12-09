@@ -1,9 +1,9 @@
 ---
 config:
   image:
-    repository: registry.k8s.io/git-sync/git-sync
+    repository: alpine
     pullPolicy: IfNotPresent
-    tag: v4.3.0
+    tag: latest
   securityContext: {}
     # allowPrivilegeEscalation: false
     # capabilities:
