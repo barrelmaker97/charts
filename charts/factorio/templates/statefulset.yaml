@@ -27,6 +27,17 @@ spec:
       serviceAccountName: {{ include "factorio.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: config
+          securityContext:
+            {{- toYaml .Values.config.securityContext | nindent 12 }}
+          image: "{{ .Values.config.image.repository }}:{{ .Values.config.image.tag }}"
+          imagePullPolicy: {{ .Values.config.image.pullPolicy }}
+          resources:
+            {{- toYaml .Values.config.resources | nindent 12 }}
+          volumeMounts:
+            - name: savedata
+              mountPath: /factorio
       containers:
         - name: factorio
           securityContext:
