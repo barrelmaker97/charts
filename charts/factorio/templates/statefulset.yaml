@@ -35,9 +35,12 @@ spec:
           image: "{{ .Values.config.image.repository }}:{{ .Values.config.image.tag }}"
           imagePullPolicy: {{ .Values.config.image.pullPolicy }}
           command:
-            - cat
+            - /bin/ash
           args:
-            - /config/server-settings.json
+            - -c
+            - |
+              mkdir -p /factorio/config
+              cp /config/server-settings.json /factorio/config/
           resources:
             {{- toYaml .Values.config.resources | nindent 12 }}
           volumeMounts:
