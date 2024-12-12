@@ -1,4 +1,24 @@
 ---
+server:
+  name: "Factorio Server"
+  description: "Server Description"
+  maxPlayers: 5
+  public: false
+
+config:
+  securityContext: {}
+    # allowPrivilegeEscalation: false
+    # capabilities:
+    #   drop:
+    #     - ALL
+  resources: {}
+    # requests:
+    #   cpu: 20m
+    #   memory: 20Mi
+    # limits:
+    #   cpu: 60m
+    #   memory: 60Mi
+
 image:
   repository: docker.io/factoriotools/factorio
   pullPolicy: IfNotPresent
