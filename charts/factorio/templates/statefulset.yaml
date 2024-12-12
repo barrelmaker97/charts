@@ -39,6 +39,8 @@ spec:
               value: {{ .Values.server.name | quote }}
             - name: SERVER_DESC
               value: {{ .Values.server.description | quote }}
+            - name: MAX_PLAYERS
+              value: {{ .Values.server.maxPlayers | quote }}
           command:
             - /bin/bash
           args:
