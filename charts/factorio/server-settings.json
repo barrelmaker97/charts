@@ -1,6 +1,6 @@
 {
-  "name": "Factorio Server",
-  "description": "Factorio Server",
+  "name": "${SERVER_NAME}",
+  "description": "${SERVER_DESC}",
   "tags": [ "game", "tags" ],
   "max_players": 5,
   "visibility": {

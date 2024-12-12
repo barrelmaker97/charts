@@ -1,9 +1,9 @@
 ---
+server:
+  name: "Factorio Server"
+  description: "Server Description"
+
 config:
-  image:
-    repository: alpine
-    pullPolicy: IfNotPresent
-    tag: latest
   securityContext: {}
     # allowPrivilegeEscalation: false
     # capabilities:

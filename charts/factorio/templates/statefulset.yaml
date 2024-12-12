@@ -32,15 +32,20 @@ spec:
         - name: config
           securityContext:
             {{- toYaml .Values.config.securityContext | nindent 12 }}
-          image: "{{ .Values.config.image.repository }}:{{ .Values.config.image.tag }}"
-          imagePullPolicy: {{ .Values.config.image.pullPolicy }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: SERVER_NAME
+              value: {{ .Values.server.name | quote }}
+            - name: SERVER_DESC
+              value: {{ .Values.server.description | quote }}
           command:
-            - /bin/ash
+            - /bin/bash
           args:
             - -c
             - |
               mkdir -p /factorio/config
-              cp /config/server-settings.json /factorio/config/
+              envsubst < /config/server-settings.json > /factorio/config/server-settings.json
           resources:
             {{- toYaml .Values.config.resources | nindent 12 }}
           volumeMounts:
