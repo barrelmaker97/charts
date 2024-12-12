@@ -4,7 +4,7 @@
   "tags": [ "game", "tags" ],
   "max_players": ${MAX_PLAYERS},
   "visibility": {
-    "public": false,
+    "public": ${PUBLIC},
     "lan": true
   },
   "username": "",

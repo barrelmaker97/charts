@@ -41,6 +41,8 @@ spec:
               value: {{ .Values.server.description | quote }}
             - name: MAX_PLAYERS
               value: {{ .Values.server.maxPlayers | quote }}
+            - name: PUBLIC
+              value: {{ .Values.server.public | quote }}
           command:
             - /bin/bash
           args:

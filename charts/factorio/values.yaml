@@ -3,6 +3,7 @@ server:
   name: "Factorio Server"
   description: "Server Description"
   maxPlayers: 5
+  public: false
 
 config:
   securityContext: {}
