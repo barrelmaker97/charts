@@ -10,7 +10,7 @@
   "username": "",
   "password": "",
   "token": "",
-  "game_password": "",
+  "game_password": "${PASSWORD}",
   "require_user_verification": true,
   "max_upload_in_kilobytes_per_second": 0,
   "max_upload_slots": 5,
