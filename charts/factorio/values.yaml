@@ -4,6 +4,7 @@ server:
   description: "Server Description"
   maxPlayers: 5
   public: false
+  password: ""
 
 config:
   securityContext: {}
