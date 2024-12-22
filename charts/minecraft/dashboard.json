@@ -74,7 +74,7 @@
 				"textMode": "name",
 				"wideLayout": true
 			},
-			"pluginVersion": "11.3.1",
+			"pluginVersion": "11.4.0",
 			"targets": [
 				{
 					"datasource": {
@@ -177,7 +177,7 @@
 					"sort": "none"
 				}
 			},
-			"pluginVersion": "11.3.1",
+			"pluginVersion": "11.4.0",
 			"targets": [
 				{
 					"datasource": {
@@ -188,7 +188,7 @@
 					"format": "time_series",
 					"hide": false,
 					"intervalFactor": 1,
-					"legendFormat": "Allocated",
+					"legendFormat": "Max",
 					"metric": "mc_jvm_memory",
 					"refId": "A",
 					"step": 4
@@ -205,15 +205,6 @@
 					"legendFormat": "Used",
 					"refId": "B",
 					"step": 4
-				},
-				{
-					"datasource": {
-						"type": "prometheus",
-						"uid": "$datasource"
-					},
-					"expr": "mc_jvm_memory{type='allocated', service=~\"$service\"}",
-					"hide": true,
-					"refId": "C"
 				}
 			],
 			"title": "JVM Memory",
@@ -306,7 +297,7 @@
 					"sort": "none"
 				}
 			},
-			"pluginVersion": "11.3.1",
+			"pluginVersion": "11.4.0",
 			"targets": [
 				{
 					"datasource": {
@@ -391,96 +382,6 @@
 					{
 						"matcher": {
 							"id": "byName",
-							"options": "Online (world)"
-						},
-						"properties": [
-							{
-								"id": "color",
-								"value": {
-									"fixedColor": "green",
-									"mode": "fixed"
-								}
-							}
-						]
-					},
-					{
-						"matcher": {
-							"id": "byName",
-							"options": "Online (world_nether)"
-						},
-						"properties": [
-							{
-								"id": "color",
-								"value": {
-									"fixedColor": "red",
-									"mode": "fixed"
-								}
-							}
-						]
-					},
-					{
-						"matcher": {
-							"id": "byName",
-							"options": "Online (world_the_end)"
-						},
-						"properties": [
-							{
-								"id": "color",
-								"value": {
-									"fixedColor": "yellow",
-									"mode": "fixed"
-								}
-							}
-						]
-					},
-					{
-						"matcher": {
-							"id": "byName",
-							"options": "world"
-						},
-						"properties": [
-							{
-								"id": "color",
-								"value": {
-									"fixedColor": "green",
-									"mode": "fixed"
-								}
-							}
-						]
-					},
-					{
-						"matcher": {
-							"id": "byName",
-							"options": "world_nether"
-						},
-						"properties": [
-							{
-								"id": "color",
-								"value": {
-									"fixedColor": "red",
-									"mode": "fixed"
-								}
-							}
-						]
-					},
-					{
-						"matcher": {
-							"id": "byName",
-							"options": "world_the_end"
-						},
-						"properties": [
-							{
-								"id": "color",
-								"value": {
-									"fixedColor": "yellow",
-									"mode": "fixed"
-								}
-							}
-						]
-					},
-					{
-						"matcher": {
-							"id": "byName",
 							"options": "Unique"
 						},
 						"properties": [
@@ -543,7 +444,7 @@
 					"sort": "none"
 				}
 			},
-			"pluginVersion": "11.3.1",
+			"pluginVersion": "11.4.0",
 			"targets": [
 				{
 					"datasource": {
@@ -685,7 +586,7 @@
 					"sort": "none"
 				}
 			},
-			"pluginVersion": "11.3.1",
+			"pluginVersion": "11.4.0",
 			"targets": [
 				{
 					"datasource": {
@@ -789,7 +690,7 @@
 					"sort": "none"
 				}
 			},
-			"pluginVersion": "11.3.1",
+			"pluginVersion": "11.4.0",
 			"targets": [
 				{
 					"datasource": {
@@ -860,62 +761,12 @@
 							{
 								"color": "green",
 								"value": null
-							},
-							{
-								"color": "red",
-								"value": 80
 							}
 						]
 					},
 					"unit": "short"
 				},
-				"overrides": [
-					{
-						"matcher": {
-							"id": "byName",
-							"options": "world_nether_total"
-						},
-						"properties": [
-							{
-								"id": "color",
-								"value": {
-									"fixedColor": "red",
-									"mode": "fixed"
-								}
-							}
-						]
-					},
-					{
-						"matcher": {
-							"id": "byName",
-							"options": "world_the_end_total"
-						},
-						"properties": [
-							{
-								"id": "color",
-								"value": {
-									"fixedColor": "yellow",
-									"mode": "fixed"
-								}
-							}
-						]
-					},
-					{
-						"matcher": {
-							"id": "byName",
-							"options": "world_total"
-						},
-						"properties": [
-							{
-								"id": "color",
-								"value": {
-									"fixedColor": "green",
-									"mode": "fixed"
-								}
-							}
-						]
-					}
-				]
+				"overrides": []
 			},
 			"gridPos": {
 				"h": 9,
@@ -936,7 +787,7 @@
 					"sort": "none"
 				}
 			},
-			"pluginVersion": "11.3.1",
+			"pluginVersion": "11.4.0",
 			"targets": [
 				{
 					"datasource": {
@@ -947,7 +798,7 @@
 					"format": "time_series",
 					"hide": false,
 					"intervalFactor": 2,
-					"legendFormat": "{{world}}_total",
+					"legendFormat": "{{world}}",
 					"metric": "mc_entities_total",
 					"refId": "A",
 					"step": 4
