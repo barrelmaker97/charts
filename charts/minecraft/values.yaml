@@ -33,6 +33,11 @@ dynmap:
 # https://github.com/sladkoff/minecraft-prometheus-exporter
 metrics:
   enabled: false
+  dashboard:
+    enabled: false
+    namespace: monitoring
+    labels:
+      grafana_dashboard: "1"
   serviceMonitor:
     enabled: false
     # Labels to be added to the ServiceMonitor.

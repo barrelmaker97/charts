@@ -1,0 +1,12 @@
+{{- if and .Values.metrics.enabled .Values.metrics.dashboard.enabled -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "minecraft.fullname" . }}-dashboard
+  namespace: {{ $.Values.metrics.dashboard.namespace }}
+  labels:
+    {{- include "minecraft.labels" . | nindent 4 }}
+    {{- toYaml .Values.metrics.dashboard.labels | nindent 4 }}
+data:
+{{ (.Files.Glob "dashboard.json").AsConfig | indent 2 }}
+{{- end }}
