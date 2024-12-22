@@ -145,10 +145,6 @@
 							{
 								"color": "green",
 								"value": null
-							},
-							{
-								"color": "red",
-								"value": 80
 							}
 						]
 					},
@@ -264,10 +260,6 @@
 							{
 								"color": "green",
 								"value": null
-							},
-							{
-								"color": "red",
-								"value": 80
 							}
 						]
 					},
@@ -369,10 +361,6 @@
 							{
 								"color": "green",
 								"value": null
-							},
-							{
-								"color": "red",
-								"value": 80
 							}
 						]
 					},
@@ -451,24 +439,24 @@
 						"type": "prometheus",
 						"uid": "$datasource"
 					},
-					"expr": "mc_players_total{service=~\"$service\"}",
-					"format": "time_series",
-					"hide": false,
-					"intervalFactor": 2,
-					"legendFormat": "Unique",
-					"metric": "mc_players_total",
-					"refId": "A",
-					"step": 4
+					"expr": "sum(mc_players_online_total{service=~\"$service\"}) by (world)",
+					"interval": "",
+					"legendFormat": "{{world}}",
+					"refId": "A"
 				},
 				{
 					"datasource": {
 						"type": "prometheus",
 						"uid": "$datasource"
 					},
-					"expr": "sum(mc_players_online_total{service=~\"$service\"}) by (world)",
-					"interval": "",
-					"legendFormat": "{{world}}",
-					"refId": "B"
+					"expr": "mc_players_total{service=~\"$service\"}",
+					"format": "time_series",
+					"hide": false,
+					"intervalFactor": 2,
+					"legendFormat": "Unique",
+					"metric": "mc_players_total",
+					"refId": "B",
+					"step": 4
 				}
 			],
 			"title": "Players",
@@ -501,7 +489,7 @@
 							"viz": false
 						},
 						"insertNulls": false,
-						"lineInterpolation": "linear",
+						"lineInterpolation": "stepAfter",
 						"lineWidth": 2,
 						"pointSize": 5,
 						"scaleDistribution": {
@@ -525,47 +513,12 @@
 							{
 								"color": "green",
 								"value": null
-							},
-							{
-								"color": "red",
-								"value": 80
 							}
 						]
 					},
 					"unit": "short"
 				},
-				"overrides": [
-					{
-						"matcher": {
-							"id": "byName",
-							"options": "world_nether"
-						},
-						"properties": [
-							{
-								"id": "color",
-								"value": {
-									"fixedColor": "red",
-									"mode": "fixed"
-								}
-							}
-						]
-					},
-					{
-						"matcher": {
-							"id": "byName",
-							"options": "world_the_end"
-						},
-						"properties": [
-							{
-								"id": "color",
-								"value": {
-									"fixedColor": "yellow",
-									"mode": "fixed"
-								}
-							}
-						]
-					}
-				]
+				"overrides": []
 			},
 			"gridPos": {
 				"h": 8,
@@ -657,10 +610,6 @@
 							{
 								"color": "green",
 								"value": null
-							},
-							{
-								"color": "red",
-								"value": 80
 							}
 						]
 					},
@@ -737,7 +686,7 @@
 							"viz": false
 						},
 						"insertNulls": false,
-						"lineInterpolation": "linear",
+						"lineInterpolation": "stepAfter",
 						"lineWidth": 2,
 						"pointSize": 5,
 						"scaleDistribution": {
