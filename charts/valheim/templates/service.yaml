@@ -13,12 +13,8 @@ spec:
     - name: valheim-1
       protocol: UDP
       port: {{ .Values.service.port }}
-      targetPort: valheim-1
+      targetPort: 2456
     - name: valheim-2
       protocol: UDP
       port: {{ add .Values.service.port 1 }}
-      targetPort: valheim-2
-    - name: valheim-3
-      protocol: UDP
-      port: {{ add .Values.service.port 2 }}
-      targetPort: valheim-3
+      targetPort: 2456

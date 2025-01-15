@@ -75,8 +75,6 @@ spec:
               containerPort: 2456
             - name: valheim-2
               containerPort: 2457
-            - name: valheim-3
-              containerPort: 2458
             {{- if .Values.metrics }}
             - name: metrics
               containerPort: 9100
