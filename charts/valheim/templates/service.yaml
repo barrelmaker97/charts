@@ -17,4 +17,4 @@ spec:
     - name: valheim-2
       protocol: UDP
       port: {{ add .Values.service.port 1 }}
-      targetPort: 2456
+      targetPort: 2457
