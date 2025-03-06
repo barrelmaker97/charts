@@ -3,8 +3,8 @@ apiVersion: v2
 name: factorio
 description: A Helm Chart for Factorio
 type: application
-version: 0.7.0
-appVersion: 2.0.23
+version: 0.7.1
+appVersion: 2.0.32
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com
