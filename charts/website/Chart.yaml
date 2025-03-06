@@ -3,8 +3,8 @@ apiVersion: v2
 name: website
 description: A Helm Chart for a website
 type: application
-version: 0.5.1
-appVersion: 1.27.3-alpine
+version: 0.5.2
+appVersion: 1.27.4-alpine
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com
