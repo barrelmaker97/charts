@@ -1,0 +1,678 @@
+{
+	"annotations": {
+		"list": [
+			{
+				"builtIn": 1,
+				"datasource": {
+					"type": "datasource",
+					"uid": "grafana"
+				},
+				"enable": true,
+				"hide": true,
+				"iconColor": "rgba(0, 211, 255, 1)",
+				"name": "Annotations & Alerts",
+				"type": "dashboard"
+			}
+		]
+	},
+	"editable": true,
+	"fiscalYearStartMonth": 0,
+	"graphTooltip": 1,
+	"id": 30,
+	"links": [],
+	"panels": [
+		{
+			"datasource": {
+				"type": "prometheus",
+				"uid": "prometheus"
+			},
+			"fieldConfig": {
+				"defaults": {
+					"color": {
+						"mode": "continuous-RdYlGr"
+					},
+					"mappings": [],
+					"max": 100,
+					"min": 0,
+					"thresholds": {
+						"mode": "percentage",
+						"steps": [
+							{
+								"color": "red",
+								"value": null
+							}
+						]
+					},
+					"unit": "percent"
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 4,
+				"w": 14,
+				"x": 0,
+				"y": 0
+			},
+			"id": 6,
+			"options": {
+				"displayMode": "gradient",
+				"legend": {
+					"calcs": [],
+					"displayMode": "list",
+					"placement": "bottom",
+					"showLegend": false
+				},
+				"maxVizHeight": 300,
+				"minVizHeight": 16,
+				"minVizWidth": 8,
+				"namePlacement": "auto",
+				"orientation": "horizontal",
+				"reduceOptions": {
+					"calcs": [
+						"last"
+					],
+					"fields": "/^Charge$/",
+					"values": false
+				},
+				"showUnfilled": true,
+				"sizing": "auto",
+				"text": {},
+				"valueMode": "color"
+			},
+			"pluginVersion": "11.5.2",
+			"targets": [
+				{
+					"datasource": {
+						"type": "prometheus",
+						"uid": "prometheus"
+					},
+					"exemplar": false,
+					"expr": "ups_battery_charge",
+					"instant": true,
+					"interval": "",
+					"legendFormat": "Charge",
+					"refId": "A"
+				}
+			],
+			"title": "Battery Charge",
+			"type": "bargauge"
+		},
+		{
+			"datasource": {
+				"type": "prometheus",
+				"uid": "prometheus"
+			},
+			"description": "",
+			"fieldConfig": {
+				"defaults": {
+					"color": {
+						"mode": "thresholds"
+					},
+					"mappings": [],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "dark-green",
+								"value": null
+							},
+							{
+								"color": "light-green",
+								"value": 1
+							}
+						]
+					}
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 9,
+				"w": 10,
+				"x": 14,
+				"y": 0
+			},
+			"id": 10,
+			"options": {
+				"colorMode": "background",
+				"graphMode": "none",
+				"justifyMode": "auto",
+				"orientation": "auto",
+				"percentChangeColorMode": "standard",
+				"reduceOptions": {
+					"calcs": [
+						"lastNotNull"
+					],
+					"fields": "",
+					"values": false
+				},
+				"showPercentChange": false,
+				"text": {},
+				"textMode": "name",
+				"wideLayout": true
+			},
+			"pluginVersion": "11.5.2",
+			"targets": [
+				{
+					"datasource": {
+						"type": "prometheus",
+						"uid": "prometheus"
+					},
+					"exemplar": false,
+					"expr": "ups_status",
+					"format": "time_series",
+					"instant": true,
+					"interval": "",
+					"legendFormat": "{{status}}",
+					"refId": "A"
+				}
+			],
+			"title": "Status",
+			"type": "stat"
+		},
+		{
+			"datasource": {
+				"type": "prometheus",
+				"uid": "prometheus"
+			},
+			"fieldConfig": {
+				"defaults": {
+					"color": {
+						"mode": "thresholds"
+					},
+					"mappings": [],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "red",
+								"value": null
+							},
+							{
+								"color": "orange",
+								"value": 300
+							},
+							{
+								"color": "yellow",
+								"value": 900
+							},
+							{
+								"color": "green",
+								"value": 1800
+							}
+						]
+					},
+					"unit": "dthms"
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 5,
+				"w": 6,
+				"x": 0,
+				"y": 4
+			},
+			"id": 8,
+			"options": {
+				"colorMode": "background",
+				"graphMode": "none",
+				"justifyMode": "center",
+				"orientation": "auto",
+				"percentChangeColorMode": "standard",
+				"reduceOptions": {
+					"calcs": [
+						"last"
+					],
+					"fields": "",
+					"values": false
+				},
+				"showPercentChange": false,
+				"text": {},
+				"textMode": "value",
+				"wideLayout": true
+			},
+			"pluginVersion": "11.5.2",
+			"targets": [
+				{
+					"datasource": {
+						"type": "prometheus",
+						"uid": "prometheus"
+					},
+					"expr": "ups_battery_runtime",
+					"instant": true,
+					"interval": "",
+					"legendFormat": "Runtime",
+					"refId": "A"
+				}
+			],
+			"title": "Runtime",
+			"type": "stat"
+		},
+		{
+			"datasource": {
+				"type": "prometheus",
+				"uid": "prometheus"
+			},
+			"description": "",
+			"fieldConfig": {
+				"defaults": {
+					"color": {
+						"mode": "thresholds"
+					},
+					"decimals": 2,
+					"mappings": [],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "green",
+								"value": null
+							}
+						]
+					},
+					"unit": "currencyUSD"
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 5,
+				"w": 8,
+				"x": 6,
+				"y": 4
+			},
+			"id": 12,
+			"options": {
+				"colorMode": "background",
+				"graphMode": "none",
+				"justifyMode": "center",
+				"orientation": "auto",
+				"percentChangeColorMode": "standard",
+				"reduceOptions": {
+					"calcs": [
+						"lastNotNull"
+					],
+					"fields": "",
+					"values": false
+				},
+				"showPercentChange": false,
+				"text": {},
+				"textMode": "auto",
+				"wideLayout": true
+			},
+			"pluginVersion": "11.5.2",
+			"targets": [
+				{
+					"datasource": {
+						"type": "prometheus",
+						"uid": "prometheus"
+					},
+					"exemplar": false,
+					"expr": "avg_over_time(ups_load[1d])/100*24*$elec_price",
+					"instant": false,
+					"interval": "",
+					"legendFormat": "Daily",
+					"refId": "C"
+				},
+				{
+					"datasource": {
+						"type": "prometheus",
+						"uid": "prometheus"
+					},
+					"exemplar": true,
+					"expr": "avg_over_time(ups_load[1w])/100*24*7*$elec_price",
+					"instant": false,
+					"interval": "",
+					"legendFormat": "Weekly",
+					"refId": "A"
+				},
+				{
+					"datasource": {
+						"type": "prometheus",
+						"uid": "prometheus"
+					},
+					"exemplar": true,
+					"expr": "avg_over_time(ups_load[30d])/100*24*30*$elec_price",
+					"instant": false,
+					"interval": "",
+					"legendFormat": "Monthly",
+					"refId": "B"
+				},
+				{
+					"datasource": {
+						"type": "prometheus",
+						"uid": "prometheus"
+					},
+					"exemplar": true,
+					"expr": "avg_over_time(ups_load[30d])/100*24*365*$elec_price",
+					"hide": false,
+					"interval": "",
+					"legendFormat": "Yearly",
+					"refId": "D"
+				}
+			],
+			"title": "Cost",
+			"type": "stat"
+		},
+		{
+			"datasource": {
+				"type": "prometheus",
+				"uid": "prometheus"
+			},
+			"fieldConfig": {
+				"defaults": {
+					"color": {
+						"fixedColor": "blue",
+						"mode": "fixed"
+					},
+					"custom": {
+						"axisBorderShow": false,
+						"axisCenteredZero": false,
+						"axisColorMode": "text",
+						"axisLabel": "",
+						"axisPlacement": "auto",
+						"barAlignment": 0,
+						"barWidthFactor": 0.6,
+						"drawStyle": "line",
+						"fillOpacity": 10,
+						"gradientMode": "none",
+						"hideFrom": {
+							"legend": false,
+							"tooltip": false,
+							"viz": false
+						},
+						"insertNulls": false,
+						"lineInterpolation": "linear",
+						"lineWidth": 2,
+						"pointSize": 5,
+						"scaleDistribution": {
+							"type": "linear"
+						},
+						"showPoints": "never",
+						"spanNulls": true,
+						"stacking": {
+							"group": "A",
+							"mode": "none"
+						},
+						"thresholdsStyle": {
+							"mode": "line+area"
+						}
+					},
+					"mappings": [],
+					"max": 100,
+					"min": 0,
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "transparent",
+								"value": null
+							}
+						]
+					},
+					"unit": "percent"
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 13,
+				"w": 12,
+				"x": 0,
+				"y": 9
+			},
+			"id": 2,
+			"options": {
+				"legend": {
+					"calcs": [
+						"last"
+					],
+					"displayMode": "list",
+					"placement": "bottom",
+					"showLegend": true
+				},
+				"tooltip": {
+					"hideZeros": false,
+					"mode": "multi",
+					"sort": "none"
+				}
+			},
+			"pluginVersion": "11.5.2",
+			"targets": [
+				{
+					"datasource": {
+						"type": "prometheus",
+						"uid": "prometheus"
+					},
+					"expr": "ups_load",
+					"interval": "",
+					"legendFormat": "Load",
+					"refId": "A"
+				}
+			],
+			"title": "Load",
+			"type": "timeseries"
+		},
+		{
+			"datasource": {
+				"type": "prometheus",
+				"uid": "prometheus"
+			},
+			"fieldConfig": {
+				"defaults": {
+					"color": {
+						"fixedColor": "yellow",
+						"mode": "fixed"
+					},
+					"custom": {
+						"axisBorderShow": false,
+						"axisCenteredZero": false,
+						"axisColorMode": "text",
+						"axisLabel": "",
+						"axisPlacement": "auto",
+						"barAlignment": 0,
+						"barWidthFactor": 0.6,
+						"drawStyle": "line",
+						"fillOpacity": 0,
+						"gradientMode": "none",
+						"hideFrom": {
+							"legend": false,
+							"tooltip": false,
+							"viz": false
+						},
+						"insertNulls": false,
+						"lineInterpolation": "linear",
+						"lineWidth": 2,
+						"pointSize": 5,
+						"scaleDistribution": {
+							"type": "linear"
+						},
+						"showPoints": "never",
+						"spanNulls": true,
+						"stacking": {
+							"group": "A",
+							"mode": "none"
+						},
+						"thresholdsStyle": {
+							"mode": "line"
+						}
+					},
+					"mappings": [],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "transparent",
+								"value": null
+							}
+						]
+					},
+					"unit": "volt"
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 13,
+				"w": 12,
+				"x": 12,
+				"y": 9
+			},
+			"id": 4,
+			"options": {
+				"legend": {
+					"calcs": [
+						"last"
+					],
+					"displayMode": "list",
+					"placement": "bottom",
+					"showLegend": true
+				},
+				"tooltip": {
+					"hideZeros": false,
+					"mode": "multi",
+					"sort": "none"
+				}
+			},
+			"pluginVersion": "11.5.2",
+			"targets": [
+				{
+					"datasource": {
+						"type": "prometheus",
+						"uid": "prometheus"
+					},
+					"expr": "ups_input_voltage",
+					"interval": "",
+					"legendFormat": "Input",
+					"refId": "A"
+				}
+			],
+			"title": "Voltage",
+			"type": "timeseries"
+		},
+		{
+			"datasource": {
+				"type": "prometheus",
+				"uid": "prometheus"
+			},
+			"description": "",
+			"fieldConfig": {
+				"defaults": {
+					"color": {
+						"mode": "palette-classic"
+					},
+					"custom": {
+						"axisBorderShow": false,
+						"axisCenteredZero": false,
+						"axisColorMode": "text",
+						"axisLabel": "",
+						"axisPlacement": "auto",
+						"barAlignment": 0,
+						"barWidthFactor": 0.6,
+						"drawStyle": "line",
+						"fillOpacity": 10,
+						"gradientMode": "none",
+						"hideFrom": {
+							"graph": false,
+							"legend": false,
+							"tooltip": false,
+							"viz": false
+						},
+						"insertNulls": false,
+						"lineInterpolation": "linear",
+						"lineWidth": 2,
+						"pointSize": 5,
+						"scaleDistribution": {
+							"type": "linear"
+						},
+						"showPoints": "never",
+						"spanNulls": true,
+						"stacking": {
+							"group": "A",
+							"mode": "none"
+						},
+						"thresholdsStyle": {
+							"mode": "off"
+						}
+					},
+					"mappings": [],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "green",
+								"value": null
+							}
+						]
+					},
+					"unit": "currencyUSD"
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 10,
+				"w": 24,
+				"x": 0,
+				"y": 22
+			},
+			"id": 13,
+			"options": {
+				"graph": {},
+				"legend": {
+					"calcs": [],
+					"displayMode": "list",
+					"placement": "bottom",
+					"showLegend": true
+				},
+				"tooltip": {
+					"hideZeros": false,
+					"mode": "single",
+					"sort": "none"
+				}
+			},
+			"pluginVersion": "11.5.2",
+			"targets": [
+				{
+					"datasource": {
+						"type": "prometheus",
+						"uid": "prometheus"
+					},
+					"exemplar": false,
+					"expr": "avg_over_time(ups_load[1d])/100*24*$elec_price",
+					"instant": false,
+					"interval": "",
+					"legendFormat": "Daily",
+					"refId": "C"
+				}
+			],
+			"title": "Cost",
+			"type": "timeseries"
+		}
+	],
+	"preload": false,
+	"refresh": "10s",
+	"schemaVersion": 40,
+	"tags": [],
+	"templating": {
+		"list": [
+			{
+				"current": {
+					"text": "0.12",
+					"value": "0.12"
+				},
+				"hide": 2,
+				"label": "Cost per kWh",
+				"name": "elec_price",
+				"query": "0.12",
+				"skipUrlSync": true,
+				"type": "constant"
+			}
+		]
+	},
+	"time": {
+		"from": "now-1h",
+		"to": "now"
+	},
+	"timepicker": {},
+	"timezone": "browser",
+	"title": "Power",
+	"uid": "WAdS__2Mk",
+	"version": 1,
+	"weekStart": ""
+}

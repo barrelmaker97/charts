@@ -8,5 +8,5 @@ metadata:
     {{- include "pistachio.labels" . | nindent 4 }}
     {{- toYaml .Values.dashboard.labels | nindent 4 }}
 data:
-{{ (.Files.Glob "dashboard.json").AsConfig | indent 2 }}
+{{ (.Files.Glob "pistachio-dashboard.json").AsConfig | indent 2 }}
 {{- end }}
