@@ -1,0 +1,11 @@
+---
+apiVersion: v2
+name: pistachio
+description: A helm chart for pistachio
+type: application
+version: 0.1.0
+appVersion: 0.4.0
+maintainers:
+  - name: barrelmaker97
+    email: nolancooper97@gmail.com
+    url: barrelmaker.dev

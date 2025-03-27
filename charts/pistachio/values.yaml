@@ -1,0 +1,115 @@
+---
+pistachio:
+  logLevel: info
+  pollRate: 10
+  ups:
+    name: ups
+    host: localhost
+    port: 3493
+
+replicaCount: 1
+
+image:
+  repository: ghcr.io/barrelmaker97/pistachio
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # runAsNonRoot: true
+  # runAsUser: 1000
+  # runAsGroup: 1000
+  # fsGroup: 1000
+
+securityContext: {}
+  # allowPrivilegeEscalation: false
+  # capabilities:
+  #   drop:
+  #     - ALL
+
+service:
+  type: ClusterIP
+  port: 9120
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: pistachio.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: pistachio-tls
+  #    hosts:
+  #      - pistachio.local
+
+resources: {}
+  # requests:
+  #   cpu: 20m
+  #   memory: 500Mi
+  # limits:
+  #   cpu: 100m
+  #   memory: 1Gi
+
+dashboard:
+  enabled: false
+  namespace: monitoring
+  labels:
+    grafana_dashboard: "1"
+serviceMonitor:
+  enabled: false
+  # Labels to be added to the ServiceMonitor.
+  additionalLabels: {}
+  # Annotations to be added to the ServiceMonitor.
+  annotations: {}
+  # Interval at which Prometheus scrapes the metrics from the target.
+  scrapeInterval: 15s
+  # Preserves the metric’s labels when they collide with the target’s labels.
+  # honorLabels: true
+  relabelings: []
+  metricRelabelings: []
+  # The label to use to retrieve the job name from.
+  # jobLabel: "app.kubernetes.io/name"
+  targetLabels: []
+  # Per-scrape limit on number of labels that will be accepted for a sample.
+  labelLimit: 0
+  # Per-scrape limit on length of labels name that will be accepted for a sample.
+  labelNameLengthLimit: 0
+  # Per-scrape limit on length of labels value that will be accepted for a sample.
+  labelValueLengthLimit: 0
+  # Defines a per-scrape limit on the number of scraped samples that will be accepted.
+  sampleLimit: 0
+  # Defines a limit on the number of scraped targets that will be accepted.
+  targetLimit: 0
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

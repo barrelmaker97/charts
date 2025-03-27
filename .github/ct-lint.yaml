@@ -1,9 +1,8 @@
 ---
-check-version-increment: true
 chart-repos: bitnami=https://charts.bitnami.com/bitnami
+check-version-increment: true
 remote: origin
 target-branch: main
-upgrade: true
 validate-chart-schema: true
 validate-maintainers: true
 validate-yaml: true

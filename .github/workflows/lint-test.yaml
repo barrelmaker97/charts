@@ -33,4 +33,4 @@ jobs:
         uses: helm/kind-action@v1.12.0
 
       - name: Run chart-testing (install)
-        run: ct install --config .github/ct-lint.yaml
+        run: ct install --config .github/ct-install.yaml
