@@ -1,0 +1,18 @@
+{{- if .Values.metrics }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "satisfactory.fullname" . }}-metrics
+  labels:
+    {{- include "satisfactory.labels" . | nindent 4 }}
+spec:
+  clusterIP: None
+  selector:
+    {{- include "satisfactory.selectorLabels" . | nindent 4 }}
+  ports:
+    - name: metrics
+      protocol: TCP
+      port: 9100
+      targetPort: metrics
+{{- end }}
