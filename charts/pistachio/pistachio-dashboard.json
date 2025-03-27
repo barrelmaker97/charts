@@ -18,7 +18,7 @@
 	"editable": true,
 	"fiscalYearStartMonth": 0,
 	"graphTooltip": 1,
-	"id": 30,
+	"id": 33,
 	"links": [],
 	"panels": [
 		{
@@ -86,12 +86,17 @@
 						"type": "prometheus",
 						"uid": "prometheus"
 					},
+					"disableTextWrap": false,
+					"editorMode": "builder",
 					"exemplar": false,
 					"expr": "ups_battery_charge",
+					"fullMetaSearch": false,
+					"includeNullMetadata": true,
 					"instant": true,
 					"interval": "",
 					"legendFormat": "Charge",
-					"refId": "A"
+					"refId": "A",
+					"useBackend": false
 				}
 			],
 			"title": "Battery Charge",
@@ -157,13 +162,18 @@
 						"type": "prometheus",
 						"uid": "prometheus"
 					},
+					"disableTextWrap": false,
+					"editorMode": "builder",
 					"exemplar": false,
 					"expr": "ups_status",
 					"format": "time_series",
+					"fullMetaSearch": false,
+					"includeNullMetadata": true,
 					"instant": true,
 					"interval": "",
 					"legendFormat": "{{status}}",
-					"refId": "A"
+					"refId": "A",
+					"useBackend": false
 				}
 			],
 			"title": "Status",
@@ -271,7 +281,44 @@
 					},
 					"unit": "currencyUSD"
 				},
-				"overrides": []
+				"overrides": [
+					{
+						"matcher": {
+							"id": "byFrameRefID",
+							"options": "B"
+						},
+						"properties": [
+							{
+								"id": "displayName",
+								"value": "Weekly"
+							}
+						]
+					},
+					{
+						"matcher": {
+							"id": "byFrameRefID",
+							"options": "C"
+						},
+						"properties": [
+							{
+								"id": "displayName",
+								"value": "Monthly"
+							}
+						]
+					},
+					{
+						"matcher": {
+							"id": "byFrameRefID",
+							"options": "D"
+						},
+						"properties": [
+							{
+								"id": "displayName",
+								"value": "Yearly"
+							}
+						]
+					}
+				]
 			},
 			"gridPos": {
 				"h": 5,
@@ -305,48 +352,47 @@
 						"type": "prometheus",
 						"uid": "prometheus"
 					},
+					"editorMode": "code",
 					"exemplar": false,
-					"expr": "avg_over_time(ups_load[1d])/100*24*$elec_price",
+					"expr": "(avg by(job) (avg_over_time(ups_load[24h])) / 100 * 24) * $elec_price",
 					"instant": false,
 					"interval": "",
 					"legendFormat": "Daily",
-					"refId": "C"
-				},
-				{
-					"datasource": {
-						"type": "prometheus",
-						"uid": "prometheus"
-					},
-					"exemplar": true,
-					"expr": "avg_over_time(ups_load[1w])/100*24*7*$elec_price",
-					"instant": false,
-					"interval": "",
-					"legendFormat": "Weekly",
+					"range": true,
 					"refId": "A"
 				},
 				{
 					"datasource": {
-						"type": "prometheus",
-						"uid": "prometheus"
+						"name": "Expression",
+						"type": "__expr__",
+						"uid": "__expr__"
 					},
-					"exemplar": true,
-					"expr": "avg_over_time(ups_load[30d])/100*24*30*$elec_price",
-					"instant": false,
-					"interval": "",
-					"legendFormat": "Monthly",
-					"refId": "B"
+					"expression": "$A * 7",
+					"hide": false,
+					"refId": "B",
+					"type": "math"
 				},
 				{
 					"datasource": {
-						"type": "prometheus",
-						"uid": "prometheus"
+						"name": "Expression",
+						"type": "__expr__",
+						"uid": "__expr__"
 					},
-					"exemplar": true,
-					"expr": "avg_over_time(ups_load[30d])/100*24*365*$elec_price",
+					"expression": "$A * 30",
 					"hide": false,
-					"interval": "",
-					"legendFormat": "Yearly",
-					"refId": "D"
+					"refId": "C",
+					"type": "math"
+				},
+				{
+					"datasource": {
+						"name": "Expression",
+						"type": "__expr__",
+						"uid": "__expr__"
+					},
+					"expression": "$A * 365",
+					"hide": false,
+					"refId": "D",
+					"type": "math"
 				}
 			],
 			"title": "Cost",
@@ -441,10 +487,16 @@
 						"type": "prometheus",
 						"uid": "prometheus"
 					},
-					"expr": "ups_load",
+					"disableTextWrap": false,
+					"editorMode": "builder",
+					"expr": "avg by(job) (ups_load)",
+					"fullMetaSearch": false,
+					"includeNullMetadata": true,
 					"interval": "",
 					"legendFormat": "Load",
-					"refId": "A"
+					"range": true,
+					"refId": "A",
+					"useBackend": false
 				}
 			],
 			"title": "Load",
@@ -491,16 +543,34 @@
 							"mode": "none"
 						},
 						"thresholdsStyle": {
-							"mode": "line"
+							"mode": "dashed+area"
 						}
 					},
 					"mappings": [],
+					"max": 128,
+					"min": 112,
 					"thresholds": {
 						"mode": "absolute",
 						"steps": [
 							{
 								"color": "transparent",
 								"value": null
+							},
+							{
+								"color": "red",
+								"value": 0
+							},
+							{
+								"color": "red",
+								"value": 115
+							},
+							{
+								"color": "transparent",
+								"value": 115
+							},
+							{
+								"color": "red",
+								"value": 125
 							}
 						]
 					},
@@ -537,13 +607,19 @@
 						"type": "prometheus",
 						"uid": "prometheus"
 					},
-					"expr": "ups_input_voltage",
+					"disableTextWrap": false,
+					"editorMode": "builder",
+					"expr": "avg by(job) (ups_input_voltage)",
+					"fullMetaSearch": false,
+					"includeNullMetadata": true,
 					"interval": "",
-					"legendFormat": "Input",
-					"refId": "A"
+					"legendFormat": "Voltage",
+					"range": true,
+					"refId": "A",
+					"useBackend": false
 				}
 			],
-			"title": "Voltage",
+			"title": "Input Voltage",
 			"type": "timeseries"
 		},
 		{
@@ -633,8 +709,9 @@
 						"type": "prometheus",
 						"uid": "prometheus"
 					},
+					"editorMode": "code",
 					"exemplar": false,
-					"expr": "avg_over_time(ups_load[1d])/100*24*$elec_price",
+					"expr": "avg by(job) (avg_over_time(ups_load[1h]))/100*24*$elec_price",
 					"instant": false,
 					"interval": "",
 					"legendFormat": "Daily",
@@ -653,26 +730,26 @@
 		"list": [
 			{
 				"current": {
-					"text": "0.12",
-					"value": "0.12"
+					"text": "0.14",
+					"value": "0.14"
 				},
 				"hide": 2,
 				"label": "Cost per kWh",
 				"name": "elec_price",
-				"query": "0.12",
+				"query": "0.14",
 				"skipUrlSync": true,
 				"type": "constant"
 			}
 		]
 	},
 	"time": {
-		"from": "now-1h",
+		"from": "now-24h",
 		"to": "now"
 	},
 	"timepicker": {},
 	"timezone": "browser",
 	"title": "Power",
-	"uid": "WAdS__2Mk",
+	"uid": "WAdS__2Mz",
 	"version": 1,
 	"weekStart": ""
 }
