@@ -2626,6 +2626,21 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/minecraft-0.1.1/minecraft-0.1.1.tgz
     version: 0.1.1
+  pistachio:
+  - apiVersion: v2
+    appVersion: 0.4.0
+    created: "2025-03-27T03:23:52.459175057Z"
+    description: A helm chart for pistachio
+    digest: 523e85467a7e7f99612bdd2ad25c1386bffe0adec8f948b11b09ad07a449cf8b
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: pistachio
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/pistachio-0.1.0/pistachio-0.1.0.tgz
+    version: 0.1.0
   serge:
   - apiVersion: v2
     appVersion: 0.8.2
@@ -3570,4 +3585,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2025-03-13T00:34:32.283610266Z"
+generated: "2025-03-27T03:23:52.459563506Z"
