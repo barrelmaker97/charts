@@ -1,0 +1,6 @@
+---
+chart-repos: bitnami=https://charts.bitnami.com/bitnami
+excluded-charts: pistachio
+remote: origin
+target-branch: main
+upgrade: true
