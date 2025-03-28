@@ -8,5 +8,5 @@ metadata:
     {{- include "minecraft.labels" . | nindent 4 }}
     {{- toYaml .Values.metrics.dashboard.labels | nindent 4 }}
 data:
-{{ (.Files.Glob "dashboard.json").AsConfig | indent 2 }}
+{{ (.Files.Glob "minecraft-dashboard.json").AsConfig | indent 2 }}
 {{- end }}
