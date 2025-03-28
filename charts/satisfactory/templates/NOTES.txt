@@ -1,7 +1,1 @@
-Valheim has been installed!
-
-To get the password for the server, run:
-
-    kubectl get secret --namespace {{ .Release.Namespace }} {{ include "satisfactory.fullname" . }}-password -o jsonpath="{.data.password}" | base64 --decode
-
-If you did not set a password manually, then one was generated for you.
+Satisfactory has been installed!

@@ -1,10 +1,10 @@
 ---
 apiVersion: v2
 name: satisfactory
-description: A Helm Chart for Valheim
+description: A Helm Chart for Satisfactory
 type: application
-version: 0.4.5
-appVersion: 3.1.0
+version: 0.1.0
+appVersion: v1.9.5
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com

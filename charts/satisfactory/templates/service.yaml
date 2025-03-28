@@ -10,11 +10,11 @@ spec:
   selector:
     {{- include "satisfactory.selectorLabels" . | nindent 4 }}
   ports:
-    - name: satisfactory-1
-      protocol: UDP
-      port: {{ .Values.service.port }}
-      targetPort: 2456
-    - name: satisfactory-2
-      protocol: UDP
-      port: {{ add .Values.service.port 1 }}
-      targetPort: 2457
+  - name: game-port-udp
+    port: {{ .Values.satisfactoryOpts.serverGamePort }}
+    targetPort: {{ .Values.satisfactoryOpts.serverGamePort }}
+    protocol: UDP
+  - name: game-port-tcp
+    port: {{ .Values.satisfactoryOpts.serverGamePort }}
+    targetPort: {{ .Values.satisfactoryOpts.serverGamePort }}
+    protocol: TCP

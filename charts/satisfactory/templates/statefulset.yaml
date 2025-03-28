@@ -7,14 +7,14 @@ metadata:
     {{- include "satisfactory.labels" . | nindent 4 }}
 spec:
   replicas: 1
-  serviceName: {{ include "satisfactory.fullname" . }}-metrics
+  serviceName: {{ include "satisfactory.fullname" . }}
   selector:
     matchLabels:
       {{- include "satisfactory.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       annotations:
-        checksum/config: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+        checksum/configmap: {{ include (print $.Template.BasePath "/configmap.yaml") $ | sha256sum }}
       {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
@@ -29,65 +29,33 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: satisfactory
+        - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          env:
-            - name: TZ
-              value: {{ .Values.timezone | quote }}
-            - name: NAME
-              value: {{ .Values.serverName | quote }}
-            - name: WORLD
-              value: {{ .Values.worldName | quote }}
-            {{- if .Values.public }}
-            - name: PUBLIC
-              value: "1"
-            {{- else }}
-            - name: PUBLIC
-              value: "0"
-            {{- end }}
-            - name: PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "satisfactory.fullname" . }}-password
-                  key: password
-            - name: ADDRESS
-              value: 127.0.0.1:2457
-            - name: HTTP_PORT
-              value: "9100"
-          livenessProbe:
-            exec:
-              command:
-                - bash
-                - -c
-                - "pidof satisfactory_server.x86_64 || exit 1"
-            initialDelaySeconds: 60
-          readinessProbe:
-            exec:
-              command:
-                - bash
-                - -c
-                - "pidof satisfactory_server.x86_64 || exit 1"
           ports:
-            - name: satisfactory-1
-              containerPort: 2456
-            - name: satisfactory-2
-              containerPort: 2457
-            {{- if .Values.metrics }}
-            - name: metrics
-              containerPort: 9100
+            - name: game-port-udp
+              containerPort: {{ .Values.satisfactoryOpts.serverGamePort }}
+              protocol: UDP
+            - name: game-port-tcp
+              containerPort: {{ .Values.satisfactoryOpts.serverGamePort }}
+              protocol: TCP
+          {{- if .Values.env }}
+          env:
+            {{- toYaml .Values.env | nindent 12 }}
+          {{- end }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "satisfactory.fullname" . }}-env
+            {{- if .Values.envFrom }}
+            {{- toYaml .Values.envFrom | nindent 12 }}
             {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - name: savedata
-              mountPath: /home/steam/.config/unity3d/IronGate/Valheim
-              subPath: saves
-            - name: savedata
-              mountPath: /home/steam/satisfactory
-              subPath: server
+              mountPath: /config
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
