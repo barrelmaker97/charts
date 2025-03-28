@@ -56,6 +56,22 @@ spec:
           volumeMounts:
             - name: savedata
               mountPath: /config
+            {{- if .Values.certificate.enabled }}
+            - name: certificate
+              mountPath: /config/gamefiles/FactoryGame/Certificates
+              readOnly: true
+            {{- end }}
+      {{- if .Values.certificate.enabled }}
+      volumes:
+        - name: certificate
+          secret:
+            secretName: {{ include "satisfactory.fullname" . }}
+            items:
+              - key: tls.crt
+                path: cert_chain.pem
+              - key: tls.key
+                path: private_key.pem
+      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

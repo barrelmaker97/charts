@@ -15,6 +15,12 @@ satisfactoryOpts:
   skipUpdate: false
   steamBeta: false
 
+certificate:
+  enabled: false
+  issuerName: letsencrypt
+  issuerKind: Issuer
+  domain: satisfactory.game
+
 image:
   repository: wolveix/satisfactory-server
   pullPolicy: IfNotPresent
