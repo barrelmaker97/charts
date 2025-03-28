@@ -2641,6 +2641,21 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/pistachio-0.1.0/pistachio-0.1.0.tgz
     version: 0.1.0
+  satisfactory:
+  - apiVersion: v2
+    appVersion: v1.9.5
+    created: "2025-03-28T05:14:00.181028656Z"
+    description: A Helm Chart for Satisfactory
+    digest: e3d7057e67319966325d192fb05b8969834220569565a763da910e739a1b18be
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: satisfactory
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/satisfactory-0.1.0/satisfactory-0.1.0.tgz
+    version: 0.1.0
   serge:
   - apiVersion: v2
     appVersion: 0.8.2
@@ -3585,4 +3600,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2025-03-27T03:23:52.459563506Z"
+generated: "2025-03-28T05:14:00.181403283Z"
