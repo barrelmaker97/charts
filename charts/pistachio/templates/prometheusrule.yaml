@@ -1,0 +1,36 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ include "pistachio.fullname" . }}
+  labels:
+    {{- include "pistachio.labels" . | nindent 4 }}
+spec:
+  groups:
+  - name: pistachio
+    rules:
+    - alert: UPSBatteryCharge
+      annotations:
+        description: The UPS monitored by pistachio has a battery charge of less than 100%.
+        summary: The UPS monitored by pistachio has a battery charge of less than 100%.
+      expr: ups_battery_charge < 100
+      labels:
+        severity: warning
+    - alert: UPSBatteryCharge
+      annotations:
+        description: |
+          The battery in the UPS monitored by pistachio has reached the 'warning' state.
+          If power is not restored soon, systems attached to the UPS will be shut down.
+        summary: Systems attached to the UPS will soon be shut down due to low battery.
+      expr: ups_battery_charge < ups_battery_charge_warning
+      labels:
+        severity: critical
+    - alert: UPSBatteryCharge
+      annotations:
+        description: |
+          The battery in the UPS monitored by pistachio has reached the 'low' state.
+          Systems attached to the UPS have been instructed to shut down.
+        summary: Systems attached to the UPS have been instructed to shut down.
+      expr: ups_battery_charge < ups_battery_charge_low
+      labels:
+        severity: critical
