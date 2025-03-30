@@ -7,6 +7,15 @@ spec:
   groups:
   - name: pistachio
     rules:
+    - alert: UPSDisconnected
+      annotations:
+        description: |
+          The UPS monitored by pistachio is reporting no status.
+          This means the UPS is most likely disconnected from NUT (Network UPS Tools).
+        summary: The UPS monitored by pistachio is disconnected.
+      expr: sum(ups_status) == 0
+      labels:
+        severity: warning
     - alert: UPSOnBattery
       annotations:
         description: The UPS monitored by pistachio is running on battery power.
