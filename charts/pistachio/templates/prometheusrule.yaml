@@ -1,0 +1,101 @@
+{{- if .Values.prometheusRules.enabled -}}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ include "pistachio.fullname" . }}
+  labels:
+    {{- include "pistachio.labels" . | nindent 4 }}
+spec:
+  groups:
+  - name: pistachio
+    rules:
+    - alert: UPSDisconnected
+      annotations:
+        description: |
+          No status is being reported from the UPS monitored by Pistachio.
+          This likely indicates that the UPS is disconnected from Network UPS Tools (NUT).
+        summary: No status received — UPS may be disconnected.
+      expr: sum(ups_status) == 0
+      labels:
+        severity: warning
+
+    - alert: UPSOnBattery
+      annotations:
+        description: |
+          The UPS monitored by Pistachio is currently running on battery power.
+          This may indicate a power outage or an issue with the input power supply.
+        summary: UPS is running on battery power.
+      expr: ups_status{status="OB"} == 1
+      labels:
+        severity: warning
+
+    - alert: UPSOverloaded
+      annotations:
+        description: |
+          The UPS monitored by Pistachio is experiencing an overload condition.
+          This could lead to power instability or automatic shutdown if not addressed.
+        summary: UPS is overloaded.
+      expr: ups_status{status="OVER"} == 1
+      labels:
+        severity: warning
+
+    - alert: UPSBoosting
+      annotations:
+        description: |
+          The input voltage to the UPS is too low.
+          The UPS is compensating by boosting the voltage to maintain stable power output.
+        summary: UPS is compensating for low input voltage.
+      expr: ups_status{status="BOOST"} == 1
+      labels:
+        severity: warning
+
+    - alert: UPSTrimming
+      annotations:
+        description: |
+          The input voltage to the UPS is too high.
+          The UPS is trimming the voltage to prevent damage to connected equipment.
+        summary: UPS is reducing excessive input voltage.
+      expr: ups_status{status="TRIM"} == 1
+      labels:
+        severity: warning
+
+    - alert: UPSBatteryChargeWarning
+      annotations:
+        description: |
+          The UPS battery charge has dropped to a warning level.
+          If the battery continues to discharge, connected systems may shut down soon.
+        summary: UPS battery charge is low — shutdown may occur soon.
+      expr: ups_battery_charge < ups_battery_charge_warning
+      labels:
+        severity: warning
+
+    - alert: UPSBatteryChargeLow
+      annotations:
+        description: |
+          The UPS battery has reached a critically low level.
+          Connected systems have been instructed to shut down to prevent data loss.
+        summary: UPS battery is critically low — systems are shutting down.
+      expr: ups_status{status="LB"} == 1
+      labels:
+        severity: critical
+
+    - alert: UPSReplaceBattery
+      annotations:
+        description: |
+          The UPS battery needs replacement.
+          Continued use may result in reduced backup time or sudden power loss.
+        summary: UPS battery requires replacement.
+      expr: ups_status{status="RB"} == 1
+      labels:
+        severity: critical
+
+    - alert: UPSAlarm
+      annotations:
+        description: |
+          An alarm condition has been detected on the UPS.
+          Check the UPS logs or hardware for details on the issue.
+        summary: UPS has triggered an alarm condition.
+      expr: ups_status{status="ALARM"} == 1
+      labels:
+        severity: critical
+{{- end }}

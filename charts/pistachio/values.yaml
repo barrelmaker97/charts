@@ -75,6 +75,10 @@ dashboard:
   namespace: monitoring
   labels:
     grafana_dashboard: "1"
+
+prometheusRules:
+  enabled: false
+
 serviceMonitor:
   enabled: false
   # Labels to be added to the ServiceMonitor.
