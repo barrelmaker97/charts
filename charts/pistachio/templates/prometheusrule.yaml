@@ -1,8 +1,10 @@
----
+{{- if .Values.prometheusRules.enabled -}}
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: pistachio
+  name: {{ include "pistachio.fullname" . }}
+  labels:
+    {{- include "pistachio.labels" . | nindent 4 }}
 spec:
   groups:
   - name: pistachio
@@ -96,4 +98,4 @@ spec:
       expr: ups_status{status="ALARM"} == 1
       labels:
         severity: critical
-
+{{- end }}
