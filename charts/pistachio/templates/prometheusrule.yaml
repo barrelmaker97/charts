@@ -2,35 +2,72 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: {{ include "pistachio.fullname" . }}
-  labels:
-    {{- include "pistachio.labels" . | nindent 4 }}
+  name: pistachio
 spec:
   groups:
   - name: pistachio
     rules:
-    - alert: UPSBatteryCharge
+    - alert: UPSOnBattery
       annotations:
-        description: The UPS monitored by pistachio has a battery charge of less than 100%.
-        summary: The UPS monitored by pistachio has a battery charge of less than 100%.
-      expr: ups_battery_charge < 100
+        description: The UPS monitored by pistachio is running on battery power.
+        summary: The UPS monitored by pistachio is running on battery power.
+      expr: ups_status{status="OB"} == 1
       labels:
         severity: warning
-    - alert: UPSBatteryCharge
+    - alert: UPSOverloaded
+      annotations:
+        description: The UPS monitored by pistachio is overloaded.
+        summary: The UPS monitored by pistachio is overloaded.
+      expr: ups_status{status="OVER"} == 1
+      labels:
+        severity: warning
+    - alert: UPSBoosting
+      annotations:
+        description: |
+          The input voltage to the UPS monitored by pistachio is too low.
+          The UPS is boosting the voltage to appropriate levels.
+        summary: The UPS is boosting the voltage to appropriate levels.
+      expr: ups_status{status="BOOST"} == 1
+      labels:
+        severity: warning
+    - alert: UPSTrimming
+      annotations:
+        description: |
+          The input voltage to the UPS monitored by pistachio is too high.
+          The UPS is trimming the voltage to appropriate levels.
+        summary: The UPS is trimming the voltage to appropriate levels.
+      expr: ups_status{status="TRIM"} == 1
+      labels:
+        severity: warning
+    - alert: UPSBatteryChargeWarning
       annotations:
         description: |
           The battery in the UPS monitored by pistachio has reached the 'warning' state.
-          If power is not restored soon, systems attached to the UPS will be shut down.
+          If the battery continues to discharge, systems attached to the UPS will be shut down.
         summary: Systems attached to the UPS will soon be shut down due to low battery.
       expr: ups_battery_charge < ups_battery_charge_warning
       labels:
-        severity: critical
-    - alert: UPSBatteryCharge
+        severity: warning
+    - alert: UPSBatteryChargeLow
       annotations:
         description: |
           The battery in the UPS monitored by pistachio has reached the 'low' state.
           Systems attached to the UPS have been instructed to shut down.
         summary: Systems attached to the UPS have been instructed to shut down.
-      expr: ups_battery_charge < ups_battery_charge_low
+      expr: ups_status{status="LB"} == 1
+      labels:
+        severity: critical
+    - alert: UPSReplaceBattery
+      annotations:
+        description: The battery in the UPS monitored by pistachio needs to be replaced.
+        summary: The battery in the UPS monitored by pistachio needs to be replaced.
+      expr: ups_status{status="RB"} == 1
+      labels:
+        severity: critical
+    - alert: UPSAlarm
+      annotations:
+        description: An alarm has been detected on the UPS monitored by pistachio.
+        summary: An alarm has been detected on the UPS monitored by pistachio.
+      expr: ups_status{status="ALARM"} == 1
       labels:
         severity: critical
