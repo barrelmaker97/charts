@@ -80,11 +80,15 @@ spec:
               value: {{ .Values.properties.viewDistance | quote }}
             - name: WHITELIST
               value: {{ .Values.properties.whitelist | quote }}
+          startupProbe:
+            exec:
+              command:
+                - mc-health
+            failureThreshold: 10
           livenessProbe:
             exec:
               command:
                 - mc-health
-            initialDelaySeconds: 120
           readinessProbe:
             exec:
               command:
