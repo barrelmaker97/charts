@@ -41,6 +41,19 @@ spec:
             - name: game-port-tcp
               containerPort: {{ .Values.satisfactoryOpts.serverGamePort }}
               protocol: TCP
+          startupProbe:
+            exec:
+              command:
+                - /home/steam/healthcheck.sh
+            failureThreshold: 10
+          livenessProbe:
+            exec:
+              command:
+                - /home/steam/healthcheck.sh
+          readinessProbe:
+            exec:
+              command:
+                - /home/steam/healthcheck.sh
           {{- if .Values.env }}
           env:
             {{- toYaml .Values.env | nindent 12 }}
