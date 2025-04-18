@@ -17,6 +17,7 @@ data:
   PGID: "{{ .Values.satisfactoryOpts.pgid }}"
   PUID: "{{ .Values.satisfactoryOpts.puid }}"
   SERVERGAMEPORT: "{{ .Values.satisfactoryOpts.serverGamePort }}"
+  SERVERMESSAGINGPORT: "{{ .Values.satisfactoryOpts.serverMessagingPort }}"
   SERVERIP: "{{ .Values.satisfactoryOpts.serverIP }}"
   SKIPUPDATE: "{{ .Values.satisfactoryOpts.skipUpdate }}"
   STEAMBETA: "{{ .Values.satisfactoryOpts.steamBeta }}"

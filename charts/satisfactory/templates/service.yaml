@@ -18,3 +18,7 @@ spec:
     port: {{ .Values.satisfactoryOpts.serverGamePort }}
     targetPort: {{ .Values.satisfactoryOpts.serverGamePort }}
     protocol: TCP
+  - name: messaging-port
+    port: {{ .Values.satisfactoryOpts.serverMessagingPort }}
+    targetPort: {{ .Values.satisfactoryOpts.serverMessagingPort }}
+    protocol: TCP

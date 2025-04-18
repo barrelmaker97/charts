@@ -41,6 +41,9 @@ spec:
             - name: game-port-tcp
               containerPort: {{ .Values.satisfactoryOpts.serverGamePort }}
               protocol: TCP
+            - name: messaging-port
+              containerPort: {{ .Values.satisfactoryOpts.serverMessagingPort }}
+              protocol: TCP
           startupProbe:
             exec:
               command:

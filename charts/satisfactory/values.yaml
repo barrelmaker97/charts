@@ -11,6 +11,7 @@ satisfactoryOpts:
   pgid: 1000
   puid: 1000
   serverGamePort: 7777
+  serverMessagingPort: 8888
   serverIP: "0.0.0.0"
   skipUpdate: false
   steamBeta: false
