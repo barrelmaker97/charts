@@ -2753,6 +2753,20 @@ entries:
     version: 0.1.0
   satisfactory:
   - apiVersion: v2
+    appVersion: v1.9.8
+    created: "2025-05-10T16:07:23.239502115Z"
+    description: A Helm Chart for Satisfactory
+    digest: 15c4858242a4fb6050d9cf7f76303d4b5329ac5920be5842db3ffda5e4872cbb
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: satisfactory
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/satisfactory-0.3.1/satisfactory-0.3.1.tgz
+    version: 0.3.1
+  - apiVersion: v2
     appVersion: v1.9.7
     created: "2025-04-18T15:34:49.998798257Z"
     description: A Helm Chart for Satisfactory
@@ -3794,4 +3808,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2025-04-30T18:52:15.047444389Z"
+generated: "2025-05-10T16:07:23.239932974Z"
