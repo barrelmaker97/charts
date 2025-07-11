@@ -3,8 +3,8 @@ apiVersion: v2
 name: minecraft
 description: A Helm Chart for Minecraft
 type: application
-version: 0.8.11
-appVersion: 2025.6.1-java21-alpine
+version: 0.8.12
+appVersion: 2025.6.2-java21-alpine
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com
