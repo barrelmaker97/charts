@@ -13,8 +13,9 @@ spec:
       {{- include "minecraft.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
       annotations:
+        checksum/dynmap-config: {{ include (print $.Template.BasePath "/configmap-dynmap.yaml") . | sha256sum }}
+      {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
@@ -27,6 +28,29 @@ spec:
       serviceAccountName: {{ include "minecraft.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- if .Values.dynmap.enabled }}
+      initContainers:
+        - name: dynmap-config
+          securityContext:
+            {{- toYaml .Values.dynmap.config.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - /bin/ash
+          args:
+            - -c
+            - |
+              mkdir -p /data/plugins/dynmap
+              cp /dynmap-config/configuration.txt /data/plugins/dynmap
+          resources:
+            {{- toYaml .Values.dynmap.config.resources | nindent 12 }}
+          volumeMounts:
+            - name: savedata
+              mountPath: /data
+            - name: dynmap-config
+              mountPath: /dynmap-config
+              readOnly: true
+      {{- end }}
       containers:
         - name: minecraft
           securityContext:
@@ -120,6 +144,13 @@ spec:
       {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.dynmap.enabled }}
+      volumes:
+        - name: dynmap-config
+          configMap:
+            name: {{ include "minecraft.fullname" . }}-dynmap
+            defaultMode: 0644
       {{- end }}
   volumeClaimTemplates:
     - metadata:
