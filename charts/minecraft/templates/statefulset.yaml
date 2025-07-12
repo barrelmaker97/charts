@@ -111,8 +111,8 @@ spec:
               mountPath: /data
             {{- if .Values.dynmap.enabled }}
             - name: dynmap-config
-              mountPath: /data/plugins/dynmap
-              readOnly: true
+              mountPath: /data/plugins/dynmap/configuration.txt
+              subPath: configuration.txt
             {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
