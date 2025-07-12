@@ -1,4 +1,3 @@
-
 deftemplatesuffix: hires
 
 storage:
