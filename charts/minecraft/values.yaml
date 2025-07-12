@@ -16,23 +16,23 @@ dynmap:
   cores: 10
   config:
     resources: {}
-      # requests:
-      #   cpu: 10m
-      #   memory: 10Mi
-      # limits:
-      #   cpu: 30m
-      #   memory: 30Mi
+    # requests:
+    #   cpu: 10m
+    #   memory: 10Mi
+    # limits:
+    #   cpu: 30m
+    #   memory: 30Mi
     securityContext: {}
-      # allowPrivilegeEscalation: false
-      # capabilities:
-      #   drop:
-      #     - ALL
+    # allowPrivilegeEscalation: false
+    # capabilities:
+    #   drop:
+    #     - ALL
   ingress:
     enabled: false
     className: ""
     annotations: {}
-      # kubernetes.io/ingress.class: nginx
-      # kubernetes.io/tls-acme: "true"
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
     hosts:
       - host: minecraft.local
         paths:
@@ -119,28 +119,28 @@ serviceAccount:
 podAnnotations: {}
 
 podSecurityContext: {}
-  # runAsNonRoot: true
-  # runAsUser: 1000
-  # runAsGroup: 1000
-  # fsGroup: 1000
+# runAsNonRoot: true
+# runAsUser: 1000
+# runAsGroup: 1000
+# fsGroup: 1000
 
 securityContext: {}
-  # allowPrivilegeEscalation: false
-  # capabilities:
-  #   drop:
-  #     - ALL
+# allowPrivilegeEscalation: false
+# capabilities:
+#   drop:
+#     - ALL
 
 service:
   type: ClusterIP
   port: 25565
 
 resources: {}
-  # requests:
-  #   cpu: 1000m
-  #   memory: 1000Mi
-  # limits:
-  #   cpu: 1500m
-  #   memory: 2000Mi
+# requests:
+#   cpu: 1000m
+#   memory: 1000Mi
+# limits:
+#   cpu: 1500m
+#   memory: 2000Mi
 
 nodeSelector: {}
 
