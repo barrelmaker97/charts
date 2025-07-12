@@ -109,6 +109,11 @@ spec:
           volumeMounts:
             - name: savedata
               mountPath: /data
+            {{- if .Values.dynmap.enabled }}
+            - name: dynmap-config
+              mountPath: /data/plugins/dynmap
+              readOnly: true
+            {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
