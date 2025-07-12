@@ -121,6 +121,13 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- if .Values.dynmap.enabled }}
+      volumes:
+        - name: dynmap-config
+          configMap:
+            name: {{ include "minecraft.fullname" . }}-dynmap
+            defaultMode: 0644
+      {{- end }}
   volumeClaimTemplates:
     - metadata:
         name: savedata
