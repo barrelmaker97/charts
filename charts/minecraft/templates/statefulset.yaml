@@ -27,6 +27,29 @@ spec:
       serviceAccountName: {{ include "minecraft.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- if .Values.dynmap.enabled }}
+      initContainers:
+        - name: dynmap-config
+          securityContext:
+            {{- toYaml .Values.dynmap.config.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - /bin/ash
+          args:
+            - -c
+            - |
+              mkdir -p /data/plugins/dynmap
+              cp /dynmap-config/configuration.txt /data/plugins/dynmap
+          resources:
+            {{- toYaml .Values.dynmap.config.resources | nindent 12 }}
+          volumeMounts:
+            - name: savedata
+              mountPath: /data
+            - name: dynmap-config
+              mountPath: /dynmap-config
+              readOnly: true
+      {{- end }}
       containers:
         - name: minecraft
           securityContext:
@@ -109,11 +132,6 @@ spec:
           volumeMounts:
             - name: savedata
               mountPath: /data
-            {{- if .Values.dynmap.enabled }}
-            - name: dynmap-config
-              mountPath: /data/plugins/dynmap/configuration.txt
-              subPath: configuration.txt
-            {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

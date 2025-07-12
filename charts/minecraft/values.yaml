@@ -13,6 +13,19 @@ persistence:
 # https://modrinth.com/plugin/dynmap
 dynmap:
   enabled: false
+  config:
+    resources: {}
+      # requests:
+      #   cpu: 10m
+      #   memory: 10Mi
+      # limits:
+      #   cpu: 30m
+      #   memory: 30Mi
+    securityContext: {}
+      # allowPrivilegeEscalation: false
+      # capabilities:
+      #   drop:
+      #     - ALL
   ingress:
     enabled: false
     className: ""
