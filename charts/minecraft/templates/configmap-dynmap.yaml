@@ -1,0 +1,11 @@
+{{- if .Values.dynmap.enabled }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "minecraft.fullname" . }}-dynmap
+  labels:
+    {{- include "minecraft.labels" . | nindent 4 }}
+data:
+{{ (.Files.Glob "configuration.txt").AsConfig | indent 2 }}
+{{- end }}
