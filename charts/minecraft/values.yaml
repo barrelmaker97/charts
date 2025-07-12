@@ -13,6 +13,7 @@ persistence:
 # https://modrinth.com/plugin/dynmap
 dynmap:
   enabled: false
+  cores: 10
   config:
     resources: {}
       # requests:

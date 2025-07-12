@@ -98,7 +98,8 @@ data:
     renderinterval: 1
     renderacceleratethreshold: 60
     renderaccelerateinterval: 0.2
-    tiles-rendered-at-once: 12
+    tiles-rendered-at-once: {{ .Values.dynmap.cores }}
+    parallelrendercnt: {{ .Values.dynmap.cores }}
     usenormalthreadpriority: true
     saverestorepending: true
     save-pending-period: 900
@@ -144,7 +145,6 @@ data:
     timesliceinterval: 0.0
     maxchunkspertick: 200
     progressloginterval: 100
-    parallelrendercnt: 12
     updaterate: 2000
     fullrenderplayerlimit: 0
     updateplayerlimit: 0
