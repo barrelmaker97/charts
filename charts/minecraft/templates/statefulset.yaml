@@ -104,6 +104,12 @@ spec:
               value: {{ .Values.properties.viewDistance | quote }}
             - name: WHITELIST
               value: {{ .Values.properties.whitelist | quote }}
+            - name: PLUGINS
+              value: {{ .Values.properties.plugins | quote }}
+          {{- if .Values.metrics.enabled }}
+            - name: MINECRAFT_PROMETHEUS_EXPORTER_HOST
+              value: "0.0.0.0"
+          {{- end }}
           startupProbe:
             exec:
               command:

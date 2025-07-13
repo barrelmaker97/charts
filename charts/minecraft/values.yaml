@@ -97,6 +97,7 @@ properties:
   spawnProtection: 0
   spigetResources: ""
   modrinthProjects: ""
+  plugins: ""
   timezone: "America/Chicago"
   type: VANILLA
   version: LATEST
