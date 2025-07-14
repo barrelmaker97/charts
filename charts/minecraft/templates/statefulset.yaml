@@ -92,6 +92,8 @@ spec:
               value: {{ .Values.properties.spigetResources | quote }}
             - name: MODRINTH_PROJECTS
               value: {{ .Values.properties.modrinthProjects | quote }}
+            - name: PLUGINS
+              value: {{ .Values.properties.plugins | quote }}
             - name: TYPE
               value: {{ .Values.properties.type | quote }}
             - name: TZ
@@ -104,12 +106,6 @@ spec:
               value: {{ .Values.properties.viewDistance | quote }}
             - name: WHITELIST
               value: {{ .Values.properties.whitelist | quote }}
-            - name: PLUGINS
-              value: {{ .Values.properties.plugins | quote }}
-          {{- if .Values.metrics.enabled }}
-            - name: MINECRAFT_PROMETHEUS_EXPORTER_HOST
-              value: "0.0.0.0"
-          {{- end }}
           startupProbe:
             exec:
               command:
