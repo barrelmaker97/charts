@@ -92,6 +92,8 @@ spec:
               value: {{ .Values.properties.spigetResources | quote }}
             - name: MODRINTH_PROJECTS
               value: {{ .Values.properties.modrinthProjects | quote }}
+            - name: PLUGINS
+              value: {{ .Values.properties.plugins | quote }}
             - name: TYPE
               value: {{ .Values.properties.type | quote }}
             - name: TZ
