@@ -49,13 +49,13 @@ data:
         showspawn: true
         spawnicon: world
         spawnlabel: "Spawn"
-        showofflineplayers: false
+        showofflineplayers: {{ .Values.dynmap.showOfflinePlayers }}
         offlinelabel: "Offline"
         offlineicon: offlineuser
         offlinehidebydefault: true
         offlineminzoom: 0
         maxofflinetime: 30
-        showspawnbeds: false
+        showspawnbeds: {{ .Values.dynmap.showSpawnBeds }}
         spawnbedlabel: "Spawn Beds"
         spawnbedicon: bed
         spawnbedhidebydefault: true
