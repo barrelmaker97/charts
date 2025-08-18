@@ -247,7 +247,7 @@
 						"type": "prometheus",
 						"uid": "prometheus"
 					},
-					"expr": "ups_battery_runtime",
+					"expr": "avg(ups_battery_runtime)",
 					"instant": true,
 					"interval": "",
 					"legendFormat": "Runtime",
