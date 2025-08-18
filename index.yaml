@@ -2879,6 +2879,20 @@ entries:
   pistachio:
   - apiVersion: v2
     appVersion: 0.6.1
+    created: "2025-08-18T03:34:10.225998099Z"
+    description: A helm chart for pistachio
+    digest: 6f7d1d863740e92abd43c3e4c8eafbc2839a0c53c659813b6aa18b63fc76d319
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: pistachio
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/pistachio-0.2.4/pistachio-0.2.4.tgz
+    version: 0.2.4
+  - apiVersion: v2
+    appVersion: 0.6.1
     created: "2025-07-20T16:48:03.761155214Z"
     description: A helm chart for pistachio
     digest: cde39aabe07962a13e5c9417a7318842763b951a7d954433b1e487cebaf7e094
@@ -4060,4 +4074,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2025-08-15T16:50:08.21464775Z"
+generated: "2025-08-18T03:34:10.226525979Z"
