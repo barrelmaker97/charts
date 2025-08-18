@@ -165,7 +165,7 @@
 					"disableTextWrap": false,
 					"editorMode": "builder",
 					"exemplar": false,
-					"expr": "ups_status",
+					"expr": "avg by(status) (ups_status)",
 					"format": "time_series",
 					"fullMetaSearch": false,
 					"includeNullMetadata": true,
@@ -247,7 +247,7 @@
 						"type": "prometheus",
 						"uid": "prometheus"
 					},
-					"expr": "ups_battery_runtime",
+					"expr": "avg(ups_battery_runtime)",
 					"instant": true,
 					"interval": "",
 					"legendFormat": "Runtime",
