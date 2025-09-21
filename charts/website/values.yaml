@@ -7,7 +7,7 @@ gitSync:
   image:
     repository: registry.k8s.io/git-sync/git-sync
     pullPolicy: IfNotPresent
-    tag: v4.4.3
+    tag: v4.5.0
   securityContext: {}
     # allowPrivilegeEscalation: false
     # capabilities:
