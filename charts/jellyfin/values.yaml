@@ -8,7 +8,7 @@ image:
 persistence:
   config:
     storageClassName: ""
-    size: 1Gi
+    size: 3Gi
   media:
     storageClassName: ""
     size: 50Gi
