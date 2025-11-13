@@ -2,6 +2,20 @@ apiVersion: v1
 entries:
   factorio:
   - apiVersion: v2
+    appVersion: 2.0.72
+    created: "2025-11-13T00:26:44.243777355Z"
+    description: A Helm Chart for Factorio
+    digest: 7c1a7b5d1a4fc8dae6cc8202ee29ce07b7df5cd61512f8569aca82443c3bc77b
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: factorio
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/factorio-0.7.7/factorio-0.7.7.tgz
+    version: 0.7.7
+  - apiVersion: v2
     appVersion: 2.0.69
     created: "2025-10-20T14:16:05.039667768Z"
     description: A Helm Chart for Factorio
@@ -4312,4 +4326,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2025-11-07T15:35:26.90488527Z"
+generated: "2025-11-13T00:26:44.244321316Z"
