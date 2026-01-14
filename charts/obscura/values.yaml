@@ -1,0 +1,104 @@
+---
+obscura:
+  logLevel: debug
+  # Connection string for the PostgreSQL database.
+  # WARNING: For production, consider using a Secret and injecting it via extraEnv or similar.
+  databaseUrl: "postgres://obscura:obscura_password@obscura-postgresql:5432/obscura_db"
+  # Secret key for JWT generation/validation.
+  # WARNING: Must be changed for production!
+  jwtSecret: "change_me_to_a_secure_random_string"
+  
+  # Application configuration
+  rateLimitPerSecond: 5
+  rateLimitBurst: 10
+  messageTtlDays: 30
+  maxInboxSize: 1000
+  messageCleanupIntervalSecs: 300
+  notificationGcIntervalSecs: 60
+  notificationChannelCapacity: 16
+  
+  server:
+    host: "0.0.0.0"
+    port: 3000
+
+postgresql:
+  enabled: true
+  auth:
+    username: obscura
+    password: obscura_password
+    database: obscura_db
+
+replicaCount: 1
+
+image:
+  repository: ghcr.io/barrelmaker97/obscura-server
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+securityContext: {}
+  # allowPrivilegeEscalation: false
+  # capabilities:
+  #   drop:
+  #     - ALL
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 3000
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: obscura.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: obscura-tls
+  #    hosts:
+  #      - obscura.local
+
+resources: {}
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # limits:
+  #   cpu: 200m
+  #   memory: 256Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

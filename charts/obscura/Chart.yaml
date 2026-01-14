@@ -1,0 +1,15 @@
+---
+apiVersion: v2
+name: obscura
+description: A Helm chart for Obscura Server (Signal Protocol Relay)
+type: application
+version: 0.1.0
+appVersion: 0.1.0
+maintainers:
+  - name: barrelmaker97
+    email: nolancooper97@gmail.com
+    url: barrelmaker.dev
+dependencies:
+  - name: postgresql
+    version: 16.2.5
+    repository: https://charts.bitnami.com/bitnami

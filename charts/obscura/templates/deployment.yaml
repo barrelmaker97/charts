@@ -1,0 +1,85 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "obscura.fullname" . }}
+  labels:
+    {{- include "obscura.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "obscura.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+      {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "obscura.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "obscura.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: RUST_LOG
+              value: {{ .Values.obscura.logLevel | quote }}
+            - name: DATABASE_URL
+              value: {{ .Values.obscura.databaseUrl | quote }}
+            - name: JWT_SECRET
+              value: {{ .Values.obscura.jwtSecret | quote }}
+            - name: SERVER_HOST
+              value: {{ .Values.obscura.server.host | quote }}
+            - name: PORT
+              value: {{ .Values.obscura.server.port | quote }}
+            - name: RATE_LIMIT_PER_SECOND
+              value: {{ .Values.obscura.rateLimitPerSecond | quote }}
+            - name: RATE_LIMIT_BURST
+              value: {{ .Values.obscura.rateLimitBurst | quote }}
+            - name: MESSAGE_TTL_DAYS
+              value: {{ .Values.obscura.messageTtlDays | quote }}
+            - name: MAX_INBOX_SIZE
+              value: {{ .Values.obscura.maxInboxSize | quote }}
+            - name: MESSAGE_CLEANUP_INTERVAL_SECS
+              value: {{ .Values.obscura.messageCleanupIntervalSecs | quote }}
+            - name: NOTIFICATION_GC_INTERVAL_SECS
+              value: {{ .Values.obscura.notificationGcIntervalSecs | quote }}
+            - name: NOTIFICATION_CHANNEL_CAPACITY
+              value: {{ .Values.obscura.notificationChannelCapacity | quote }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.obscura.server.port }}
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: http
+          readinessProbe:
+            tcpSocket:
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
