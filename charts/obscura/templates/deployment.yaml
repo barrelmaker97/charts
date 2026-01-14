@@ -41,10 +41,6 @@ spec:
               value: {{ .Values.obscura.databaseUrl | quote }}
             - name: JWT_SECRET
               value: {{ .Values.obscura.jwtSecret | quote }}
-            - name: SERVER_HOST
-              value: {{ .Values.obscura.server.host | quote }}
-            - name: PORT
-              value: {{ .Values.obscura.server.port | quote }}
             - name: RATE_LIMIT_PER_SECOND
               value: {{ .Values.obscura.rateLimitPerSecond | quote }}
             - name: RATE_LIMIT_BURST
@@ -61,7 +57,7 @@ spec:
               value: {{ .Values.obscura.notificationChannelCapacity | quote }}
           ports:
             - name: http
-              containerPort: {{ .Values.obscura.server.port }}
+              containerPort: 3000
               protocol: TCP
           livenessProbe:
             tcpSocket:

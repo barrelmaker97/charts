@@ -7,7 +7,7 @@ obscura:
   # Secret key for JWT generation/validation.
   # WARNING: Must be changed for production!
   jwtSecret: "change_me_to_a_secure_random_string"
-  
+
   # Application configuration
   rateLimitPerSecond: 5
   rateLimitBurst: 10
@@ -16,10 +16,6 @@ obscura:
   messageCleanupIntervalSecs: 300
   notificationGcIntervalSecs: 60
   notificationChannelCapacity: 16
-  
-  server:
-    host: "0.0.0.0"
-    port: 3000
 
 postgresql:
   enabled: true
@@ -64,7 +60,6 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 80
-  targetPort: 3000
 
 ingress:
   enabled: false

@@ -1,7 +1,7 @@
 ---
 apiVersion: v2
 name: obscura
-description: A Helm chart for Obscura Server (Signal Protocol Relay)
+description: A Helm chart for Obscura Server
 type: application
 version: 0.1.0
 appVersion: 0.1.0
