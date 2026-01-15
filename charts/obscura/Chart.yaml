@@ -11,5 +11,5 @@ maintainers:
     url: barrelmaker.dev
 dependencies:
   - name: postgresql
-    version: 16.2.5
+    version: "18.X.X"
     repository: https://charts.bitnami.com/bitnami
