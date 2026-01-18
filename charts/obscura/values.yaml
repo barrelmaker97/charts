@@ -9,13 +9,23 @@ obscura:
   jwtSecret: "change_me_to_a_secure_random_string"
 
   # Application configuration
-  rateLimitPerSecond: 5
-  rateLimitBurst: 10
+  rateLimitPerSecond: 10
+  rateLimitBurst: 20
+  authRateLimitPerSecond: 1
+  authRateLimitBurst: 3
+  serverHost: "0.0.0.0"
+  serverPort: 3000
   messageTtlDays: 30
   maxInboxSize: 1000
   messageCleanupIntervalSecs: 300
   notificationGcIntervalSecs: 60
   notificationChannelCapacity: 16
+  messageBatchLimit: 50
+  trustedProxies: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,127.0.0.1/32"
+  wsOutboundBufferSize: 32
+  wsAckBufferSize: 100
+  wsAckBatchSize: 50
+  wsAckFlushIntervalMs: 500
 
 postgresql:
   enabled: true
