@@ -60,3 +60,18 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Compute the database URL
+*/}}
+{{- define "obscura.databaseUrl" -}}
+{{- if .Values.obscura.databaseUrl -}}
+{{- .Values.obscura.databaseUrl -}}
+{{- else -}}
+{{- $user := .Values.postgresql.auth.username -}}
+{{- $pass := .Values.postgresql.auth.password -}}
+{{- $db := .Values.postgresql.auth.database -}}
+{{- $host := printf "%s-postgresql" .Release.Name -}}
+{{- printf "postgres://%s:%s@%s:5432/%s" $user $pass $host $db -}}
+{{- end -}}
+{{- end }}

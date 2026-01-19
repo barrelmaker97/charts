@@ -2,7 +2,8 @@
 obscura:
   logLevel: debug
   # Connection string for the PostgreSQL database.
-  databaseUrl: "postgres://obscura:obscura_password@obscura-postgresql:5432/obscura_db"
+  # If empty, it will be generated using the postgresql subchart values.
+  databaseUrl: ""
   # Secret key for JWT generation/validation.
   # WARNING: Must be changed for production!
   jwtSecret: "change_me_to_a_secure_random_string"
