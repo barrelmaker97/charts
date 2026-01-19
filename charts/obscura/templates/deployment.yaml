@@ -84,7 +84,7 @@ spec:
               value: {{ .Values.obscura.wsAckFlushIntervalMs | quote }}
           ports:
             - name: http
-              containerPort: 3000
+              containerPort: {{ .Values.obscura.serverPort }}
               protocol: TCP
           livenessProbe:
             tcpSocket:
