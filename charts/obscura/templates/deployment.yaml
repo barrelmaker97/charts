@@ -86,6 +86,28 @@ spec:
               value: {{ .Values.obscura.wsAckBatchSize | quote }}
             - name: WS_ACK_FLUSH_INTERVAL_MS
               value: {{ .Values.obscura.wsAckFlushIntervalMs | quote }}
+            - name: S3_BUCKET
+              value: {{ .Values.obscura.s3.bucket | quote }}
+            - name: S3_REGION
+              value: {{ .Values.obscura.s3.region | quote }}
+            - name: S3_ENDPOINT
+              value: {{ include "obscura.s3Endpoint" . | quote }}
+            - name: S3_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "obscura.fullname" . }}-secret
+                  key: s3-access-key
+            - name: S3_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "obscura.fullname" . }}-secret
+                  key: s3-secret-key
+            - name: S3_FORCE_PATH_STYLE
+              value: {{ .Values.obscura.s3.forcePathStyle | quote }}
+            - name: ATTACHMENT_TTL_DAYS
+              value: {{ .Values.obscura.attachmentTtlDays | quote }}
+            - name: ATTACHMENT_MAX_SIZE_BYTES
+              value: {{ .Values.obscura.attachmentMaxSizeByes | quote }}
           ports:
             - name: http
               containerPort: {{ .Values.obscura.serverPort }}

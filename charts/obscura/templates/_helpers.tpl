@@ -75,3 +75,36 @@ Compute the database URL
 {{- printf "postgres://%s:%s@%s:5432/%s" $user $pass $host $db -}}
 {{- end -}}
 {{- end }}
+
+{{/*
+Compute the S3 endpoint
+*/}}
+{{- define "obscura.s3Endpoint" -}}
+{{- if .Values.obscura.s3.endpoint -}}
+{{- .Values.obscura.s3.endpoint -}}
+{{- else if .Values.minio.enabled -}}
+{{- printf "http://%s-minio:9000" .Release.Name -}}
+{{- end -}}
+{{- end }}
+
+{{/*
+Compute the S3 Access Key
+*/}}
+{{- define "obscura.s3AccessKey" -}}
+{{- if .Values.obscura.s3.accessKey -}}
+{{- .Values.obscura.s3.accessKey -}}
+{{- else if .Values.minio.enabled -}}
+{{- .Values.minio.auth.rootUser -}}
+{{- end -}}
+{{- end }}
+
+{{/*
+Compute the S3 Secret Key
+*/}}
+{{- define "obscura.s3SecretKey" -}}
+{{- if .Values.obscura.s3.secretKey -}}
+{{- .Values.obscura.s3.secretKey -}}
+{{- else if .Values.minio.enabled -}}
+{{- .Values.minio.auth.rootPassword -}}
+{{- end -}}
+{{- end }}

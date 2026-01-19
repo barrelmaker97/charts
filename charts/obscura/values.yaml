@@ -29,6 +29,20 @@ obscura:
   wsAckBatchSize: 50
   wsAckFlushIntervalMs: 500
 
+  # S3 / Attachment configuration
+  s3:
+    bucket: "obscura-attachments"
+    region: "us-east-1"
+    # If empty and minio.enabled is true, it will be generated.
+    endpoint: ""
+    # Access and Secret keys. If empty and minio.enabled is true, minio defaults will be used.
+    accessKey: ""
+    secretKey: ""
+    forcePathStyle: true
+  
+  attachmentTtlDays: 30
+  attachmentMaxSizeByes: 52428800
+
 postgresql:
   enabled: true
   auth:
@@ -36,6 +50,15 @@ postgresql:
     # WARNING: Must be changed for production!
     password: obscura_password
     database: obscura_db
+
+minio:
+  enabled: true
+  auth:
+    rootUser: minioadmin
+    rootPassword: minioadmin
+  defaultBuckets: "obscura-attachments"
+  persistence:
+    enabled: false
 
 replicaCount: 1
 
