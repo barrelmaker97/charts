@@ -3156,6 +3156,25 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/minecraft-0.1.1/minecraft-0.1.1.tgz
     version: 0.1.1
+  obscura:
+  - apiVersion: v2
+    appVersion: 0.2.3
+    created: "2026-01-19T15:03:22.438364811Z"
+    dependencies:
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 18.X.X
+    description: A Helm chart for Obscura Server
+    digest: 77281c5a6c5db9ccf545b10c255f9800c0845b92659ea34bfcc9ed782b35ab7d
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: obscura
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/obscura-0.1.0/obscura-0.1.0.tgz
+    version: 0.1.0
   pistachio:
   - apiVersion: v2
     appVersion: 0.6.1
@@ -4466,4 +4485,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2026-01-09T21:02:35.996885985Z"
+generated: "2026-01-19T15:03:22.438740971Z"
