@@ -48,6 +48,10 @@ spec:
                 secretKeyRef:
                   name: {{ include "obscura.fullname" . }}-secret
                   key: jwt-secret
+            - name: ACCESS_TOKEN_TTL_SECS
+              value: {{ .Values.obscura.accessTokenTtlSecs | quote }}
+            - name: REFRESH_TOKEN_TTL_DAYS
+              value: {{ .Values.obscura.refreshTokenTtlDays | quote }}
             - name: RATE_LIMIT_PER_SECOND
               value: {{ .Values.obscura.rateLimitPerSecond | quote }}
             - name: RATE_LIMIT_BURST
