@@ -31,6 +31,7 @@ postgresql:
   enabled: true
   auth:
     username: obscura
+    # WARNING: Must be changed for production!
     password: obscura_password
     database: obscura_db
 
