@@ -1,6 +1,6 @@
 ---
 obscura:
-  logLevel: debug
+  logLevel: info
   # Connection string for the PostgreSQL database.
   # If empty, it will be generated using the postgresql subchart values.
   databaseUrl: ""
