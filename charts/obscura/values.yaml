@@ -2,7 +2,6 @@
 obscura:
   logLevel: debug
   # Connection string for the PostgreSQL database.
-  # WARNING: For production, consider using a Secret and injecting it via extraEnv or similar.
   databaseUrl: "postgres://obscura:obscura_password@obscura-postgresql:5432/obscura_db"
   # Secret key for JWT generation/validation.
   # WARNING: Must be changed for production!
