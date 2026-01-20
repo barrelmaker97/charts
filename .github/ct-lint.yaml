@@ -1,5 +1,5 @@
 ---
-chart-repos: bitnami=https://charts.bitnami.com/bitnami
+chart-repos: bitnami=https://charts.bitnami.com/bitnami,minio=https://charts.min.io/
 check-version-increment: true
 remote: origin
 target-branch: main
