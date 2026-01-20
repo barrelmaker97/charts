@@ -4,7 +4,7 @@ obscura:
   # Connection string for the PostgreSQL database.
   # If empty, it will be generated using the postgresql subchart values.
   databaseUrl: ""
-  
+
   # Global time-to-live for messages and attachments in days
   ttlDays: 30
 
