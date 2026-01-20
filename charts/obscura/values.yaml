@@ -72,8 +72,10 @@ minio:
   enabled: true
   mode: standalone
   replicas: 1
-  rootUser: minioadmin
-  rootPassword: minioadmin
+  rootUser: obscura
+  rootPassword: obscura_password
+  image:
+    tag: RELEASE.2025-09-07T16-13-09Z
   buckets:
     - name: obscura-attachments
       policy: none
