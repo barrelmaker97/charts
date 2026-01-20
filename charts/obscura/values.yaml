@@ -70,12 +70,19 @@ postgresql:
 
 minio:
   enabled: true
-  auth:
-    rootUser: minioadmin
-    rootPassword: minioadmin
-  defaultBuckets: "obscura-attachments"
+  mode: standalone
+  replicas: 1
+  rootUser: minioadmin
+  rootPassword: minioadmin
+  buckets:
+    - name: obscura-attachments
+      policy: none
+      purge: false
   persistence:
     enabled: false
+  resources:
+    requests:
+      memory: 256Mi
 
 replicaCount: 1
 

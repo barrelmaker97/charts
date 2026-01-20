@@ -94,7 +94,7 @@ Compute the S3 Access Key
 {{- if .Values.obscura.s3.accessKey -}}
 {{- .Values.obscura.s3.accessKey -}}
 {{- else if .Values.minio.enabled -}}
-{{- .Values.minio.auth.rootUser -}}
+{{- .Values.minio.rootUser -}}
 {{- end -}}
 {{- end }}
 
@@ -105,6 +105,6 @@ Compute the S3 Secret Key
 {{- if .Values.obscura.s3.secretKey -}}
 {{- .Values.obscura.s3.secretKey -}}
 {{- else if .Values.minio.enabled -}}
-{{- .Values.minio.auth.rootPassword -}}
+{{- .Values.minio.rootPassword -}}
 {{- end -}}
 {{- end }}

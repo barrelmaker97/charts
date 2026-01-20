@@ -14,5 +14,5 @@ dependencies:
     version: ~18.2.0
     repository: https://charts.bitnami.com/bitnami
   - name: minio
-    version: ~17.0.0
-    repository: https://charts.bitnami.com/bitnami
+    version: 5.4.0
+    repository: https://charts.min.io/
