@@ -38,57 +38,77 @@ spec:
           env:
             - name: RUST_LOG
               value: {{ .Values.obscura.logLevel | quote }}
-            - name: DATABASE_URL
+            - name: OBSCURA_DATABASE_URL
               valueFrom:
                 secretKeyRef:
                   name: {{ include "obscura.fullname" . }}-secret
                   key: database-url
-            - name: JWT_SECRET
+            - name: OBSCURA_TTL_DAYS
+              value: {{ .Values.obscura.ttlDays | quote }}
+            - name: OBSCURA_JWT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: {{ include "obscura.fullname" . }}-secret
                   key: jwt-secret
-            - name: ACCESS_TOKEN_TTL_SECS
-              value: {{ .Values.obscura.accessTokenTtlSecs | quote }}
-            - name: REFRESH_TOKEN_TTL_DAYS
-              value: {{ .Values.obscura.refreshTokenTtlDays | quote }}
-            - name: RATE_LIMIT_PER_SECOND
-              value: {{ .Values.obscura.rateLimitPerSecond | quote }}
-            - name: RATE_LIMIT_BURST
-              value: {{ .Values.obscura.rateLimitBurst | quote }}
-            - name: AUTH_RATE_LIMIT_PER_SECOND
-              value: {{ .Values.obscura.authRateLimitPerSecond | quote }}
-            - name: AUTH_RATE_LIMIT_BURST
-              value: {{ .Values.obscura.authRateLimitBurst | quote }}
-            - name: SERVER_HOST
-              value: {{ .Values.obscura.serverHost | quote }}
-            - name: PORT
-              value: {{ .Values.obscura.serverPort | quote }}
-            - name: MESSAGE_TTL_DAYS
-              value: {{ .Values.obscura.messageTtlDays | quote }}
-            - name: MAX_INBOX_SIZE
-              value: {{ .Values.obscura.maxInboxSize | quote }}
-            - name: MESSAGE_CLEANUP_INTERVAL_SECS
-              value: {{ .Values.obscura.messageCleanupIntervalSecs | quote }}
-            - name: NOTIFICATION_GC_INTERVAL_SECS
-              value: {{ .Values.obscura.notificationGcIntervalSecs | quote }}
-            - name: NOTIFICATION_CHANNEL_CAPACITY
-              value: {{ .Values.obscura.notificationChannelCapacity | quote }}
-            - name: MESSAGE_BATCH_LIMIT
-              value: {{ .Values.obscura.messageBatchLimit | quote }}
-            - name: TRUSTED_PROXIES
-              value: {{ .Values.obscura.trustedProxies | quote }}
-            - name: WS_OUTBOUND_BUFFER_SIZE
-              value: {{ .Values.obscura.wsOutboundBufferSize | quote }}
-            - name: WS_ACK_BUFFER_SIZE
-              value: {{ .Values.obscura.wsAckBufferSize | quote }}
-            - name: WS_ACK_BATCH_SIZE
-              value: {{ .Values.obscura.wsAckBatchSize | quote }}
-            - name: WS_ACK_FLUSH_INTERVAL_MS
-              value: {{ .Values.obscura.wsAckFlushIntervalMs | quote }}
+            - name: OBSCURA_ACCESS_TOKEN_TTL_SECS
+              value: {{ .Values.obscura.auth.accessTokenTtlSecs | quote }}
+            - name: OBSCURA_REFRESH_TOKEN_TTL_DAYS
+              value: {{ .Values.obscura.auth.refreshTokenTtlDays | quote }}
+            - name: OBSCURA_RATE_LIMIT_PER_SECOND
+              value: {{ .Values.obscura.rateLimit.perSecond | quote }}
+            - name: OBSCURA_RATE_LIMIT_BURST
+              value: {{ .Values.obscura.rateLimit.burst | quote }}
+            - name: OBSCURA_AUTH_RATE_LIMIT_PER_SECOND
+              value: {{ .Values.obscura.rateLimit.authPerSecond | quote }}
+            - name: OBSCURA_AUTH_RATE_LIMIT_BURST
+              value: {{ .Values.obscura.rateLimit.authBurst | quote }}
+            - name: OBSCURA_HOST
+              value: {{ .Values.obscura.server.host | quote }}
+            - name: OBSCURA_PORT
+              value: {{ .Values.obscura.server.port | quote }}
+            - name: OBSCURA_MAX_INBOX_SIZE
+              value: {{ .Values.obscura.messaging.maxInboxSize | quote }}
+            - name: OBSCURA_CLEANUP_INTERVAL_SECS
+              value: {{ .Values.obscura.messaging.cleanupIntervalSecs | quote }}
+            - name: OBSCURA_GC_INTERVAL_SECS
+              value: {{ .Values.obscura.notifications.gcIntervalSecs | quote }}
+            - name: OBSCURA_CHANNEL_CAPACITY
+              value: {{ .Values.obscura.notifications.channelCapacity | quote }}
+            - name: OBSCURA_BATCH_LIMIT
+              value: {{ .Values.obscura.messaging.batchLimit | quote }}
+            - name: OBSCURA_TRUSTED_PROXIES
+              value: {{ .Values.obscura.server.trustedProxies | quote }}
+            - name: OBSCURA_WS_OUTBOUND_BUFFER_SIZE
+              value: {{ .Values.obscura.websocket.outboundBufferSize | quote }}
+            - name: OBSCURA_WS_ACK_BUFFER_SIZE
+              value: {{ .Values.obscura.websocket.ackBufferSize | quote }}
+            - name: OBSCURA_WS_ACK_BATCH_SIZE
+              value: {{ .Values.obscura.websocket.ackBatchSize | quote }}
+            - name: OBSCURA_WS_ACK_FLUSH_INTERVAL_MS
+              value: {{ .Values.obscura.websocket.ackFlushIntervalMs | quote }}
+            - name: OBSCURA_S3_BUCKET
+              value: {{ .Values.obscura.s3.bucket | quote }}
+            - name: OBSCURA_S3_REGION
+              value: {{ .Values.obscura.s3.region | quote }}
+            - name: OBSCURA_S3_ENDPOINT
+              value: {{ include "obscura.s3Endpoint" . | quote }}
+            - name: OBSCURA_S3_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "obscura.fullname" . }}-secret
+                  key: s3-access-key
+            - name: OBSCURA_S3_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "obscura.fullname" . }}-secret
+                  key: s3-secret-key
+            - name: OBSCURA_S3_FORCE_PATH_STYLE
+              value: {{ .Values.obscura.s3.forcePathStyle | quote }}
+            - name: OBSCURA_S3_MAX_SIZE_BYTES
+              value: {{ printf "%d" (int .Values.obscura.s3.maxSizeBytes) | quote }}
           ports:
             - name: http
-              containerPort: {{ .Values.obscura.serverPort }}
+              containerPort: {{ .Values.obscura.server.port }}
               protocol: TCP
           livenessProbe:
             tcpSocket:

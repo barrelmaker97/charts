@@ -3,13 +3,16 @@ apiVersion: v2
 name: obscura
 description: A Helm chart for Obscura Server
 type: application
-version: 0.1.1
-appVersion: 0.2.6
+version: 0.1.2
+appVersion: 0.3.0
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com
     url: barrelmaker.dev
 dependencies:
   - name: postgresql
-    version: "18.X.X"
+    version: ~18.2.0
     repository: https://charts.bitnami.com/bitnami
+  - name: minio
+    version: 5.4.0
+    repository: https://charts.min.io/

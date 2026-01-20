@@ -4,30 +4,61 @@ obscura:
   # Connection string for the PostgreSQL database.
   # If empty, it will be generated using the postgresql subchart values.
   databaseUrl: ""
-  # Secret key for JWT generation/validation.
-  # WARNING: Must be changed for production!
-  jwtSecret: "change_me_to_a_secure_random_string"
 
-  # Application configuration
-  accessTokenTtlSecs: 900
-  refreshTokenTtlDays: 30
-  rateLimitPerSecond: 10
-  rateLimitBurst: 20
-  authRateLimitPerSecond: 1
-  authRateLimitBurst: 3
-  serverHost: "0.0.0.0"
-  serverPort: 3000
-  messageTtlDays: 30
-  maxInboxSize: 1000
-  messageCleanupIntervalSecs: 300
-  notificationGcIntervalSecs: 60
-  notificationChannelCapacity: 16
-  messageBatchLimit: 50
-  trustedProxies: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,127.0.0.1/32"
-  wsOutboundBufferSize: 32
-  wsAckBufferSize: 100
-  wsAckBatchSize: 50
-  wsAckFlushIntervalMs: 500
+  # Global time-to-live for messages and attachments in days
+  ttlDays: 30
+
+  # Server configuration
+  server:
+    host: "0.0.0.0"
+    port: 3000
+    # Comma-separated list of CIDRs to trust for X-Forwarded-For IP extraction
+    trustedProxies: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,127.0.0.1/32"
+
+  # Auth configuration
+  auth:
+    # Secret key for JWT generation/validation.
+    # WARNING: Must be changed for production!
+    jwtSecret: "change_me_to_a_secure_random_string"
+    accessTokenTtlSecs: 900
+    refreshTokenTtlDays: 30
+
+  # Rate limit configuration
+  rateLimit:
+    perSecond: 10
+    burst: 20
+    authPerSecond: 1
+    authBurst: 3
+
+  # Messaging configuration
+  messaging:
+    maxInboxSize: 1000
+    cleanupIntervalSecs: 300
+    batchLimit: 50
+
+  # Notification configuration
+  notifications:
+    gcIntervalSecs: 60
+    channelCapacity: 16
+
+  # Websocket configuration
+  websocket:
+    outboundBufferSize: 32
+    ackBufferSize: 100
+    ackBatchSize: 50
+    ackFlushIntervalMs: 500
+
+  # S3 / Attachment configuration
+  s3:
+    bucket: "obscura-attachments"
+    region: "us-east-1"
+    # If empty and minio.enabled is true, it will be generated.
+    endpoint: ""
+    # Access and Secret keys. If empty and minio.enabled is true, minio defaults will be used.
+    accessKey: ""
+    secretKey: ""
+    forcePathStyle: true
+    maxSizeBytes: 52428800
 
 postgresql:
   enabled: true
@@ -36,6 +67,22 @@ postgresql:
     # WARNING: Must be changed for production!
     password: obscura_password
     database: obscura_db
+
+minio:
+  enabled: true
+  mode: standalone
+  replicas: 1
+  rootUser: minioadmin
+  rootPassword: minioadmin
+  buckets:
+    - name: obscura-attachments
+      policy: none
+      purge: false
+  persistence:
+    enabled: false
+  resources:
+    requests:
+      memory: 256Mi
 
 replicaCount: 1
 
