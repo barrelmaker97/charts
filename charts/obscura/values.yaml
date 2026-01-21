@@ -35,6 +35,8 @@ obscura:
     maxInboxSize: 1000
     cleanupIntervalSecs: 300
     batchLimit: 50
+    preKeyRefillThreshold: 20
+    maxPreKeys: 100
 
   # Notification configuration
   notifications:
