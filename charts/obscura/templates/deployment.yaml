@@ -76,6 +76,10 @@ spec:
               value: {{ .Values.obscura.notifications.channelCapacity | quote }}
             - name: OBSCURA_BATCH_LIMIT
               value: {{ .Values.obscura.messaging.batchLimit | quote }}
+            - name: OBSCURA_PRE_KEY_REFILL_THRESHOLD
+              value: {{ .Values.obscura.messaging.preKeyRefillThreshold | quote }}
+            - name: OBSCURA_MAX_PRE_KEYS
+              value: {{ .Values.obscura.messaging.maxPreKeys | quote }}
             - name: OBSCURA_TRUSTED_PROXIES
               value: {{ .Values.obscura.server.trustedProxies | quote }}
             - name: OBSCURA_WS_OUTBOUND_BUFFER_SIZE
