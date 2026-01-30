@@ -12,8 +12,14 @@ obscura:
   server:
     host: "0.0.0.0"
     port: 3000
+    mgmtPort: 9090
     # Comma-separated list of CIDRs to trust for X-Forwarded-For IP extraction
     trustedProxies: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,127.0.0.1/32"
+
+  # Health check configuration
+  health:
+    dbTimeoutMs: 2000
+    s3TimeoutMs: 2000
 
   # Auth configuration
   auth:

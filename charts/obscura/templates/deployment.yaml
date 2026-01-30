@@ -66,6 +66,12 @@ spec:
               value: {{ .Values.obscura.server.host | quote }}
             - name: OBSCURA_PORT
               value: {{ .Values.obscura.server.port | quote }}
+            - name: OBSCURA_MGMT_PORT
+              value: {{ .Values.obscura.server.mgmtPort | quote }}
+            - name: OBSCURA_HEALTH_DB_TIMEOUT_MS
+              value: {{ .Values.obscura.health.dbTimeoutMs | quote }}
+            - name: OBSCURA_HEALTH_S3_TIMEOUT_MS
+              value: {{ .Values.obscura.health.s3TimeoutMs | quote }}
             - name: OBSCURA_MAX_INBOX_SIZE
               value: {{ .Values.obscura.messaging.maxInboxSize | quote }}
             - name: OBSCURA_CLEANUP_INTERVAL_SECS
@@ -114,12 +120,17 @@ spec:
             - name: http
               containerPort: {{ .Values.obscura.server.port }}
               protocol: TCP
+            - name: mgmt
+              containerPort: {{ .Values.obscura.server.mgmtPort }}
+              protocol: TCP
           livenessProbe:
-            tcpSocket:
-              port: http
+            httpGet:
+              path: /livez
+              port: mgmt
           readinessProbe:
-            tcpSocket:
-              port: http
+            httpGet:
+              path: /readyz
+              port: mgmt
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
