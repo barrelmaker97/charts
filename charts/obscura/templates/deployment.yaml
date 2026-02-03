@@ -38,6 +38,8 @@ spec:
           env:
             - name: RUST_LOG
               value: {{ .Values.obscura.logLevel | quote }}
+            - name: OBSCURA_LOG_FORMAT
+              value: {{ .Values.obscura.server.logFormat | quote }}
             - name: OBSCURA_DATABASE_URL
               valueFrom:
                 secretKeyRef:
