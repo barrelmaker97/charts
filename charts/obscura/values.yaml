@@ -13,10 +13,16 @@ obscura:
     host: "0.0.0.0"
     port: 3000
     mgmtPort: 9090
-    # Log format (text or json)
-    logFormat: "text"
     # Comma-separated list of CIDRs to trust for X-Forwarded-For IP extraction
     trustedProxies: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,127.0.0.1/32"
+
+  # Telemetry configuration
+  telemetry:
+    # OTLP Endpoint for traces and metrics (e.g. http://otel-collector:4318)
+    # If empty, OTLP export is disabled (logs only).
+    otlpEndpoint: ""
+    # Log format (text or json)
+    logFormat: "text"
 
   # Health check configuration
   health:

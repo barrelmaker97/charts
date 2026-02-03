@@ -3,7 +3,7 @@ apiVersion: v2
 name: obscura
 description: A Helm chart for Obscura Server
 type: application
-version: 0.2.2
+version: 0.3.0
 appVersion: 0.3.8
 maintainers:
   - name: barrelmaker97

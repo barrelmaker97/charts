@@ -38,8 +38,10 @@ spec:
           env:
             - name: RUST_LOG
               value: {{ .Values.obscura.logLevel | quote }}
+            - name: OBSCURA_OTLP_ENDPOINT
+              value: {{ .Values.obscura.telemetry.otlpEndpoint | quote }}
             - name: OBSCURA_LOG_FORMAT
-              value: {{ .Values.obscura.server.logFormat | quote }}
+              value: {{ .Values.obscura.telemetry.logFormat | quote }}
             - name: OBSCURA_DATABASE_URL
               valueFrom:
                 secretKeyRef:
