@@ -77,33 +77,33 @@ Compute the database URL
 {{- end }}
 
 {{/*
-Compute the S3 endpoint
+Compute the storage endpoint
 */}}
-{{- define "obscura.s3Endpoint" -}}
-{{- if .Values.obscura.s3.endpoint -}}
-{{- .Values.obscura.s3.endpoint -}}
+{{- define "obscura.storageEndpoint" -}}
+{{- if .Values.obscura.storage.endpoint -}}
+{{- .Values.obscura.storage.endpoint -}}
 {{- else if .Values.minio.enabled -}}
 {{- printf "http://%s-minio:9000" .Release.Name -}}
 {{- end -}}
 {{- end }}
 
 {{/*
-Compute the S3 Access Key
+Compute the Storage Access Key
 */}}
-{{- define "obscura.s3AccessKey" -}}
-{{- if .Values.obscura.s3.accessKey -}}
-{{- .Values.obscura.s3.accessKey -}}
+{{- define "obscura.storageAccessKey" -}}
+{{- if .Values.obscura.storage.accessKey -}}
+{{- .Values.obscura.storage.accessKey -}}
 {{- else if .Values.minio.enabled -}}
 {{- .Values.minio.rootUser -}}
 {{- end -}}
 {{- end }}
 
 {{/*
-Compute the S3 Secret Key
+Compute the Storage Secret Key
 */}}
-{{- define "obscura.s3SecretKey" -}}
-{{- if .Values.obscura.s3.secretKey -}}
-{{- .Values.obscura.s3.secretKey -}}
+{{- define "obscura.storageSecretKey" -}}
+{{- if .Values.obscura.storage.secretKey -}}
+{{- .Values.obscura.storage.secretKey -}}
 {{- else if .Values.minio.enabled -}}
 {{- .Values.minio.rootPassword -}}
 {{- end -}}

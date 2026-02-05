@@ -13,6 +13,7 @@ obscura:
     host: "0.0.0.0"
     port: 3000
     mgmtPort: 9090
+    shutdownTimeoutSecs: 5
     # Comma-separated list of CIDRs to trust for X-Forwarded-For IP extraction
     trustedProxies: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,127.0.0.1/32"
 
@@ -23,11 +24,13 @@ obscura:
     otlpEndpoint: ""
     # Log format (text or json)
     logFormat: "text"
+    metricsExportIntervalSecs: 60
+    exportTimeoutSecs: 10
 
   # Health check configuration
   health:
     dbTimeoutMs: 2000
-    s3TimeoutMs: 2000
+    storageTimeoutMs: 2000
 
   # Auth configuration
   auth:
@@ -64,8 +67,8 @@ obscura:
     ackBatchSize: 50
     ackFlushIntervalMs: 500
 
-  # S3 / Attachment configuration
-  s3:
+  # Storage / Attachment configuration
+  storage:
     bucket: "obscura-attachments"
     region: "us-east-1"
     # If empty and minio.enabled is true, it will be generated.
@@ -75,6 +78,8 @@ obscura:
     secretKey: ""
     forcePathStyle: true
     maxSizeBytes: 52428800
+    cleanupIntervalSecs: 3600
+    cleanupBatchSize: 100
 
 postgresql:
   enabled: true
