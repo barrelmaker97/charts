@@ -30,6 +30,24 @@ spec:
       serviceAccountName: {{ include "obscura.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- if .Values.minio.enabled }}
+      initContainers:
+        - name: create-bucket
+          image: "{{ .Values.minio.image.repository }}:{{ .Values.minio.image.tag }}"
+          command:
+            - /bin/sh
+            - -c
+            - |
+              sleep 5;
+              /usr/bin/mc alias set local {{ include "obscura.storageEndpoint" . }} {{ include "obscura.storageAccessKey" . }} {{ include "obscura.storageSecretKey" . }};
+              if ! /usr/bin/mc ls local/{{ .Values.obscura.storage.bucket }} > /dev/null 2>&1; then
+                /usr/bin/mc mb local/{{ .Values.obscura.storage.bucket }};
+              fi
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:

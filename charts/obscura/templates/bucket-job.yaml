@@ -1,0 +1,33 @@
+{{- if .Values.minio.enabled -}}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "obscura.fullname" . }}-bucket-setup
+  labels:
+    {{- include "obscura.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "5"
+    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
+spec:
+  template:
+    spec:
+      containers:
+        - name: mc
+          image: quay.io/minio/mc:latest
+          command:
+            - /bin/sh
+            - -c
+            - |
+              mc alias set myminio {{ include "obscura.storageEndpoint" . }} {{ include "obscura.storageAccessKey" . }} {{ include "obscura.storageSecretKey" . }};
+              if ! mc ls myminio/{{ .Values.obscura.storage.bucket }} > /dev/null 2>&1; then
+                mc mb myminio/{{ .Values.obscura.storage.bucket }};
+              else
+                echo "Bucket {{ .Values.obscura.storage.bucket }} already exists";
+              fi
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+      restartPolicy: OnFailure
+{{- end -}}
