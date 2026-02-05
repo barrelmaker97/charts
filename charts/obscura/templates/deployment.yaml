@@ -16,6 +16,7 @@ spec:
     metadata:
       annotations:
         checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
       {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
@@ -29,97 +30,69 @@ spec:
       serviceAccountName: {{ include "obscura.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- if .Values.minio.enabled }}
+      initContainers:
+        - name: create-bucket
+          image: "{{ .Values.minio.image.repository }}:{{ .Values.minio.image.tag }}"
+          command:
+            - /bin/sh
+            - -c
+            - |
+              sleep 5;
+              /usr/bin/mc alias set local {{ include "obscura.storageEndpoint" . }} {{ include "obscura.storageAccessKey" . }} {{ include "obscura.storageSecretKey" . }};
+              if ! /usr/bin/mc ls local/{{ .Values.obscura.storage.bucket }} > /dev/null 2>&1; then
+                /usr/bin/mc mb local/{{ .Values.obscura.storage.bucket }};
+              fi
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "obscura.fullname" . }}-config
           env:
-            - name: RUST_LOG
-              value: {{ .Values.obscura.logLevel | quote }}
             - name: OBSCURA_DATABASE_URL
               valueFrom:
                 secretKeyRef:
                   name: {{ include "obscura.fullname" . }}-secret
                   key: database-url
-            - name: OBSCURA_TTL_DAYS
-              value: {{ .Values.obscura.ttlDays | quote }}
             - name: OBSCURA_JWT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: {{ include "obscura.fullname" . }}-secret
                   key: jwt-secret
-            - name: OBSCURA_ACCESS_TOKEN_TTL_SECS
-              value: {{ .Values.obscura.auth.accessTokenTtlSecs | quote }}
-            - name: OBSCURA_REFRESH_TOKEN_TTL_DAYS
-              value: {{ .Values.obscura.auth.refreshTokenTtlDays | quote }}
-            - name: OBSCURA_RATE_LIMIT_PER_SECOND
-              value: {{ .Values.obscura.rateLimit.perSecond | quote }}
-            - name: OBSCURA_RATE_LIMIT_BURST
-              value: {{ .Values.obscura.rateLimit.burst | quote }}
-            - name: OBSCURA_AUTH_RATE_LIMIT_PER_SECOND
-              value: {{ .Values.obscura.rateLimit.authPerSecond | quote }}
-            - name: OBSCURA_AUTH_RATE_LIMIT_BURST
-              value: {{ .Values.obscura.rateLimit.authBurst | quote }}
-            - name: OBSCURA_HOST
-              value: {{ .Values.obscura.server.host | quote }}
-            - name: OBSCURA_PORT
-              value: {{ .Values.obscura.server.port | quote }}
-            - name: OBSCURA_MAX_INBOX_SIZE
-              value: {{ .Values.obscura.messaging.maxInboxSize | quote }}
-            - name: OBSCURA_CLEANUP_INTERVAL_SECS
-              value: {{ .Values.obscura.messaging.cleanupIntervalSecs | quote }}
-            - name: OBSCURA_GC_INTERVAL_SECS
-              value: {{ .Values.obscura.notifications.gcIntervalSecs | quote }}
-            - name: OBSCURA_CHANNEL_CAPACITY
-              value: {{ .Values.obscura.notifications.channelCapacity | quote }}
-            - name: OBSCURA_BATCH_LIMIT
-              value: {{ .Values.obscura.messaging.batchLimit | quote }}
-            - name: OBSCURA_PRE_KEY_REFILL_THRESHOLD
-              value: {{ .Values.obscura.messaging.preKeyRefillThreshold | quote }}
-            - name: OBSCURA_MAX_PRE_KEYS
-              value: {{ .Values.obscura.messaging.maxPreKeys | quote }}
-            - name: OBSCURA_TRUSTED_PROXIES
-              value: {{ .Values.obscura.server.trustedProxies | quote }}
-            - name: OBSCURA_WS_OUTBOUND_BUFFER_SIZE
-              value: {{ .Values.obscura.websocket.outboundBufferSize | quote }}
-            - name: OBSCURA_WS_ACK_BUFFER_SIZE
-              value: {{ .Values.obscura.websocket.ackBufferSize | quote }}
-            - name: OBSCURA_WS_ACK_BATCH_SIZE
-              value: {{ .Values.obscura.websocket.ackBatchSize | quote }}
-            - name: OBSCURA_WS_ACK_FLUSH_INTERVAL_MS
-              value: {{ .Values.obscura.websocket.ackFlushIntervalMs | quote }}
-            - name: OBSCURA_S3_BUCKET
-              value: {{ .Values.obscura.s3.bucket | quote }}
-            - name: OBSCURA_S3_REGION
-              value: {{ .Values.obscura.s3.region | quote }}
-            - name: OBSCURA_S3_ENDPOINT
-              value: {{ include "obscura.s3Endpoint" . | quote }}
-            - name: OBSCURA_S3_ACCESS_KEY
+            - name: OBSCURA_STORAGE_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
                   name: {{ include "obscura.fullname" . }}-secret
-                  key: s3-access-key
-            - name: OBSCURA_S3_SECRET_KEY
+                  key: storage-access-key
+            - name: OBSCURA_STORAGE_SECRET_KEY
               valueFrom:
                 secretKeyRef:
                   name: {{ include "obscura.fullname" . }}-secret
-                  key: s3-secret-key
-            - name: OBSCURA_S3_FORCE_PATH_STYLE
-              value: {{ .Values.obscura.s3.forcePathStyle | quote }}
-            - name: OBSCURA_S3_MAX_SIZE_BYTES
-              value: {{ printf "%d" (int .Values.obscura.s3.maxSizeBytes) | quote }}
+                  key: storage-secret-key
           ports:
             - name: http
               containerPort: {{ .Values.obscura.server.port }}
               protocol: TCP
+            - name: mgmt
+              containerPort: {{ .Values.obscura.server.mgmtPort }}
+              protocol: TCP
           livenessProbe:
-            tcpSocket:
-              port: http
+            httpGet:
+              path: /livez
+              port: mgmt
           readinessProbe:
-            tcpSocket:
-              port: http
+            httpGet:
+              path: /readyz
+              port: mgmt
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

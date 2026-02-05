@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "obscura.fullname" . }}-config
+  labels:
+    {{- include "obscura.labels" . | nindent 4 }}
+data:
+  RUST_LOG: {{ .Values.obscura.logLevel | quote }}
+  OBSCURA_OTLP_ENDPOINT: {{ .Values.obscura.telemetry.otlpEndpoint | quote }}
+  OBSCURA_LOG_FORMAT: {{ .Values.obscura.telemetry.logFormat | quote }}
+  OBSCURA_TELEMETRY_METRICS_EXPORT_INTERVAL_SECS: {{ .Values.obscura.telemetry.metricsExportIntervalSecs | quote }}
+  OBSCURA_TELEMETRY_EXPORT_TIMEOUT_SECS: {{ .Values.obscura.telemetry.exportTimeoutSecs | quote }}
+  OBSCURA_TTL_DAYS: {{ .Values.obscura.ttlDays | quote }}
+  OBSCURA_ACCESS_TOKEN_TTL_SECS: {{ .Values.obscura.auth.accessTokenTtlSecs | quote }}
+  OBSCURA_REFRESH_TOKEN_TTL_DAYS: {{ .Values.obscura.auth.refreshTokenTtlDays | quote }}
+  OBSCURA_RATE_LIMIT_PER_SECOND: {{ .Values.obscura.rateLimit.perSecond | quote }}
+  OBSCURA_RATE_LIMIT_BURST: {{ .Values.obscura.rateLimit.burst | quote }}
+  OBSCURA_AUTH_RATE_LIMIT_PER_SECOND: {{ .Values.obscura.rateLimit.authPerSecond | quote }}
+  OBSCURA_AUTH_RATE_LIMIT_BURST: {{ .Values.obscura.rateLimit.authBurst | quote }}
+  OBSCURA_HOST: {{ .Values.obscura.server.host | quote }}
+  OBSCURA_PORT: {{ .Values.obscura.server.port | quote }}
+  OBSCURA_MGMT_PORT: {{ .Values.obscura.server.mgmtPort | quote }}
+  OBSCURA_SHUTDOWN_TIMEOUT_SECS: {{ .Values.obscura.server.shutdownTimeoutSecs | quote }}
+  OBSCURA_HEALTH_DB_TIMEOUT_MS: {{ .Values.obscura.health.dbTimeoutMs | quote }}
+  OBSCURA_STORAGE_HEALTH_TIMEOUT_MS: {{ .Values.obscura.health.storageTimeoutMs | quote }}
+  OBSCURA_MAX_INBOX_SIZE: {{ .Values.obscura.messaging.maxInboxSize | quote }}
+  OBSCURA_MESSAGING_CLEANUP_INTERVAL_SECS: {{ .Values.obscura.messaging.cleanupIntervalSecs | quote }}
+  OBSCURA_GC_INTERVAL_SECS: {{ .Values.obscura.notifications.gcIntervalSecs | quote }}
+  OBSCURA_CHANNEL_CAPACITY: {{ .Values.obscura.notifications.channelCapacity | quote }}
+  OBSCURA_BATCH_LIMIT: {{ .Values.obscura.messaging.batchLimit | quote }}
+  OBSCURA_PRE_KEY_REFILL_THRESHOLD: {{ .Values.obscura.messaging.preKeyRefillThreshold | quote }}
+  OBSCURA_MAX_PRE_KEYS: {{ .Values.obscura.messaging.maxPreKeys | quote }}
+  OBSCURA_TRUSTED_PROXIES: {{ .Values.obscura.server.trustedProxies | quote }}
+  OBSCURA_WS_OUTBOUND_BUFFER_SIZE: {{ .Values.obscura.websocket.outboundBufferSize | quote }}
+  OBSCURA_WS_ACK_BUFFER_SIZE: {{ .Values.obscura.websocket.ackBufferSize | quote }}
+  OBSCURA_WS_ACK_BATCH_SIZE: {{ .Values.obscura.websocket.ackBatchSize | quote }}
+  OBSCURA_WS_ACK_FLUSH_INTERVAL_MS: {{ .Values.obscura.websocket.ackFlushIntervalMs | quote }}
+  OBSCURA_STORAGE_BUCKET: {{ .Values.obscura.storage.bucket | quote }}
+  OBSCURA_STORAGE_REGION: {{ .Values.obscura.storage.region | quote }}
+  OBSCURA_STORAGE_ENDPOINT: {{ include "obscura.storageEndpoint" . | quote }}
+  OBSCURA_STORAGE_FORCE_PATH_STYLE: {{ .Values.obscura.storage.forcePathStyle | quote }}
+  OBSCURA_STORAGE_MAX_SIZE_BYTES: {{ printf "%d" (int .Values.obscura.storage.maxSizeBytes) | quote }}
+  OBSCURA_STORAGE_CLEANUP_INTERVAL_SECS: {{ .Values.obscura.storage.cleanupIntervalSecs | quote }}
+  OBSCURA_STORAGE_CLEANUP_BATCH_SIZE: {{ .Values.obscura.storage.cleanupBatchSize | quote }}
