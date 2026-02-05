@@ -4,7 +4,7 @@ name: obscura
 description: A Helm chart for Obscura Server
 type: application
 version: 0.3.0
-appVersion: 0.3.9
+appVersion: 0.3.10
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com
