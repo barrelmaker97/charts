@@ -19,7 +19,7 @@ obscura:
 
   # Telemetry configuration
   telemetry:
-    # OTLP Endpoint for traces and metrics (e.g. http://otel-collector:4318)
+    # OTLP Endpoint for traces and metrics (e.g. http://otel-collector:4317)
     # If empty, OTLP export is disabled (logs only).
     otlpEndpoint: ""
     # Log format (text or json)
