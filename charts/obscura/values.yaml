@@ -5,6 +5,10 @@ obscura:
   # If empty, it will be generated using the postgresql subchart values.
   databaseUrl: ""
 
+  # Connection string for the Valkey/Redis database.
+  # If empty, it will be generated using the valkey subchart values.
+  cacheUrl: ""
+
   # Global time-to-live for messages and attachments in days
   ttlDays: 30
 
@@ -103,6 +107,14 @@ minio:
   resources:
     requests:
       memory: 256Mi
+
+valkey:
+  enabled: true
+  persistence:
+    enabled: false
+  resources:
+    requests:
+      memory: 128Mi
 
 replicaCount: 1
 

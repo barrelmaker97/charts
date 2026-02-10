@@ -77,6 +77,18 @@ Compute the database URL
 {{- end }}
 
 {{/*
+Compute the Valkey/Redis URL
+*/}}
+{{- define "obscura.cacheUrl" -}}
+{{- if .Values.obscura.cacheUrl -}}
+{{- .Values.obscura.cacheUrl -}}
+{{- else if .Values.valkey.enabled -}}
+{{- $host := printf "%s-valkey-primary" .Release.Name -}}
+{{- printf "redis://%s:6379" $host -}}
+{{- end -}}
+{{- end }}
+
+{{/*
 Compute the storage endpoint
 */}}
 {{- define "obscura.storageEndpoint" -}}
