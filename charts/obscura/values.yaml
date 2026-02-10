@@ -106,6 +106,11 @@ minio:
     tag: RELEASE.2025-09-07T16-13-09Z
   persistence:
     enabled: false
+  # The MinIO subchart defaults to 16Gi memory requests, which exceeds
+  # most namespace quotas. We override it here to a sane default.
+  resources:
+    requests:
+      memory: 256Mi
 
 valkey:
   enabled: true
