@@ -104,9 +104,6 @@ minio:
     tag: RELEASE.2025-09-07T16-13-09Z
   persistence:
     enabled: false
-  resources:
-    requests:
-      memory: 256Mi
 
 valkey:
   enabled: true
@@ -122,9 +119,6 @@ valkey:
         permissions: "+@all ~*"
   persistence:
     enabled: false
-  resources:
-    requests:
-      memory: 128Mi
 
 replicaCount: 1
 
