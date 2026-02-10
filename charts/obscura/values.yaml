@@ -110,6 +110,16 @@ minio:
 
 valkey:
   enabled: true
+  architecture: standalone
+  auth:
+    enabled: true
+    # WARNING: Must be changed for production!
+    password: obscura_password
+    aclUsers:
+      default:
+        password: obscura_password
+        # Give the default user full permissions for simplicity in standalone mode
+        permissions: "+@all ~*"
   persistence:
     enabled: false
   resources:

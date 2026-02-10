@@ -83,8 +83,9 @@ Compute the Valkey/Redis URL
 {{- if .Values.obscura.cacheUrl -}}
 {{- .Values.obscura.cacheUrl -}}
 {{- else if .Values.valkey.enabled -}}
-{{- $host := printf "%s-valkey-primary" .Release.Name -}}
-{{- printf "redis://%s:6379" $host -}}
+{{- $pass := .Values.valkey.auth.password -}}
+{{- $host := printf "%s-valkey" .Release.Name -}}
+{{- printf "redis://:%s@%s:6379" $pass $host -}}
 {{- end -}}
 {{- end }}
 
