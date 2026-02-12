@@ -17,23 +17,6 @@ obscura:
     # Comma-separated list of CIDRs to trust for X-Forwarded-For IP extraction
     trustedProxies: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,127.0.0.1/32"
 
-  # Telemetry configuration
-  telemetry:
-    # OTLP Endpoint for traces and metrics (e.g. http://otel-collector:4317)
-    # If empty, OTLP export is disabled (logs only).
-    otlpEndpoint: ""
-    # Log format (text or json)
-    logFormat: "text"
-    # Trace sampling ratio (0.0 to 1.0)
-    traceSamplingRatio: 1.0
-    metricsExportIntervalSecs: 60
-    exportTimeoutSecs: 10
-
-  # Health check configuration
-  health:
-    dbTimeoutMs: 2000
-    storageTimeoutMs: 2000
-
   # Auth configuration
   auth:
     # Secret key for JWT generation/validation.
@@ -48,6 +31,11 @@ obscura:
     burst: 20
     authPerSecond: 1
     authBurst: 3
+
+  # Health check configuration
+  health:
+    dbTimeoutMs: 2000
+    storageTimeoutMs: 2000
 
   # Messaging configuration
   messaging:
@@ -91,6 +79,18 @@ obscura:
     maxSizeBytes: 52428800
     cleanupIntervalSecs: 3600
     cleanupBatchSize: 100
+
+  # Telemetry configuration
+  telemetry:
+    # OTLP Endpoint for traces and metrics (e.g. http://otel-collector:4317)
+    # If empty, OTLP export is disabled (logs only).
+    otlpEndpoint: ""
+    # Log format (text or json)
+    logFormat: "text"
+    # Trace sampling ratio (0.0 to 1.0)
+    traceSamplingRatio: 1.0
+    metricsExportIntervalSecs: 60
+    exportTimeoutSecs: 10
 
 postgresql:
   enabled: true

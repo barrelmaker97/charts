@@ -68,7 +68,7 @@ spec:
                 secretKeyRef:
                   name: {{ include "obscura.fullname" . }}-secret
                   key: pubsub-url
-            - name: OBSCURA_JWT_SECRET
+            - name: OBSCURA_AUTH_JWT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: {{ include "obscura.fullname" . }}-secret
