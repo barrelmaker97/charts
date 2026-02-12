@@ -77,11 +77,11 @@ Compute the database URL
 {{- end }}
 
 {{/*
-Compute the Valkey/Redis URL
+Compute the PubSub URL
 */}}
-{{- define "obscura.cacheUrl" -}}
-{{- if .Values.obscura.cacheUrl -}}
-{{- .Values.obscura.cacheUrl -}}
+{{- define "obscura.pubsubUrl" -}}
+{{- if .Values.obscura.pubsub.url -}}
+{{- .Values.obscura.pubsub.url -}}
 {{- else if .Values.valkey.enabled -}}
 {{- $pass := .Values.valkey.auth.password -}}
 {{- $host := printf "%s-valkey" .Release.Name -}}

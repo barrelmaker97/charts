@@ -5,10 +5,6 @@ obscura:
   # If empty, it will be generated using the postgresql subchart values.
   databaseUrl: ""
 
-  # Connection string for the Valkey/Redis database.
-  # If empty, it will be generated using the valkey subchart values.
-  cacheUrl: ""
-
   # Global time-to-live for messages and attachments in days
   ttlDays: 30
 
@@ -28,6 +24,8 @@ obscura:
     otlpEndpoint: ""
     # Log format (text or json)
     logFormat: "text"
+    # Trace sampling ratio (0.0 to 1.0)
+    traceSamplingRatio: 1.0
     metricsExportIntervalSecs: 60
     exportTimeoutSecs: 10
 
@@ -62,7 +60,16 @@ obscura:
   # Notification configuration
   notifications:
     gcIntervalSecs: 60
-    channelCapacity: 16
+    globalChannelCapacity: 1024
+    userChannelCapacity: 64
+
+  # PubSub configuration
+  pubsub:
+    # Connection string for the Valkey/Redis database.
+    # If empty, it will be generated using the valkey subchart values.
+    url: ""
+    minBackoffSecs: 1
+    maxBackoffSecs: 30
 
   # Websocket configuration
   websocket:

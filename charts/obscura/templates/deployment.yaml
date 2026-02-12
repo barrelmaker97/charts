@@ -63,11 +63,11 @@ spec:
                 secretKeyRef:
                   name: {{ include "obscura.fullname" . }}-secret
                   key: database-url
-            - name: OBSCURA_CACHE_URL
+            - name: OBSCURA_PUBSUB_URL
               valueFrom:
                 secretKeyRef:
                   name: {{ include "obscura.fullname" . }}-secret
-                  key: cache-url
+                  key: pubsub-url
             - name: OBSCURA_JWT_SECRET
               valueFrom:
                 secretKeyRef:
