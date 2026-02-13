@@ -77,6 +77,19 @@ Compute the database URL
 {{- end }}
 
 {{/*
+Compute the PubSub URL
+*/}}
+{{- define "obscura.pubsubUrl" -}}
+{{- if .Values.obscura.pubsub.url -}}
+{{- .Values.obscura.pubsub.url -}}
+{{- else if .Values.valkey.enabled -}}
+{{- $pass := .Values.valkey.auth.password -}}
+{{- $host := printf "%s-valkey" .Release.Name -}}
+{{- printf "redis://:%s@%s:6379" $pass $host -}}
+{{- end -}}
+{{- end }}
+
+{{/*
 Compute the storage endpoint
 */}}
 {{- define "obscura.storageEndpoint" -}}

@@ -17,21 +17,6 @@ obscura:
     # Comma-separated list of CIDRs to trust for X-Forwarded-For IP extraction
     trustedProxies: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,127.0.0.1/32"
 
-  # Telemetry configuration
-  telemetry:
-    # OTLP Endpoint for traces and metrics (e.g. http://otel-collector:4317)
-    # If empty, OTLP export is disabled (logs only).
-    otlpEndpoint: ""
-    # Log format (text or json)
-    logFormat: "text"
-    metricsExportIntervalSecs: 60
-    exportTimeoutSecs: 10
-
-  # Health check configuration
-  health:
-    dbTimeoutMs: 2000
-    storageTimeoutMs: 2000
-
   # Auth configuration
   auth:
     # Secret key for JWT generation/validation.
@@ -47,6 +32,12 @@ obscura:
     authPerSecond: 1
     authBurst: 3
 
+  # Health check configuration
+  health:
+    dbTimeoutMs: 2000
+    storageTimeoutMs: 2000
+    pubsubTimeoutMs: 2000
+
   # Messaging configuration
   messaging:
     maxInboxSize: 1000
@@ -58,7 +49,16 @@ obscura:
   # Notification configuration
   notifications:
     gcIntervalSecs: 60
-    channelCapacity: 16
+    globalChannelCapacity: 1024
+    userChannelCapacity: 64
+
+  # PubSub configuration
+  pubsub:
+    # Connection string for the Valkey/Redis database.
+    # If empty, it will be generated using the valkey subchart values.
+    url: ""
+    minBackoffSecs: 1
+    maxBackoffSecs: 30
 
   # Websocket configuration
   websocket:
@@ -81,6 +81,18 @@ obscura:
     cleanupIntervalSecs: 3600
     cleanupBatchSize: 100
 
+  # Telemetry configuration
+  telemetry:
+    # OTLP Endpoint for traces and metrics (e.g. http://otel-collector:4317)
+    # If empty, OTLP export is disabled (logs only).
+    otlpEndpoint: ""
+    # Log format (text or json)
+    logFormat: "text"
+    # Trace sampling ratio (0.0 to 1.0)
+    traceSamplingRatio: 1.0
+    metricsExportIntervalSecs: 60
+    exportTimeoutSecs: 10
+
 postgresql:
   enabled: true
   auth:
@@ -93,6 +105,8 @@ minio:
   enabled: true
   mode: standalone
   replicas: 1
+  serviceAccount:
+    create: false
   rootUser: obscura
   # WARNING: Must be changed for production!
   rootPassword: obscura_password
@@ -100,9 +114,25 @@ minio:
     tag: RELEASE.2025-09-07T16-13-09Z
   persistence:
     enabled: false
+  # The MinIO subchart defaults to 16Gi memory requests, which exceeds
+  # most namespace quotas. We override it here to a sane default.
   resources:
     requests:
       memory: 256Mi
+
+valkey:
+  enabled: true
+  architecture: standalone
+  auth:
+    enabled: true
+    # WARNING: Must be changed for production!
+    password: obscura_password
+    aclUsers:
+      default:
+        password: obscura_password
+        permissions: "+@all ~*"
+  persistence:
+    enabled: false
 
 replicaCount: 1
 
