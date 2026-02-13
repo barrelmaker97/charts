@@ -1,5 +1,5 @@
 ---
-chart-repos: bitnami=https://charts.bitnami.com/bitnami,minio=https://charts.min.io/
+chart-repos: bitnami=https://charts.bitnami.com/bitnami,minio=https://charts.min.io/,valkey=https://valkey.io/valkey-helm/
 check-version-increment: true
 remote: origin
 target-branch: main
