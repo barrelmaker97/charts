@@ -130,7 +130,7 @@ valkey:
     aclUsers:
       default:
         password: obscura_password
-        permissions: "+@all ~*"
+        permissions: "+@all ~* &*"
   persistence:
     enabled: false
 
