@@ -36,6 +36,7 @@ obscura:
   health:
     dbTimeoutMs: 2000
     storageTimeoutMs: 2000
+    pubsubTimeoutMs: 2000
 
   # Messaging configuration
   messaging:

@@ -8,7 +8,7 @@ data:
   RUST_LOG: {{ .Values.obscura.logLevel | quote }}
   OBSCURA_TELEMETRY_OTLP_ENDPOINT: {{ .Values.obscura.telemetry.otlpEndpoint | quote }}
   OBSCURA_TELEMETRY_LOG_FORMAT: {{ .Values.obscura.telemetry.logFormat | quote }}
-  OBSCURA_TRACE_SAMPLING_RATIO: {{ .Values.obscura.telemetry.traceSamplingRatio | quote }}
+  OBSCURA_TELEMETRY_TRACE_SAMPLING_RATIO: {{ .Values.obscura.telemetry.traceSamplingRatio | quote }}
   OBSCURA_TELEMETRY_METRICS_EXPORT_INTERVAL_SECS: {{ .Values.obscura.telemetry.metricsExportIntervalSecs | quote }}
   OBSCURA_TELEMETRY_EXPORT_TIMEOUT_SECS: {{ .Values.obscura.telemetry.exportTimeoutSecs | quote }}
   OBSCURA_TTL_DAYS: {{ .Values.obscura.ttlDays | quote }}
@@ -24,6 +24,7 @@ data:
   OBSCURA_SERVER_SHUTDOWN_TIMEOUT_SECS: {{ .Values.obscura.server.shutdownTimeoutSecs | quote }}
   OBSCURA_HEALTH_DB_TIMEOUT_MS: {{ .Values.obscura.health.dbTimeoutMs | quote }}
   OBSCURA_HEALTH_STORAGE_TIMEOUT_MS: {{ .Values.obscura.health.storageTimeoutMs | quote }}
+  OBSCURA_HEALTH_PUBSUB_TIMEOUT_MS: {{ .Values.obscura.health.pubsubTimeoutMs | quote }}
   OBSCURA_MESSAGING_INBOX_MAX_SIZE: {{ .Values.obscura.messaging.maxInboxSize | quote }}
   OBSCURA_MESSAGING_CLEANUP_INTERVAL_SECS: {{ .Values.obscura.messaging.cleanupIntervalSecs | quote }}
   OBSCURA_NOTIFICATIONS_GC_INTERVAL_SECS: {{ .Values.obscura.notifications.gcIntervalSecs | quote }}
