@@ -3243,6 +3243,30 @@ entries:
   obscura:
   - apiVersion: v2
     appVersion: 0.4.2
+    created: "2026-02-18T23:27:02.350976702Z"
+    dependencies:
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: ~18.2.0
+    - name: minio
+      repository: https://charts.min.io/
+      version: 5.4.0
+    - name: valkey
+      repository: https://valkey.io/valkey-helm/
+      version: ~0.9.0
+    description: A Helm chart for Obscura Server
+    digest: bec64606587fff704a807824057f86ad6737eaa2b6e81d3bbfe8889638e5f529
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: obscura
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/obscura-0.5.2/obscura-0.5.2.tgz
+    version: 0.5.2
+  - apiVersion: v2
+    appVersion: 0.4.2
     created: "2026-02-18T21:22:46.641760471Z"
     dependencies:
     - name: postgresql
@@ -4928,4 +4952,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2026-02-18T21:22:46.642212407Z"
+generated: "2026-02-18T23:27:02.351519066Z"
