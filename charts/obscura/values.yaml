@@ -57,7 +57,7 @@ obscura:
     gcIntervalSecs: 60
     globalChannelCapacity: 1024
     userChannelCapacity: 64
-    pushDelaySecs: 10
+    pushDelaySecs: 2
     workerIntervalSecs: 1
     workerConcurrency: 100
     pushQueueKey: "jobs:push_notifications"
@@ -78,8 +78,8 @@ obscura:
   # Websocket configuration
   websocket:
     outboundBufferSize: 32
-    ackBufferSize: 100
-    ackBatchSize: 50
+    ackBufferSize: 1000
+    ackBatchSize: 100
     ackFlushIntervalMs: 500
 
   # Storage / Attachment configuration
