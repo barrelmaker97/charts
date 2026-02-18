@@ -67,8 +67,6 @@ Compute the database URL
 {{- define "obscura.databaseUrl" -}}
 {{- if .Values.obscura.database.url -}}
 {{- .Values.obscura.database.url -}}
-{{- else if .Values.obscura.databaseUrl -}}
-{{- .Values.obscura.databaseUrl -}}
 {{- else -}}
 {{- $user := .Values.postgresql.auth.username -}}
 {{- $pass := .Values.postgresql.auth.password -}}
