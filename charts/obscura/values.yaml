@@ -3,7 +3,13 @@ obscura:
   logLevel: info
   # Connection string for the PostgreSQL database.
   # If empty, it will be generated using the postgresql subchart values.
-  databaseUrl: ""
+  database:
+    url: ""
+    maxConnections: 20
+    minConnections: 5
+    acquireTimeoutSecs: 3
+    idleTimeoutSecs: 600
+    maxLifetimeSecs: 1800
 
   # Global time-to-live for messages and attachments in days
   ttlDays: 30
@@ -51,6 +57,15 @@ obscura:
     gcIntervalSecs: 60
     globalChannelCapacity: 1024
     userChannelCapacity: 64
+    pushDelaySecs: 10
+    workerIntervalSecs: 1
+    workerConcurrency: 100
+    pushQueueKey: "jobs:push_notifications"
+    channelPrefix: "user:"
+    visibilityTimeoutSecs: 30
+    janitorIntervalSecs: 5
+    janitorBatchSize: 50
+    janitorChannelCapacity: 256
 
   # PubSub configuration
   pubsub:

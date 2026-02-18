@@ -65,8 +65,8 @@ Create the name of the service account to use
 Compute the database URL
 */}}
 {{- define "obscura.databaseUrl" -}}
-{{- if .Values.obscura.databaseUrl -}}
-{{- .Values.obscura.databaseUrl -}}
+{{- if .Values.obscura.database.url -}}
+{{- .Values.obscura.database.url -}}
 {{- else -}}
 {{- $user := .Values.postgresql.auth.username -}}
 {{- $pass := .Values.postgresql.auth.password -}}

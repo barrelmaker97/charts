@@ -27,9 +27,23 @@ data:
   OBSCURA_HEALTH_PUBSUB_TIMEOUT_MS: {{ .Values.obscura.health.pubsubTimeoutMs | quote }}
   OBSCURA_MESSAGING_INBOX_MAX_SIZE: {{ .Values.obscura.messaging.maxInboxSize | quote }}
   OBSCURA_MESSAGING_CLEANUP_INTERVAL_SECS: {{ .Values.obscura.messaging.cleanupIntervalSecs | quote }}
+  OBSCURA_DATABASE_MAX_CONNECTIONS: {{ .Values.obscura.database.maxConnections | quote }}
+  OBSCURA_DATABASE_MIN_CONNECTIONS: {{ .Values.obscura.database.minConnections | quote }}
+  OBSCURA_DATABASE_ACQUIRE_TIMEOUT_SECS: {{ .Values.obscura.database.acquireTimeoutSecs | quote }}
+  OBSCURA_DATABASE_IDLE_TIMEOUT_SECS: {{ .Values.obscura.database.idleTimeoutSecs | quote }}
+  OBSCURA_DATABASE_MAX_LIFETIME_SECS: {{ .Values.obscura.database.maxLifetimeSecs | quote }}
   OBSCURA_NOTIFICATIONS_GC_INTERVAL_SECS: {{ .Values.obscura.notifications.gcIntervalSecs | quote }}
   OBSCURA_NOTIFICATIONS_GLOBAL_CHANNEL_CAPACITY: {{ .Values.obscura.notifications.globalChannelCapacity | quote }}
   OBSCURA_NOTIFICATIONS_USER_CHANNEL_CAPACITY: {{ .Values.obscura.notifications.userChannelCapacity | quote }}
+  OBSCURA_NOTIFICATIONS_PUSH_DELAY_SECS: {{ .Values.obscura.notifications.pushDelaySecs | quote }}
+  OBSCURA_NOTIFICATIONS_WORKER_INTERVAL_SECS: {{ .Values.obscura.notifications.workerIntervalSecs | quote }}
+  OBSCURA_NOTIFICATIONS_WORKER_CONCURRENCY: {{ .Values.obscura.notifications.workerConcurrency | quote }}
+  OBSCURA_NOTIFICATIONS_PUSH_QUEUE_KEY: {{ .Values.obscura.notifications.pushQueueKey | quote }}
+  OBSCURA_NOTIFICATIONS_CHANNEL_PREFIX: {{ .Values.obscura.notifications.channelPrefix | quote }}
+  OBSCURA_NOTIFICATIONS_VISIBILITY_TIMEOUT_SECS: {{ .Values.obscura.notifications.visibilityTimeoutSecs | quote }}
+  OBSCURA_NOTIFICATIONS_JANITOR_INTERVAL_SECS: {{ .Values.obscura.notifications.janitorIntervalSecs | quote }}
+  OBSCURA_NOTIFICATIONS_JANITOR_BATCH_SIZE: {{ .Values.obscura.notifications.janitorBatchSize | quote }}
+  OBSCURA_NOTIFICATIONS_JANITOR_CHANNEL_CAPACITY: {{ .Values.obscura.notifications.janitorChannelCapacity | quote }}
   OBSCURA_PUBSUB_MIN_BACKOFF_SECS: {{ .Values.obscura.pubsub.minBackoffSecs | quote }}
   OBSCURA_PUBSUB_MAX_BACKOFF_SECS: {{ .Values.obscura.pubsub.maxBackoffSecs | quote }}
   OBSCURA_MESSAGING_BATCH_LIMIT: {{ .Values.obscura.messaging.batchLimit | quote }}
