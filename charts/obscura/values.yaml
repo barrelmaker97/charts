@@ -81,6 +81,8 @@ obscura:
     ackBufferSize: 1000
     ackBatchSize: 100
     ackFlushIntervalMs: 500
+    pingIntervalSecs: 30
+    pingTimeoutSecs: 10
 
   # Storage / Attachment configuration
   storage:
