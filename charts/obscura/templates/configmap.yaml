@@ -54,6 +54,8 @@ data:
   OBSCURA_WS_ACK_BUFFER_SIZE: {{ .Values.obscura.websocket.ackBufferSize | quote }}
   OBSCURA_WS_ACK_BATCH_SIZE: {{ .Values.obscura.websocket.ackBatchSize | quote }}
   OBSCURA_WS_ACK_FLUSH_INTERVAL_MS: {{ .Values.obscura.websocket.ackFlushIntervalMs | quote }}
+  OBSCURA_WS_PING_INTERVAL_SECS: {{ .Values.obscura.websocket.pingIntervalSecs | quote }}
+  OBSCURA_WS_PING_TIMEOUT_SECS: {{ .Values.obscura.websocket.pingTimeoutSecs | quote }}
   OBSCURA_STORAGE_BUCKET: {{ .Values.obscura.storage.bucket | quote }}
   OBSCURA_STORAGE_REGION: {{ .Values.obscura.storage.region | quote }}
   OBSCURA_STORAGE_ENDPOINT: {{ include "obscura.storageEndpoint" . | quote }}
