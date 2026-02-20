@@ -56,7 +56,7 @@ obscura:
 
   # Notification configuration
   notifications:
-    gcIntervalSecs: 60
+    cleanupIntervalSecs: 60
     globalChannelCapacity: 1024
     userChannelCapacity: 64
     pushDelaySecs: 2
@@ -65,9 +65,9 @@ obscura:
     pushQueueKey: "jobs:push_notifications"
     channelPrefix: "user:"
     visibilityTimeoutSecs: 30
-    janitorIntervalSecs: 5
-    janitorBatchSize: 50
-    janitorChannelCapacity: 256
+    invalidTokenCleanupIntervalSecs: 5
+    invalidTokenCleanupBatchSize: 50
+    invalidTokenCleanupChannelCapacity: 256
 
   # PubSub configuration
   pubsub:
@@ -102,7 +102,7 @@ obscura:
     minSizeBytes: 32
     requestTimeoutSecs: 60
     staleThresholdMins: 30
-    janitorIntervalSecs: 300
+    cleanupIntervalSecs: 300
 
   # Storage configuration (S3-compatible)
   storage:
