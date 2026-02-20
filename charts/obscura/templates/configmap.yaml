@@ -22,6 +22,8 @@ data:
   OBSCURA_SERVER_PORT: {{ .Values.obscura.server.port | quote }}
   OBSCURA_SERVER_MGMT_PORT: {{ .Values.obscura.server.mgmtPort | quote }}
   OBSCURA_SERVER_SHUTDOWN_TIMEOUT_SECS: {{ .Values.obscura.server.shutdownTimeoutSecs | quote }}
+  OBSCURA_SERVER_REQUEST_TIMEOUT_SECS: {{ .Values.obscura.server.requestTimeoutSecs | quote }}
+  OBSCURA_SERVER_GLOBAL_TIMEOUT_SECS: {{ .Values.obscura.server.globalTimeoutSecs | quote }}
   OBSCURA_HEALTH_DB_TIMEOUT_MS: {{ .Values.obscura.health.dbTimeoutMs | quote }}
   OBSCURA_HEALTH_STORAGE_TIMEOUT_MS: {{ .Values.obscura.health.storageTimeoutMs | quote }}
   OBSCURA_HEALTH_PUBSUB_TIMEOUT_MS: {{ .Values.obscura.health.pubsubTimeoutMs | quote }}
@@ -56,10 +58,19 @@ data:
   OBSCURA_WS_ACK_FLUSH_INTERVAL_MS: {{ .Values.obscura.websocket.ackFlushIntervalMs | quote }}
   OBSCURA_WS_PING_INTERVAL_SECS: {{ .Values.obscura.websocket.pingIntervalSecs | quote }}
   OBSCURA_WS_PING_TIMEOUT_SECS: {{ .Values.obscura.websocket.pingTimeoutSecs | quote }}
+  OBSCURA_ATTACHMENT_MAX_SIZE_BYTES: {{ printf "%d" (int .Values.obscura.attachment.maxSizeBytes) | quote }}
+  OBSCURA_ATTACHMENT_MIN_SIZE_BYTES: {{ printf "%d" (int .Values.obscura.attachment.minSizeBytes) | quote }}
+  OBSCURA_ATTACHMENT_PREFIX: {{ .Values.obscura.attachment.prefix | quote }}
+  OBSCURA_ATTACHMENT_CLEANUP_INTERVAL_SECS: {{ .Values.obscura.attachment.cleanupIntervalSecs | quote }}
+  OBSCURA_ATTACHMENT_CLEANUP_BATCH_SIZE: {{ .Values.obscura.attachment.cleanupBatchSize | quote }}
+  OBSCURA_ATTACHMENT_TIMEOUT_SECS: {{ .Values.obscura.attachment.requestTimeoutSecs | quote }}
+  OBSCURA_BACKUP_PREFIX: {{ .Values.obscura.backup.prefix | quote }}
+  OBSCURA_BACKUP_MAX_SIZE_BYTES: {{ printf "%d" (int .Values.obscura.backup.maxSizeBytes) | quote }}
+  OBSCURA_BACKUP_MIN_SIZE_BYTES: {{ printf "%d" (int .Values.obscura.backup.minSizeBytes) | quote }}
+  OBSCURA_BACKUP_TIMEOUT_SECS: {{ .Values.obscura.backup.requestTimeoutSecs | quote }}
+  OBSCURA_BACKUP_STALE_THRESHOLD_MINS: {{ .Values.obscura.backup.staleThresholdMins | quote }}
+  OBSCURA_BACKUP_JANITOR_INTERVAL_SECS: {{ .Values.obscura.backup.janitorIntervalSecs | quote }}
   OBSCURA_STORAGE_BUCKET: {{ .Values.obscura.storage.bucket | quote }}
   OBSCURA_STORAGE_REGION: {{ .Values.obscura.storage.region | quote }}
   OBSCURA_STORAGE_ENDPOINT: {{ include "obscura.storageEndpoint" . | quote }}
   OBSCURA_STORAGE_FORCE_PATH_STYLE: {{ .Values.obscura.storage.forcePathStyle | quote }}
-  OBSCURA_STORAGE_MAX_SIZE_BYTES: {{ printf "%d" (int .Values.obscura.storage.maxSizeBytes) | quote }}
-  OBSCURA_STORAGE_CLEANUP_INTERVAL_SECS: {{ .Values.obscura.storage.cleanupIntervalSecs | quote }}
-  OBSCURA_STORAGE_CLEANUP_BATCH_SIZE: {{ .Values.obscura.storage.cleanupBatchSize | quote }}
