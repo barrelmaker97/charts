@@ -50,7 +50,8 @@ obscura:
   messaging:
     maxInboxSize: 1000
     cleanupIntervalSecs: 300
-    batchLimit: 50
+    sendBatchLimit: 100
+    idempotencyTtlSecs: 86400
     preKeyRefillThreshold: 20
     maxPreKeys: 100
 
@@ -85,6 +86,7 @@ obscura:
     ackFlushIntervalMs: 500
     pingIntervalSecs: 30
     pingTimeoutSecs: 10
+    messageFetchBatchSize: 50
 
   # Attachment configuration
   attachment:
