@@ -14,6 +14,7 @@ data:
   OBSCURA_TTL_DAYS: {{ .Values.obscura.ttlDays | quote }}
   OBSCURA_AUTH_TOKEN_TTL_SECS: {{ .Values.obscura.auth.accessTokenTtlSecs | quote }}
   OBSCURA_AUTH_REFRESH_TOKEN_TTL_DAYS: {{ .Values.obscura.auth.refreshTokenTtlDays | quote }}
+  OBSCURA_AUTH_REFRESH_TOKEN_CLEANUP_INTERVAL_SECS: {{ .Values.obscura.auth.refreshTokenCleanupIntervalSecs | quote }}
   OBSCURA_RATE_LIMIT_PER_SECOND: {{ .Values.obscura.rateLimit.perSecond | quote }}
   OBSCURA_RATE_LIMIT_BURST: {{ .Values.obscura.rateLimit.burst | quote }}
   OBSCURA_RATE_LIMIT_AUTH_PER_SECOND: {{ .Values.obscura.rateLimit.authPerSecond | quote }}
