@@ -32,6 +32,7 @@ obscura:
     jwtSecret: "change_me_to_a_secure_random_string"
     accessTokenTtlSecs: 900
     refreshTokenTtlDays: 30
+    refreshTokenCleanupIntervalSecs: 86400
 
   # Rate limit configuration
   rateLimit:
