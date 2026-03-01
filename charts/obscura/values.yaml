@@ -87,6 +87,7 @@ obscura:
     ackFlushIntervalMs: 500
     pingIntervalSecs: 30
     pingTimeoutSecs: 10
+    prekeyDebounceIntervalMs: 500
     messageFetchBatchSize: 50
 
   # Attachment configuration

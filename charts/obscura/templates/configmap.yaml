@@ -60,6 +60,7 @@ data:
   OBSCURA_WS_ACK_FLUSH_INTERVAL_MS: {{ .Values.obscura.websocket.ackFlushIntervalMs | quote }}
   OBSCURA_WS_PING_INTERVAL_SECS: {{ .Values.obscura.websocket.pingIntervalSecs | quote }}
   OBSCURA_WS_PING_TIMEOUT_SECS: {{ .Values.obscura.websocket.pingTimeoutSecs | quote }}
+  OBSCURA_WS_PREKEY_DEBOUNCE_INTERVAL_MS: {{ .Values.obscura.websocket.prekeyDebounceIntervalMs | quote }}
   OBSCURA_WS_MESSAGE_FETCH_BATCH_SIZE: {{ .Values.obscura.websocket.messageFetchBatchSize | quote }}
   OBSCURA_ATTACHMENT_MAX_SIZE_BYTES: {{ printf "%d" (int .Values.obscura.attachment.maxSizeBytes) | quote }}
   OBSCURA_ATTACHMENT_MIN_SIZE_BYTES: {{ printf "%d" (int .Values.obscura.attachment.minSizeBytes) | quote }}
