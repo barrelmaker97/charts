@@ -87,6 +87,7 @@ obscura:
     ackFlushIntervalMs: 500
     pingIntervalSecs: 30
     pingTimeoutSecs: 10
+    prekeyDebounceIntervalMs: 500
     messageFetchBatchSize: 50
 
   # Attachment configuration
@@ -221,6 +222,7 @@ ingress:
     # nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     # nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
     # nginx.ingress.kubernetes.io/websocket-services: "obscura"
+    # nginx.ingress.kubernetes.io/proxy-body-size: "55m"
   hosts:
     - host: obscura.local
       paths:
