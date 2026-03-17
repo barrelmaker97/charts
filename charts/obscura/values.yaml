@@ -33,6 +33,7 @@ obscura:
     accessTokenTtlSecs: 900
     refreshTokenTtlDays: 30
     refreshTokenCleanupIntervalSecs: 86400
+    maxDevicesPerUser: 10
 
   # Rate limit configuration
   rateLimit:
