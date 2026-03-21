@@ -3,8 +3,8 @@ apiVersion: v2
 name: pistachio
 description: A helm chart for pistachio
 type: application
-version: 0.2.4
-appVersion: 0.6.1
+version: 0.2.5
+appVersion: 0.6.2
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com
