@@ -90,6 +90,7 @@ obscura:
     pingTimeoutSecs: 10
     prekeyDebounceIntervalMs: 500
     messageFetchBatchSize: 50
+    maxBatchBytes: 8388608
     ticketTtlSecs: 30
 
   # Attachment configuration
