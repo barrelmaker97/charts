@@ -121,3 +121,12 @@ Compute the Storage Secret Key
 {{- .Values.minio.rootPassword -}}
 {{- end -}}
 {{- end }}
+
+{{/*
+Check if FCM is configured (both projectId and credentialsJson are non-empty)
+*/}}
+{{- define "obscura.fcmEnabled" -}}
+{{- if and .Values.obscura.fcm.projectId .Values.obscura.fcm.credentialsJson -}}
+true
+{{- end -}}
+{{- end }}

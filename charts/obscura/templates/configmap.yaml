@@ -81,3 +81,7 @@ data:
   OBSCURA_STORAGE_REGION: {{ .Values.obscura.storage.region | quote }}
   OBSCURA_STORAGE_ENDPOINT: {{ include "obscura.storageEndpoint" . | quote }}
   OBSCURA_STORAGE_FORCE_PATH_STYLE: {{ .Values.obscura.storage.forcePathStyle | quote }}
+  {{- if include "obscura.fcmEnabled" . }}
+  OBSCURA_FCM_PROJECT_ID: {{ .Values.obscura.fcm.projectId | quote }}
+  OBSCURA_FCM_CREDENTIALS_FILE: "/etc/obscura/fcm/credentials.json"
+  {{- end }}

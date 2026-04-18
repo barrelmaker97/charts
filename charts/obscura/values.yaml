@@ -122,6 +122,14 @@ obscura:
     secretKey: ""
     forcePathStyle: true
 
+  # FCM (Firebase Cloud Messaging) configuration
+  # Set both values to enable push notifications via FCM.
+  fcm:
+    # Google Cloud Project ID
+    projectId: ""
+    # Raw JSON content of the Google service account credentials file
+    credentialsJson: ""
+
   # Telemetry configuration
   telemetry:
     # OTLP Endpoint for traces and metrics (e.g. http://otel-collector:4317)
