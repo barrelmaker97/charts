@@ -84,4 +84,5 @@ data:
   {{- if include "obscura.fcmEnabled" . }}
   OBSCURA_FCM_PROJECT_ID: {{ .Values.obscura.fcm.projectId | quote }}
   OBSCURA_FCM_CREDENTIALS_FILE: "/etc/obscura/fcm/credentials.json"
+  OBSCURA_FCM_TTL_SECS: {{ .Values.obscura.fcm.ttlSecs | quote }}
   {{- end }}

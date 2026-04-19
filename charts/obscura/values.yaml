@@ -129,6 +129,8 @@ obscura:
     projectId: ""
     # Raw JSON content of the Google service account credentials file
     credentialsJson: ""
+    # Time-to-live for FCM push notifications in seconds (default: 1 week)
+    ttlSecs: 604800
 
   # Telemetry configuration
   telemetry:
