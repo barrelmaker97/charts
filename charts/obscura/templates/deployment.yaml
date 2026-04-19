@@ -83,6 +83,12 @@ spec:
                 secretKeyRef:
                   name: {{ include "obscura.fullname" . }}-secret
                   key: storage-secret-key
+          {{- if include "obscura.fcmEnabled" . }}
+          volumeMounts:
+            - name: fcm-credentials
+              mountPath: /etc/obscura/fcm
+              readOnly: true
+          {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.obscura.server.port }}
@@ -100,6 +106,15 @@ spec:
               port: mgmt
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      {{- if include "obscura.fcmEnabled" . }}
+      volumes:
+        - name: fcm-credentials
+          secret:
+            secretName: {{ include "obscura.fullname" . }}-secret
+            items:
+              - key: fcm-credentials-json
+                path: credentials.json
+      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

@@ -3,8 +3,8 @@ apiVersion: v2
 name: obscura
 description: A Helm chart for Obscura Server
 type: application
-version: 0.9.2
-appVersion: 0.9.0
+version: 0.9.3
+appVersion: 0.9.1
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com
