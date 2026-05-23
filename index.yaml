@@ -1160,6 +1160,20 @@ entries:
     version: 0.1.1
   jellyfin:
   - apiVersion: v2
+    appVersion: 10.11.9
+    created: "2026-05-23T13:25:17.748391491Z"
+    description: A Helm Chart for Jellyfin
+    digest: 3cedfd7723a64e84791bab05074f8aadaf92ab8abfd819ebff16d4ec30b873a8
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: jellyfin
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/jellyfin-0.5.9/jellyfin-0.5.9.tgz
+    version: 0.5.9
+  - apiVersion: v2
     appVersion: 10.11.8
     created: "2026-04-05T20:09:03.693318425Z"
     description: A Helm Chart for Jellyfin
@@ -5408,4 +5422,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2026-05-12T13:52:37.689685451Z"
+generated: "2026-05-23T13:25:17.749203382Z"
