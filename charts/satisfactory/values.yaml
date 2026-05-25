@@ -63,6 +63,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
+  externalTrafficPolicy: Local
 
 resources: {}
   # limits:

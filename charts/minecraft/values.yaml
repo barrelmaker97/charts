@@ -136,6 +136,7 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 25565
+  externalTrafficPolicy: Local
 
 resources: {}
 # requests:

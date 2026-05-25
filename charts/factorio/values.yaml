@@ -59,6 +59,7 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 34197
+  externalTrafficPolicy: Local
 
 resources: {}
   # requests:

@@ -3,7 +3,7 @@ apiVersion: v2
 name: satisfactory
 description: A Helm Chart for Satisfactory
 type: application
-version: 0.3.3
+version: 0.4.0
 appVersion: v1.9.10
 maintainers:
   - name: barrelmaker97

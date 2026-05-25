@@ -44,6 +44,7 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 2456
+  externalTrafficPolicy: Local
 
 resources: {}
   # limits:
