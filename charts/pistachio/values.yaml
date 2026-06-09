@@ -46,22 +46,6 @@ service:
   type: ClusterIP
   port: 9120
 
-ingress:
-  enabled: false
-  className: ""
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: pistachio.local
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: pistachio-tls
-  #    hosts:
-  #      - pistachio.local
-
 httpRoute:
   enabled: false
   annotations: {}
