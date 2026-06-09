@@ -1,0 +1,24 @@
+{{- if .Values.httpRoute.enabled -}}
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: dotfiles
+spec:
+  {{- with .Values.httpRoute.parentRefs }}
+  parentRefs:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  hostnames:
+    - dotfiles.{{ .Values.baseDomain }}
+  rules:
+    - filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
+            hostname: raw.githubusercontent.com
+            port: 443
+            path:
+              type: ReplaceFullPath
+              replaceFullPath: /barrelmaker97/dotfiles/master/bin/updot
+            statusCode: 302
+{{- end }}

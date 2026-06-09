@@ -61,6 +61,25 @@ ingress:
   #      - serge.local
 
 
+httpRoute:
+  enabled: false
+  annotations: {}
+  # Gateways this route should attach to
+  parentRefs: []
+  #  - name: gateway
+  #    namespace: envoy-gateway-system
+  #    sectionName: https
+  hostnames: []
+  #  - serge.local
+  matches:
+    - path:
+        type: PathPrefix
+        value: /
+  # Filters applied to requests matching the rule above
+  filters: []
+  # Additional custom rules appended to the route
+  additionalRules: []
+
 resources: {}
   # limits:
   #   cpu: 100m

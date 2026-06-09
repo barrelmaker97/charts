@@ -44,6 +44,24 @@ dynmap:
     #  - secretName: minecraft-tls
     #    hosts:
     #      - minecraft.local
+  httpRoute:
+    enabled: false
+    annotations: {}
+    # Gateways this route should attach to
+    parentRefs: []
+    #  - name: gateway
+    #    namespace: envoy-gateway-system
+    #    sectionName: https
+    hostnames: []
+    #  - minecraft.local
+    matches:
+      - path:
+          type: PathPrefix
+          value: /
+    # Filters applied to requests matching the rule above
+    filters: []
+    # Additional custom rules appended to the route
+    additionalRules: []
 
 # Requires installation of the mod Prometheus Exporter to work properly
 # https://github.com/sladkoff/minecraft-prometheus-exporter
