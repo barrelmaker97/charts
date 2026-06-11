@@ -248,9 +248,7 @@ httpRoute:
 securityPolicy:
   cors:
     enabled: false
-    allowOrigins:
-      - "https://*.obscura-client-web.pages.dev"
-      - "https://obscura-client-web.pages.dev"
+    allowOrigins: []
     allowMethods:
       - GET
       - POST
