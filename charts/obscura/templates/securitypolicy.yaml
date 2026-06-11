@@ -1,0 +1,27 @@
+{{- if and .Values.httpRoute.enabled .Values.securityPolicy.cors.enabled -}}
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: {{ include "obscura.fullname" . }}-cors
+  labels:
+    {{- include "obscura.labels" . | nindent 4 }}
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: {{ include "obscura.fullname" . }}
+  cors:
+    {{- with .Values.securityPolicy.cors.allowOrigins }}
+    allowOrigins:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
+    {{- with .Values.securityPolicy.cors.allowMethods }}
+    allowMethods:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
+    {{- with .Values.securityPolicy.cors.allowHeaders }}
+    allowHeaders:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
+    allowCredentials: {{ .Values.securityPolicy.cors.allowCredentials | default false }}
+{{- end }}

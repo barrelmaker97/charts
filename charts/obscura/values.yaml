@@ -245,6 +245,31 @@ httpRoute:
   # Additional custom rules appended to the route
   additionalRules: []
 
+securityPolicy:
+  cors:
+    enabled: false
+    allowOrigins: []
+    allowMethods:
+      - GET
+      - POST
+      - PUT
+      - OPTIONS
+      - DELETE
+    allowHeaders:
+      - DNT
+      - Keep-Alive
+      - User-Agent
+      - X-Requested-With
+      - If-Modified-Since
+      - Cache-Control
+      - Content-Type
+      - Range
+      - Authorization
+      - Idempotency-Key
+      - If-Match
+      - If-None-Match
+    allowCredentials: true
+
 resources: {}
   # requests:
   #   cpu: 100m
