@@ -13,6 +13,6 @@ spec:
   ports:
     - name: metrics
       protocol: TCP
-      port: 9225
+      port: {{ .Values.metrics.port }}
       targetPort: metrics
 {{- end }}

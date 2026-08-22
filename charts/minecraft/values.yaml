@@ -48,10 +48,13 @@ dynmap:
     # Additional custom rules appended to the route
     additionalRules: []
 
-# Requires installation of the mod Prometheus Exporter to work properly
-# https://github.com/sladkoff/minecraft-prometheus-exporter
+# Requires FabricExporter. Spark is also required for TPS and MSPT metrics.
+# https://modrinth.com/mod/fabricexporter
+# https://modrinth.com/mod/spark
 metrics:
   enabled: false
+  # Port exposed by the exporter.
+  port: 25585
   dashboard:
     enabled: false
     namespace: monitoring
