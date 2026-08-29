@@ -1,3 +1,4 @@
+{{- include "obscura.validateDatabaseConfiguration" . }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -61,8 +62,8 @@ spec:
             - name: OBSCURA_DATABASE_URL
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "obscura.fullname" . }}-secret
-                  key: database-url
+                  name: {{ include "obscura.databaseSecretName" . | quote }}
+                  key: {{ include "obscura.databaseSecretKey" . | quote }}
             - name: OBSCURA_PUBSUB_URL
               valueFrom:
                 secretKeyRef:

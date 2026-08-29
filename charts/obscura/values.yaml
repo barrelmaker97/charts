@@ -1,10 +1,17 @@
 ---
 obscura:
   logLevel: info
-  # Connection string for the PostgreSQL database.
-  # If empty, it will be generated using the postgresql subchart values.
   database:
+    # url is the PostgreSQL connection string. Set either url or existingSecret
+    # when postgresql.enabled is false. If both are empty, the URL is generated
+    # using the postgresql subchart values.
     url: ""
+    # existingSecret references a Secret containing the PostgreSQL connection string.
+    existingSecret:
+      # name is the name of the existing Secret.
+      name: ""
+      # key is the Secret key containing the connection string.
+      key: "database-url"
     maxConnections: 20
     minConnections: 5
     acquireTimeoutSecs: 3

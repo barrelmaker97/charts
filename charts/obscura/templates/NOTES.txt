@@ -1,1 +1,9 @@
 Obscura Server has been installed!
+{{- if .Values.obscura.database.existingSecret.name }}
+The database connection is read from key {{ include "obscura.databaseSecretKey" . }}
+in Secret {{ include "obscura.databaseSecretName" . }}.
+{{- else if .Values.postgresql.enabled }}
+The bundled PostgreSQL database is enabled.
+{{- else }}
+The database connection is managed by this release.
+{{- end }}

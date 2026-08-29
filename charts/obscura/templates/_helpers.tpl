@@ -67,12 +67,50 @@ Compute the database URL
 {{- define "obscura.databaseUrl" -}}
 {{- if .Values.obscura.database.url -}}
 {{- .Values.obscura.database.url -}}
-{{- else -}}
+{{- else if .Values.postgresql.enabled -}}
 {{- $user := .Values.postgresql.auth.username -}}
 {{- $pass := .Values.postgresql.auth.password -}}
 {{- $db := .Values.postgresql.auth.database -}}
 {{- $host := printf "%s-postgresql" .Release.Name -}}
 {{- printf "postgres://%s:%s@%s:5432/%s" $user $pass $host $db -}}
+{{- else -}}
+{{- fail "obscura.database.url or obscura.database.existingSecret.name is required when postgresql.enabled is false" -}}
+{{- end -}}
+{{- end }}
+
+{{/*
+Get the Secret containing the database URL
+*/}}
+{{- define "obscura.databaseSecretName" -}}
+{{- if .Values.obscura.database.existingSecret.name -}}
+{{- .Values.obscura.database.existingSecret.name -}}
+{{- else -}}
+{{- printf "%s-secret" (include "obscura.fullname" .) -}}
+{{- end -}}
+{{- end }}
+
+{{/*
+Get the database URL key
+*/}}
+{{- define "obscura.databaseSecretKey" -}}
+{{- .Values.obscura.database.existingSecret.key -}}
+{{- end }}
+
+{{/*
+Validate the database configuration
+*/}}
+{{- define "obscura.validateDatabaseConfiguration" -}}
+{{- if and .Values.obscura.database.url .Values.obscura.database.existingSecret.name -}}
+{{- fail "obscura.database.url and obscura.database.existingSecret.name are mutually exclusive" -}}
+{{- end -}}
+{{- if and .Values.postgresql.enabled (or .Values.obscura.database.url .Values.obscura.database.existingSecret.name) -}}
+{{- fail "postgresql.enabled must be false when obscura.database.url or obscura.database.existingSecret.name is set" -}}
+{{- end -}}
+{{- if and .Values.obscura.database.existingSecret.name (not .Values.obscura.database.existingSecret.key) -}}
+{{- fail "obscura.database.existingSecret.key is required when obscura.database.existingSecret.name is set" -}}
+{{- end -}}
+{{- if and (not .Values.postgresql.enabled) (not .Values.obscura.database.url) (not .Values.obscura.database.existingSecret.name) -}}
+{{- fail "obscura.database.url or obscura.database.existingSecret.name is required when postgresql.enabled is false" -}}
 {{- end -}}
 {{- end }}
 
