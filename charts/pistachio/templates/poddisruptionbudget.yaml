@@ -1,0 +1,26 @@
+{{- if .Values.podDisruptionBudget.enabled }}
+{{- $minAvailable := .Values.podDisruptionBudget.minAvailable }}
+{{- $maxUnavailable := .Values.podDisruptionBudget.maxUnavailable }}
+{{- if and (ne $minAvailable nil) (ne $maxUnavailable nil) }}
+{{- fail "podDisruptionBudget.minAvailable and podDisruptionBudget.maxUnavailable are mutually exclusive" }}
+{{- end }}
+{{- if and (eq $minAvailable nil) (eq $maxUnavailable nil) }}
+{{- fail "podDisruptionBudget requires minAvailable or maxUnavailable when enabled" }}
+{{- end }}
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "pistachio.fullname" . }}
+  labels:
+    {{- include "pistachio.labels" . | nindent 4 }}
+spec:
+  {{- if ne $minAvailable nil }}
+  minAvailable: {{ $minAvailable }}
+  {{- else }}
+  maxUnavailable: {{ $maxUnavailable }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "pistachio.selectorLabels" . | nindent 6 }}
+{{- end }}

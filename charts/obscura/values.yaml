@@ -292,8 +292,16 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
+podDisruptionBudget:
+  enabled: false
+  # Exactly one of minAvailable or maxUnavailable must be set when enabled.
+  minAvailable: null
+  maxUnavailable: 1
+
 nodeSelector: {}
 
 tolerations: []
 
 affinity: {}
+
+topologySpreadConstraints: []
