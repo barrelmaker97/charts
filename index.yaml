@@ -3634,6 +3634,33 @@ entries:
   obscura:
   - apiVersion: v2
     appVersion: 0.9.5
+    created: "2026-08-31T15:46:35.88932069Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: ~18.2.0
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.min.io/
+      version: 5.4.0
+    - condition: valkey.enabled
+      name: valkey
+      repository: https://valkey.io/valkey-helm/
+      version: ~0.9.0
+    description: A Helm chart for Obscura Server
+    digest: 96335a119e423c9faeaec39c30986b4cc5613fdc2620013e699aa56608db1709
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: obscura
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/obscura-0.12.3/obscura-0.12.3.tgz
+    version: 0.12.3
+  - apiVersion: v2
+    appVersion: 0.9.5
     created: "2026-08-29T14:28:58.036238589Z"
     dependencies:
     - condition: postgresql.enabled
@@ -4431,6 +4458,20 @@ entries:
     - https://github.com/barrelmaker97/charts/releases/download/obscura-0.1.0/obscura-0.1.0.tgz
     version: 0.1.0
   pistachio:
+  - apiVersion: v2
+    appVersion: 0.6.2
+    created: "2026-08-31T15:46:36.028348172Z"
+    description: A helm chart for pistachio
+    digest: 0f49d56219c7b094bba5d0f32240b88209a2ad7668eb08a818eaacb968ab4067
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: pistachio
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/pistachio-0.3.1/pistachio-0.3.1.tgz
+    version: 0.3.1
   - apiVersion: v2
     appVersion: 0.6.2
     created: "2026-06-09T21:04:06.032767494Z"
@@ -5563,6 +5604,20 @@ entries:
     version: 0.1.1
   website:
   - apiVersion: v2
+    appVersion: 1.31.3-alpine
+    created: "2026-08-31T15:46:36.175716336Z"
+    description: A Helm Chart for a website
+    digest: 8b592516973bc8fb3de1281aa9f4f5fee3c9ba7a21e53235748f28d5124eb624
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: website
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/website-0.6.2/website-0.6.2.tgz
+    version: 0.6.2
+  - apiVersion: v2
     appVersion: 1.30.2-alpine
     created: "2026-06-09T21:04:06.346949354Z"
     description: A Helm Chart for a website
@@ -5880,4 +5935,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2026-08-29T14:28:58.03752255Z"
+generated: "2026-08-31T15:46:36.176613709Z"
