@@ -40,8 +40,8 @@ spec:
           args:
             - -c
             - |
-              mkdir -p /data/plugins/dynmap
-              cp /dynmap-config/configuration.txt /data/plugins/dynmap
+              mkdir -p /data/dynmap
+              cp /dynmap-config/configuration.txt /data/dynmap
           resources:
             {{- toYaml .Values.dynmap.config.resources | nindent 12 }}
           volumeMounts:
