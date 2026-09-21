@@ -57,19 +57,33 @@ spec:
               value: 127.0.0.1:2457
             - name: HTTP_PORT
               value: "9100"
+          startupProbe:
+            exec:
+              command:
+                - bash
+                - -c
+                - "pidof valheim_server.x86_64"
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 60 # up to 10 minutes for first startup
           livenessProbe:
             exec:
               command:
                 - bash
                 - -c
-                - "pidof valheim_server.x86_64 || exit 1"
-            initialDelaySeconds: 60
+                - "pidof valheim_server.x86_64"
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
           readinessProbe:
             exec:
               command:
                 - bash
                 - -c
-                - "pidof valheim_server.x86_64 || exit 1"
+                - "pidof valheim_server.x86_64"
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
           ports:
             - name: valheim-1
               containerPort: 2456
