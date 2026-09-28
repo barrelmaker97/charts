@@ -33,13 +33,4 @@ jobs:
         uses: helm/kind-action@v1.15.0
 
       - name: Run chart-testing (install)
-        run: |
-          changed=$(ct list-changed --config .github/ct-install.yaml)
-          if printf '%s\n' "$changed" | grep -Fxq charts/obscura; then
-            # The published Obscura chart cannot be installed for upgrade tests:
-            # its bucket hook pulls the retired quay.io/minio/mc image.
-            ct install --config .github/ct-install.yaml --excluded-charts pistachio,obscura
-            ct install --config .github/ct-install.yaml --charts charts/obscura --upgrade=false
-          else
-            ct install --config .github/ct-install.yaml
-          fi
+        run: ct install --config .github/ct-install.yaml
