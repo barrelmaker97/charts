@@ -195,7 +195,7 @@ valkey:
 replicaCount: 1
 
 image:
-  repository: ghcr.io/barrelmaker97/obscura-server
+  repository: ghcr.io/obscura-messaging/obscura-server
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
