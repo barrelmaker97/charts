@@ -36,7 +36,11 @@ spec:
       initContainers:
         - name: create-bucket
           image: {{ .Values.bucketSetup.image | quote }}
+          securityContext:
+            {{- toYaml .Values.bucketSetup.securityContext | nindent 12 }}
           env:
+            - name: MC_CONFIG_DIR
+              value: /mc-config
             - name: S3_ENDPOINT
               value: {{ include "obscura.storageEndpoint" . | quote }}
             - name: S3_BUCKET
@@ -66,6 +70,9 @@ spec:
                 sleep 2
               done
               mc mb --ignore-existing "local/$S3_BUCKET"
+          volumeMounts:
+            - name: mc-config
+              mountPath: /mc-config
           resources:
             requests:
               cpu: 100m
@@ -129,14 +136,20 @@ spec:
               port: mgmt
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-      {{- if include "obscura.fcmEnabled" . }}
+      {{- if or .Values.rustfs.enabled (include "obscura.fcmEnabled" .) }}
       volumes:
+        {{- if .Values.rustfs.enabled }}
+        - name: mc-config
+          emptyDir: {}
+        {{- end }}
+        {{- if include "obscura.fcmEnabled" . }}
         - name: fcm-credentials
           secret:
             secretName: {{ include "obscura.fullname" . }}-secret
             items:
               - key: fcm-credentials-json
                 path: credentials.json
+        {{- end }}
       {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:

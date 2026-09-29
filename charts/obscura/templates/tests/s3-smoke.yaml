@@ -8,10 +8,16 @@ metadata:
     "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
 spec:
   restartPolicy: Never
+  securityContext:
+    {{- toYaml .Values.podSecurityContext | nindent 4 }}
   containers:
     - name: s3-smoke
       image: {{ .Values.bucketSetup.image | quote }}
+      securityContext:
+        {{- toYaml .Values.bucketSetup.securityContext | nindent 8 }}
       env:
+        - name: MC_CONFIG_DIR
+          value: /mc-config
         - name: S3_ENDPOINT
           value: {{ include "obscura.storageEndpoint" . | quote }}
         - name: S3_BUCKET
@@ -37,4 +43,10 @@ spec:
           mc stat "$key"
           mc cat "$key" | grep -Fxq 'obscura-chart-smoke'
           mc rm "$key"
+      volumeMounts:
+        - name: mc-config
+          mountPath: /mc-config
+  volumes:
+    - name: mc-config
+      emptyDir: {}
 {{- end }}

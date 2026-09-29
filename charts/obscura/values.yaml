@@ -194,6 +194,8 @@ rustfs:
 bucketSetup:
   image: cgr.dev/chainguard/minio-client:latest-dev
   attempts: 60
+  # Applies to bucket initialization and the S3 smoke test.
+  securityContext: {}
 
 valkey:
   enabled: true
