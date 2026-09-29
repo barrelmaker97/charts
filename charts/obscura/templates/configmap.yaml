@@ -78,7 +78,7 @@ data:
   OBSCURA_BACKUP_STALE_THRESHOLD_MINS: {{ .Values.obscura.backup.staleThresholdMins | quote }}
   OBSCURA_BACKUP_CLEANUP_INTERVAL_SECS: {{ .Values.obscura.backup.cleanupIntervalSecs | quote }}
   OBSCURA_STORAGE_BUCKET: {{ .Values.obscura.storage.bucket | quote }}
-  OBSCURA_STORAGE_REGION: {{ .Values.obscura.storage.region | quote }}
+  OBSCURA_STORAGE_REGION: {{ include "obscura.storageRegion" . | quote }}
   OBSCURA_STORAGE_ENDPOINT: {{ include "obscura.storageEndpoint" . | quote }}
   OBSCURA_STORAGE_FORCE_PATH_STYLE: {{ .Values.obscura.storage.forcePathStyle | quote }}
   {{- if include "obscura.fcmEnabled" . }}

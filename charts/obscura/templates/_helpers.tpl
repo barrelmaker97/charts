@@ -134,7 +134,16 @@ Compute the storage endpoint
 {{- if .Values.obscura.storage.endpoint -}}
 {{- .Values.obscura.storage.endpoint -}}
 {{- else if .Values.rustfs.enabled -}}
-{{- printf "http://%s-rustfs-svc:%v" .Release.Name .Values.rustfs.service.endpoint.port -}}
+{{- $rustfs := dict "Chart" (dict "Name" "rustfs") "Values" .Values.rustfs "Release" .Release -}}
+{{- printf "http://%s-svc:%v" (include "rustfs.fullname" $rustfs) .Values.rustfs.service.endpoint.port -}}
+{{- end -}}
+{{- end }}
+
+{{- define "obscura.storageRegion" -}}
+{{- if .Values.rustfs.enabled -}}
+{{- .Values.rustfs.config.rustfs.region -}}
+{{- else -}}
+{{- .Values.obscura.storage.region -}}
 {{- end -}}
 {{- end }}
 

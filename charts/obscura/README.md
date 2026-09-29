@@ -23,7 +23,8 @@ Obscura server and bucket initialization both use these values. Alternatively,
 set `rustfs.secret.existingSecret` to a Secret containing `RUSTFS_ACCESS_KEY`
 and `RUSTFS_SECRET_KEY`; the Obscura server reads the same Secret. The
 `obscura.storage.bucket` value selects the bucket, which an init container
-creates on startup. `helm test` checks S3 write, read, head, and delete.
+creates on startup. The bundled region comes from `rustfs.config.rustfs.region`.
+`helm test` checks S3 write, read, head, and delete.
 
 For an object store already available in the cluster, disable the bundled
 RustFS dependency and provide an existing bucket and S3 credentials:

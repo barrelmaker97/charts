@@ -121,6 +121,7 @@ obscura:
   # Storage configuration (S3-compatible)
   storage:
     bucket: "obscura-storage"
+    # Used for external S3; bundled RustFS uses rustfs.config.rustfs.region.
     region: "us-east-1"
     # Set these when rustfs.enabled is false; the bucket must already exist.
     endpoint: ""
