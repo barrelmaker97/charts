@@ -26,8 +26,8 @@ jobs:
       - name: Add Bitnami Helm Repo
         run: helm repo add bitnami https://charts.bitnami.com/bitnami
 
-      - name: Add Minio Helm Repo
-        run: helm repo add minio https://charts.min.io/
+      - name: Add RustFS Helm Repo
+        run: helm repo add rustfs https://charts.rustfs.com
 
       - name: Add Valkey Helm Repo
         run: helm repo add valkey https://valkey.io/valkey-helm/
