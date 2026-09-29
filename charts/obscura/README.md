@@ -26,6 +26,14 @@ and `RUSTFS_SECRET_KEY`; the Obscura server reads the same Secret. The
 creates on startup. The bundled region comes from `rustfs.config.rustfs.region`.
 `helm test` checks S3 write, read, head, and delete.
 
+Bucket initialization and the S3 smoke test store the MinIO client configuration
+in a dedicated writable `emptyDir`, including when their root filesystems are
+read-only. Both inherit `podSecurityContext`; when setting a non-root user, set
+`fsGroup` to a group that user belongs to so it can write to the volume.
+`bucketSetup.securityContext` configures both client containers, independently
+of the server's `securityContext`. CI tests default values and the hardened
+configuration in `ci/nonroot-values.yaml`.
+
 For an object store already available in the cluster, disable the bundled
 RustFS dependency and provide an existing bucket and S3 credentials:
 
