@@ -133,8 +133,8 @@ Compute the storage endpoint
 {{- define "obscura.storageEndpoint" -}}
 {{- if .Values.obscura.storage.endpoint -}}
 {{- .Values.obscura.storage.endpoint -}}
-{{- else if .Values.minio.enabled -}}
-{{- printf "http://%s-minio:9000" .Release.Name -}}
+{{- else if .Values.rustfs.enabled -}}
+{{- printf "http://%s-rustfs-svc:%v" .Release.Name .Values.rustfs.service.endpoint.port -}}
 {{- end -}}
 {{- end }}
 
@@ -142,10 +142,10 @@ Compute the storage endpoint
 Compute the Storage Access Key
 */}}
 {{- define "obscura.storageAccessKey" -}}
-{{- if .Values.obscura.storage.accessKey -}}
+{{- if .Values.rustfs.enabled -}}
+{{- .Values.rustfs.secret.rustfs.access_key -}}
+{{- else -}}
 {{- .Values.obscura.storage.accessKey -}}
-{{- else if .Values.minio.enabled -}}
-{{- .Values.minio.rootUser -}}
 {{- end -}}
 {{- end }}
 
@@ -153,10 +153,66 @@ Compute the Storage Access Key
 Compute the Storage Secret Key
 */}}
 {{- define "obscura.storageSecretKey" -}}
-{{- if .Values.obscura.storage.secretKey -}}
+{{- if .Values.rustfs.enabled -}}
+{{- .Values.rustfs.secret.rustfs.secret_key -}}
+{{- else -}}
 {{- .Values.obscura.storage.secretKey -}}
-{{- else if .Values.minio.enabled -}}
-{{- .Values.minio.rootPassword -}}
+{{- end -}}
+{{- end }}
+
+{{- define "obscura.storageCredentialsSecretName" -}}
+{{- if and .Values.rustfs.enabled .Values.rustfs.secret.existingSecret -}}
+{{- .Values.rustfs.secret.existingSecret -}}
+{{- else if .Values.obscura.storage.existingSecret.name -}}
+{{- .Values.obscura.storage.existingSecret.name -}}
+{{- else -}}
+{{- printf "%s-secret" (include "obscura.fullname" .) -}}
+{{- end -}}
+{{- end }}
+
+{{- define "obscura.storageAccessKeyName" -}}
+{{- if and .Values.rustfs.enabled .Values.rustfs.secret.existingSecret -}}
+RUSTFS_ACCESS_KEY
+{{- else if .Values.obscura.storage.existingSecret.name -}}
+{{- .Values.obscura.storage.existingSecret.accessKeyKey -}}
+{{- else -}}
+storage-access-key
+{{- end -}}
+{{- end }}
+
+{{- define "obscura.storageSecretKeyName" -}}
+{{- if and .Values.rustfs.enabled .Values.rustfs.secret.existingSecret -}}
+RUSTFS_SECRET_KEY
+{{- else if .Values.obscura.storage.existingSecret.name -}}
+{{- .Values.obscura.storage.existingSecret.secretKeyKey -}}
+{{- else -}}
+storage-secret-key
+{{- end -}}
+{{- end }}
+
+{{- define "obscura.validateStorageConfiguration" -}}
+{{- $storage := .Values.obscura.storage -}}
+{{- if not $storage.bucket -}}
+{{- fail "obscura.storage.bucket is required" -}}
+{{- end -}}
+{{- if .Values.rustfs.enabled -}}
+{{- if lt (int .Values.bucketSetup.attempts) 1 -}}
+{{- fail "bucketSetup.attempts must be at least 1" -}}
+{{- end -}}
+{{- if or $storage.endpoint $storage.accessKey $storage.secretKey $storage.existingSecret.name -}}
+{{- fail "disable rustfs.enabled before configuring external obscura.storage endpoint or credentials" -}}
+{{- end -}}
+{{- else -}}
+{{- if not $storage.endpoint -}}
+{{- fail "obscura.storage.endpoint is required when rustfs.enabled is false" -}}
+{{- end -}}
+{{- if $storage.existingSecret.name -}}
+{{- if or $storage.accessKey $storage.secretKey (not $storage.existingSecret.accessKeyKey) (not $storage.existingSecret.secretKeyKey) -}}
+{{- fail "external storage existingSecret requires both key names and no inline credentials" -}}
+{{- end -}}
+{{- else if or (not $storage.accessKey) (not $storage.secretKey) -}}
+{{- fail "external storage requires both accessKey and secretKey, or existingSecret.name" -}}
+{{- end -}}
 {{- end -}}
 {{- end }}
 

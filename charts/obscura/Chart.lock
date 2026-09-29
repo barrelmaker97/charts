@@ -2,11 +2,11 @@ dependencies:
 - name: postgresql
   repository: https://charts.bitnami.com/bitnami
   version: 18.2.9
-- name: minio
-  repository: https://charts.min.io/
-  version: 5.4.0
+- name: rustfs
+  repository: https://charts.rustfs.com
+  version: 1.0.0
 - name: valkey
   repository: https://valkey.io/valkey-helm/
   version: 0.9.4
-digest: sha256:af5248ca38560ea7fd59db6436cba5e929c25607cb7c34ef42287224ed057750
-generated: "2026-08-27T23:17:46.721638034-05:00"
+digest: sha256:16653a8f0ed340a09d19313024a8f94f518a2edf4132182a62b2301cb37ca922
+generated: "2026-09-28T23:42:34.415585-05:00"
