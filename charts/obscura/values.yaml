@@ -121,12 +121,17 @@ obscura:
   # Storage configuration (S3-compatible)
   storage:
     bucket: "obscura-storage"
+    # Used for external S3; bundled RustFS uses rustfs.config.rustfs.region.
     region: "us-east-1"
-    # If empty and minio.enabled is true, it will be generated.
+    # Set these when rustfs.enabled is false; the bucket must already exist.
     endpoint: ""
-    # Access and Secret keys. If empty and minio.enabled is true, minio defaults will be used.
     accessKey: ""
     secretKey: ""
+    # Optional Secret for external S3 credentials.
+    existingSecret:
+      name: ""
+      accessKeyKey: "access-key"
+      secretKeyKey: "secret-key"
     forcePathStyle: true
 
   # FCM (Firebase Cloud Messaging) configuration
@@ -159,24 +164,36 @@ postgresql:
     password: obscura_password
     database: obscura_db
 
-minio:
+rustfs:
   enabled: true
-  mode: standalone
-  replicas: 1
-  serviceAccount:
-    create: false
-  rootUser: obscura
-  # WARNING: Must be changed for production!
-  rootPassword: obscura_password
-  image:
-    tag: RELEASE.2025-09-07T16-13-09Z
-  persistence:
+  mode:
+    standalone:
+      enabled: true
+    distributed:
+      enabled: false
+  ingress:
     enabled: false
-  # The MinIO subchart defaults to 16Gi memory requests, which exceeds
-  # most namespace quotas. We override it here to a sane default.
-  resources:
-    requests:
-      memory: 256Mi
+  service:
+    endpoint:
+      port: 9000
+  config:
+    rustfs:
+      obs_log_directory: ""
+      region: us-east-1
+  secret:
+    existingSecret: ""
+    rustfs:
+      # Development credentials only; replace both for production.
+      access_key: obscura
+      secret_key: obscura_password
+  storageclass:
+    # Empty uses the cluster's default StorageClass.
+    name: ""
+    dataStorageSize: 1Gi
+
+bucketSetup:
+  image: cgr.dev/chainguard/minio-client:latest-dev
+  attempts: 60
 
 valkey:
   enabled: true
@@ -195,7 +212,7 @@ valkey:
 replicaCount: 1
 
 image:
-  repository: ghcr.io/barrelmaker97/obscura-server
+  repository: ghcr.io/obscura-messaging/obscura-server
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
