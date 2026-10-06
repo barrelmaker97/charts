@@ -3,9 +3,9 @@ apiVersion: v2
 name: website
 description: A Helm Chart for a website
 type: application
-version: 0.7.0
+version: 0.7.1
 # renovate: image=docker.io/nginx
-appVersion: 1.31.3-alpine
+appVersion: 1.31.6-alpine
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com
