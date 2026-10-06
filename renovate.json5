@@ -1,0 +1,37 @@
+{
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  // Every update is a PR that gets the lint and install tests, and merging
+  // releases the chart. Nothing automerges.
+  extends: ['config:recommended'],
+  timezone: 'America/Chicago',
+  customManagers: [
+    {
+      description: "A chart's appVersion is its default image tag; the comment above it names the image",
+      customType: 'regex',
+      managerFilePatterns: ['/^charts/[^/]+/Chart\\.yaml$/'],
+      matchStrings: ['# renovate: image=(?<depName>\\S+)\\s+appVersion: "?(?<currentValue>[^"\\s]+)"?'],
+      datasourceTemplate: 'docker',
+    },
+  ],
+  // The subchart archives committed under charts/*/charts stay in step with
+  // Chart.lock.
+  postUpdateOptions: ['helmUpdateSubChartArchives'],
+  packageRules: [
+    {
+      description: 'ct lint fails a changed chart whose version did not go up, so an update to a chart bumps it too: minor for a major update, patch otherwise',
+      matchFileNames: ['charts/**'],
+      bumpVersions: [
+        {
+          filePatterns: ['{{packageFileDir}}/Chart.yaml'],
+          matchStrings: ['version:\\s(?<version>[^\\s]+)'],
+          bumpType: '{{#if isMajor}}minor{{else}}patch{{/if}}',
+        },
+      ],
+    },
+    {
+      description: 'Major updates wait on the Dependency Dashboard until approved: they usually need migration work',
+      matchUpdateTypes: ['major'],
+      dependencyDashboardApproval: true,
+    },
+  ],
+}
