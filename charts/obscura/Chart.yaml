@@ -3,7 +3,7 @@ apiVersion: v2
 name: obscura
 description: A Helm chart for Obscura Server
 type: application
-version: 0.14.0
+version: 0.14.1
 # renovate: image=ghcr.io/obscura-messaging/obscura-server
 appVersion: 0.9.6
 maintainers:
@@ -16,7 +16,7 @@ dependencies:
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
   - name: rustfs
-    version: 1.0.0
+    version: 1.0.1
     repository: https://charts.rustfs.com
     condition: rustfs.enabled
   - name: valkey
