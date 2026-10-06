@@ -8,11 +8,11 @@ gitSync:
     repository: registry.k8s.io/git-sync/git-sync
     pullPolicy: IfNotPresent
     tag: v4.7.1
-  securityContext: {}
-    # allowPrivilegeEscalation: false
-    # capabilities:
-    #   drop:
-    #     - ALL
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
   resources: {}
     # requests:
     #   cpu: 20m
@@ -36,6 +36,8 @@ fullnameOverride: ""
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
+  # Nothing in this chart calls the Kubernetes API.
+  automount: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
@@ -44,17 +46,19 @@ serviceAccount:
 
 podAnnotations: {}
 
-podSecurityContext: {}
-  # runAsNonRoot: true
-  # runAsUser: 1000
-  # runAsGroup: 1000
-  # fsGroup: 1000
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
+  seccompProfile:
+    type: RuntimeDefault
 
-securityContext: {}
-  # allowPrivilegeEscalation: false
-  # capabilities:
-  #   drop:
-  #     - ALL
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
 
 service:
   type: ClusterIP

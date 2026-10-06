@@ -8,6 +8,8 @@ satisfactoryOpts:
   debug: false
   disableSeasonalEvents: false
   maxPlayers: 4
+  # Ignored unless the pod runs as root: the default podSecurityContext
+  # already runs as 1000:1000.
   pgid: 1000
   puid: 1000
   serverGamePort: 7777
@@ -42,6 +44,8 @@ persistence:
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
+  # Nothing in this chart calls the Kubernetes API.
+  automount: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
@@ -50,16 +54,19 @@ serviceAccount:
 
 podAnnotations: {}
 
-podSecurityContext: {}
-  # fsGroup: 2000
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
+  seccompProfile:
+    type: RuntimeDefault
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
 
 service:
   type: ClusterIP

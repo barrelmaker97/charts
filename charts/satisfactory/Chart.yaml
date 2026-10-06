@@ -3,7 +3,8 @@ apiVersion: v2
 name: satisfactory
 description: A Helm Chart for Satisfactory
 type: application
-version: 0.4.0
+version: 0.5.0
+# renovate: image=wolveix/satisfactory-server
 appVersion: v1.9.10
 maintainers:
   - name: barrelmaker97

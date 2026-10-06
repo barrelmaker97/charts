@@ -47,6 +47,29 @@ Useful Helm Client Commands:
 * Install a chart: `helm install my-release barrelmaker/<package-name>`
 * Upgrade your application: `helm upgrade`
 
+## Security defaults
+
+Every chart meets the [restricted Pod Security Standard](https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted)
+out of the box: pods run as a non-root user (the image's own where it has
+one), cannot gain privileges, drop all Linux capabilities, use the runtime's
+default seccomp profile, and do not mount a service account token.
+
+These are ordinary values (`podSecurityContext`, `securityContext`,
+`serviceAccount.automount`, and the same settings on sidecars such as
+`gitSync`), and Helm merges yours into them. Set a key to change it, or set it
+to `null` to drop it:
+
+```yaml
+podSecurityContext:
+  runAsUser: 1234        # a different user
+securityContext:
+  capabilities: null     # keep the image's default capabilities
+```
+
+Obscura's bundled RustFS and Valkey subcharts ship `helm test` pods without a
+security context, so `helm test` fails in a namespace that enforces the
+restricted standard. Installs and upgrades are not affected.
+
 # License
 
 Copyright (c) 2026 Nolan Cooper

@@ -166,6 +166,11 @@ postgresql:
 
 rustfs:
   enabled: true
+  podSecurityContext:
+    seccompProfile:
+      type: RuntimeDefault
+  serviceAccount:
+    automount: false
   mode:
     standalone:
       enabled: true
@@ -195,7 +200,12 @@ bucketSetup:
   image: cgr.dev/chainguard/minio-client:latest-dev
   attempts: 60
   # Applies to bucket initialization and the S3 smoke test.
-  securityContext: {}
+  securityContext:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop:
+        - ALL
 
 valkey:
   enabled: true
@@ -226,6 +236,8 @@ fullnameOverride: ""
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
+  # Nothing in this chart calls the Kubernetes API.
+  automount: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
@@ -234,19 +246,20 @@ serviceAccount:
 
 podAnnotations: {}
 
-podSecurityContext: {}
-  # fsGroup: 10001
-  # runAsGroup: 10001
-  # runAsUser: 10001
-  # runAsNonRoot: true
-  # seccompProfile:
-  #   type: RuntimeDefault
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 10001
+  runAsGroup: 10001
+  fsGroup: 10001
+  seccompProfile:
+    type: RuntimeDefault
 
-securityContext: {}
-  # allowPrivilegeEscalation: false
-  # capabilities:
-  #   drop:
-  #     - ALL
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop:
+      - ALL
 
 service:
   type: ClusterIP

@@ -3,7 +3,8 @@ apiVersion: v2
 name: obscura
 description: A Helm chart for Obscura Server
 type: application
-version: 0.13.1
+version: 0.14.0
+# renovate: image=ghcr.io/obscura-messaging/obscura-server
 appVersion: 0.9.6
 maintainers:
   - name: barrelmaker97

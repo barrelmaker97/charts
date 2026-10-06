@@ -7,11 +7,11 @@ server:
   password: ""
 
 config:
-  securityContext: {}
-    # allowPrivilegeEscalation: false
-    # capabilities:
-    #   drop:
-    #     - ALL
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
   resources: {}
     # requests:
     #   cpu: 20m
@@ -37,6 +37,8 @@ persistence:
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
+  # Nothing in this chart calls the Kubernetes API.
+  automount: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
@@ -45,16 +47,19 @@ serviceAccount:
 
 podAnnotations: {}
 
-podSecurityContext: {}
-  # runAsNonRoot: true
-  # runAsUser: 845
-  # runAsGroup: 845
-  # fsGroup: 845
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 845
+  runAsGroup: 845
+  fsGroup: 845
+  seccompProfile:
+    type: RuntimeDefault
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #     - ALL
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
 
 service:
   type: ClusterIP
