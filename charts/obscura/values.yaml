@@ -166,6 +166,13 @@ postgresql:
 
 rustfs:
   enabled: true
+  # The RustFS chart runs as non-root already; this adds the seccomp
+  # profile and drops the service account token it does not use.
+  podSecurityContext:
+    seccompProfile:
+      type: RuntimeDefault
+  serviceAccount:
+    automount: false
   mode:
     standalone:
       enabled: true
@@ -195,7 +202,12 @@ bucketSetup:
   image: cgr.dev/chainguard/minio-client:latest-dev
   attempts: 60
   # Applies to bucket initialization and the S3 smoke test.
-  securityContext: {}
+  securityContext:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop:
+        - ALL
 
 valkey:
   enabled: true
@@ -226,6 +238,9 @@ fullnameOverride: ""
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
+  # Mount the service account's API token into the pods. Nothing in this
+  # chart calls the Kubernetes API.
+  automount: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
@@ -234,19 +249,24 @@ serviceAccount:
 
 podAnnotations: {}
 
-podSecurityContext: {}
-  # fsGroup: 10001
-  # runAsGroup: 10001
-  # runAsUser: 10001
-  # runAsNonRoot: true
-  # seccompProfile:
-  #   type: RuntimeDefault
+# Secure by default: the pod runs as UID 10001, cannot gain privileges, has no
+# Linux capabilities and uses the runtime's default seccomp profile, which meets
+# the restricted Pod Security Standard. Helm merges your values into these, so
+# set a key to change it, or set it to null to drop it.
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 10001
+  runAsGroup: 10001
+  fsGroup: 10001
+  seccompProfile:
+    type: RuntimeDefault
 
-securityContext: {}
-  # allowPrivilegeEscalation: false
-  # capabilities:
-  #   drop:
-  #     - ALL
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop:
+      - ALL
 
 service:
   type: ClusterIP

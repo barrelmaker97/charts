@@ -7,11 +7,11 @@ server:
   password: ""
 
 config:
-  securityContext: {}
-    # allowPrivilegeEscalation: false
-    # capabilities:
-    #   drop:
-    #     - ALL
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
   resources: {}
     # requests:
     #   cpu: 20m
@@ -37,6 +37,9 @@ persistence:
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
+  # Mount the service account's API token into the pods. Nothing in this
+  # chart calls the Kubernetes API.
+  automount: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
@@ -45,16 +48,24 @@ serviceAccount:
 
 podAnnotations: {}
 
-podSecurityContext: {}
-  # runAsNonRoot: true
-  # runAsUser: 845
-  # runAsGroup: 845
-  # fsGroup: 845
+# Secure by default: the pod runs as the image's factorio user (845), cannot
+# gain privileges, has no Linux capabilities and uses the runtime's default
+# seccomp profile, which meets the restricted Pod Security Standard. Helm merges
+# your values into these, so set a key to change it, or set it to null to drop
+# it.
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 845
+  runAsGroup: 845
+  fsGroup: 845
+  seccompProfile:
+    type: RuntimeDefault
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #     - ALL
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
 
 service:
   type: ClusterIP
