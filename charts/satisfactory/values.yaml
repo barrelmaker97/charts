@@ -8,9 +8,8 @@ satisfactoryOpts:
   debug: false
   disableSeasonalEvents: false
   maxPlayers: 4
-  # Used only when the pod runs as root, which the image needs to chown its
-  # files to this user. By default it runs as this user already
-  # (podSecurityContext below), and these are ignored.
+  # Ignored unless the pod runs as root: the default podSecurityContext
+  # already runs as 1000:1000.
   pgid: 1000
   puid: 1000
   serverGamePort: 7777
@@ -45,8 +44,7 @@ persistence:
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
-  # Mount the service account's API token into the pods. Nothing in this
-  # chart calls the Kubernetes API.
+  # Nothing in this chart calls the Kubernetes API.
   automount: false
   # Annotations to add to the service account
   annotations: {}
@@ -56,10 +54,6 @@ serviceAccount:
 
 podAnnotations: {}
 
-# Secure by default: the pod runs as the image's steam user (1000), cannot gain
-# privileges, has no Linux capabilities and uses the runtime's default seccomp
-# profile, which meets the restricted Pod Security Standard. Helm merges your
-# values into these, so set a key to change it, or set it to null to drop it.
 podSecurityContext:
   runAsNonRoot: true
   runAsUser: 1000

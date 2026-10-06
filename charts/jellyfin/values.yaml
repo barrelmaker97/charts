@@ -20,8 +20,7 @@ fullnameOverride: ""
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
-  # Mount the service account's API token into the pods. Nothing in this
-  # chart calls the Kubernetes API.
+  # Nothing in this chart calls the Kubernetes API.
   automount: false
   # Annotations to add to the service account
   annotations: {}
@@ -31,10 +30,6 @@ serviceAccount:
 
 podAnnotations: {}
 
-# Secure by default: the pod runs as UID 1000, cannot gain privileges, has no
-# Linux capabilities and uses the runtime's default seccomp profile, which meets
-# the restricted Pod Security Standard. Helm merges your values into these, so
-# set a key to change it, or set it to null to drop it.
 podSecurityContext:
   runAsNonRoot: true
   runAsUser: 1000
