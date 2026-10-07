@@ -3,6 +3,20 @@ entries:
   factorio:
   - apiVersion: v2
     appVersion: 2.0.77
+    created: "2026-10-07T18:09:13.495600148Z"
+    description: A Helm Chart for Factorio
+    digest: 430d30a0223bf4e1eb3d848faf9de0c94e9f264096880ef055b6292f26afc7f8
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: factorio
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/factorio-0.10.0/factorio-0.10.0.tgz
+    version: 0.10.0
+  - apiVersion: v2
+    appVersion: 2.0.77
     created: "2026-10-06T23:36:28.64813374Z"
     description: A Helm Chart for Factorio
     digest: 89cefaf4d4092efc6b91e7fe89c20b7ca9c8a0c243b2f8db55b06196cb64cbc0
@@ -772,6 +786,19 @@ entries:
     - https://github.com/barrelmaker97/charts/releases/download/friendbot-0.1.1/friendbot-0.1.1.tgz
     version: 0.1.1
   gmod:
+  - apiVersion: v2
+    created: "2026-10-07T18:09:13.684639923Z"
+    description: A Helm Chart for Garry's Mod
+    digest: 0044044eeba4eb5d39873ddbb279ec1f3e91bb7a1a21b751ca6e9cde94f39e0c
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: gmod
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/gmod-0.5.0/gmod-0.5.0.tgz
+    version: 0.5.0
   - apiVersion: v2
     created: "2026-10-06T23:36:28.809319159Z"
     description: A Helm Chart for Garry's Mod
@@ -1977,6 +2004,20 @@ entries:
     - https://github.com/barrelmaker97/charts/releases/download/jellyfin-0.1.1/jellyfin-0.1.1.tgz
     version: 0.1.1
   minecraft:
+  - apiVersion: v2
+    appVersion: 2026.9.2-java25-alpine
+    created: "2026-10-07T18:09:13.83739411Z"
+    description: A Helm Chart for Minecraft
+    digest: 57434fa88ea5528daf47394c7a626d3d65e6987bdee886f1a22390fc2701860d
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: minecraft
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/minecraft-0.13.0/minecraft-0.13.0.tgz
+    version: 0.13.0
   - apiVersion: v2
     appVersion: 2026.9.2-java25-alpine
     created: "2026-10-06T23:36:29.159914928Z"
@@ -4889,6 +4930,20 @@ entries:
   satisfactory:
   - apiVersion: v2
     appVersion: v1.9.11
+    created: "2026-10-07T18:09:13.976210403Z"
+    description: A Helm Chart for Satisfactory
+    digest: e68247aa8fd759bd82e900ef1814825895b2fe058eaf13e1dfdafc6e3c79e2ff
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: satisfactory
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/satisfactory-0.6.0/satisfactory-0.6.0.tgz
+    version: 0.6.0
+  - apiVersion: v2
+    appVersion: v1.9.11
     created: "2026-10-07T00:39:40.183793731Z"
     description: A Helm Chart for Satisfactory
     digest: 39cd555cd300d46f27af3c709b80b579f36938b192c968162d79ad1033e97721
@@ -5225,6 +5280,20 @@ entries:
     - https://github.com/barrelmaker97/charts/releases/download/serge-0.1.0/serge-0.1.0.tgz
     version: 0.1.0
   valheim:
+  - apiVersion: v2
+    appVersion: 3.8.9
+    created: "2026-10-07T18:09:14.142379358Z"
+    description: A Helm Chart for Valheim
+    digest: 282fc94ad22061401bd03098eb30f5d74f1162f27b509cb0e21e2ccb0b4441bf
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: valheim
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/valheim-0.7.0/valheim-0.7.0.tgz
+    version: 0.7.0
   - apiVersion: v2
     appVersion: 3.8.9
     created: "2026-10-06T23:36:29.852422053Z"
@@ -6349,4 +6418,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2026-10-07T11:31:15.267834492Z"
+generated: "2026-10-07T18:09:14.143503598Z"
