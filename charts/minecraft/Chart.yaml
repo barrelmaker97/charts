@@ -3,7 +3,7 @@ apiVersion: v2
 name: minecraft
 description: A Helm Chart for Minecraft
 type: application
-version: 0.12.0
+version: 0.13.0
 # renovate: image=docker.io/itzg/minecraft-server
 appVersion: 2026.9.2-java25-alpine
 maintainers:
