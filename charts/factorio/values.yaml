@@ -63,6 +63,8 @@ securityContext:
 
 service:
   type: ClusterIP
+  # For example, metallb.io/loadBalancerIPs to pin a LoadBalancer address.
+  annotations: {}
   port: 34197
   externalTrafficPolicy: Local
 

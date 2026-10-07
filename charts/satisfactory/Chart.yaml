@@ -3,7 +3,7 @@ apiVersion: v2
 name: satisfactory
 description: A Helm Chart for Satisfactory
 type: application
-version: 0.5.1
+version: 0.6.0
 # renovate: image=wolveix/satisfactory-server
 appVersion: v1.9.11
 maintainers:

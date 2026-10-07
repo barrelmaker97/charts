@@ -3,7 +3,7 @@ apiVersion: v2
 name: valheim
 description: A Helm Chart for Valheim
 type: application
-version: 0.6.0
+version: 0.7.0
 # renovate: image=docker.io/mbround18/valheim
 appVersion: 3.8.9
 maintainers:
