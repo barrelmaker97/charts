@@ -3,7 +3,7 @@ apiVersion: v2
 name: obscura
 description: A Helm chart for Obscura Server
 type: application
-version: 0.14.1
+version: 0.14.2
 # renovate: image=ghcr.io/obscura-messaging/obscura-server
 appVersion: 0.9.6
 maintainers:
@@ -20,6 +20,6 @@ dependencies:
     repository: https://charts.rustfs.com
     condition: rustfs.enabled
   - name: valkey
-    version: ~0.9.0
+    version: ~0.12.0
     repository: https://valkey.io/valkey-helm/
     condition: valkey.enabled
