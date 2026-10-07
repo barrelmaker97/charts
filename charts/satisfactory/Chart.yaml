@@ -3,9 +3,9 @@ apiVersion: v2
 name: satisfactory
 description: A Helm Chart for Satisfactory
 type: application
-version: 0.5.0
+version: 0.5.1
 # renovate: image=wolveix/satisfactory-server
-appVersion: v1.9.10
+appVersion: v1.9.11
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com
