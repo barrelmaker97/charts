@@ -6,4 +6,5 @@ metadata:
   labels:
     {{- include "website.labels" . | nindent 4 }}
 data:
-{{ (.Files.Glob "nginx.conf").AsConfig | indent 2 }}
+  nginx.conf: |
+    {{- tpl (.Files.Get "nginx.conf") . | nindent 4 }}
