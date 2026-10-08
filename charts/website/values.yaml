@@ -23,6 +23,12 @@ gitSync:
 
 replicaCount: 1
 
+nginx:
+  # Each worker preallocates its connections. "auto" starts one worker per
+  # node CPU, which costs hundreds of MiB on a large node for no benefit.
+  workerProcesses: 2
+  workerConnections: 1024
+
 image:
   repository: docker.io/nginx
   pullPolicy: IfNotPresent

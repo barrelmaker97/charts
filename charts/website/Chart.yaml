@@ -3,7 +3,7 @@ apiVersion: v2
 name: website
 description: A Helm Chart for a website
 type: application
-version: 0.7.1
+version: 0.8.0
 # renovate: image=docker.io/nginx
 appVersion: 1.31.6-alpine
 maintainers:
