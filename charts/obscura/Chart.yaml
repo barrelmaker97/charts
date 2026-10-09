@@ -3,7 +3,7 @@ apiVersion: v2
 name: obscura
 description: A Helm chart for Obscura Server
 type: application
-version: 0.14.2
+version: 0.14.3
 # renovate: image=ghcr.io/obscura-messaging/obscura-server
 appVersion: 0.9.6
 maintainers:
@@ -12,7 +12,7 @@ maintainers:
     url: barrelmaker.dev
 dependencies:
   - name: postgresql
-    version: ~18.2.0
+    version: ~18.12.0
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
   - name: rustfs
