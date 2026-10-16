@@ -3,6 +3,20 @@ entries:
   factorio:
   - apiVersion: v2
     appVersion: 2.0.77
+    created: "2026-10-16T15:24:02.419666077Z"
+    description: A Helm Chart for Factorio
+    digest: 99d6c163380fd3d048051499dd6e0bb420d3e8d53ea220d3dbfbb59c2c749228
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: factorio
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/factorio-0.11.0/factorio-0.11.0.tgz
+    version: 0.11.0
+  - apiVersion: v2
+    appVersion: 2.0.77
     created: "2026-10-07T18:09:13.495600148Z"
     description: A Helm Chart for Factorio
     digest: 430d30a0223bf4e1eb3d848faf9de0c94e9f264096880ef055b6292f26afc7f8
@@ -5323,6 +5337,20 @@ entries:
   valheim:
   - apiVersion: v2
     appVersion: 3.8.10
+    created: "2026-10-16T15:24:02.553494504Z"
+    description: A Helm Chart for Valheim
+    digest: ca4667929df0501331c69c06e12d307a9c6385fa43af840d2ad77567f213e6cc
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: valheim
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/valheim-0.8.0/valheim-0.8.0.tgz
+    version: 0.8.0
+  - apiVersion: v2
+    appVersion: 3.8.10
     created: "2026-10-15T21:29:45.298595982Z"
     description: A Helm Chart for Valheim
     digest: d1991d009e0e85f8cf7787a6e4d92087364aeebe63419b184ec23e4e0c0c5879
@@ -6501,4 +6529,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2026-10-15T21:29:45.299165031Z"
+generated: "2026-10-16T15:24:02.555479402Z"
