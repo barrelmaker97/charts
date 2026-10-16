@@ -15,6 +15,12 @@ worldName: "world"
 public: false
 metrics: false
 
+# Name of an existing Secret in the release namespace containing a password key.
+# When set, no Secret is created and password is ignored.
+existingSecret: ""
+# Leave empty to generate a password when existingSecret is not set.
+password: ""
+
 persistence:
   storageClassName: ""
   size: 10Gi

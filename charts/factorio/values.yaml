@@ -6,6 +6,10 @@ server:
   public: false
   password: ""
 
+# Name of an existing Secret in the release namespace containing a password key.
+# When set, no Secret is created and server.password is ignored.
+existingSecret: ""
+
 config:
   securityContext:
     allowPrivilegeEscalation: false
