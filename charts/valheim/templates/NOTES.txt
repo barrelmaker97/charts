@@ -2,6 +2,8 @@ Valheim has been installed!
 
 To get the password for the server, run:
 
-    kubectl get secret --namespace {{ .Release.Namespace }} {{ include "valheim.fullname" . }}-password -o jsonpath="{.data.password}" | base64 --decode
+    kubectl get secret --namespace {{ .Release.Namespace }} {{ .Values.existingSecret | default (printf "%s-password" (include "valheim.fullname" .)) | quote }} -o jsonpath="{.data.password}" | base64 --decode
 
+{{- if not .Values.existingSecret }}
 If you did not set a password manually, then one was generated for you.
+{{- end }}

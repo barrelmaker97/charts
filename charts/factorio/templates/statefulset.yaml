@@ -48,7 +48,7 @@ spec:
             - name: PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "factorio.fullname" . }}-password
+                  name: {{ .Values.existingSecret | default (printf "%s-password" (include "factorio.fullname" .)) | quote }}
                   key: password
           command:
             - /bin/bash
