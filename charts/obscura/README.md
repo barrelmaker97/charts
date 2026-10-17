@@ -57,6 +57,22 @@ The Secret must exist in the release namespace. Instead of `existingSecret`,
 putting production credentials in a checked-in values file. The chart does not
 create buckets in external storage.
 
+The JWT secret and FCM service account JSON can also come from existing
+Secrets in the release namespace instead of values:
+
+```yaml
+obscura:
+  auth:
+    existingSecret:
+      name: obscura-secrets
+      key: jwt-secret
+  fcm:
+    projectId: my-project
+    existingSecret:
+      name: obscura-secrets
+      key: fcm-credentials-json
+```
+
 ## Upgrading from the MinIO chart
 
 Version `0.13.0` changes the bundled store from MinIO to RustFS. It **does not

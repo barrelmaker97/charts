@@ -37,6 +37,10 @@ obscura:
     # Secret key for JWT generation/validation.
     # WARNING: Must be changed for production!
     jwtSecret: "change_me_to_a_secure_random_string"
+    # jwtSecret is ignored when existingSecret.name is set.
+    existingSecret:
+      name: ""
+      key: "jwt-secret"
     accessTokenTtlSecs: 900
     refreshTokenTtlDays: 30
     refreshTokenCleanupIntervalSecs: 86400
@@ -135,12 +139,16 @@ obscura:
     forcePathStyle: true
 
   # FCM (Firebase Cloud Messaging) configuration
-  # Set both values to enable push notifications via FCM.
+  # Set projectId and either credentialsJson or existingSecret.name to enable
+  # push notifications via FCM.
   fcm:
     # Google Cloud Project ID
     projectId: ""
     # Raw JSON content of the Google service account credentials file
     credentialsJson: ""
+    existingSecret:
+      name: ""
+      key: "fcm-credentials-json"
     # Time-to-live for FCM push notifications in seconds (default: 1 week)
     ttlSecs: 604800
 
