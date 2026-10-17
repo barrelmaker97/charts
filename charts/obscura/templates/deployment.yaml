@@ -1,5 +1,6 @@
 {{- include "obscura.validateDatabaseConfiguration" . }}
 {{- include "obscura.validateStorageConfiguration" . }}
+{{- include "obscura.validateSecretConfiguration" . }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -102,8 +103,8 @@ spec:
             - name: OBSCURA_AUTH_JWT_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "obscura.fullname" . }}-secret
-                  key: jwt-secret
+                  name: {{ include "obscura.jwtSecretName" . | quote }}
+                  key: {{ include "obscura.jwtSecretKey" . | quote }}
             - name: OBSCURA_STORAGE_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
@@ -146,9 +147,9 @@ spec:
         {{- if include "obscura.fcmEnabled" . }}
         - name: fcm-credentials
           secret:
-            secretName: {{ include "obscura.fullname" . }}-secret
+            secretName: {{ include "obscura.fcmSecretName" . | quote }}
             items:
-              - key: fcm-credentials-json
+              - key: {{ include "obscura.fcmSecretKey" . | quote }}
                 path: credentials.json
         {{- end }}
       {{- end }}

@@ -226,10 +226,57 @@ storage-secret-key
 {{- end }}
 
 {{/*
-Check if FCM is configured (both projectId and credentialsJson are non-empty)
+Get the Secret and key containing the JWT secret
+*/}}
+{{- define "obscura.jwtSecretName" -}}
+{{- .Values.obscura.auth.existingSecret.name | default (printf "%s-secret" (include "obscura.fullname" .)) -}}
+{{- end }}
+
+{{- define "obscura.jwtSecretKey" -}}
+{{- if .Values.obscura.auth.existingSecret.name -}}
+{{- .Values.obscura.auth.existingSecret.key -}}
+{{- else -}}
+jwt-secret
+{{- end -}}
+{{- end }}
+
+{{/*
+Get the Secret and key containing the FCM credentials JSON
+*/}}
+{{- define "obscura.fcmSecretName" -}}
+{{- .Values.obscura.fcm.existingSecret.name | default (printf "%s-secret" (include "obscura.fullname" .)) -}}
+{{- end }}
+
+{{- define "obscura.fcmSecretKey" -}}
+{{- if .Values.obscura.fcm.existingSecret.name -}}
+{{- .Values.obscura.fcm.existingSecret.key -}}
+{{- else -}}
+fcm-credentials-json
+{{- end -}}
+{{- end }}
+
+{{/*
+Validate the JWT and FCM Secret configuration
+*/}}
+{{- define "obscura.validateSecretConfiguration" -}}
+{{- $auth := .Values.obscura.auth -}}
+{{- if and $auth.existingSecret.name (not $auth.existingSecret.key) -}}
+{{- fail "obscura.auth.existingSecret.key is required when obscura.auth.existingSecret.name is set" -}}
+{{- end -}}
+{{- $fcm := .Values.obscura.fcm -}}
+{{- if and $fcm.credentialsJson $fcm.existingSecret.name -}}
+{{- fail "obscura.fcm.credentialsJson and obscura.fcm.existingSecret.name are mutually exclusive" -}}
+{{- end -}}
+{{- if and $fcm.existingSecret.name (not $fcm.existingSecret.key) -}}
+{{- fail "obscura.fcm.existingSecret.key is required when obscura.fcm.existingSecret.name is set" -}}
+{{- end -}}
+{{- end }}
+
+{{/*
+Check if FCM is configured (projectId plus credentialsJson or existingSecret.name)
 */}}
 {{- define "obscura.fcmEnabled" -}}
-{{- if and .Values.obscura.fcm.projectId .Values.obscura.fcm.credentialsJson -}}
+{{- if and .Values.obscura.fcm.projectId (or .Values.obscura.fcm.credentialsJson .Values.obscura.fcm.existingSecret.name) -}}
 true
 {{- end -}}
 {{- end }}
