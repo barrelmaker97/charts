@@ -3856,6 +3856,33 @@ entries:
   obscura:
   - apiVersion: v2
     appVersion: 0.9.6
+    created: "2026-10-18T23:09:40.839047206Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: ~18.12.0
+    - condition: rustfs.enabled
+      name: rustfs
+      repository: https://charts.rustfs.com
+      version: 1.0.3
+    - condition: valkey.enabled
+      name: valkey
+      repository: https://valkey.io/valkey-helm/
+      version: ~0.12.0
+    description: A Helm chart for Obscura Server
+    digest: d50bba54d0507c0e73c2ce3b78d6d5d980ffb9bde09bce6550790d685f74a7b6
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: obscura
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/obscura-0.16.1/obscura-0.16.1.tgz
+    version: 0.16.1
+  - apiVersion: v2
+    appVersion: 0.9.6
     created: "2026-10-18T22:14:45.844437179Z"
     dependencies:
     - condition: postgresql.enabled
@@ -6637,4 +6664,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2026-10-18T22:14:45.845454181Z"
+generated: "2026-10-18T23:09:40.839769242Z"
