@@ -1,4 +1,5 @@
 {{- include "obscura.validateDatabaseConfiguration" . }}
+{{- include "obscura.validatePubsubConfiguration" . }}
 {{- include "obscura.validateStorageConfiguration" . }}
 {{- include "obscura.validateSecretConfiguration" . }}
 ---
@@ -98,8 +99,8 @@ spec:
             - name: OBSCURA_PUBSUB_URL
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "obscura.fullname" . }}-secret
-                  key: pubsub-url
+                  name: {{ include "obscura.pubsubSecretName" . | quote }}
+                  key: {{ include "obscura.pubsubSecretKey" . | quote }}
             - name: OBSCURA_AUTH_JWT_SECRET
               valueFrom:
                 secretKeyRef:
