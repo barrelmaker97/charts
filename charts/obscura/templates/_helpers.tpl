@@ -128,6 +128,37 @@ Compute the PubSub URL
 {{- end }}
 
 {{/*
+Get the Secret and key containing the PubSub URL
+*/}}
+{{- define "obscura.pubsubSecretName" -}}
+{{- .Values.obscura.pubsub.existingSecret.name | default (printf "%s-secret" (include "obscura.fullname" .)) -}}
+{{- end }}
+
+{{- define "obscura.pubsubSecretKey" -}}
+{{- if .Values.obscura.pubsub.existingSecret.name -}}
+{{- .Values.obscura.pubsub.existingSecret.key -}}
+{{- else -}}
+pubsub-url
+{{- end -}}
+{{- end }}
+
+{{/*
+Validate the PubSub configuration
+*/}}
+{{- define "obscura.validatePubsubConfiguration" -}}
+{{- $pubsub := .Values.obscura.pubsub -}}
+{{- if and $pubsub.url $pubsub.existingSecret.name -}}
+{{- fail "obscura.pubsub.url and obscura.pubsub.existingSecret.name are mutually exclusive" -}}
+{{- end -}}
+{{- if and $pubsub.existingSecret.name (not $pubsub.existingSecret.key) -}}
+{{- fail "obscura.pubsub.existingSecret.key is required when obscura.pubsub.existingSecret.name is set" -}}
+{{- end -}}
+{{- if and (not .Values.valkey.enabled) (not $pubsub.url) (not $pubsub.existingSecret.name) -}}
+{{- fail "obscura.pubsub.url or obscura.pubsub.existingSecret.name is required when valkey.enabled is false" -}}
+{{- end -}}
+{{- end }}
+
+{{/*
 Compute the storage endpoint
 */}}
 {{- define "obscura.storageEndpoint" -}}

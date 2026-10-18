@@ -85,9 +85,13 @@ obscura:
 
   # PubSub configuration
   pubsub:
-    # Connection string for the Valkey/Redis database.
-    # If empty, it will be generated using the valkey subchart values.
+    # Connection string for the Valkey/Redis database. Set either url or
+    # existingSecret when valkey.enabled is false. If both are empty, the URL
+    # is generated using the valkey subchart values.
     url: ""
+    existingSecret:
+      name: ""
+      key: "pubsub-url"
     minBackoffSecs: 1
     maxBackoffSecs: 30
 

@@ -73,6 +73,20 @@ obscura:
       key: fcm-credentials-json
 ```
 
+To use a Valkey or Redis server outside the chart, disable the bundled
+dependency and supply the connection URL, either as `obscura.pubsub.url` or
+from an existing Secret:
+
+```yaml
+valkey:
+  enabled: false
+obscura:
+  pubsub:
+    existingSecret:
+      name: obscura-valkey
+      key: url
+```
+
 ## Upgrading from the MinIO chart
 
 Version `0.13.0` changes the bundled store from MinIO to RustFS. It **does not
