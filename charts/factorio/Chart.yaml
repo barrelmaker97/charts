@@ -3,9 +3,9 @@ apiVersion: v2
 name: factorio
 description: A Helm Chart for Factorio
 type: application
-version: 0.12.0
+version: 0.12.1
 # renovate: image=docker.io/factoriotools/factorio
-appVersion: 2.1.22
+appVersion: 2.1.23
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com
