@@ -3,9 +3,9 @@ apiVersion: v2
 name: jellyfin
 description: A Helm Chart for Jellyfin
 type: application
-version: 0.7.1
+version: 0.7.2
 # renovate: image=docker.io/jellyfin/jellyfin
-appVersion: "12.2"
+appVersion: "12.3"
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com
