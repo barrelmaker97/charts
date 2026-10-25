@@ -1,12 +1,12 @@
 dependencies:
 - name: postgresql
   repository: https://charts.bitnami.com/bitnami
-  version: 18.12.4
+  version: 18.12.15
 - name: rustfs
   repository: https://charts.rustfs.com
-  version: 1.0.3
+  version: 1.0.4
 - name: valkey
   repository: https://valkey.io/valkey-helm/
   version: 0.12.0
-digest: sha256:d1a1b1c09ba5bddf105599e8adc75724e7c99c602a567f9adff2d4259360ba41
-generated: "2026-10-17T16:55:01.883795118Z"
+digest: sha256:2c14b1a96b821aef6bc6a7d0795cd89c2821261388e74eafdb435bfd01d291fb
+generated: "2026-10-25T17:17:10.157955276Z"
