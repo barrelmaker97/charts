@@ -31,7 +31,8 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
-        - name: git-sync-init
+        - name: git-sync
+          restartPolicy: Always
           securityContext:
             {{- toYaml .Values.gitSync.securityContext | nindent 12 }}
           image: "{{ .Values.gitSync.image.repository }}:{{ .Values.gitSync.image.tag }}"
@@ -39,14 +40,35 @@ spec:
           args:
             - --repo={{ $.Values.gitSync.repo }}
             - --ref={{ $.Values.gitSync.ref }}
-            - --root=/git
+            - --root=/git/repo
             - --link=head
-            - --one-time
-            - --git-gc=off
+            - --period={{ $.Values.gitSync.periodSeconds }}s
+            - --max-failures=30
+            - --http-bind=:9100
             - --verbose=2
+          ports:
+            - name: health
+              containerPort: 9100
+              protocol: TCP
           volumeMounts:
             - name: content
               mountPath: /git
+            - name: git-sync-tmp
+              mountPath: /tmp
+          startupProbe:
+            httpGet:
+              path: /
+              port: health
+            periodSeconds: 1
+            failureThreshold: 60
+          livenessProbe:
+            httpGet:
+              path: /
+              port: health
+          readinessProbe:
+            httpGet:
+              path: /
+              port: health
           resources:
             {{- toYaml .Values.gitSync.resources | nindent 12 }}
       containers:
@@ -65,9 +87,10 @@ spec:
               mountPath: /etc/nginx/nginx.conf
               readOnly: true
             - name: content
-              mountPath: /usr/share/nginx/html
+              mountPath: /git
               readOnly: true
-              subPath: head/{{ $.Values.gitSync.contentDirectory }}
+            - name: nginx-tmp
+              mountPath: /tmp
           livenessProbe:
             httpGet:
               path: /
@@ -78,43 +101,16 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-        - name: git-sync
-          securityContext:
-            {{- toYaml .Values.gitSync.securityContext | nindent 12 }}
-          image: "{{ .Values.gitSync.image.repository }}:{{ .Values.gitSync.image.tag }}"
-          imagePullPolicy: {{ .Values.gitSync.image.pullPolicy }}
-          args:
-            - --repo={{ $.Values.gitSync.repo }}
-            - --ref={{ $.Values.gitSync.ref }}
-            - --root=/git
-            - --link=head
-            - --period={{ $.Values.gitSync.periodSeconds }}s
-            - --max-failures=30
-            - --http-bind=:9100
-            - --verbose=2
-          ports:
-            - name: health
-              containerPort: 9100
-              protocol: TCP
-          volumeMounts:
-            - name: content
-              mountPath: /git
-          livenessProbe:
-            httpGet:
-              path: /
-              port: health
-          readinessProbe:
-            httpGet:
-              path: /
-              port: health
-          resources:
-            {{- toYaml .Values.gitSync.resources | nindent 12 }}
       volumes:
         - name: config
           configMap:
             name: {{ include "website.fullname" . }}-config
             defaultMode: 0644
         - name: content
+          emptyDir: {}
+        - name: git-sync-tmp
+          emptyDir: {}
+        - name: nginx-tmp
           emptyDir: {}
       {{- with .Values.nodeSelector }}
       nodeSelector:
