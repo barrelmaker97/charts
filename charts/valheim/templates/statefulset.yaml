@@ -54,10 +54,12 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.existingSecret | default (printf "%s-password" (include "valheim.fullname" .)) | quote }}
                   key: password
+            {{- if .Values.metrics.enabled }}
             - name: ADDRESS
               value: 127.0.0.1:2457
             - name: HTTP_PORT
-              value: "9100"
+              value: {{ .Values.metrics.port | quote }}
+            {{- end }}
           startupProbe:
             exec:
               command:
@@ -90,9 +92,9 @@ spec:
               containerPort: 2456
             - name: valheim-2
               containerPort: 2457
-            {{- if .Values.metrics }}
+            {{- if .Values.metrics.enabled }}
             - name: metrics
-              containerPort: 9100
+              containerPort: {{ .Values.metrics.port }}
             {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
