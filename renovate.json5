@@ -1,7 +1,8 @@
 {
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
-  // Every update is a PR that gets the lint and install tests, and merging
-  // releases the chart. Nothing automerges.
+  // Every chart update is a PR that gets the lint and install tests, and
+  // merging releases the chart. Only workflow updates automerge; see the last
+  // package rule.
   extends: ['config:recommended'],
   timezone: 'America/Chicago',
   customManagers: [
@@ -32,6 +33,16 @@
       description: 'Major updates wait on the Dependency Dashboard until approved: they usually need migration work',
       matchUpdateTypes: ['major'],
       dependencyDashboardApproval: true,
+    },
+    {
+      description: 'Workflow updates never release a chart: they merge without a PR once CI passes on the branch, and a failure opens one',
+      matchFileNames: ['.github/workflows/**'],
+      matchUpdateTypes: ['minor', 'patch', 'digest'],
+      // The workflow runs on push for this prefix, since these branches have no PR.
+      additionalBranchPrefix: 'tooling-',
+      automerge: true,
+      automergeType: 'branch',
+      schedule: ['* * * * 1'],
     },
   ],
 }
