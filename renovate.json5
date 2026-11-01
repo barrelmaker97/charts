@@ -35,6 +35,12 @@
       dependencyDashboardApproval: true,
     },
     {
+      description: 'Obscura Server image updates automerge once chart lint and install tests pass',
+      matchDepNames: ['ghcr.io/obscura-messaging/obscura-server'],
+      matchUpdateTypes: ['minor', 'patch'],
+      automerge: true,
+    },
+    {
       description: 'Workflow updates never release a chart: they merge without a PR once CI passes on the branch, and a failure opens one',
       matchFileNames: ['.github/workflows/**'],
       matchUpdateTypes: ['minor', 'patch', 'digest'],
