@@ -285,7 +285,7 @@
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "/^.*$/",
+          "fields": "",
           "values": false
         },
         "showPercentChange": false,
