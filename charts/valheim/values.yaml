@@ -13,7 +13,43 @@ timezone: "America/Chicago"
 serverName: "Valheim"
 worldName: "world"
 public: false
-metrics: false
+
+# Requires public: true; the server only answers local status queries on port
+# 2457 when it is public.
+metrics:
+  enabled: false
+  # Port exposed by the exporter.
+  port: 9100
+  dashboard:
+    enabled: false
+    namespace: monitoring
+    labels:
+      grafana_dashboard: "1"
+  serviceMonitor:
+    enabled: false
+    # Labels to be added to the ServiceMonitor.
+    additionalLabels: {}
+    # Annotations to be added to the ServiceMonitor.
+    annotations: {}
+    # Interval at which Prometheus scrapes the metrics from the target.
+    scrapeInterval: 15s
+    # Preserves the metric’s labels when they collide with the target’s labels.
+    # honorLabels: true
+    relabelings: []
+    metricRelabelings: []
+    # The label to use to retrieve the job name from.
+    # jobLabel: "app.kubernetes.io/name"
+    targetLabels: []
+    # Per-scrape limit on number of labels accepted for a sample.
+    labelLimit: 0
+    # Per-scrape limit on length of label names accepted for a sample.
+    labelNameLengthLimit: 0
+    # Per-scrape limit on length of label values accepted for a sample.
+    labelValueLengthLimit: 0
+    # Per-scrape limit on the number of scraped samples accepted.
+    sampleLimit: 0
+    # Limit on the number of scraped targets accepted.
+    targetLimit: 0
 
 # Name of an existing Secret in the release namespace containing a password key.
 # When set, no Secret is created and password is ignored.
@@ -33,7 +69,8 @@ serviceAccount:
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
+  # If not set and create is true, a name is generated using the fullname
+  # template.
   name: ""
 
 podAnnotations: {}
@@ -60,12 +97,12 @@ service:
   externalTrafficPolicy: Local
 
 resources: {}
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+# limits:
+#   cpu: 100m
+#   memory: 128Mi
+# requests:
+#   cpu: 100m
+#   memory: 128Mi
 
 nodeSelector: {}
 
