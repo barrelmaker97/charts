@@ -66,8 +66,8 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 4,
+        "h": 6,
+        "w": 6,
         "x": 0,
         "y": 0
       },
@@ -95,7 +95,7 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "max(valheim_online{service=~\"$service\"})",
+          "expr": "(max(valheim_online{service=~\"$service\"}) and max(up{service=~\"$service\"}) == 1) or vector(0)",
           "instant": true,
           "legendFormat": "Status",
           "range": false,
@@ -131,9 +131,9 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 4,
-        "x": 4,
+        "h": 6,
+        "w": 6,
+        "x": 6,
         "y": 0
       },
       "id": 2,
@@ -160,7 +160,7 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "sum(valheim_current_player_count{service=~\"$service\"})",
+          "expr": "sum(valheim_current_player_count{service=~\"$service\"}) or vector(0)",
           "instant": true,
           "legendFormat": "Online",
           "range": false,
@@ -175,30 +175,41 @@
         "type": "prometheus",
         "uid": "$datasource"
       },
+      "description": "Fraction of the selected time range the server was online and answering status queries.",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
-          "decimals": 0,
+          "decimals": 1,
           "mappings": [],
+          "max": 1,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "blue",
+                "color": "red",
                 "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0.95
+              },
+              {
+                "color": "green",
+                "value": 0.99
               }
             ]
           },
-          "unit": "short"
+          "unit": "percentunit"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 4,
-        "x": 8,
+        "h": 6,
+        "w": 6,
+        "x": 12,
         "y": 0
       },
       "id": 3,
@@ -225,94 +236,14 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "max(valheim_max_player_count{service=~\"$service\"})",
+          "expr": "avg_over_time(((max(valheim_online{service=~\"$service\"}) and max(up{service=~\"$service\"}) == 1) or vector(0))[$__range:15s])",
           "instant": true,
-          "legendFormat": "Max",
+          "legendFormat": "Uptime",
           "range": false,
           "refId": "A"
         }
       ],
-      "title": "Max Players",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "$datasource"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "color": "text",
-                  "index": 0,
-                  "text": "No"
-                },
-                "1": {
-                  "color": "purple",
-                  "index": 1,
-                  "text": "Yes"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "text",
-                "value": null
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 4,
-        "x": 12,
-        "y": 0
-      },
-      "id": 4,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "$datasource"
-          },
-          "editorMode": "code",
-          "expr": "max(valheim_bepinex_installed{service=~\"$service\"})",
-          "instant": true,
-          "legendFormat": "BepInEx",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "BepInEx",
+      "title": "Uptime",
       "type": "stat"
     },
     {
@@ -339,12 +270,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 8,
-        "x": 16,
+        "h": 6,
+        "w": 6,
+        "x": 18,
         "y": 0
       },
-      "id": 5,
+      "id": 4,
       "options": {
         "colorMode": "none",
         "graphMode": "none",
@@ -368,14 +299,14 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "valheim_online{service=~\"$service\"}",
+          "expr": "max by (name) (valheim_online{service=~\"$service\"})",
           "instant": true,
-          "legendFormat": "{{name}} — {{map}} ({{version}})",
+          "legendFormat": "{{name}}",
           "range": false,
           "refId": "A"
         }
       ],
-      "title": "Server Info",
+      "title": "Server Name",
       "type": "stat"
     },
     {
@@ -444,12 +375,12 @@
         ]
       },
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 24,
         "x": 0,
-        "y": 5
+        "y": 6
       },
-      "id": 6,
+      "id": 5,
       "options": {
         "legend": {
           "calcs": [
@@ -489,8 +420,94 @@
           "refId": "B"
         }
       ],
-      "title": "Players Online",
+      "title": "Player Count",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "fillOpacity": 80,
+            "lineWidth": 0,
+            "spanNulls": false
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "index": 0,
+                  "text": "Offline"
+                },
+                "1": {
+                  "color": "green",
+                  "index": 1,
+                  "text": "Online"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 15
+      },
+      "id": 6,
+      "options": {
+        "alignValue": "center",
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "mergeValues": true,
+        "rowHeight": 0.8,
+        "showValue": "auto",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$datasource"
+          },
+          "editorMode": "code",
+          "expr": "(max(valheim_online{service=~\"$service\"}) and max(up{service=~\"$service\"}) == 1) or vector(0)",
+          "legendFormat": "Status",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Server Availability",
+      "type": "state-timeline"
     }
   ],
   "preload": false,
