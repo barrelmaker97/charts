@@ -3,9 +3,9 @@ apiVersion: v2
 name: pistachio
 description: A helm chart for pistachio
 type: application
-version: 0.4.1
+version: 0.4.2
 # renovate: image=ghcr.io/barrelmaker97/pistachio
-appVersion: 0.6.3
+appVersion: 0.6.4
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com
