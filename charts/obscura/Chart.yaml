@@ -5,7 +5,7 @@ description: A Helm chart for Obscura Server
 type: application
 version: 1.1.0
 # renovate: image=ghcr.io/obscura-messaging/obscura-server
-appVersion: 0.10.0
+appVersion: 0.11.0
 maintainers:
   - name: barrelmaker97
     email: nolancooper97@gmail.com
