@@ -65,8 +65,6 @@ obscura:
     cleanupIntervalSecs: 300
     sendBatchLimit: 100
     idempotencyTtlSecs: 86400
-    preKeyRefillThreshold: 20
-    maxPreKeys: 100
 
   # Notification configuration
   notifications:
@@ -103,7 +101,6 @@ obscura:
     ackFlushIntervalMs: 500
     pingIntervalSecs: 30
     pingTimeoutSecs: 10
-    prekeyDebounceIntervalMs: 500
     messageFetchBatchSize: 50
     maxBatchBytes: 8388608
     ticketTtlSecs: 30

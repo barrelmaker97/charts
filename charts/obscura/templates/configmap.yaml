@@ -52,8 +52,6 @@ data:
   OBSCURA_PUBSUB_MAX_BACKOFF_SECS: {{ .Values.obscura.pubsub.maxBackoffSecs | quote }}
   OBSCURA_MESSAGING_SEND_BATCH_LIMIT: {{ .Values.obscura.messaging.sendBatchLimit | quote }}
   OBSCURA_MESSAGING_IDEMPOTENCY_TTL_SECS: {{ .Values.obscura.messaging.idempotencyTtlSecs | quote }}
-  OBSCURA_PRE_KEY_REFILL_THRESHOLD: {{ .Values.obscura.messaging.preKeyRefillThreshold | quote }}
-  OBSCURA_PRE_KEYS_MAX: {{ .Values.obscura.messaging.maxPreKeys | quote }}
   OBSCURA_SERVER_TRUSTED_PROXIES: {{ .Values.obscura.server.trustedProxies | quote }}
   OBSCURA_WS_OUTBOUND_BUFFER_SIZE: {{ .Values.obscura.websocket.outboundBufferSize | quote }}
   OBSCURA_WS_ACK_BUFFER_SIZE: {{ .Values.obscura.websocket.ackBufferSize | quote }}
@@ -61,7 +59,6 @@ data:
   OBSCURA_WS_ACK_FLUSH_INTERVAL_MS: {{ .Values.obscura.websocket.ackFlushIntervalMs | quote }}
   OBSCURA_WS_PING_INTERVAL_SECS: {{ .Values.obscura.websocket.pingIntervalSecs | quote }}
   OBSCURA_WS_PING_TIMEOUT_SECS: {{ .Values.obscura.websocket.pingTimeoutSecs | quote }}
-  OBSCURA_WS_PREKEY_DEBOUNCE_INTERVAL_MS: {{ .Values.obscura.websocket.prekeyDebounceIntervalMs | quote }}
   OBSCURA_WS_MESSAGE_FETCH_BATCH_SIZE: {{ .Values.obscura.websocket.messageFetchBatchSize | quote }}
   OBSCURA_WS_MAX_BATCH_BYTES: {{ printf "%d" (int .Values.obscura.websocket.maxBatchBytes) | quote }}
   OBSCURA_WS_TICKET_TTL_SECS: {{ .Values.obscura.websocket.ticketTtlSecs | quote }}
