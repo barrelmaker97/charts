@@ -6636,6 +6636,20 @@ entries:
     version: 0.1.1
   website:
   - apiVersion: v2
+    appVersion: 1.31.10-alpine
+    created: "2026-11-23T23:43:09.582911407Z"
+    description: A Helm Chart for a website
+    digest: a6a98f37a839da1926d30d7e1eacfbfdd9801952fdc12a3407a2a00eb76b649d
+    maintainers:
+    - email: nolancooper97@gmail.com
+      name: barrelmaker97
+      url: barrelmaker.dev
+    name: website
+    type: application
+    urls:
+    - https://github.com/barrelmaker97/charts/releases/download/website-0.9.2/website-0.9.2.tgz
+    version: 0.9.2
+  - apiVersion: v2
     appVersion: 1.31.9-alpine
     created: "2026-11-18T19:36:38.342760895Z"
     description: A Helm Chart for a website
@@ -7065,4 +7079,4 @@ entries:
     urls:
     - https://github.com/barrelmaker97/charts/releases/download/website-0.1.0/website-0.1.0.tgz
     version: 0.1.0
-generated: "2026-11-23T19:38:58.084671554Z"
+generated: "2026-11-23T23:43:09.583386513Z"
