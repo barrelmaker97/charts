@@ -7,7 +7,8 @@ from [charts.rustfs.com](https://charts.rustfs.com). The default server image is
 
 ```sh
 helm dependency build charts/obscura
-helm install obscura charts/obscura
+helm install obscura charts/obscura \
+  --set-string obscura.auth.jwtSecret="$(openssl rand -hex 32)"
 ```
 
 The bundled RustFS instance uses the cluster's default StorageClass and keeps
@@ -31,8 +32,8 @@ in a dedicated writable `emptyDir`, including when their root filesystems are
 read-only. Both inherit `podSecurityContext`; when setting a non-root user, set
 `fsGroup` to a group that user belongs to so it can write to the volume.
 `bucketSetup.securityContext` configures both client containers, independently
-of the server's `securityContext`. CI tests default values and the hardened
-configuration in `ci/nonroot-values.yaml`.
+of the server's `securityContext`. CI tests the default workload settings and
+the hardened configuration in `ci/nonroot-values.yaml`, with a test JWT secret.
 
 For an object store already available in the cluster, disable the bundled
 RustFS dependency and provide an existing bucket and S3 credentials:
@@ -57,8 +58,10 @@ The Secret must exist in the release namespace. Instead of `existingSecret`,
 putting production credentials in a checked-in values file. The chart does not
 create buckets in external storage.
 
-The JWT secret and FCM service account JSON can also come from existing
-Secrets in the release namespace instead of values:
+The JWT signing secret is required. For production, use an existing Secret in
+the release namespace rather than an inline value. Keep the secret unchanged
+across upgrades to preserve existing access tokens. FCM service account JSON
+can also come from an existing Secret:
 
 ```yaml
 obscura:
@@ -72,6 +75,10 @@ obscura:
       name: obscura-secrets
       key: fcm-credentials-json
 ```
+
+When upgrading to chart version `3.0.0`, supply an explicit JWT secret if you
+used the old chart default. Releases already using `obscura.auth.existingSecret`
+or a non-default inline value do not need to change it.
 
 To use a Valkey or Redis server outside the chart, disable the bundled
 dependency and supply the connection URL, either as `obscura.pubsub.url` or

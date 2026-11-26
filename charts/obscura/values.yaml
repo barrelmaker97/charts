@@ -34,10 +34,9 @@ obscura:
 
   # Auth configuration
   auth:
-    # Secret key for JWT generation/validation.
-    # WARNING: Must be changed for production!
-    jwtSecret: "change_me_to_a_secure_random_string"
-    # jwtSecret is ignored when existingSecret.name is set.
+    # Secret key for JWT generation/validation. Required unless existingSecret.name is set.
+    jwtSecret: ""
+    # When existingSecret.name is set, jwtSecret is ignored.
     existingSecret:
       name: ""
       key: "jwt-secret"

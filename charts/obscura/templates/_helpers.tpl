@@ -291,6 +291,9 @@ Validate the JWT and FCM Secret configuration
 */}}
 {{- define "obscura.validateSecretConfiguration" -}}
 {{- $auth := .Values.obscura.auth -}}
+{{- if and (not $auth.existingSecret.name) (or (not $auth.jwtSecret) (eq (toString $auth.jwtSecret) "change_me_to_a_secure_random_string")) -}}
+{{- fail "set obscura.auth.existingSecret.name or supply a nonempty obscura.auth.jwtSecret (not the old chart default)" -}}
+{{- end -}}
 {{- if and $auth.existingSecret.name (not $auth.existingSecret.key) -}}
 {{- fail "obscura.auth.existingSecret.key is required when obscura.auth.existingSecret.name is set" -}}
 {{- end -}}
