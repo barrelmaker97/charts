@@ -1,2 +1,4 @@
 ---
-{}
+obscura:
+  auth:
+    jwtSecret: "test-only-jwt-signing-secret"

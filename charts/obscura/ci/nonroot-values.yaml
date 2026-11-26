@@ -1,4 +1,8 @@
 ---
+obscura:
+  auth:
+    jwtSecret: "test-only-jwt-signing-secret"
+
 podSecurityContext:
   fsGroup: 10001
   runAsGroup: 10001
